@@ -1,22 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace ClinicaFrba
+﻿namespace ClinicaFrba
 {
+    using Autofac;
+    using ClinicaFrba.IoC;
+    using System;
+    using System.Windows.Forms;
+
     static class Program
     {
+        private static IContainer _container;
         /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>
         [STAThread]
         static void Main()
         {
+            InitializeDependencies();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(_container.Resolve<LoginForm>());
+
+        }
+
+        public static void InitializeDependencies()
+        {
+            var bootstrapper = new Bootstrapper();
+            _container = bootstrapper.Build();
         }
     }
 }

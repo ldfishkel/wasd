@@ -1,0 +1,12 @@
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.DataAccess\bin\Debug\ClinicaFrba.DataAccess.dll.config
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.DataAccess\bin\Debug\ClinicaFrba.DataAccess.dll
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.DataAccess\bin\Debug\ClinicaFrba.DataAccess.pdb
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.DataAccess\bin\Debug\Autofac.dll
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.DataAccess\bin\Debug\EntityFramework.dll
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.DataAccess\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.DataAccess\bin\Debug\Autofac.xml
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.DataAccess\bin\Debug\EntityFramework.xml
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.DataAccess\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.DataAccess\obj\Debug\ClinicaFrba.DataAccess.dll
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.DataAccess\obj\Debug\ClinicaFrba.DataAccess.pdb
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.DataAccess\obj\Debug\ClinicaFrba.DataAccess.csprojResolveAssemblyReference.cache

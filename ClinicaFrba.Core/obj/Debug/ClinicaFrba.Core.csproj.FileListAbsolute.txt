@@ -1,0 +1,12 @@
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.Core\bin\Debug\ClinicaFrba.Core.dll.config
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.Core\bin\Debug\ClinicaFrba.Core.dll
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.Core\bin\Debug\ClinicaFrba.Core.pdb
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.Core\bin\Debug\Autofac.dll
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.Core\bin\Debug\EntityFramework.dll
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.Core\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.Core\bin\Debug\Autofac.xml
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.Core\bin\Debug\EntityFramework.xml
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.Core\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.Core\obj\Debug\ClinicaFrba.Core.csprojResolveAssemblyReference.cache
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.Core\obj\Debug\ClinicaFrba.Core.dll
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.Core\obj\Debug\ClinicaFrba.Core.pdb

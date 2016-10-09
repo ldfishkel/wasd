@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GD2C2016ModelStoreContainer" CdmEntityContainer="GD2C2016Entities">
+    <EntitySetMapping Name="Agenda">
+      <EntityTypeMapping TypeName="GD2C2016Model.Agendum">
+        <MappingFragment StoreEntitySet="Agenda">
+          <ScalarProperty Name="agenda_id" ColumnName="agenda_id" />
+          <ScalarProperty Name="profesional_id" ColumnName="profesional_id" />
+          <ScalarProperty Name="agenda_dia" ColumnName="agenda_dia" />
+          <ScalarProperty Name="agenda_hora_desde" ColumnName="agenda_hora_desde" />
+          <ScalarProperty Name="agenda_hora_hasta" ColumnName="agenda_hora_hasta" />
+          <ScalarProperty Name="agenda_fecha_desde" ColumnName="agenda_fecha_desde" />
+          <ScalarProperty Name="agenda_fecha_hasta" ColumnName="agenda_fecha_hasta" />
+          <ScalarProperty Name="especialidad_id" ColumnName="especialidad_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Especialidads">
+      <EntityTypeMapping TypeName="GD2C2016Model.Especialidad">
+        <MappingFragment StoreEntitySet="Especialidad">
+          <ScalarProperty Name="especialidad_id" ColumnName="especialidad_id" />
+          <ScalarProperty Name="especialidad_nombre" ColumnName="especialidad_nombre" />
+          <ScalarProperty Name="especialidad_tipo" ColumnName="especialidad_tipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstadoCivils">
+      <EntityTypeMapping TypeName="GD2C2016Model.EstadoCivil">
+        <MappingFragment StoreEntitySet="EstadoCivil">
+          <ScalarProperty Name="estadocivil_id" ColumnName="estadocivil_id" />
+          <ScalarProperty Name="estadocivil_nombre" ColumnName="estadocivil_nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Funcionalidads">
+      <EntityTypeMapping TypeName="GD2C2016Model.Funcionalidad">
+        <MappingFragment StoreEntitySet="Funcionalidad">
+          <ScalarProperty Name="funcionalidad_id" ColumnName="funcionalidad_id" />
+          <ScalarProperty Name="funcionalidad_nombre" ColumnName="funcionalidad_nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Plans">
+      <EntityTypeMapping TypeName="GD2C2016Model.Plan">
+        <MappingFragment StoreEntitySet="Plan">
+          <ScalarProperty Name="plan_id" ColumnName="plan_id" />
+          <ScalarProperty Name="plan_nombre" ColumnName="plan_nombre" />
+          <ScalarProperty Name="plan_cuota" ColumnName="plan_cuota" />
+          <ScalarProperty Name="plan_precio_bono" ColumnName="plan_precio_bono" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Profesionals">
+      <EntityTypeMapping TypeName="GD2C2016Model.Profesional">
+        <MappingFragment StoreEntitySet="Profesional">
+          <ScalarProperty Name="profesional_id" ColumnName="profesional_id" />
+          <ScalarProperty Name="profesional_nombre" ColumnName="profesional_nombre" />
+          <ScalarProperty Name="profesional_apellido" ColumnName="profesional_apellido" />
+          <ScalarProperty Name="profesional_direccion" ColumnName="profesional_direccion" />
+          <ScalarProperty Name="profesional_telefono" ColumnName="profesional_telefono" />
+          <ScalarProperty Name="profesional_mail" ColumnName="profesional_mail" />
+          <ScalarProperty Name="profesional_fecha_nacimiento" ColumnName="profesional_fecha_nacimiento" />
+          <ScalarProperty Name="profesional_sexo" ColumnName="profesional_sexo" />
+          <ScalarProperty Name="profesional_matricula" ColumnName="profesional_matricula" />
+          <ScalarProperty Name="profesional_tipo_documento" ColumnName="profesional_tipo_documento" />
+          <ScalarProperty Name="profesional_numero_documento" ColumnName="profesional_numero_documento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rols">
+      <EntityTypeMapping TypeName="GD2C2016Model.Rol">
+        <MappingFragment StoreEntitySet="Rol">
+          <ScalarProperty Name="rol_id" ColumnName="rol_id" />
+          <ScalarProperty Name="rol_nombre" ColumnName="rol_nombre" />
+          <ScalarProperty Name="rol_activo" ColumnName="rol_activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sexoes">
+      <EntityTypeMapping TypeName="GD2C2016Model.Sexo">
+        <MappingFragment StoreEntitySet="Sexo">
+          <ScalarProperty Name="sexo_id" ColumnName="sexo_id" />
+          <ScalarProperty Name="sexo_nombre" ColumnName="sexo_nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoDocumentoes">
+      <EntityTypeMapping TypeName="GD2C2016Model.TipoDocumento">
+        <MappingFragment StoreEntitySet="TipoDocumento">
+          <ScalarProperty Name="tipodocumento_id" ColumnName="tipodocumento_id" />
+          <ScalarProperty Name="tipodocumento_nombre" ColumnName="tipodocumento_nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoEspecialidads">
+      <EntityTypeMapping TypeName="GD2C2016Model.TipoEspecialidad">
+        <MappingFragment StoreEntitySet="TipoEspecialidad">
+          <ScalarProperty Name="tipoespecialidad_id" ColumnName="tipoespecialidad_id" />
+          <ScalarProperty Name="tipoespecialidad_nombre" ColumnName="tipoespecialidad_nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="GD2C2016Model.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+          <ScalarProperty Name="usuario_nombre" ColumnName="usuario_nombre" />
+          <ScalarProperty Name="usuario_apellido" ColumnName="usuario_apellido" />
+          <ScalarProperty Name="usuario_dni" ColumnName="usuario_dni" />
+          <ScalarProperty Name="usuario_password" ColumnName="usuario_password" />
+          <ScalarProperty Name="usuario_intentos" ColumnName="usuario_intentos" />
+          <ScalarProperty Name="usuario_activo" ColumnName="usuario_activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="EspecialidadesPorProfesional" TypeName="GD2C2016Model.EspecialidadesPorProfesional" StoreEntitySet="EspecialidadesPorProfesional">
+      <EndProperty Name="Especialidad">
+        <ScalarProperty Name="especialidad_id" ColumnName="especialidad_id" />
+      </EndProperty>
+      <EndProperty Name="Profesional">
+        <ScalarProperty Name="profesional_id" ColumnName="profesional_id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FuncionalidadPorRol" TypeName="GD2C2016Model.FuncionalidadPorRol" StoreEntitySet="FuncionalidadPorRol">
+      <EndProperty Name="Funcionalidad">
+        <ScalarProperty Name="funcionalidad_id" ColumnName="funcionalidad_id" />
+      </EndProperty>
+      <EndProperty Name="Rol">
+        <ScalarProperty Name="rol_id" ColumnName="rol_id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RolPorUsuario" TypeName="GD2C2016Model.RolPorUsuario" StoreEntitySet="RolPorUsuario">
+      <EndProperty Name="Rol">
+        <ScalarProperty Name="rol_id" ColumnName="rol_id" />
+      </EndProperty>
+      <EndProperty Name="Usuario">
+        <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="GD2C2016Model.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="GD2C2016Model.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="GD2C2016Model.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="GD2C2016Model.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GD2C2016Model.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="GD2C2016Model.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GD2C2016Model.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="GD2C2016Model.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="GD2C2016Model.Store.sp_upgraddiagrams" />
+  </EntityContainerMapping>
+</Mapping>
