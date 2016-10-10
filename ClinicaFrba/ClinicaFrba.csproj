@@ -63,6 +63,12 @@
     <Compile Include="AbmAfiliado\ABMAfiliados.Designer.cs">
       <DependentUpon>ABMAfiliados.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmAfiliado\AltaAfiliado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmAfiliado\AltaAfiliado.Designer.cs">
+      <DependentUpon>AltaAfiliado.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmRol\ABMRolForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +87,7 @@
     <Compile Include="CompraBono\ComprarBonoForm.Designer.cs">
       <DependentUpon>ComprarBonoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="IoC\ClinicaFrbaModule.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +135,9 @@
     </Compile>
     <EmbeddedResource Include="AbmAfiliado\ABMAfiliados.resx">
       <DependentUpon>ABMAfiliados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmAfiliado\AltaAfiliado.resx">
+      <DependentUpon>AltaAfiliado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\ABMRolForm.resx">
       <DependentUpon>ABMRolForm.cs</DependentUpon>

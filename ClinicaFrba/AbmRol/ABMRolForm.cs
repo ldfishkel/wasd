@@ -1,18 +1,21 @@
 ﻿namespace ClinicaFrba.AbmRol
 {
+    using Menu;
     using System.Windows.Forms;
 
     public partial class ABMRolForm : Form
     {
-        public ABMRolForm(Form parent)
+        public ABMRolForm()
+        {
+
+        }
+
+        public Panel Init(MenuForm parent)
         {
             InitializeComponent();
 
             parent.Text = "ABM Rol";
-        }
 
-        public Panel GetTabContent()
-        {
             return _panel;
         }
     }

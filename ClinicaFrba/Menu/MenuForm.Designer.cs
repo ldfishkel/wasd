@@ -1,5 +1,9 @@
 ﻿namespace ClinicaFrba.Menu
 {
+    using System;
+    using System.Drawing;
+    using System.Windows.Forms;
+
     partial class MenuForm
     {
         /// <summary>
@@ -28,7 +32,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.MaximizeBox = false;
             this._functionsTabControl = new System.Windows.Forms.TabControl();
             this.SuspendLayout();
             // 
@@ -41,24 +44,51 @@
             this._functionsTabControl.Multiline = true;
             this._functionsTabControl.Name = "_functionsTabControl";
             this._functionsTabControl.SelectedIndex = 0;
-            this._functionsTabControl.Size = new System.Drawing.Size(636, 420);
+            this._functionsTabControl.Size = new System.Drawing.Size(854, 420);
             this._functionsTabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this._functionsTabControl.TabIndex = 0;
+            this._functionsTabControl.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.TabLabelDrawing);
             this._functionsTabControl.SelectedIndexChanged += new System.EventHandler(this.OnTabSelected);
-            this._functionsTabControl.DrawItem += new System.Windows.Forms.DrawItemEventHandler(TabLabelDrawing);
             // 
             // MenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(655, 442);
+            this.ClientSize = new System.Drawing.Size(878, 442);
             this.Controls.Add(this._functionsTabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "MenuForm";
             this.Text = "Menu";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MenuFormOnClose);
             this.ResumeLayout(false);
 
+        }
+
+        private void TabLabelDrawing(Object sender, System.Windows.Forms.DrawItemEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            Brush _textBrush;
+
+            TabPage _tabPage = _functionsTabControl.TabPages[e.Index];
+            Rectangle _tabBounds = _functionsTabControl.GetTabRect(e.Index);
+
+            if (e.State == DrawItemState.Selected)
+            {
+                _textBrush = new SolidBrush(Color.Red);
+                g.FillRectangle(Brushes.Gray, e.Bounds);
+            }
+            else
+            {
+                _textBrush = new System.Drawing.SolidBrush(e.ForeColor);
+                e.DrawBackground();
+            }
+
+            Font _tabFont = new Font("Arial", (float)12.0, FontStyle.Bold, GraphicsUnit.Pixel);
+
+            StringFormat _stringFlags = new StringFormat();
+            _stringFlags.Alignment = StringAlignment.Center;
+            _stringFlags.LineAlignment = StringAlignment.Center;
+            g.DrawString(_tabPage.Text, _tabFont, _textBrush, _tabBounds, new StringFormat(_stringFlags));
         }
 
         #endregion

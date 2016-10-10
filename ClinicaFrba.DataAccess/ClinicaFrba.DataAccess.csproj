@@ -73,6 +73,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ClinicaFrba.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DAO\Afiliado.cs" />
+    <Compile Include="DAO\AfiliadoDao.cs" />
     <Compile Include="DAO\UsuarioDao.cs" />
     <Compile Include="Especialidad.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>

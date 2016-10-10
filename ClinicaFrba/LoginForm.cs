@@ -11,14 +11,16 @@
     public partial class LoginForm : Form
     {
         private UsuarioDao _usuarioDao;
+        private MenuForm _menuForm;
 
         private Usuario _user;
 
-        public LoginForm(UsuarioDao usuarioDao)
+        public LoginForm(UsuarioDao usuarioDao, MenuForm menuForm)
         {
             InitializeComponent();
 
             _usuarioDao = usuarioDao;
+            _menuForm = menuForm;
         }
 
         private void SubmitLogin(object sender, EventArgs e)
@@ -62,9 +64,13 @@
         {
             this.Hide();
 
-            var menuForm = new MenuForm(_user, rol, this);
+            _menuForm.Init(_user, rol, this.CloseForm);
+            _menuForm.Show();
+        }
 
-            menuForm.Show();
+        private void CloseForm(object sender, FormClosingEventArgs e)
+        {
+            this.Close();
         }
 
         private void LoginWithRolClick(object sender, EventArgs e)

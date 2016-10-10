@@ -1,18 +1,21 @@
 ﻿namespace ClinicaFrba.Diagnosticar
 {
+    using Menu;
     using System.Windows.Forms;
 
     public partial class DiagnosticarForm : Form
     {
-        public DiagnosticarForm(Form parent)
+        public DiagnosticarForm()
+        {
+            
+        }
+
+        public Panel Init(MenuForm parent)
         {
             InitializeComponent();
 
             parent.Text = "Diagnosticar";
-        }
 
-        public Panel GetTabContent()
-        {
             return _panel;
         }
     }

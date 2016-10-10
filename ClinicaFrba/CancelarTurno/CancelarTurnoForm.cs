@@ -1,18 +1,21 @@
 ﻿namespace ClinicaFrba.CancelarTurno
 {
+    using Menu;
     using System.Windows.Forms;
 
     public partial class CancelarTurnoForm : Form
     {
-        public CancelarTurnoForm(Form parent)
+        public CancelarTurnoForm()
+        {
+
+        }
+
+        public Panel Init(MenuForm parent)
         {
             InitializeComponent();
 
             parent.Text = "Cancelar Turno";
-        }
 
-        public Panel GetTabContent()
-        {
             return _panel;
         }
     }

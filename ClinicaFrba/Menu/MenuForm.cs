@@ -16,18 +16,40 @@
 
     public partial class MenuForm : Form
     {
-        private Form _mainForm;
         private Usuario _user;
         private Rol _rol;
 
-        public MenuForm(Usuario usuario, Rol rol, Form parent)
-        {
-            _mainForm = parent;
-            _user = usuario;
-            _rol = rol;
+        //forms
+        private ABMRolForm _abmRolForm;
+        private ABMAfiliadosForm _abmAfiliadosForm;
+        private RegistrarAgendaForm _registrarAgendaForm;
+        private ComprarBonoForm _comprarBonoForm;
+        private PedirTurnoForm _pedirTurnoForm;
+        private CancelarTurnoForm _cancelarTurnoForm;
+        private RegistrarLlegadaForm _registrarLlegadaForm;
+        private DiagnosticarForm _diagnosticarForm;
+        private VerEstadisticasForm _verEstadisticasForm;
 
-            InitializeComponent();
-            InitializeTabs();
+        public MenuForm(ABMRolForm abmRolForm,
+                        ABMAfiliadosForm abmAfiliadosForm,
+                        RegistrarAgendaForm registrarAgendaForm,
+                        ComprarBonoForm comprarBonoForm,
+                        PedirTurnoForm pedirTurnoForm,
+                        CancelarTurnoForm cancelarTurnoForm,
+                        RegistrarLlegadaForm registrarLlegadaForm,
+                        DiagnosticarForm diagnosticarForm,
+                        VerEstadisticasForm verEstadisticasForm
+            )
+        {
+            _abmRolForm = abmRolForm;
+            _abmAfiliadosForm = abmAfiliadosForm;
+            _registrarAgendaForm = registrarAgendaForm;
+            _comprarBonoForm = comprarBonoForm;
+            _pedirTurnoForm = pedirTurnoForm;
+            _cancelarTurnoForm = cancelarTurnoForm;
+            _registrarLlegadaForm = registrarLlegadaForm;
+            _diagnosticarForm = diagnosticarForm;
+            _verEstadisticasForm = verEstadisticasForm;
         }
 
         public Usuario User()
@@ -38,6 +60,18 @@
         public Rol Rol()
         {
             return _rol;
+        }
+
+        public void Init(Usuario user, Rol rol, Action<object, FormClosingEventArgs> close)
+        {
+            _user = user;
+            _rol = rol;
+
+            InitializeComponent();
+
+            this.FormClosing += new FormClosingEventHandler(close);
+
+            InitializeTabs();
         }
 
         private void InitializeTabs()
@@ -60,49 +94,17 @@
             var tab = _functionsTabControl.SelectedTab;
             switch (tab.Name)
             {
-                case "ABM Roles": tab.Controls.Add(new ABMRolForm(this).GetTabContent()); break;
-                case "ABM Afiliados": tab.Controls.Add(new ABMAfiliadosForm(this).GetTabContent()); break;
-                case "Registrar Agenda": tab.Controls.Add(new RegistrarAgendaForm(this).GetTabContent()); break;
-                case "Comprar Bonos": tab.Controls.Add(new ComprarBonoForm(this).GetTabContent()); break;
-                case "Pedir Turno": tab.Controls.Add(new PedirTurnoForm(this).GetTabContent()); break;
-                case "Cancelar Turno": tab.Controls.Add(new CancelarTurnoForm(this).GetTabContent()); break;
-                case "Registrar Llegada": tab.Controls.Add(new RegistrarLlegadaForm(this).GetTabContent()); break;
-                case "Diagnosticar": tab.Controls.Add(new DiagnosticarForm(this).GetTabContent()); break;
-                case "Ver Estadisticas": tab.Controls.Add(new VerEstadisticasForm(this).GetTabContent()); break;
+                case "ABM Roles": tab.Controls.Add(_abmRolForm.Init(this)); break;
+                case "ABM Afiliados": tab.Controls.Add(_abmAfiliadosForm.Init(this)); break;
+                case "Registrar Agenda": tab.Controls.Add(_registrarAgendaForm.Init(this)); break;
+                case "Comprar Bonos": tab.Controls.Add(_comprarBonoForm.Init(this)); break;
+                case "Pedir Turno": tab.Controls.Add(_pedirTurnoForm.Init(this)); break;
+                case "Cancelar Turno": tab.Controls.Add(_cancelarTurnoForm.Init(this)); break;
+                case "Registrar Llegada": tab.Controls.Add(_registrarLlegadaForm.Init(this)); break;
+                case "Diagnosticar": tab.Controls.Add(_diagnosticarForm.Init(this)); break;
+                case "Ver Estadisticas": tab.Controls.Add(_verEstadisticasForm.Init(this)); break;
                 default: break;
             }
-        }
-
-        private void MenuFormOnClose(object sender, EventArgs e)
-        {
-            _mainForm.Close();
-        }
-
-        private void TabLabelDrawing(Object sender, System.Windows.Forms.DrawItemEventArgs e)
-        {
-            Graphics g = e.Graphics;
-            Brush _textBrush;
-
-            TabPage _tabPage = _functionsTabControl.TabPages[e.Index];
-            Rectangle _tabBounds = _functionsTabControl.GetTabRect(e.Index);
-
-            if (e.State == DrawItemState.Selected)
-            {
-                _textBrush = new SolidBrush(Color.Red);
-                g.FillRectangle(Brushes.Gray, e.Bounds);
-            }
-            else
-            {
-                _textBrush = new System.Drawing.SolidBrush(e.ForeColor);
-                e.DrawBackground();
-            }
-
-            Font _tabFont = new Font("Arial", (float)12.0, FontStyle.Bold, GraphicsUnit.Pixel);
-
-            StringFormat _stringFlags = new StringFormat();
-            _stringFlags.Alignment = StringAlignment.Center;
-            _stringFlags.LineAlignment = StringAlignment.Center;
-            g.DrawString(_tabPage.Text, _tabFont, _textBrush, _tabBounds, new StringFormat(_stringFlags));
         }
     }
 }

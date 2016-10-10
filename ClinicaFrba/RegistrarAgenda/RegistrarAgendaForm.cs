@@ -1,18 +1,21 @@
 ﻿namespace ClinicaFrba.RegistrarAgenda
 {
+    using Menu;
     using System.Windows.Forms;
 
     public partial class RegistrarAgendaForm : Form
     {
-        public RegistrarAgendaForm(Form parent)
+        public RegistrarAgendaForm()
+        {
+            
+        }
+
+        public Panel Init(MenuForm parent)
         {
             InitializeComponent();
 
             parent.Text = "Registrar Agenda";
-        }
 
-        public Panel GetTabContent()
-        {
             return _panel;
         }
     }

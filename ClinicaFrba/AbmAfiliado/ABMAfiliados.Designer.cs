@@ -29,49 +29,98 @@
         private void InitializeComponent()
         {
             this._panel = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this._altaBtn = new System.Windows.Forms.Button();
+            this._afiliadosGrid = new System.Windows.Forms.DataGridView();
+            this.NroAfiliado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Plan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ver = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Baja = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Modificar = new System.Windows.Forms.DataGridViewButtonColumn();
             this._panel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._afiliadosGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // _panel
             // 
-            this._panel.Controls.Add(this.button1);
-            this._panel.Controls.Add(this.label1);
-            this._panel.Location = new System.Drawing.Point(27, 12);
+            this._panel.Controls.Add(this._altaBtn);
+            this._panel.Controls.Add(this._afiliadosGrid);
+            this._panel.Location = new System.Drawing.Point(12, 12);
             this._panel.Name = "_panel";
-            this._panel.Size = new System.Drawing.Size(367, 308);
+            this._panel.Size = new System.Drawing.Size(723, 320);
             this._panel.TabIndex = 0;
             // 
-            // label1
+            // _altaBtn
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(114, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "asdasasdasdasdasasd";
+            this._altaBtn.Location = new System.Drawing.Point(609, 5);
+            this._altaBtn.Name = "_altaBtn";
+            this._altaBtn.Size = new System.Drawing.Size(110, 23);
+            this._altaBtn.TabIndex = 1;
+            this._altaBtn.Text = "Alta";
+            this._altaBtn.UseVisualStyleBackColor = true;
+            this._altaBtn.Click += new System.EventHandler(this.AltaClick);
             // 
-            // button1
+            // _afiliadosGrid
             // 
-            this.button1.Location = new System.Drawing.Point(19, 54);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this._afiliadosGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this._afiliadosGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.NroAfiliado,
+            this.Nombre,
+            this.Plan,
+            this.Ver,
+            this.Baja,
+            this.Modificar});
+            this._afiliadosGrid.Location = new System.Drawing.Point(0, 3);
+            this._afiliadosGrid.MultiSelect = false;
+            this._afiliadosGrid.Name = "_afiliadosGrid";
+            this._afiliadosGrid.RowHeadersVisible = false;
+            this._afiliadosGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this._afiliadosGrid.Size = new System.Drawing.Size(604, 317);
+            this._afiliadosGrid.TabIndex = 0;
             // 
-            // ABMAfiliados
+            // NroAfiliado
+            // 
+            this.NroAfiliado.HeaderText = "Nro Afiliado";
+            this.NroAfiliado.Name = "NroAfiliado";
+            this.NroAfiliado.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre y Apellido";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            // 
+            // Plan
+            // 
+            this.Plan.HeaderText = "Plan";
+            this.Plan.Name = "Plan";
+            this.Plan.ReadOnly = true;
+            // 
+            // Ver
+            // 
+            this.Ver.HeaderText = "Ver";
+            this.Ver.Name = "Ver";
+            // 
+            // Baja
+            // 
+            this.Baja.HeaderText = "Baja";
+            this.Baja.Name = "Baja";
+            // 
+            // Modificar
+            // 
+            this.Modificar.HeaderText = "Modificar";
+            this.Modificar.Name = "Modificar";
+            // 
+            // ABMAfiliadosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(452, 344);
+            this.ClientSize = new System.Drawing.Size(762, 344);
             this.Controls.Add(this._panel);
-            this.Name = "ABMAfiliados";
+            this.Name = "ABMAfiliadosForm";
             this.Text = "ABMAfiliados";
             this._panel.ResumeLayout(false);
-            this._panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._afiliadosGrid)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -79,7 +128,13 @@
         #endregion
 
         private System.Windows.Forms.Panel _panel;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridView _afiliadosGrid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NroAfiliado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Plan;
+        private System.Windows.Forms.DataGridViewButtonColumn Ver;
+        private System.Windows.Forms.DataGridViewButtonColumn Baja;
+        private System.Windows.Forms.DataGridViewButtonColumn Modificar;
+        private System.Windows.Forms.Button _altaBtn;
     }
 }

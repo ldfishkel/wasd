@@ -1,26 +1,45 @@
 ﻿namespace ClinicaFrba.AbmAfiliado
 {
-    using System;
+    using DataAccess;
+    using DataAccess.DAO;
+    using Menu;
     using System.Windows.Forms;
 
     public partial class ABMAfiliadosForm : Form
     {
-        public ABMAfiliadosForm(Form parent)
+        private AfiliadoDao _afiliadoDao;
+
+        private Usuario _user;
+        private Rol _rol;
+
+        public ABMAfiliadosForm(AfiliadoDao afiliadoDao)
+        {
+            _afiliadoDao = afiliadoDao;
+        }
+
+        public Panel Init(MenuForm menuForm)
         {
             InitializeComponent();
 
-            parent.Text = "ABM Afiliados";
-        }
+            menuForm.Text = "ABM Afiliados";
+            _user = menuForm.User();
+            _rol = menuForm.Rol();
 
-        public Panel GetTabContent()
-        {
+            InitializeAfiliadosGrid();
+
             return _panel;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void InitializeAfiliadosGrid()
         {
-            label1.Text = "QWEQWEQWQWEQWEQWQWEQW";
-           
+            foreach (Afiliado afiliado in _afiliadoDao.GetAfiliados())
+                _afiliadosGrid.Rows.Add(afiliado.idAfiliado, afiliado.NombreyApellido, afiliado.Plan, "Ver", "Baja", "Modificar");
+        }
+
+        private void AltaClick(object sender, System.EventArgs e)
+        {
+            var altaAfiliadoForm = new AltaAfiliado();
+            altaAfiliadoForm.Show();
         }
     }
 }
