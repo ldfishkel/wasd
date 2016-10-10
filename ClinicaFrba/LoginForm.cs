@@ -62,7 +62,8 @@
         {
             this.Hide();
 
-            var menuForm = new MenuForm(_user, rol);
+            var menuForm = new MenuForm(_user, rol, this);
+
             menuForm.Show();
         }
 

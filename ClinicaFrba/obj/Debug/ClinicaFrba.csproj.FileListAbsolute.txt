@@ -24,3 +24,12 @@ C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\Clini
 C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.LoginForm.resources
 C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Menu.MenuForm.resources
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.CancelarTurno.CancelarTurnoForm.resources
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Diagnosticar.DiagnosticarForm.resources
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.PedirTurno.PedirTurnoForm.resources
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.RegistrarAgenda.RegistrarAgendaForm.resources
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.RegistrarLlegada.RegistrarLlegadaForm.resources
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.VerEstadisticas.VerEstadisticasForm.resources
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.AbmAfiliado.ABMAfiliadosForm.resources
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.AbmRol.ABMRolForm.resources
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.CompraBono.ComprarBonoForm.resources

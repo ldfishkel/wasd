@@ -28,34 +28,41 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.MaximizeBox = false;
+            this._functionsTabControl = new System.Windows.Forms.TabControl();
             this.SuspendLayout();
             // 
-            // label1
+            // _functionsTabControl
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(38, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
+            this._functionsTabControl.Alignment = System.Windows.Forms.TabAlignment.Left;
+            this._functionsTabControl.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this._functionsTabControl.ItemSize = new System.Drawing.Size(30, 120);
+            this._functionsTabControl.Location = new System.Drawing.Point(12, 12);
+            this._functionsTabControl.Multiline = true;
+            this._functionsTabControl.Name = "_functionsTabControl";
+            this._functionsTabControl.SelectedIndex = 0;
+            this._functionsTabControl.Size = new System.Drawing.Size(636, 420);
+            this._functionsTabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this._functionsTabControl.TabIndex = 0;
+            this._functionsTabControl.SelectedIndexChanged += new System.EventHandler(this.OnTabSelected);
+            this._functionsTabControl.DrawItem += new System.Windows.Forms.DrawItemEventHandler(TabLabelDrawing);
             // 
             // MenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(433, 97);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(655, 442);
+            this.Controls.Add(this._functionsTabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MenuForm";
-            this.Text = "MenuForm";
+            this.Text = "Menu";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MenuFormOnClose);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TabControl _functionsTabControl;
     }
 }

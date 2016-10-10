@@ -57,47 +57,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abm Afiliado\Form1.cs">
+    <Compile Include="AbmAfiliado\ABMAfiliados.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Afiliado\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="AbmAfiliado\ABMAfiliados.Designer.cs">
+      <DependentUpon>ABMAfiliados.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Especialidades Medicas\Form1.cs">
+    <Compile Include="AbmRol\ABMRolForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Especialidades Medicas\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="AbmRol\ABMRolForm.Designer.cs">
+      <DependentUpon>ABMRolForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Planes\Form1.cs">
+    <Compile Include="CancelarTurno\CancelarTurnoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Planes\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="CancelarTurno\CancelarTurnoForm.Designer.cs">
+      <DependentUpon>CancelarTurnoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Profesional\Form1.cs">
+    <Compile Include="CompraBono\ComprarBonoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Profesional\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AbmRol\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AbmRol\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Cancelar Atencion\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Cancelar Atencion\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Compra Bono\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Compra Bono\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="CompraBono\ComprarBonoForm.Designer.cs">
+      <DependentUpon>ComprarBonoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -106,11 +88,11 @@
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="IoC\Bootstrapper.cs" />
-    <Compile Include="Listados\Form1.cs">
+    <Compile Include="VerEstadisticas\VerEstadisticasForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Listados\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="VerEstadisticas\VerEstadisticasForm.Designer.cs">
+      <DependentUpon>VerEstadisticasForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Menu\MenuForm.cs">
       <SubType>Form</SubType>
@@ -118,37 +100,55 @@
     <Compile Include="Menu\MenuForm.Designer.cs">
       <DependentUpon>MenuForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pedir Turno\Form1.cs">
+    <Compile Include="PedirTurno\PedirTurnoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pedir Turno\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="PedirTurno\PedirTurnoForm.Designer.cs">
+      <DependentUpon>PedirTurnoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registrar Agenta Medico\Form1.cs">
+    <Compile Include="RegistrarAgenda\RegistrarAgendaForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registrar Agenta Medico\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="RegistrarAgenda\RegistrarAgendaForm.Designer.cs">
+      <DependentUpon>RegistrarAgendaForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Registro Llegada\Form1.cs">
+    <Compile Include="RegistrarLlegada\RegistrarLlegadaForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registro Llegada\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="RegistrarLlegada\RegistrarLlegadaForm.Designer.cs">
+      <DependentUpon>RegistrarLlegadaForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Registro Resultado\Form1.cs">
+    <Compile Include="Diagnosticar\DiagnosticarForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registro Resultado\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Diagnosticar\DiagnosticarForm.Designer.cs">
+      <DependentUpon>DiagnosticarForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AbmAfiliado\ABMAfiliados.resx">
+      <DependentUpon>ABMAfiliados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRol\ABMRolForm.resx">
+      <DependentUpon>ABMRolForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CancelarTurno\CancelarTurnoForm.resx">
+      <DependentUpon>CancelarTurnoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CompraBono\ComprarBonoForm.resx">
+      <DependentUpon>ComprarBonoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Diagnosticar\DiagnosticarForm.resx">
+      <DependentUpon>DiagnosticarForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menu\MenuForm.resx">
       <DependentUpon>MenuForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PedirTurno\PedirTurnoForm.resx">
+      <DependentUpon>PedirTurnoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -159,6 +159,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="RegistrarAgenda\RegistrarAgendaForm.resx">
+      <DependentUpon>RegistrarAgendaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegistrarLlegada\RegistrarLlegadaForm.resx">
+      <DependentUpon>RegistrarLlegadaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VerEstadisticas\VerEstadisticasForm.resx">
+      <DependentUpon>VerEstadisticasForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
