@@ -33,7 +33,7 @@
         private void InitializeAfiliadosGrid()
         {
             foreach (Afiliado afiliado in _afiliadoDao.GetAfiliados())
-                _afiliadosGrid.Rows.Add(afiliado.idAfiliado, afiliado.NombreyApellido, afiliado.Plan, "Ver", "Baja", "Modificar");
+                _afiliadosGrid.Rows.Add(afiliado.afiliado_numero, afiliado.afiliado_nombre, afiliado.Plan, "Ver", "Baja", "Modificar");
         }
 
         private void AltaClick(object sender, System.EventArgs e)

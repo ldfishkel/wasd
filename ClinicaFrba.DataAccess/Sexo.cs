@@ -17,12 +17,15 @@ namespace ClinicaFrba.DataAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Sexo()
         {
+            this.Afiliadoes = new HashSet<Afiliado>();
             this.Profesionals = new HashSet<Profesional>();
         }
     
         public int sexo_id { get; set; }
         public string sexo_nombre { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Afiliado> Afiliadoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Profesional> Profesionals { get; set; }
     }

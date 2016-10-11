@@ -10,10 +10,14 @@
 namespace ClinicaFrba.DataAccess
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_helpdiagramdefinition_Result
+    public partial class Diagnostico
     {
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int turno_id { get; set; }
+        public string diagnostico_descripcion { get; set; }
+        public string diagnostico_sintomas { get; set; }
+    
+        public virtual Turno Turno { get; set; }
     }
 }

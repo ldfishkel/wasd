@@ -10,13 +10,14 @@
 namespace ClinicaFrba.DataAccess
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_helpdiagrams_Result
+    public partial class HistorialPlan
     {
-        public string Database { get; set; }
-        public string Name { get; set; }
-        public int ID { get; set; }
-        public string Owner { get; set; }
-        public int OwnerID { get; set; }
+        public int afiliado_id { get; set; }
+        public System.DateTime historial_fecha_cambio { get; set; }
+        public string historial_motivo { get; set; }
+    
+        public virtual Afiliado Afiliado { get; set; }
     }
 }

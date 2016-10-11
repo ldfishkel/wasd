@@ -9,3 +9,4 @@ C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\Clini
 C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.DataAccess\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.DataAccess\obj\Debug\ClinicaFrba.DataAccess.dll
 C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.DataAccess\obj\Debug\ClinicaFrba.DataAccess.pdb
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.DataAccess\obj\Debug\ClinicaFrba.DataAccess.csprojResolveAssemblyReference.cache

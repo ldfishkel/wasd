@@ -17,17 +17,18 @@ namespace ClinicaFrba.DataAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuario()
         {
+            this.Afiliadoes = new HashSet<Afiliado>();
             this.Rols = new HashSet<Rol>();
         }
     
         public int usuario_id { get; set; }
         public string usuario_nombre { get; set; }
-        public string usuario_apellido { get; set; }
-        public int usuario_dni { get; set; }
         public string usuario_password { get; set; }
         public byte usuario_intentos { get; set; }
         public bool usuario_activo { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Afiliado> Afiliadoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Rol> Rols { get; set; }
     }

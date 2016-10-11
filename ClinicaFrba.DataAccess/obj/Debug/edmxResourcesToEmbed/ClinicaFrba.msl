@@ -1,6 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="GD2C2016ModelStoreContainer" CdmEntityContainer="database">
+  <EntityContainerMapping StorageEntityContainer="GD2C2016ModelStoreContainer" CdmEntityContainer="Database">
+    <EntitySetMapping Name="Afiliadoes">
+      <EntityTypeMapping TypeName="GD2C2016Model.Afiliado">
+        <MappingFragment StoreEntitySet="Afiliado">
+          <ScalarProperty Name="afiliado_id" ColumnName="afiliado_id" />
+          <ScalarProperty Name="afiliado_numero" ColumnName="afiliado_numero" />
+          <ScalarProperty Name="afiliado_nombre" ColumnName="afiliado_nombre" />
+          <ScalarProperty Name="afiliado_apellido" ColumnName="afiliado_apellido" />
+          <ScalarProperty Name="afiliado_numero_documento" ColumnName="afiliado_numero_documento" />
+          <ScalarProperty Name="afiliado_tipo_documento" ColumnName="afiliado_tipo_documento" />
+          <ScalarProperty Name="afiliado_direccion" ColumnName="afiliado_direccion" />
+          <ScalarProperty Name="afiliado_telefono" ColumnName="afiliado_telefono" />
+          <ScalarProperty Name="afiliado_mail" ColumnName="afiliado_mail" />
+          <ScalarProperty Name="afiliado_fecha_nacimiento" ColumnName="afiliado_fecha_nacimiento" />
+          <ScalarProperty Name="afiliado_sexo" ColumnName="afiliado_sexo" />
+          <ScalarProperty Name="afiliado_estado_civil" ColumnName="afiliado_estado_civil" />
+          <ScalarProperty Name="afiliado_familiares_dependientes" ColumnName="afiliado_familiares_dependientes" />
+          <ScalarProperty Name="afiliado_plan" ColumnName="afiliado_plan" />
+          <ScalarProperty Name="afiliado_fecha_alta" ColumnName="afiliado_fecha_alta" />
+          <ScalarProperty Name="afiliado_fecha_baja" ColumnName="afiliado_fecha_baja" />
+          <ScalarProperty Name="afiliado_activo" ColumnName="afiliado_activo" />
+          <ScalarProperty Name="afiliado_usuario" ColumnName="afiliado_usuario" />
+          <ScalarProperty Name="afiliado_grupo_familiar" ColumnName="afiliado_grupo_familiar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Agenda">
       <EntityTypeMapping TypeName="GD2C2016Model.Agendum">
         <MappingFragment StoreEntitySet="Agenda">
@@ -12,6 +37,30 @@
           <ScalarProperty Name="agenda_fecha_desde" ColumnName="agenda_fecha_desde" />
           <ScalarProperty Name="agenda_fecha_hasta" ColumnName="agenda_fecha_hasta" />
           <ScalarProperty Name="especialidad_id" ColumnName="especialidad_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bonoes">
+      <EntityTypeMapping TypeName="GD2C2016Model.Bono">
+        <MappingFragment StoreEntitySet="Bono">
+          <ScalarProperty Name="bono_id" ColumnName="bono_id" />
+          <ScalarProperty Name="plan_id" ColumnName="plan_id" />
+          <ScalarProperty Name="afiliado_id" ColumnName="afiliado_id" />
+          <ScalarProperty Name="bono_numero_consulta" ColumnName="bono_numero_consulta" />
+          <ScalarProperty Name="bono_afiliado_usado" ColumnName="bono_afiliado_usado" />
+          <ScalarProperty Name="bono_fecha_uso" ColumnName="bono_fecha_uso" />
+          <ScalarProperty Name="compra_id" ColumnName="compra_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Compras">
+      <EntityTypeMapping TypeName="GD2C2016Model.Compra">
+        <MappingFragment StoreEntitySet="Compra">
+          <ScalarProperty Name="compra_id" ColumnName="compra_id" />
+          <ScalarProperty Name="afiliado_id" ColumnName="afiliado_id" />
+          <ScalarProperty Name="compra_fecha_hora" ColumnName="compra_fecha_hora" />
+          <ScalarProperty Name="compra_cantidad" ColumnName="compra_cantidad" />
+          <ScalarProperty Name="compra_monto" ColumnName="compra_monto" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -100,16 +149,45 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Turnoes">
+      <EntityTypeMapping TypeName="GD2C2016Model.Turno">
+        <MappingFragment StoreEntitySet="Turno">
+          <ScalarProperty Name="turno_id" ColumnName="turno_id" />
+          <ScalarProperty Name="afiliado_id" ColumnName="afiliado_id" />
+          <ScalarProperty Name="profesional_id" ColumnName="profesional_id" />
+          <ScalarProperty Name="bono_id" ColumnName="bono_id" />
+          <ScalarProperty Name="turno_fecha_hora" ColumnName="turno_fecha_hora" />
+          <ScalarProperty Name="turno_cancelado" ColumnName="turno_cancelado" />
+          <ScalarProperty Name="especialidad_id" ColumnName="especialidad_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Usuarios">
       <EntityTypeMapping TypeName="GD2C2016Model.Usuario">
         <MappingFragment StoreEntitySet="Usuario">
           <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
           <ScalarProperty Name="usuario_nombre" ColumnName="usuario_nombre" />
-          <ScalarProperty Name="usuario_apellido" ColumnName="usuario_apellido" />
-          <ScalarProperty Name="usuario_dni" ColumnName="usuario_dni" />
           <ScalarProperty Name="usuario_password" ColumnName="usuario_password" />
           <ScalarProperty Name="usuario_intentos" ColumnName="usuario_intentos" />
           <ScalarProperty Name="usuario_activo" ColumnName="usuario_activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Diagnosticoes">
+      <EntityTypeMapping TypeName="GD2C2016Model.Diagnostico">
+        <MappingFragment StoreEntitySet="Diagnostico">
+          <ScalarProperty Name="turno_id" ColumnName="turno_id" />
+          <ScalarProperty Name="diagnostico_descripcion" ColumnName="diagnostico_descripcion" />
+          <ScalarProperty Name="diagnostico_sintomas" ColumnName="diagnostico_sintomas" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HistorialPlans">
+      <EntityTypeMapping TypeName="GD2C2016Model.HistorialPlan">
+        <MappingFragment StoreEntitySet="HistorialPlan">
+          <ScalarProperty Name="afiliado_id" ColumnName="afiliado_id" />
+          <ScalarProperty Name="historial_fecha_cambio" ColumnName="historial_fecha_cambio" />
+          <ScalarProperty Name="historial_motivo" ColumnName="historial_motivo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -137,29 +215,5 @@
         <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
       </EndProperty>
     </AssociationSetMapping>
-    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="GD2C2016Model.Store.sp_alterdiagram" />
-    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="GD2C2016Model.Store.sp_creatediagram" />
-    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="GD2C2016Model.Store.sp_dropdiagram" />
-    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="GD2C2016Model.Store.sp_helpdiagramdefinition">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="GD2C2016Model.sp_helpdiagramdefinition_Result">
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="definition" ColumnName="definition" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="GD2C2016Model.Store.sp_helpdiagrams">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="GD2C2016Model.sp_helpdiagrams_Result">
-          <ScalarProperty Name="Database" ColumnName="Database" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Owner" ColumnName="Owner" />
-          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="GD2C2016Model.Store.sp_renamediagram" />
-    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="GD2C2016Model.Store.sp_upgraddiagrams" />
   </EntityContainerMapping>
 </Mapping>

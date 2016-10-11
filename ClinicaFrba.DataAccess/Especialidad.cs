@@ -18,6 +18,7 @@ namespace ClinicaFrba.DataAccess
         public Especialidad()
         {
             this.Agenda = new HashSet<Agendum>();
+            this.Turnoes = new HashSet<Turno>();
             this.Profesionals = new HashSet<Profesional>();
         }
     
@@ -28,6 +29,8 @@ namespace ClinicaFrba.DataAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Agendum> Agenda { get; set; }
         public virtual TipoEspecialidad TipoEspecialidad { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Turno> Turnoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Profesional> Profesionals { get; set; }
     }

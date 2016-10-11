@@ -55,7 +55,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Afiliado.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
     <Compile Include="Agendum.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Bono.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
     <Compile Include="ClinicaFrba.Context.cs">
@@ -73,9 +79,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ClinicaFrba.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DAO\Afiliado.cs" />
+    <Compile Include="Compra.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAO\AfiliadoDao.cs" />
     <Compile Include="DAO\UsuarioDao.cs" />
+    <Compile Include="Diagnostico.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
     <Compile Include="Especialidad.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
@@ -83,6 +94,9 @@
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
     <Compile Include="Funcionalidad.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HistorialPlan.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
     <Compile Include="IoC\Bootstrapper.cs" />
@@ -100,16 +114,13 @@
     <Compile Include="Sexo.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
-    <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>ClinicaFrba.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagrams_Result.cs">
-      <DependentUpon>ClinicaFrba.tt</DependentUpon>
-    </Compile>
     <Compile Include="TipoDocumento.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
     <Compile Include="TipoEspecialidad.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Turno.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
     <Compile Include="Usuario.cs">

@@ -12,18 +12,26 @@ namespace ClinicaFrba.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class EstadoCivil
+    public partial class Bono
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public EstadoCivil()
+        public Bono()
         {
-            this.Afiliadoes = new HashSet<Afiliado>();
+            this.Turnoes = new HashSet<Turno>();
         }
     
-        public int estadocivil_id { get; set; }
-        public string estadocivil_nombre { get; set; }
+        public int bono_id { get; set; }
+        public int plan_id { get; set; }
+        public int afiliado_id { get; set; }
+        public Nullable<int> bono_numero_consulta { get; set; }
+        public Nullable<int> bono_afiliado_usado { get; set; }
+        public Nullable<System.DateTime> bono_fecha_uso { get; set; }
+        public int compra_id { get; set; }
     
+        public virtual Afiliado Afiliado { get; set; }
+        public virtual Compra Compra { get; set; }
+        public virtual Plan Plan { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Afiliado> Afiliadoes { get; set; }
+        public virtual ICollection<Turno> Turnoes { get; set; }
     }
 }

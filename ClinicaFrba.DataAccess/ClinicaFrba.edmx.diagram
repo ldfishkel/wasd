@@ -4,23 +4,45 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="15371a14e876428590124047582b16c5" Name="Diagram1">
-        <EntityTypeShape EntityType="GD2C2016Model.Agendum" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="GD2C2016Model.Especialidad" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GD2C2016Model.EstadoCivil" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GD2C2016Model.Funcionalidad" Width="1.5" PointX="8.75" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="GD2C2016Model.Plan" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GD2C2016Model.Profesional" Width="1.5" PointX="8.25" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="GD2C2016Model.Rol" Width="1.5" PointX="11" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="GD2C2016Model.Sexo" Width="1.5" PointX="6" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="GD2C2016Model.TipoDocumento" Width="1.5" PointX="6" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="GD2C2016Model.TipoEspecialidad" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="GD2C2016Model.Usuario" Width="1.5" PointX="13.25" PointY="8" IsExpanded="true" />
+      <Diagram DiagramId="7c3e9cdbcbd44d01b2e2489fa9047c56" Name="Diagram1">
+        <EntityTypeShape EntityType="GD2C2016Model.Afiliado" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GD2C2016Model.Agendum" Width="1.5" PointX="9.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GD2C2016Model.Bono" Width="1.5" PointX="7.5" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GD2C2016Model.Compra" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GD2C2016Model.Especialidad" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GD2C2016Model.EstadoCivil" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GD2C2016Model.Funcionalidad" Width="1.5" PointX="1.5" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GD2C2016Model.Plan" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GD2C2016Model.Profesional" Width="1.5" PointX="7.5" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GD2C2016Model.Rol" Width="1.5" PointX="1.5" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GD2C2016Model.Sexo" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GD2C2016Model.TipoDocumento" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GD2C2016Model.TipoEspecialidad" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GD2C2016Model.Turno" Width="1.5" PointX="9.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GD2C2016Model.Usuario" Width="1.5" PointX="0.75" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GD2C2016Model.Diagnostico" Width="1.5" PointX="12" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GD2C2016Model.HistorialPlan" Width="1.5" PointX="5.25" PointY="10.25" IsExpanded="true" />
+        <AssociationConnector Association="GD2C2016Model.FK_Afiliado_Afiliado" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK_Afiliado_EstadoCivil" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK_Afiliado_Plan" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK_Afiliado_Sexo" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK_Afiliado_TipoDocumento" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK_Afiliado_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK_Bono_Afiliado" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK_Compra_Afiliado" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK_HistorialPlan_Afiliado" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK_Turno_Afiliado" ManuallyRouted="false" />
         <AssociationConnector Association="GD2C2016Model.FK_Agenda_Especialidad" ManuallyRouted="false" />
         <AssociationConnector Association="GD2C2016Model.FK_Agenda_Profesional" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK_Bono_Compra" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK_Bono_Plan" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK_Turno_Bono" ManuallyRouted="false" />
         <AssociationConnector Association="GD2C2016Model.FK_Especialidad_TipoEspecialidad" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK_Turno_Especialidad" ManuallyRouted="false" />
         <AssociationConnector Association="GD2C2016Model.FK_Profesional_Sexo" ManuallyRouted="false" />
         <AssociationConnector Association="GD2C2016Model.FK_Profesional_TipoDocumento" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK_Turno_Profesional" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK_Diagnostico_Turno" ManuallyRouted="false" />
         <AssociationConnector Association="GD2C2016Model.EspecialidadesPorProfesional" ManuallyRouted="false" />
         <AssociationConnector Association="GD2C2016Model.FuncionalidadPorRol" ManuallyRouted="false" />
         <AssociationConnector Association="GD2C2016Model.RolPorUsuario" ManuallyRouted="false" />
