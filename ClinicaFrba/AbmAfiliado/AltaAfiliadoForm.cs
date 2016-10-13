@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ClinicaFrba.AbmAfiliado
 {
-    public partial class AltaAfiliado : Form
+    public partial class AltaAfiliadoForm : Form
     {
-        public AltaAfiliado()
+        public AltaAfiliadoForm()
         {
             InitializeComponent();
         }

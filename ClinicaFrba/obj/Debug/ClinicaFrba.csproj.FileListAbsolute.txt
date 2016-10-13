@@ -33,4 +33,4 @@ C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\Clini
 C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache
 C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.exe
 C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.pdb
-C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.AbmAfiliado.AltaAfiliado.resources
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.AbmAfiliado.AltaAfiliadoForm.resources

@@ -82,6 +82,7 @@
     <Compile Include="Compra.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAO\ProfesionalDao.cs" />
     <Compile Include="DAO\AfiliadoDao.cs" />
     <Compile Include="DAO\UsuarioDao.cs" />
     <Compile Include="Diagnostico.cs">

@@ -12,6 +12,7 @@
             //Components
             builder.RegisterType<UsuarioDao>().AsSelf().SingleInstance();
             builder.RegisterType<AfiliadoDao>().AsSelf().SingleInstance();
+            builder.RegisterType<ProfesionalDao>().AsSelf().SingleInstance();
         }
     }
 }
