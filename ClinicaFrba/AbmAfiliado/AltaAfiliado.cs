@@ -109,8 +109,18 @@ namespace ClinicaFrba.AbmAfiliado
             {
                 sb.AppendLine("Debe completar el campo Email");
             }
-            int longitud = sb.Length;
-
+            if (_estado_civil.SelectedItem == null)
+            {
+                sb.AppendLine("Debe seleccionar un Estado Civil");
+            }
+            if (_sexo.SelectedItem == null)
+            {
+                sb.AppendLine("Debe seleccionar un Sexo");
+            }
+            if (_si_familia.Checked == false && _no_familia.Checked == false)
+            {
+                sb.AppendLine("Debe de no tener hijos o familiares a cargo seleccione 'NO'");
+            }
             if (sb.Length != 0)
             {
                 MessageBox.Show(sb.ToString());

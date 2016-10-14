@@ -62,3 +62,31 @@ C:\Users\ezequ\Google Drive\UTN\UTN 2016\Gestion de Datos\TP CLINICA FRBA 1.0 - 
 C:\Users\ezequ\Google Drive\UTN\UTN 2016\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\obj\Debug\ClinicaFrba.RegistrarLlegada.RegistrarLlegadaForm.resources
 C:\Users\ezequ\Google Drive\UTN\UTN 2016\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\obj\Debug\ClinicaFrba.VerEstadisticas.VerEstadisticasForm.resources
 C:\Users\ezequ\Google Drive\UTN\UTN 2016\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache
+E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\bin\Debug\ClinicaFrba.exe.config
+E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\obj\Debug\ClinicaFrba.exe
+E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\obj\Debug\ClinicaFrba.pdb
+E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\bin\Debug\ClinicaFrba.exe
+E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\bin\Debug\ClinicaFrba.pdb
+E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\bin\Debug\Autofac.dll
+E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\bin\Debug\ClinicaFrba.DataAccess.dll
+E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\bin\Debug\EntityFramework.dll
+E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\bin\Debug\EntityFramework.SqlServer.dll
+E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\bin\Debug\ClinicaFrba.DataAccess.pdb
+E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\bin\Debug\Autofac.xml
+E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\bin\Debug\EntityFramework.xml
+E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\bin\Debug\EntityFramework.SqlServer.xml
+E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\obj\Debug\ClinicaFrba.csprojResolveAssemblyReference.cache
+E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\obj\Debug\ClinicaFrba.AbmAfiliado.ABMAfiliadosForm.resources
+E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\obj\Debug\ClinicaFrba.AbmAfiliado.AltaAfiliado.resources
+E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\obj\Debug\ClinicaFrba.AbmRol.ABMRolForm.resources
+E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\obj\Debug\ClinicaFrba.CancelarTurno.CancelarTurnoForm.resources
+E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\obj\Debug\ClinicaFrba.CompraBono.ComprarBonoForm.resources
+E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\obj\Debug\ClinicaFrba.Diagnosticar.DiagnosticarForm.resources
+E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\obj\Debug\ClinicaFrba.LoginForm.resources
+E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\obj\Debug\ClinicaFrba.Menu.MenuForm.resources
+E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\obj\Debug\ClinicaFrba.PedirTurno.PedirTurnoForm.resources
+E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\obj\Debug\ClinicaFrba.Properties.Resources.resources
+E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\obj\Debug\ClinicaFrba.RegistrarAgenda.RegistrarAgendaForm.resources
+E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\obj\Debug\ClinicaFrba.RegistrarLlegada.RegistrarLlegadaForm.resources
+E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\obj\Debug\ClinicaFrba.VerEstadisticas.VerEstadisticasForm.resources
+E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache
