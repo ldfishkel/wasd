@@ -41,5 +41,10 @@
             var altaAfiliadoForm = new AltaAfiliado();
             altaAfiliadoForm.Show();
         }
+
+        private void _afiliadosGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

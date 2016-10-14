@@ -45,16 +45,18 @@
             // 
             this._panel.Controls.Add(this._altaBtn);
             this._panel.Controls.Add(this._afiliadosGrid);
-            this._panel.Location = new System.Drawing.Point(12, 12);
+            this._panel.Location = new System.Drawing.Point(16, 15);
+            this._panel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this._panel.Name = "_panel";
-            this._panel.Size = new System.Drawing.Size(723, 320);
+            this._panel.Size = new System.Drawing.Size(964, 394);
             this._panel.TabIndex = 0;
             // 
             // _altaBtn
             // 
-            this._altaBtn.Location = new System.Drawing.Point(609, 5);
+            this._altaBtn.Location = new System.Drawing.Point(812, 6);
+            this._altaBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this._altaBtn.Name = "_altaBtn";
-            this._altaBtn.Size = new System.Drawing.Size(110, 23);
+            this._altaBtn.Size = new System.Drawing.Size(147, 28);
             this._altaBtn.TabIndex = 1;
             this._altaBtn.Text = "Alta";
             this._altaBtn.UseVisualStyleBackColor = true;
@@ -70,13 +72,15 @@
             this.Ver,
             this.Baja,
             this.Modificar});
-            this._afiliadosGrid.Location = new System.Drawing.Point(0, 3);
+            this._afiliadosGrid.Location = new System.Drawing.Point(0, 4);
+            this._afiliadosGrid.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this._afiliadosGrid.MultiSelect = false;
             this._afiliadosGrid.Name = "_afiliadosGrid";
             this._afiliadosGrid.RowHeadersVisible = false;
             this._afiliadosGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this._afiliadosGrid.Size = new System.Drawing.Size(604, 317);
+            this._afiliadosGrid.Size = new System.Drawing.Size(805, 390);
             this._afiliadosGrid.TabIndex = 0;
+            this._afiliadosGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this._afiliadosGrid_CellContentClick);
             // 
             // NroAfiliado
             // 
@@ -113,10 +117,11 @@
             // 
             // ABMAfiliadosForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(762, 344);
+            this.ClientSize = new System.Drawing.Size(1016, 423);
             this.Controls.Add(this._panel);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ABMAfiliadosForm";
             this.Text = "ABMAfiliados";
             this._panel.ResumeLayout(false);

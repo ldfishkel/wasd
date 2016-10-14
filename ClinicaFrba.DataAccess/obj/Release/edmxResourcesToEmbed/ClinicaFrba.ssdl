@@ -1,0 +1,695 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GD2C2016Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Afiliado">
+    <Key>
+      <PropertyRef Name="afiliado_id" />
+    </Key>
+    <Property Name="afiliado_id" Type="int" Nullable="false" />
+    <Property Name="afiliado_numero" Type="int" Nullable="false" />
+    <Property Name="afiliado_nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="afiliado_apellido" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="afiliado_numero_documento" Type="int" Nullable="false" />
+    <Property Name="afiliado_tipo_documento" Type="int" Nullable="false" />
+    <Property Name="afiliado_direccion" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="afiliado_telefono" Type="int" Nullable="false" />
+    <Property Name="afiliado_mail" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="afiliado_fecha_nacimiento" Type="date" Nullable="false" />
+    <Property Name="afiliado_sexo" Type="int" Nullable="false" />
+    <Property Name="afiliado_estado_civil" Type="int" Nullable="false" />
+    <Property Name="afiliado_familiares_dependientes" Type="tinyint" Nullable="false" />
+    <Property Name="afiliado_plan" Type="int" Nullable="false" />
+    <Property Name="afiliado_fecha_alta" Type="date" Nullable="false" />
+    <Property Name="afiliado_fecha_baja" Type="date" />
+    <Property Name="afiliado_activo" Type="bit" Nullable="false" />
+    <Property Name="afiliado_usuario" Type="int" Nullable="false" />
+    <Property Name="afiliado_grupo_familiar" Type="int" />
+  </EntityType>
+  <EntityType Name="Agenda">
+    <Key>
+      <PropertyRef Name="agenda_id" />
+    </Key>
+    <Property Name="agenda_id" Type="int" Nullable="false" />
+    <Property Name="profesional_id" Type="int" Nullable="false" />
+    <Property Name="agenda_dia" Type="char" MaxLength="10" />
+    <Property Name="agenda_hora_desde" Type="time" Precision="7" Nullable="false" />
+    <Property Name="agenda_hora_hasta" Type="time" Precision="7" Nullable="false" />
+    <Property Name="agenda_fecha_desde" Type="date" Nullable="false" />
+    <Property Name="agenda_fecha_hasta" Type="date" Nullable="false" />
+    <Property Name="especialidad_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Bono">
+    <Key>
+      <PropertyRef Name="bono_id" />
+    </Key>
+    <Property Name="bono_id" Type="int" Nullable="false" />
+    <Property Name="plan_id" Type="int" Nullable="false" />
+    <Property Name="afiliado_id" Type="int" Nullable="false" />
+    <Property Name="bono_numero_consulta" Type="int" />
+    <Property Name="bono_afiliado_usado" Type="int" />
+    <Property Name="bono_fecha_uso" Type="date" />
+    <Property Name="compra_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Compra">
+    <Key>
+      <PropertyRef Name="compra_id" />
+    </Key>
+    <Property Name="compra_id" Type="int" Nullable="false" />
+    <Property Name="afiliado_id" Type="int" Nullable="false" />
+    <Property Name="compra_fecha_hora" Type="datetime" Nullable="false" />
+    <Property Name="compra_cantidad" Type="smallint" Nullable="false" />
+    <Property Name="compra_monto" Type="money" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'GD2C2016.WASD.Diagnostico' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Diagnostico">
+    <Key>
+      <PropertyRef Name="turno_id" />
+      <PropertyRef Name="diagnostico_descripcion" />
+      <PropertyRef Name="diagnostico_sintomas" />
+    </Key>
+    <Property Name="turno_id" Type="int" Nullable="false" />
+    <Property Name="diagnostico_descripcion" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="diagnostico_sintomas" Type="varchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Especialidad">
+    <Key>
+      <PropertyRef Name="especialidad_id" />
+    </Key>
+    <Property Name="especialidad_id" Type="int" Nullable="false" />
+    <Property Name="especialidad_nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="especialidad_tipo" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'GD2C2016.WASD.EspecialidadesPorProfesional' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="EspecialidadesPorProfesional">
+    <Key>
+      <PropertyRef Name="profesional_id" />
+      <PropertyRef Name="especialidad_id" />
+    </Key>
+    <Property Name="profesional_id" Type="int" Nullable="false" />
+    <Property Name="especialidad_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EstadoCivil">
+    <Key>
+      <PropertyRef Name="estadocivil_id" />
+    </Key>
+    <Property Name="estadocivil_id" Type="int" Nullable="false" />
+    <Property Name="estadocivil_nombre" Type="char" MaxLength="12" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Funcionalidad">
+    <Key>
+      <PropertyRef Name="funcionalidad_id" />
+    </Key>
+    <Property Name="funcionalidad_id" Type="int" Nullable="false" />
+    <Property Name="funcionalidad_nombre" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'GD2C2016.WASD.FuncionalidadPorRol' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="FuncionalidadPorRol">
+    <Key>
+      <PropertyRef Name="rol_id" />
+      <PropertyRef Name="funcionalidad_id" />
+    </Key>
+    <Property Name="rol_id" Type="int" Nullable="false" />
+    <Property Name="funcionalidad_id" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'GD2C2016.WASD.HistorialPlan' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="HistorialPlan">
+    <Key>
+      <PropertyRef Name="afiliado_id" />
+      <PropertyRef Name="historial_fecha_cambio" />
+      <PropertyRef Name="historial_motivo" />
+    </Key>
+    <Property Name="afiliado_id" Type="int" Nullable="false" />
+    <Property Name="historial_fecha_cambio" Type="date" Nullable="false" />
+    <Property Name="historial_motivo" Type="varchar" MaxLength="144" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Plan">
+    <Key>
+      <PropertyRef Name="plan_id" />
+    </Key>
+    <Property Name="plan_id" Type="int" Nullable="false" />
+    <Property Name="plan_nombre" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="plan_cuota" Type="smallmoney" Nullable="false" />
+    <Property Name="plan_precio_bono" Type="smallmoney" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Profesional">
+    <Key>
+      <PropertyRef Name="profesional_id" />
+    </Key>
+    <Property Name="profesional_id" Type="int" Nullable="false" />
+    <Property Name="profesional_nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="profesional_apellido" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="profesional_direccion" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="profesional_telefono" Type="int" Nullable="false" />
+    <Property Name="profesional_mail" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="profesional_fecha_nacimiento" Type="date" Nullable="false" />
+    <Property Name="profesional_sexo" Type="int" Nullable="false" />
+    <Property Name="profesional_matricula" Type="int" Nullable="false" />
+    <Property Name="profesional_tipo_documento" Type="int" Nullable="false" />
+    <Property Name="profesional_numero_documento" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Rol">
+    <Key>
+      <PropertyRef Name="rol_id" />
+    </Key>
+    <Property Name="rol_id" Type="int" Nullable="false" />
+    <Property Name="rol_nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="rol_activo" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'GD2C2016.WASD.RolPorUsuario' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="RolPorUsuario">
+    <Key>
+      <PropertyRef Name="usuario_id" />
+      <PropertyRef Name="rol_id" />
+    </Key>
+    <Property Name="usuario_id" Type="int" Nullable="false" />
+    <Property Name="rol_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sexo">
+    <Key>
+      <PropertyRef Name="sexo_id" />
+    </Key>
+    <Property Name="sexo_id" Type="int" Nullable="false" />
+    <Property Name="sexo_nombre" Type="char" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TipoDocumento">
+    <Key>
+      <PropertyRef Name="tipodocumento_id" />
+    </Key>
+    <Property Name="tipodocumento_id" Type="int" Nullable="false" />
+    <Property Name="tipodocumento_nombre" Type="char" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TipoEspecialidad">
+    <Key>
+      <PropertyRef Name="tipoespecialidad_id" />
+    </Key>
+    <Property Name="tipoespecialidad_id" Type="int" Nullable="false" />
+    <Property Name="tipoespecialidad_nombre" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Turno">
+    <Key>
+      <PropertyRef Name="turno_id" />
+    </Key>
+    <Property Name="turno_id" Type="int" Nullable="false" />
+    <Property Name="afiliado_id" Type="int" Nullable="false" />
+    <Property Name="profesional_id" Type="int" Nullable="false" />
+    <Property Name="bono_id" Type="int" />
+    <Property Name="turno_fecha_hora" Type="datetime" />
+    <Property Name="turno_cancelado" Type="char" MaxLength="1" />
+    <Property Name="especialidad_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="usuario_id" />
+    </Key>
+    <Property Name="usuario_id" Type="int" Nullable="false" />
+    <Property Name="usuario_nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="usuario_password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="usuario_intentos" Type="tinyint" Nullable="false" />
+    <Property Name="usuario_activo" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Afiliado_Afiliado">
+    <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="0..1" />
+    <End Role="Afiliado1" Type="Self.Afiliado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Afiliado">
+        <PropertyRef Name="afiliado_id" />
+      </Principal>
+      <Dependent Role="Afiliado1">
+        <PropertyRef Name="afiliado_grupo_familiar" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Afiliado_EstadoCivil">
+    <End Role="EstadoCivil" Type="Self.EstadoCivil" Multiplicity="1" />
+    <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstadoCivil">
+        <PropertyRef Name="estadocivil_id" />
+      </Principal>
+      <Dependent Role="Afiliado">
+        <PropertyRef Name="afiliado_estado_civil" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Afiliado_Plan">
+    <End Role="Plan" Type="Self.Plan" Multiplicity="1" />
+    <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Plan">
+        <PropertyRef Name="plan_id" />
+      </Principal>
+      <Dependent Role="Afiliado">
+        <PropertyRef Name="afiliado_plan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Afiliado_Sexo">
+    <End Role="Sexo" Type="Self.Sexo" Multiplicity="1" />
+    <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sexo">
+        <PropertyRef Name="sexo_id" />
+      </Principal>
+      <Dependent Role="Afiliado">
+        <PropertyRef Name="afiliado_sexo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Afiliado_TipoDocumento">
+    <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="1" />
+    <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoDocumento">
+        <PropertyRef Name="tipodocumento_id" />
+      </Principal>
+      <Dependent Role="Afiliado">
+        <PropertyRef Name="afiliado_tipo_documento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Afiliado_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="usuario_id" />
+      </Principal>
+      <Dependent Role="Afiliado">
+        <PropertyRef Name="afiliado_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Agenda_Especialidad">
+    <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
+    <End Role="Agenda" Type="Self.Agenda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Especialidad">
+        <PropertyRef Name="especialidad_id" />
+      </Principal>
+      <Dependent Role="Agenda">
+        <PropertyRef Name="especialidad_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Agenda_Profesional">
+    <End Role="Profesional" Type="Self.Profesional" Multiplicity="1" />
+    <End Role="Agenda" Type="Self.Agenda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profesional">
+        <PropertyRef Name="profesional_id" />
+      </Principal>
+      <Dependent Role="Agenda">
+        <PropertyRef Name="profesional_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bono_Afiliado">
+    <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
+    <End Role="Bono" Type="Self.Bono" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Afiliado">
+        <PropertyRef Name="afiliado_id" />
+      </Principal>
+      <Dependent Role="Bono">
+        <PropertyRef Name="afiliado_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bono_Compra">
+    <End Role="Compra" Type="Self.Compra" Multiplicity="1" />
+    <End Role="Bono" Type="Self.Bono" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Compra">
+        <PropertyRef Name="compra_id" />
+      </Principal>
+      <Dependent Role="Bono">
+        <PropertyRef Name="compra_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bono_Plan">
+    <End Role="Plan" Type="Self.Plan" Multiplicity="1" />
+    <End Role="Bono" Type="Self.Bono" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Plan">
+        <PropertyRef Name="plan_id" />
+      </Principal>
+      <Dependent Role="Bono">
+        <PropertyRef Name="plan_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Compra_Afiliado">
+    <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
+    <End Role="Compra" Type="Self.Compra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Afiliado">
+        <PropertyRef Name="afiliado_id" />
+      </Principal>
+      <Dependent Role="Compra">
+        <PropertyRef Name="afiliado_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Diagnostico_Turno">
+    <End Role="Turno" Type="Self.Turno" Multiplicity="1" />
+    <End Role="Diagnostico" Type="Self.Diagnostico" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Turno">
+        <PropertyRef Name="turno_id" />
+      </Principal>
+      <Dependent Role="Diagnostico">
+        <PropertyRef Name="turno_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Especialidad_TipoEspecialidad">
+    <End Role="TipoEspecialidad" Type="Self.TipoEspecialidad" Multiplicity="1" />
+    <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoEspecialidad">
+        <PropertyRef Name="tipoespecialidad_id" />
+      </Principal>
+      <Dependent Role="Especialidad">
+        <PropertyRef Name="especialidad_tipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EspecialidadesPorProfesional_Especialidad">
+    <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
+    <End Role="EspecialidadesPorProfesional" Type="Self.EspecialidadesPorProfesional" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Especialidad">
+        <PropertyRef Name="especialidad_id" />
+      </Principal>
+      <Dependent Role="EspecialidadesPorProfesional">
+        <PropertyRef Name="especialidad_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EspecialidadesPorProfesional_Profesional">
+    <End Role="Profesional" Type="Self.Profesional" Multiplicity="1" />
+    <End Role="EspecialidadesPorProfesional" Type="Self.EspecialidadesPorProfesional" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profesional">
+        <PropertyRef Name="profesional_id" />
+      </Principal>
+      <Dependent Role="EspecialidadesPorProfesional">
+        <PropertyRef Name="profesional_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FuncionalidadPorRol_Funcionalidad">
+    <End Role="Funcionalidad" Type="Self.Funcionalidad" Multiplicity="1" />
+    <End Role="FuncionalidadPorRol" Type="Self.FuncionalidadPorRol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Funcionalidad">
+        <PropertyRef Name="funcionalidad_id" />
+      </Principal>
+      <Dependent Role="FuncionalidadPorRol">
+        <PropertyRef Name="funcionalidad_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FuncionalidadPorRol_Rol">
+    <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+    <End Role="FuncionalidadPorRol" Type="Self.FuncionalidadPorRol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rol">
+        <PropertyRef Name="rol_id" />
+      </Principal>
+      <Dependent Role="FuncionalidadPorRol">
+        <PropertyRef Name="rol_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HistorialPlan_Afiliado">
+    <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
+    <End Role="HistorialPlan" Type="Self.HistorialPlan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Afiliado">
+        <PropertyRef Name="afiliado_id" />
+      </Principal>
+      <Dependent Role="HistorialPlan">
+        <PropertyRef Name="afiliado_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Profesional_Sexo">
+    <End Role="Sexo" Type="Self.Sexo" Multiplicity="1" />
+    <End Role="Profesional" Type="Self.Profesional" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sexo">
+        <PropertyRef Name="sexo_id" />
+      </Principal>
+      <Dependent Role="Profesional">
+        <PropertyRef Name="profesional_sexo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Profesional_TipoDocumento">
+    <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="1" />
+    <End Role="Profesional" Type="Self.Profesional" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoDocumento">
+        <PropertyRef Name="tipodocumento_id" />
+      </Principal>
+      <Dependent Role="Profesional">
+        <PropertyRef Name="profesional_tipo_documento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RolPorUsuario_Rol">
+    <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+    <End Role="RolPorUsuario" Type="Self.RolPorUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rol">
+        <PropertyRef Name="rol_id" />
+      </Principal>
+      <Dependent Role="RolPorUsuario">
+        <PropertyRef Name="rol_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RolPorUsuario_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="RolPorUsuario" Type="Self.RolPorUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="usuario_id" />
+      </Principal>
+      <Dependent Role="RolPorUsuario">
+        <PropertyRef Name="usuario_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Turno_Afiliado">
+    <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
+    <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Afiliado">
+        <PropertyRef Name="afiliado_id" />
+      </Principal>
+      <Dependent Role="Turno">
+        <PropertyRef Name="afiliado_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Turno_Bono">
+    <End Role="Bono" Type="Self.Bono" Multiplicity="0..1" />
+    <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bono">
+        <PropertyRef Name="bono_id" />
+      </Principal>
+      <Dependent Role="Turno">
+        <PropertyRef Name="bono_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Turno_Especialidad">
+    <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
+    <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Especialidad">
+        <PropertyRef Name="especialidad_id" />
+      </Principal>
+      <Dependent Role="Turno">
+        <PropertyRef Name="especialidad_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Turno_Profesional">
+    <End Role="Profesional" Type="Self.Profesional" Multiplicity="1" />
+    <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profesional">
+        <PropertyRef Name="profesional_id" />
+      </Principal>
+      <Dependent Role="Turno">
+        <PropertyRef Name="profesional_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GD2C2016ModelStoreContainer">
+    <EntitySet Name="Afiliado" EntityType="Self.Afiliado" Schema="WASD" store:Type="Tables" />
+    <EntitySet Name="Agenda" EntityType="Self.Agenda" Schema="WASD" store:Type="Tables" />
+    <EntitySet Name="Bono" EntityType="Self.Bono" Schema="WASD" store:Type="Tables" />
+    <EntitySet Name="Compra" EntityType="Self.Compra" Schema="WASD" store:Type="Tables" />
+    <EntitySet Name="Especialidad" EntityType="Self.Especialidad" Schema="WASD" store:Type="Tables" />
+    <EntitySet Name="EstadoCivil" EntityType="Self.EstadoCivil" Schema="WASD" store:Type="Tables" />
+    <EntitySet Name="Funcionalidad" EntityType="Self.Funcionalidad" Schema="WASD" store:Type="Tables" />
+    <EntitySet Name="Plan" EntityType="Self.Plan" Schema="WASD" store:Type="Tables" />
+    <EntitySet Name="Profesional" EntityType="Self.Profesional" Schema="WASD" store:Type="Tables" />
+    <EntitySet Name="Rol" EntityType="Self.Rol" Schema="WASD" store:Type="Tables" />
+    <EntitySet Name="Sexo" EntityType="Self.Sexo" Schema="WASD" store:Type="Tables" />
+    <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="WASD" store:Type="Tables" />
+    <EntitySet Name="TipoEspecialidad" EntityType="Self.TipoEspecialidad" Schema="WASD" store:Type="Tables" />
+    <EntitySet Name="Turno" EntityType="Self.Turno" Schema="WASD" store:Type="Tables" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="WASD" store:Type="Tables" />
+    <EntitySet Name="Diagnostico" EntityType="Self.Diagnostico" store:Type="Tables" store:Schema="WASD">
+      <DefiningQuery>SELECT 
+    [Diagnostico].[turno_id] AS [turno_id], 
+    [Diagnostico].[diagnostico_descripcion] AS [diagnostico_descripcion], 
+    [Diagnostico].[diagnostico_sintomas] AS [diagnostico_sintomas]
+    FROM [WASD].[Diagnostico] AS [Diagnostico]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="EspecialidadesPorProfesional" EntityType="Self.EspecialidadesPorProfesional" store:Type="Tables" store:Schema="WASD">
+      <DefiningQuery>SELECT 
+    [EspecialidadesPorProfesional].[profesional_id] AS [profesional_id], 
+    [EspecialidadesPorProfesional].[especialidad_id] AS [especialidad_id]
+    FROM [WASD].[EspecialidadesPorProfesional] AS [EspecialidadesPorProfesional]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="FuncionalidadPorRol" EntityType="Self.FuncionalidadPorRol" store:Type="Tables" store:Schema="WASD">
+      <DefiningQuery>SELECT 
+    [FuncionalidadPorRol].[rol_id] AS [rol_id], 
+    [FuncionalidadPorRol].[funcionalidad_id] AS [funcionalidad_id]
+    FROM [WASD].[FuncionalidadPorRol] AS [FuncionalidadPorRol]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="HistorialPlan" EntityType="Self.HistorialPlan" store:Type="Tables" store:Schema="WASD">
+      <DefiningQuery>SELECT 
+    [HistorialPlan].[afiliado_id] AS [afiliado_id], 
+    [HistorialPlan].[historial_fecha_cambio] AS [historial_fecha_cambio], 
+    [HistorialPlan].[historial_motivo] AS [historial_motivo]
+    FROM [WASD].[HistorialPlan] AS [HistorialPlan]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="RolPorUsuario" EntityType="Self.RolPorUsuario" store:Type="Tables" store:Schema="WASD">
+      <DefiningQuery>SELECT 
+    [RolPorUsuario].[usuario_id] AS [usuario_id], 
+    [RolPorUsuario].[rol_id] AS [rol_id]
+    FROM [WASD].[RolPorUsuario] AS [RolPorUsuario]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Afiliado_Afiliado" Association="Self.FK_Afiliado_Afiliado">
+      <End Role="Afiliado" EntitySet="Afiliado" />
+      <End Role="Afiliado1" EntitySet="Afiliado" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Afiliado_EstadoCivil" Association="Self.FK_Afiliado_EstadoCivil">
+      <End Role="EstadoCivil" EntitySet="EstadoCivil" />
+      <End Role="Afiliado" EntitySet="Afiliado" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Afiliado_Plan" Association="Self.FK_Afiliado_Plan">
+      <End Role="Plan" EntitySet="Plan" />
+      <End Role="Afiliado" EntitySet="Afiliado" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Afiliado_Sexo" Association="Self.FK_Afiliado_Sexo">
+      <End Role="Sexo" EntitySet="Sexo" />
+      <End Role="Afiliado" EntitySet="Afiliado" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Afiliado_TipoDocumento" Association="Self.FK_Afiliado_TipoDocumento">
+      <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+      <End Role="Afiliado" EntitySet="Afiliado" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Afiliado_Usuario" Association="Self.FK_Afiliado_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Afiliado" EntitySet="Afiliado" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Agenda_Especialidad" Association="Self.FK_Agenda_Especialidad">
+      <End Role="Especialidad" EntitySet="Especialidad" />
+      <End Role="Agenda" EntitySet="Agenda" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Agenda_Profesional" Association="Self.FK_Agenda_Profesional">
+      <End Role="Profesional" EntitySet="Profesional" />
+      <End Role="Agenda" EntitySet="Agenda" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bono_Afiliado" Association="Self.FK_Bono_Afiliado">
+      <End Role="Afiliado" EntitySet="Afiliado" />
+      <End Role="Bono" EntitySet="Bono" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bono_Compra" Association="Self.FK_Bono_Compra">
+      <End Role="Compra" EntitySet="Compra" />
+      <End Role="Bono" EntitySet="Bono" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bono_Plan" Association="Self.FK_Bono_Plan">
+      <End Role="Plan" EntitySet="Plan" />
+      <End Role="Bono" EntitySet="Bono" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Compra_Afiliado" Association="Self.FK_Compra_Afiliado">
+      <End Role="Afiliado" EntitySet="Afiliado" />
+      <End Role="Compra" EntitySet="Compra" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Diagnostico_Turno" Association="Self.FK_Diagnostico_Turno">
+      <End Role="Turno" EntitySet="Turno" />
+      <End Role="Diagnostico" EntitySet="Diagnostico" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Especialidad_TipoEspecialidad" Association="Self.FK_Especialidad_TipoEspecialidad">
+      <End Role="TipoEspecialidad" EntitySet="TipoEspecialidad" />
+      <End Role="Especialidad" EntitySet="Especialidad" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EspecialidadesPorProfesional_Especialidad" Association="Self.FK_EspecialidadesPorProfesional_Especialidad">
+      <End Role="Especialidad" EntitySet="Especialidad" />
+      <End Role="EspecialidadesPorProfesional" EntitySet="EspecialidadesPorProfesional" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EspecialidadesPorProfesional_Profesional" Association="Self.FK_EspecialidadesPorProfesional_Profesional">
+      <End Role="Profesional" EntitySet="Profesional" />
+      <End Role="EspecialidadesPorProfesional" EntitySet="EspecialidadesPorProfesional" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FuncionalidadPorRol_Funcionalidad" Association="Self.FK_FuncionalidadPorRol_Funcionalidad">
+      <End Role="Funcionalidad" EntitySet="Funcionalidad" />
+      <End Role="FuncionalidadPorRol" EntitySet="FuncionalidadPorRol" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FuncionalidadPorRol_Rol" Association="Self.FK_FuncionalidadPorRol_Rol">
+      <End Role="Rol" EntitySet="Rol" />
+      <End Role="FuncionalidadPorRol" EntitySet="FuncionalidadPorRol" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HistorialPlan_Afiliado" Association="Self.FK_HistorialPlan_Afiliado">
+      <End Role="Afiliado" EntitySet="Afiliado" />
+      <End Role="HistorialPlan" EntitySet="HistorialPlan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Profesional_Sexo" Association="Self.FK_Profesional_Sexo">
+      <End Role="Sexo" EntitySet="Sexo" />
+      <End Role="Profesional" EntitySet="Profesional" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Profesional_TipoDocumento" Association="Self.FK_Profesional_TipoDocumento">
+      <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+      <End Role="Profesional" EntitySet="Profesional" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RolPorUsuario_Rol" Association="Self.FK_RolPorUsuario_Rol">
+      <End Role="Rol" EntitySet="Rol" />
+      <End Role="RolPorUsuario" EntitySet="RolPorUsuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RolPorUsuario_Usuario" Association="Self.FK_RolPorUsuario_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="RolPorUsuario" EntitySet="RolPorUsuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Turno_Afiliado" Association="Self.FK_Turno_Afiliado">
+      <End Role="Afiliado" EntitySet="Afiliado" />
+      <End Role="Turno" EntitySet="Turno" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Turno_Bono" Association="Self.FK_Turno_Bono">
+      <End Role="Bono" EntitySet="Bono" />
+      <End Role="Turno" EntitySet="Turno" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Turno_Especialidad" Association="Self.FK_Turno_Especialidad">
+      <End Role="Especialidad" EntitySet="Especialidad" />
+      <End Role="Turno" EntitySet="Turno" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Turno_Profesional" Association="Self.FK_Turno_Profesional">
+      <End Role="Profesional" EntitySet="Profesional" />
+      <End Role="Turno" EntitySet="Turno" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
