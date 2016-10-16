@@ -33,5 +33,10 @@ namespace ClinicaFrba.DataAccess
         public virtual ICollection<Turno> Turnoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Profesional> Profesionals { get; set; }
+
+        public override string ToString()
+        {
+            return especialidad_nombre;
+        }
     }
 }
