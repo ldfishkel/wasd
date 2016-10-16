@@ -61,7 +61,7 @@ namespace ClinicaFrba.DataAccess {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:\Users\lfishkel\Documents\ExternalConfig.txt.
+        ///   Looks up a localized string similar to C:\ExternalConfig.txt.
         /// </summary>
         internal static string ConfigFilePath {
             get {
