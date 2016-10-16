@@ -34,3 +34,8 @@ C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\Clini
 C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.exe
 C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.pdb
 C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.AbmAfiliado.AltaAfiliadoForm.resources
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\bin\Debug\Newtonsoft.Json.dll
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\bin\Debug\Newtonsoft.Json.xml
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\AplicacionDesktop\ClinicaFrba\ClinicaFrba\bin\Debug\ClinicaFrba.exe.config
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\AplicacionDesktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.exe
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\AplicacionDesktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.pdb
