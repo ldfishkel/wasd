@@ -90,3 +90,6 @@ E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\Clinic
 E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\obj\Debug\ClinicaFrba.RegistrarLlegada.RegistrarLlegadaForm.resources
 E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\obj\Debug\ClinicaFrba.VerEstadisticas.VerEstadisticasForm.resources
 E:\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Base de Datos\Repo\wasd\ClinicaFrba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\AplicacionDesktop\ClinicaFrba\ClinicaFrba\bin\Debug\ClinicaFrba.exe.config
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\AplicacionDesktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.exe
+C:\Users\lfishkel\Documents\Facultad\GDD\TP\AplicacionDesktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.pdb
