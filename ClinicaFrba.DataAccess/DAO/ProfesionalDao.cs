@@ -2,13 +2,10 @@
 {
     using System.Linq;
 
-    public class ProfesionalDao
+    public class ProfesionalDao : DaoBase
     {
-        private Database _ds;
-
-        public ProfesionalDao()
+        public ProfesionalDao() : base()
         {
-            _ds = new Database();
         }
 
         public Profesional GetProfesional(int id)

@@ -19,7 +19,12 @@ namespace ClinicaFrba.DataAccess
             : base("name=Database")
         {
         }
-    
+
+        public Database(string connectionString)
+            : base(connectionString)
+        {
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();

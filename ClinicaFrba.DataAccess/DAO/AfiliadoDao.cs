@@ -2,13 +2,10 @@
 {
     using System.Collections.Generic;
 
-    public class AfiliadoDao
+    public class AfiliadoDao : DaoBase
     {
-        private Database _ds;
-
-        public AfiliadoDao()
+        public AfiliadoDao() : base()
         {
-            _ds = new Database();
         }
 
         public List<Afiliado> GetAfiliados()

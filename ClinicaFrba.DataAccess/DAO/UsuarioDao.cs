@@ -2,13 +2,10 @@
 {
     using System.Linq;
 
-    public class UsuarioDao
+    public class UsuarioDao : DaoBase
     {
-        private Database _ds;
-
-        public UsuarioDao()
+        public UsuarioDao() : base()
         {
-            _ds = new Database();
         }
 
         public Usuario Login(string username, string password)
