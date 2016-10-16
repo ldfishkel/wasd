@@ -34,14 +34,14 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button3 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this._nombre_familiar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this._apellido_familiar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._nombreFamiliar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._apellidoFamiliar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._sexo = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this._estado_civil = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
-            this._fecha_nacimiento = new System.Windows.Forms.DateTimePicker();
+            this._fechaNacimiento = new System.Windows.Forms.DateTimePicker();
             this.label8 = new System.Windows.Forms.Label();
             this._mail = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -49,14 +49,14 @@
             this.label6 = new System.Windows.Forms.Label();
             this._direccion = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this._cancelar = new System.Windows.Forms.Button();
-            this._aceptar = new System.Windows.Forms.Button();
+            this._cancelarBtn = new System.Windows.Forms.Button();
+            this._aceptarBtn = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this._numero_documento = new System.Windows.Forms.TextBox();
-            this._tipo_documento = new System.Windows.Forms.TextBox();
+            this._numeroDocumento = new System.Windows.Forms.TextBox();
+            this._tipoDocumento = new System.Windows.Forms.TextBox();
             this._apellido = new System.Windows.Forms.TextBox();
             this._nombre = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
@@ -74,7 +74,7 @@
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this._estado_civil);
             this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this._fecha_nacimiento);
+            this.groupBox1.Controls.Add(this._fechaNacimiento);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this._mail);
             this.groupBox1.Controls.Add(this.label7);
@@ -82,14 +82,14 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this._direccion);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this._cancelar);
-            this.groupBox1.Controls.Add(this._aceptar);
+            this.groupBox1.Controls.Add(this._cancelarBtn);
+            this.groupBox1.Controls.Add(this._aceptarBtn);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this._numero_documento);
-            this.groupBox1.Controls.Add(this._tipo_documento);
+            this.groupBox1.Controls.Add(this._numeroDocumento);
+            this.groupBox1.Controls.Add(this._tipoDocumento);
             this.groupBox1.Controls.Add(this._apellido);
             this.groupBox1.Controls.Add(this._nombre);
             this.groupBox1.Location = new System.Drawing.Point(17, 16);
@@ -136,7 +136,6 @@
             this.groupBox2.TabIndex = 27;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Grupo Familiar";
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // button3
             // 
@@ -151,8 +150,8 @@
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this._nombre_familiar,
-            this._apellido_familiar});
+            this._nombreFamiliar,
+            this._apellidoFamiliar});
             this.dataGridView1.Location = new System.Drawing.Point(7, 58);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
@@ -161,15 +160,15 @@
             // 
             // _nombre_familiar
             // 
-            this._nombre_familiar.HeaderText = "Nombre";
-            this._nombre_familiar.Name = "_nombre_familiar";
-            this._nombre_familiar.Width = 200;
+            this._nombreFamiliar.HeaderText = "Nombre";
+            this._nombreFamiliar.Name = "_nombre_familiar";
+            this._nombreFamiliar.Width = 200;
             // 
             // _apellido_familiar
             // 
-            this._apellido_familiar.HeaderText = "Apellido";
-            this._apellido_familiar.Name = "_apellido_familiar";
-            this._apellido_familiar.Width = 200;
+            this._apellidoFamiliar.HeaderText = "Apellido";
+            this._apellidoFamiliar.Name = "_apellido_familiar";
+            this._apellidoFamiliar.Width = 200;
             // 
             // _sexo
             // 
@@ -226,10 +225,10 @@
             // 
             // _fecha_nacimiento
             // 
-            this._fecha_nacimiento.Location = new System.Drawing.Point(117, 180);
-            this._fecha_nacimiento.Name = "_fecha_nacimiento";
-            this._fecha_nacimiento.Size = new System.Drawing.Size(271, 22);
-            this._fecha_nacimiento.TabIndex = 21;
+            this._fechaNacimiento.Location = new System.Drawing.Point(117, 180);
+            this._fechaNacimiento.Name = "_fecha_nacimiento";
+            this._fechaNacimiento.Size = new System.Drawing.Size(271, 22);
+            this._fechaNacimiento.TabIndex = 21;
             // 
             // label8
             // 
@@ -271,7 +270,6 @@
             this.label6.Size = new System.Drawing.Size(64, 17);
             this.label6.TabIndex = 16;
             this.label6.Text = "Telefono";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // _direccion
             // 
@@ -279,7 +277,6 @@
             this._direccion.Name = "_direccion";
             this._direccion.Size = new System.Drawing.Size(406, 22);
             this._direccion.TabIndex = 15;
-            this._direccion.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // label5
             // 
@@ -289,29 +286,28 @@
             this.label5.Size = new System.Drawing.Size(67, 17);
             this.label5.TabIndex = 14;
             this.label5.Text = "Direccion";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // _cancelar
             // 
-            this._cancelar.Location = new System.Drawing.Point(423, 519);
-            this._cancelar.Margin = new System.Windows.Forms.Padding(4);
-            this._cancelar.Name = "_cancelar";
-            this._cancelar.Size = new System.Drawing.Size(100, 28);
-            this._cancelar.TabIndex = 13;
-            this._cancelar.Text = "Cancelar";
-            this._cancelar.UseVisualStyleBackColor = true;
-            this._cancelar.Click += new System.EventHandler(this._cancelar_Click);
+            this._cancelarBtn.Location = new System.Drawing.Point(423, 519);
+            this._cancelarBtn.Margin = new System.Windows.Forms.Padding(4);
+            this._cancelarBtn.Name = "_cancelar";
+            this._cancelarBtn.Size = new System.Drawing.Size(100, 28);
+            this._cancelarBtn.TabIndex = 13;
+            this._cancelarBtn.Text = "Cancelar";
+            this._cancelarBtn.UseVisualStyleBackColor = true;
+            this._cancelarBtn.Click += new System.EventHandler(this.CancelarClick);
             // 
             // _aceptar
             // 
-            this._aceptar.Location = new System.Drawing.Point(315, 519);
-            this._aceptar.Margin = new System.Windows.Forms.Padding(4);
-            this._aceptar.Name = "_aceptar";
-            this._aceptar.Size = new System.Drawing.Size(100, 28);
-            this._aceptar.TabIndex = 12;
-            this._aceptar.Text = "Aceptar";
-            this._aceptar.UseVisualStyleBackColor = true;
-            this._aceptar.Click += new System.EventHandler(this._aceptar_Click);
+            this._aceptarBtn.Location = new System.Drawing.Point(315, 519);
+            this._aceptarBtn.Margin = new System.Windows.Forms.Padding(4);
+            this._aceptarBtn.Name = "_aceptar";
+            this._aceptarBtn.Size = new System.Drawing.Size(100, 28);
+            this._aceptarBtn.TabIndex = 12;
+            this._aceptarBtn.Text = "Aceptar";
+            this._aceptarBtn.UseVisualStyleBackColor = true;
+            this._aceptarBtn.Click += new System.EventHandler(this.AceptarClick);
             // 
             // label4
             // 
@@ -352,23 +348,22 @@
             this.label1.Size = new System.Drawing.Size(58, 17);
             this.label1.TabIndex = 8;
             this.label1.Text = "Nombre";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // _numero_documento
             // 
-            this._numero_documento.Location = new System.Drawing.Point(359, 94);
-            this._numero_documento.Margin = new System.Windows.Forms.Padding(4);
-            this._numero_documento.Name = "_numero_documento";
-            this._numero_documento.Size = new System.Drawing.Size(164, 22);
-            this._numero_documento.TabIndex = 3;
+            this._numeroDocumento.Location = new System.Drawing.Point(359, 94);
+            this._numeroDocumento.Margin = new System.Windows.Forms.Padding(4);
+            this._numeroDocumento.Name = "_numero_documento";
+            this._numeroDocumento.Size = new System.Drawing.Size(164, 22);
+            this._numeroDocumento.TabIndex = 3;
             // 
             // _tipo_documento
             // 
-            this._tipo_documento.Location = new System.Drawing.Point(117, 94);
-            this._tipo_documento.Margin = new System.Windows.Forms.Padding(4);
-            this._tipo_documento.Name = "_tipo_documento";
-            this._tipo_documento.Size = new System.Drawing.Size(132, 22);
-            this._tipo_documento.TabIndex = 2;
+            this._tipoDocumento.Location = new System.Drawing.Point(117, 94);
+            this._tipoDocumento.Margin = new System.Windows.Forms.Padding(4);
+            this._tipoDocumento.Name = "_tipo_documento";
+            this._tipoDocumento.Size = new System.Drawing.Size(132, 22);
+            this._tipoDocumento.TabIndex = 2;
             // 
             // _apellido
             // 
@@ -385,7 +380,6 @@
             this._nombre.Name = "_nombre";
             this._nombre.Size = new System.Drawing.Size(406, 22);
             this._nombre.TabIndex = 0;
-            this._nombre.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // AltaAfiliado
             // 
@@ -396,7 +390,6 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AltaAfiliado";
             this.Text = "AltaAfiliado";
-            this.Load += new System.EventHandler(this.AltaAfiliado_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -408,20 +401,20 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button _cancelar;
-        private System.Windows.Forms.Button _aceptar;
+        private System.Windows.Forms.Button _cancelarBtn;
+        private System.Windows.Forms.Button _aceptarBtn;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox _numero_documento;
-        private System.Windows.Forms.TextBox _tipo_documento;
+        private System.Windows.Forms.TextBox _numeroDocumento;
+        private System.Windows.Forms.TextBox _tipoDocumento;
         private System.Windows.Forms.TextBox _apellido;
         private System.Windows.Forms.TextBox _nombre;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox _direccion;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.DateTimePicker _fecha_nacimiento;
+        private System.Windows.Forms.DateTimePicker _fechaNacimiento;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox _mail;
         private System.Windows.Forms.Label label7;
@@ -436,7 +429,7 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.RadioButton _no_familia;
         private System.Windows.Forms.RadioButton _si_familia;
-        private System.Windows.Forms.DataGridViewTextBoxColumn _nombre_familiar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn _apellido_familiar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn _nombreFamiliar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn _apellidoFamiliar;
     }
 }
