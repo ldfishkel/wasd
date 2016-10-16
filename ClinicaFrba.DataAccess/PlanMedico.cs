@@ -12,19 +12,19 @@ namespace ClinicaFrba.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class Plan
+    public partial class PlanMedico
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Plan()
+        public PlanMedico()
         {
             this.Afiliadoes = new HashSet<Afiliado>();
             this.Bonoes = new HashSet<Bono>();
         }
     
-        public int plan_id { get; set; }
-        public string plan_nombre { get; set; }
-        public decimal plan_cuota { get; set; }
-        public decimal plan_precio_bono { get; set; }
+        public int planmedico_id { get; set; }
+        public string planmedico_nombre { get; set; }
+        public decimal planmedico_cuota { get; set; }
+        public decimal planmedico_precio_bono { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Afiliado> Afiliadoes { get; set; }

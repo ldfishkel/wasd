@@ -96,9 +96,6 @@
     <Compile Include="DAO\ProfesionalDao.cs" />
     <Compile Include="DAO\AfiliadoDao.cs" />
     <Compile Include="DAO\UsuarioDao.cs" />
-    <Compile Include="Diagnostico.cs">
-      <DependentUpon>ClinicaFrba.tt</DependentUpon>
-    </Compile>
     <Compile Include="Especialidad.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
@@ -113,7 +110,7 @@
     </Compile>
     <Compile Include="IoC\Bootstrapper.cs" />
     <Compile Include="IoC\DataAccessModule.cs" />
-    <Compile Include="Plan.cs">
+    <Compile Include="PlanMedico.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
     <Compile Include="Profesional.cs">
@@ -154,6 +151,12 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ClinicaFrbaResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClinicaFrbaResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="ClinicaFrba.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ClinicaFrba.edmx</DependentUpon>
@@ -164,12 +167,6 @@
       <DependentUpon>ClinicaFrba.edmx</DependentUpon>
       <LastGenOutput>ClinicaFrba.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ClinicaFrbaResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ClinicaFrbaResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

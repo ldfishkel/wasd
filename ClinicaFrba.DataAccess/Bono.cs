@@ -21,16 +21,17 @@ namespace ClinicaFrba.DataAccess
         }
     
         public int bono_id { get; set; }
-        public int plan_id { get; set; }
+        public int planmedico_id { get; set; }
         public int afiliado_id { get; set; }
-        public Nullable<int> bono_numero_consulta { get; set; }
+        public int compra_id { get; set; }
+        public Nullable<short> bono_numero_consulta { get; set; }
         public Nullable<int> bono_afiliado_usado { get; set; }
         public Nullable<System.DateTime> bono_fecha_uso { get; set; }
-        public int compra_id { get; set; }
     
         public virtual Afiliado Afiliado { get; set; }
+        public virtual Afiliado Afiliado1 { get; set; }
         public virtual Compra Compra { get; set; }
-        public virtual Plan Plan { get; set; }
+        public virtual PlanMedico PlanMedico { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Turno> Turnoes { get; set; }
     }

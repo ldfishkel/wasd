@@ -18,6 +18,7 @@ namespace ClinicaFrba.DataAccess
         public Usuario()
         {
             this.Afiliadoes = new HashSet<Afiliado>();
+            this.Profesionals = new HashSet<Profesional>();
             this.Rols = new HashSet<Rol>();
         }
     
@@ -29,6 +30,8 @@ namespace ClinicaFrba.DataAccess
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Afiliado> Afiliadoes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Profesional> Profesionals { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Rol> Rols { get; set; }
     }

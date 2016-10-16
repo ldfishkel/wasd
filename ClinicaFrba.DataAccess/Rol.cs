@@ -9,8 +9,9 @@
 
 namespace ClinicaFrba.DataAccess
 {
+    using System;
     using System.Collections.Generic;
-
+    
     public partial class Rol
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -28,10 +29,5 @@ namespace ClinicaFrba.DataAccess
         public virtual ICollection<Funcionalidad> Funcionalidads { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuario> Usuarios { get; set; }
-
-        public override string ToString()
-        {
-            return rol_nombre;
-        }
     }
 }

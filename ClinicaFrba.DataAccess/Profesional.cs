@@ -23,21 +23,23 @@ namespace ClinicaFrba.DataAccess
         }
     
         public int profesional_id { get; set; }
+        public int usuario_id { get; set; }
+        public int sexo_id { get; set; }
+        public int tipodocumento_id { get; set; }
+        public int profesional_numero_documento { get; set; }
         public string profesional_nombre { get; set; }
         public string profesional_apellido { get; set; }
         public string profesional_direccion { get; set; }
         public int profesional_telefono { get; set; }
         public string profesional_mail { get; set; }
         public System.DateTime profesional_fecha_nacimiento { get; set; }
-        public int profesional_sexo { get; set; }
         public int profesional_matricula { get; set; }
-        public int profesional_tipo_documento { get; set; }
-        public int profesional_numero_documento { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Agendum> Agenda { get; set; }
         public virtual Sexo Sexo { get; set; }
         public virtual TipoDocumento TipoDocumento { get; set; }
+        public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Turno> Turnoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -11,7 +11,7 @@
         public List<Afiliado> GetAfiliados()
         {
             List<Afiliado> afiliados = new List<Afiliado>();
-
+            /*
             for (int i = 0; i < 50; i++)
             {
                 var afiliado = new Afiliado();
@@ -35,7 +35,7 @@
                 afiliado.afiliado_tipo_documento = 1;
                 afiliado.afiliado_usuario = i;
             }
-
+            */
             return afiliados;
         }
     }
