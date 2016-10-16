@@ -21,20 +21,24 @@
 
         public Panel Init(MenuForm parent)
         {
-            parent.Text = "Registrar Agenda";
-
-            Usuario user = parent.User();
-
-            _profesional = _profesionalDao.GetProfesional(user.usuario_id);
-
             InitializeComponent();
 
+            parent.Text = "Registrar Agenda";
+            parent.FixWidth(_panel);
+
+            _profesional = _profesionalDao.GetProfesional(parent.User().usuario_id);
+
+            InitializeAgenda();
+
+            return _panel;
+        }
+
+        private void InitializeAgenda()
+        {
             if (_profesional.Agenda != null && _profesional.Agenda.Count == 0)
                 InitializeComboboxes();
             else
                 ShowAgenda();
-
-            return _panel;
         }
 
         private void InitializeComboboxes()

@@ -15,6 +15,7 @@
             InitializeComponent();
 
             parent.Text = "Diagnosticar";
+            parent.FixWidth(_panel);
 
             return _panel;
         }

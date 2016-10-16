@@ -15,6 +15,7 @@
             InitializeComponent();
 
             parent.Text = "Estadisticas";
+            parent.FixWidth(_panel);
 
             return _panel;
         }

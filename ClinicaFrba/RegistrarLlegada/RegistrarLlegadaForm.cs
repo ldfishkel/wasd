@@ -15,6 +15,7 @@
             InitializeComponent();
 
             parent.Text = "Registrar Llegada";
+            parent.FixWidth(_panel);
 
             return _panel;
         }

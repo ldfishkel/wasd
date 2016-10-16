@@ -15,6 +15,7 @@
             InitializeComponent();
 
             parent.Text = "Pedir Turno";
+            parent.FixWidth(_panel);
 
             return _panel;
         }

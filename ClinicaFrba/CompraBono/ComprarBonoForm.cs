@@ -15,6 +15,7 @@
             InitializeComponent();
 
             parent.Text = "Compra de Bonos";
+            parent.FixWidth(_panel);
 
             return _panel;
         }

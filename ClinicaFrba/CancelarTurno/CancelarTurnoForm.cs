@@ -15,6 +15,7 @@
             InitializeComponent();
 
             parent.Text = "Cancelar Turno";
+            parent.FixWidth(_panel);
 
             return _panel;
         }

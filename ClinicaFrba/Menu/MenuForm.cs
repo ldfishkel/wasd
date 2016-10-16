@@ -16,6 +16,8 @@
 
     public partial class MenuForm : Form
     {
+        private const int MENU_WIDTH = 180;
+
         private Usuario _user;
         private Rol _rol;
 
@@ -60,6 +62,11 @@
         public Rol Rol()
         {
             return _rol;
+        }
+
+        public void FixWidth(Control content)
+        {
+            Width = content.Width + MENU_WIDTH;
         }
 
         public void Init(Usuario user, Rol rol, Action<object, FormClosingEventArgs> close)
