@@ -22,7 +22,7 @@
             InitializeComponent();
 
             menuForm.Text = "ABM Afiliados";
-            menuForm.FixWidth(_panel);
+            menuForm.FixBounds(_panel);
 
             _user = menuForm.User();
             _rol = menuForm.Rol();

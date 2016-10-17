@@ -1,5 +1,6 @@
 ﻿namespace ClinicaFrba.DataAccess.DAO
 {
+    using System;
     using System.Collections.Generic;
 
     public class AfiliadoDao : DaoBase
@@ -37,6 +38,36 @@
             }
             */
             return afiliados;
+        }
+
+        public List<Bono> GetBonos(int nroAfiliado)
+        {
+            List<Bono> bonos = new List<Bono>();
+
+            for (int i = 0; i < 10; i++)
+            {
+                bonos.Add(new DataAccess.Bono()
+                {
+                    bono_id = i
+                });
+            }
+
+            return bonos;
+        }
+
+        public Afiliado GetAfiliado(string tipoDoc, int nroDoc)
+        {
+            Afiliado afiliado = new Afiliado();
+
+            afiliado.afiliado_nombre = "Leonel";
+            afiliado.afiliado_apellido = "Dan";
+            afiliado.PlanMedico = new PlanMedico();
+            afiliado.PlanMedico.planmedico_nombre = "OSDE 210";
+            afiliado.PlanMedico.planmedico_precio_bono= 100;
+            afiliado.afiliado_numero = 1564215100;
+
+            return afiliado;
+
         }
     }
 }

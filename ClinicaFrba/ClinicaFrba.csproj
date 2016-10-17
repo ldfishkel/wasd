@@ -95,6 +95,12 @@
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="IoC\Bootstrapper.cs" />
+    <Compile Include="RegistrarLlegada\BonosViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegistrarLlegada\BonosViewForm.Designer.cs">
+      <DependentUpon>BonosViewForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="VerEstadisticas\VerEstadisticasForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,6 +177,9 @@
     </Compile>
     <EmbeddedResource Include="RegistrarAgenda\RegistrarAgendaForm.resx">
       <DependentUpon>RegistrarAgendaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegistrarLlegada\BonosViewForm.resx">
+      <DependentUpon>BonosViewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RegistrarLlegada\RegistrarLlegadaForm.resx">
       <DependentUpon>RegistrarLlegadaForm.cs</DependentUpon>

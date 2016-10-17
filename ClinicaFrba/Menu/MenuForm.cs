@@ -17,6 +17,9 @@
     public partial class MenuForm : Form
     {
         private const int MENU_WIDTH = 180;
+        private const int MARGIN_RIGHT = 35;
+        private const int MARGIN_BOTTOM = 40;
+        private const int MARGIN_BOTTOM_BOTTOM = 57;
 
         private Usuario _user;
         private Rol _rol;
@@ -64,9 +67,13 @@
             return _rol;
         }
 
-        public void FixWidth(Control content)
+        public void FixBounds(Control content)
         {
             Width = content.Width + MENU_WIDTH;
+            Height = content.Height + MARGIN_BOTTOM + MARGIN_BOTTOM_BOTTOM;
+
+            _functionsTabControl.Width = content.Width + MENU_WIDTH - MARGIN_RIGHT;
+            _functionsTabControl.Height = content.Height  + MARGIN_BOTTOM;
         }
 
         public void Init(Usuario user, Rol rol, Action<object, FormClosingEventArgs> close)

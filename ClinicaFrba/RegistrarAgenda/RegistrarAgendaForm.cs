@@ -24,7 +24,7 @@
             InitializeComponent();
 
             parent.Text = "Registrar Agenda";
-            parent.FixWidth(_panel);
+            parent.FixBounds(_panel);
 
             _profesional = _profesionalDao.GetProfesional(parent.User().usuario_id);
 
