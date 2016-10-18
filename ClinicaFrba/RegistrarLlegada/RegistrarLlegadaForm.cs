@@ -69,7 +69,7 @@
             _turnosView.Refresh();
         }
 
-        private void _turnosView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             var senderGrid = (DataGridView)sender;
 

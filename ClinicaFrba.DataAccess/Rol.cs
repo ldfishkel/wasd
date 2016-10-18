@@ -29,5 +29,10 @@ namespace ClinicaFrba.DataAccess
         public virtual ICollection<Funcionalidad> Funcionalidads { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuario> Usuarios { get; set; }
+
+        public override string ToString()
+        {
+            return rol_nombre.Trim();
+        }
     }
 }

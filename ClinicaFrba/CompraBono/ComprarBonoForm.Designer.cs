@@ -47,11 +47,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this._cantidadBonos = new System.Windows.Forms.NumericUpDown();
             this.cantidadLabel = new System.Windows.Forms.Label();
+            this._searchGroupbox = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
             this._panel.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this._compraGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._cantidadBonos)).BeginInit();
+            this._searchGroupbox.SuspendLayout();
             this.SuspendLayout();
             // 
             // _panel
@@ -60,19 +63,16 @@
             this._panel.Controls.Add(this._compraGroupBox);
             this._panel.Location = new System.Drawing.Point(13, 12);
             this._panel.Name = "_panel";
-            this._panel.Size = new System.Drawing.Size(491, 205);
+            this._panel.Size = new System.Drawing.Size(491, 222);
             this._panel.TabIndex = 0;
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this._searchGroupbox);
             this.groupBox2.Controls.Add(this.groupBox3);
-            this.groupBox2.Controls.Add(this.button2);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this._nroDocumento);
-            this.groupBox2.Controls.Add(this._tipoDeDoc);
             this.groupBox2.Location = new System.Drawing.Point(13, 10);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(464, 131);
+            this.groupBox2.Size = new System.Drawing.Size(464, 146);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
@@ -84,7 +84,7 @@
             this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this._nroAfliladoLbl);
-            this.groupBox3.Location = new System.Drawing.Point(6, 69);
+            this.groupBox3.Location = new System.Drawing.Point(6, 82);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(445, 56);
             this.groupBox3.TabIndex = 7;
@@ -143,7 +143,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(339, 26);
+            this.button2.Location = new System.Drawing.Point(301, 24);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(104, 30);
             this.button2.TabIndex = 4;
@@ -154,7 +154,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 51);
+            this.label1.Location = new System.Drawing.Point(5, 46);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(115, 13);
             this.label1.TabIndex = 2;
@@ -162,7 +162,7 @@
             // 
             // _nroDocumento
             // 
-            this._nroDocumento.Location = new System.Drawing.Point(141, 48);
+            this._nroDocumento.Location = new System.Drawing.Point(127, 43);
             this._nroDocumento.Name = "_nroDocumento";
             this._nroDocumento.Size = new System.Drawing.Size(128, 20);
             this._nroDocumento.TabIndex = 1;
@@ -172,9 +172,9 @@
             this._tipoDeDoc.FormattingEnabled = true;
             this._tipoDeDoc.Items.AddRange(new object[] {
             "DNI"});
-            this._tipoDeDoc.Location = new System.Drawing.Point(19, 20);
+            this._tipoDeDoc.Location = new System.Drawing.Point(127, 16);
             this._tipoDeDoc.Name = "_tipoDeDoc";
-            this._tipoDeDoc.Size = new System.Drawing.Size(116, 21);
+            this._tipoDeDoc.Size = new System.Drawing.Size(128, 21);
             this._tipoDeDoc.TabIndex = 0;
             this._tipoDeDoc.Text = "Tipo de documento";
             // 
@@ -186,7 +186,7 @@
             this._compraGroupBox.Controls.Add(this._cantidadBonos);
             this._compraGroupBox.Controls.Add(this.cantidadLabel);
             this._compraGroupBox.Enabled = false;
-            this._compraGroupBox.Location = new System.Drawing.Point(13, 147);
+            this._compraGroupBox.Location = new System.Drawing.Point(13, 162);
             this._compraGroupBox.Name = "_compraGroupBox";
             this._compraGroupBox.Size = new System.Drawing.Size(464, 49);
             this._compraGroupBox.TabIndex = 0;
@@ -238,22 +238,45 @@
             this.cantidadLabel.TabIndex = 0;
             this.cantidadLabel.Text = "Cantidad de bonos";
             // 
+            // _searchGroupbox
+            // 
+            this._searchGroupbox.Controls.Add(this.label6);
+            this._searchGroupbox.Controls.Add(this._tipoDeDoc);
+            this._searchGroupbox.Controls.Add(this._nroDocumento);
+            this._searchGroupbox.Controls.Add(this.button2);
+            this._searchGroupbox.Controls.Add(this.label1);
+            this._searchGroupbox.Location = new System.Drawing.Point(6, 9);
+            this._searchGroupbox.Name = "_searchGroupbox";
+            this._searchGroupbox.Size = new System.Drawing.Size(445, 74);
+            this._searchGroupbox.TabIndex = 8;
+            this._searchGroupbox.TabStop = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 19);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(101, 13);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "Tipo de Documento";
+            // 
             // ComprarBonoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(516, 228);
+            this.ClientSize = new System.Drawing.Size(516, 246);
             this.Controls.Add(this._panel);
             this.Name = "ComprarBonoForm";
             this.Text = "Compra de Bonos";
             this._panel.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this._compraGroupBox.ResumeLayout(false);
             this._compraGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this._cantidadBonos)).EndInit();
+            this._searchGroupbox.ResumeLayout(false);
+            this._searchGroupbox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -279,5 +302,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label _nroAfliladoLbl;
+        private System.Windows.Forms.GroupBox _searchGroupbox;
+        private System.Windows.Forms.Label label6;
     }
 }

@@ -87,7 +87,7 @@
             this._turnosView.ShowEditingIcon = false;
             this._turnosView.Size = new System.Drawing.Size(605, 183);
             this._turnosView.TabIndex = 0;
-            this._turnosView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this._turnosView_CellContentClick);
+            this._turnosView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellContentClick);
             // 
             // Hora
             // 

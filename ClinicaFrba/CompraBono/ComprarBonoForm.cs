@@ -4,6 +4,7 @@
     using DataAccess.DAO;
     using Menu;
     using System;
+    using System.Linq;
     using System.Text;
     using System.Text.RegularExpressions;
     using System.Windows.Forms;
@@ -26,6 +27,24 @@
             {
                 parent.Text = "Compra de Bonos";
                 parent.FixBounds(_panel);
+            }
+
+            Rol rol = parent.Rol();
+            if (rol.ToString() == "Afiliado")
+            {
+                var afiliado = parent.User().Afiliadoes.FirstOrDefault();
+
+                _searchGroupbox.Enabled = false;
+
+                _nombreYApellidoLbl.Text = afiliado.afiliado_nombre + " " + afiliado.afiliado_apellido;
+
+                _planLbl.Text = afiliado.PlanMedico.planmedico_nombre;
+
+                _nroAfliladoLbl.Text = "" + afiliado.afiliado_numero;
+
+                _planMedico = afiliado.PlanMedico;
+
+                _compraGroupBox.Enabled = true;
             }
 
             return _panel;

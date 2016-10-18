@@ -19,5 +19,10 @@
 
             return _panel;
         }
+
+        private void CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
