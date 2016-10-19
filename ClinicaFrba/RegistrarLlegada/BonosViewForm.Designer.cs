@@ -105,7 +105,8 @@
             this.ClientSize = new System.Drawing.Size(284, 144);
             this.Controls.Add(this.panel1);
             this.Name = "BonosViewForm";
-            this.Text = "BonosViewForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Elegir Bono";
             this.panel1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);

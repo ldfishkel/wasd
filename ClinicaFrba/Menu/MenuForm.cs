@@ -128,5 +128,16 @@
                 default: break;
             }
         }
+
+        private void MenuForm_DragDrop(object sender, DragEventArgs e)
+        {
+            MessageBox.Show(String.Format("{0}, {1}",this.Bounds.Location.X, this.Bounds.Location.Y));
+        }
+
+        private void MenuForm_DoubleClick(object sender, EventArgs e)
+        {
+            MessageBox.Show(String.Format("{0}, {1}", this.Bounds.Location.X, this.Bounds.Location.Y));
+
+        }
     }
 }

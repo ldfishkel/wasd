@@ -95,6 +95,8 @@
     <Compile Include="DAO\DaoBase.cs" />
     <Compile Include="DAO\ProfesionalDao.cs" />
     <Compile Include="DAO\AfiliadoDao.cs" />
+    <Compile Include="DAO\TurnoDao.cs" />
+    <Compile Include="DAO\RolDao.cs" />
     <Compile Include="DAO\UsuarioDao.cs" />
     <Compile Include="Especialidad.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>

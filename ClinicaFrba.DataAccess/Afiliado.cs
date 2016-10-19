@@ -59,5 +59,10 @@ namespace ClinicaFrba.DataAccess
         public virtual HistorialPlan HistorialPlan { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Turno> Turnoes { get; set; }
+
+        public override string ToString()
+        {
+            return afiliado_nombre.Trim() + " " + afiliado_apellido.Trim();
+        }
     }
 }

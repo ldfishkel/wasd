@@ -25,5 +25,10 @@ namespace ClinicaFrba.DataAccess
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Rol> Rols { get; set; }
+
+        public override string ToString()
+        {
+            return funcionalidad_nombre.Trim();
+        }
     }
 }

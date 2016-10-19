@@ -19,17 +19,19 @@
             _afiliadoDao = afiliadoDao;
         }
 
-        public Panel Init(MenuForm parent)
+        public Panel Init(MenuForm parent, bool resize = true)
         {
             InitializeComponent();
 
             if (parent != null)
             {
                 parent.Text = "Compra de Bonos";
-                parent.FixBounds(_panel);
+                if (resize)
+                    parent.FixBounds(_panel);
             }
 
             Rol rol = parent.Rol();
+
             if (rol.ToString() == "Afiliado")
             {
                 var afiliado = parent.User().Afiliadoes.FirstOrDefault();

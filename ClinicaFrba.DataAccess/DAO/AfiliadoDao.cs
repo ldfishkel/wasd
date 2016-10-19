@@ -40,6 +40,38 @@
             return afiliados;
         }
 
+        public List<Turno> GetTurnos(int usuario_id)
+        {
+            List<Turno> turnos = new List<Turno>();
+
+            Afiliado afiliado = new Afiliado();
+
+            afiliado.afiliado_nombre = "Leonel";
+            afiliado.afiliado_apellido = "Dan";
+            afiliado.PlanMedico = new PlanMedico();
+            afiliado.PlanMedico.planmedico_nombre = "OSDE 210";
+            afiliado.PlanMedico.planmedico_precio_bono = 100;
+            afiliado.afiliado_numero = 1564215100;
+
+            var pro = new Profesional();
+            pro.profesional_nombre = "Profesional ";
+            pro.Especialidads = new List<Especialidad>();
+
+            for (int i = 0; i < 10; i++)
+            {
+                var turno = new Turno();
+                turno.Afiliado = afiliado;
+                turno.Profesional = pro;
+                turno.Especialidad = new Especialidad()
+                {
+                    especialidad_nombre = "Sarasa"
+                };
+                turnos.Add(turno);
+            }
+
+            return turnos;
+        }
+
         public List<Bono> GetBonos(int nroAfiliado)
         {
             List<Bono> bonos = new List<Bono>();

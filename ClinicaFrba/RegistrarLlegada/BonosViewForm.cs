@@ -3,6 +3,7 @@
     using ClinicaFrba.CompraBono;
     using DataAccess;
     using DataAccess.DAO;
+    using Menu;
     using System;
     using System.Windows.Forms;
 
@@ -14,9 +15,13 @@
 
         private int _rowIndex;
 
-        public BonosViewForm(AfiliadoDao afiliadoDao, int nroAfiliado, int rowIndex)
+        private Form _parent;
+
+        public BonosViewForm(Form form, AfiliadoDao afiliadoDao, int nroAfiliado, int rowIndex)
         {
             InitializeComponent();
+
+            _parent = form;
 
             _afiliadoDao = afiliadoDao;
 
@@ -39,7 +44,7 @@
         {
             ComprarBonoForm compraBonoForm = new ComprarBonoForm(_afiliadoDao);
 
-            compraBonoForm.Init(null);
+            compraBonoForm.Init((MenuForm)_parent, false);
 
             compraBonoForm.FormClosed += CompraBonoFormClosed;
 

@@ -12,6 +12,7 @@
     {
         private ProfesionalDao _profesionalDao;
         private AfiliadoDao _afiliadoDao;
+        private Form _parent;
 
         public RegistrarLlegadaForm(ProfesionalDao profesionalDao, AfiliadoDao afiliadoDao)
         {
@@ -25,6 +26,8 @@
 
             parent.Text = "Registrar Llegada";
             parent.FixBounds(_panel);
+
+            _parent = parent;
 
             InitializeCombo();
 
@@ -77,7 +80,7 @@
             {
                 var afiliadoNro = (int)senderGrid.Rows[e.RowIndex].Cells[3].Value;
 
-                BonosViewForm bonosViewForm = new BonosViewForm(_afiliadoDao, afiliadoNro, e.RowIndex);
+                BonosViewForm bonosViewForm = new BonosViewForm(_parent, _afiliadoDao, afiliadoNro, e.RowIndex);
 
                 bonosViewForm.FormClosed += BonosViewFormClosed;
 
