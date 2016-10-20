@@ -9,8 +9,9 @@
 
 namespace ClinicaFrba.DataAccess
 {
+    using System;
     using System.Collections.Generic;
-
+    
     public partial class Rol
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -31,7 +32,7 @@ namespace ClinicaFrba.DataAccess
 
         public override string ToString()
         {
-            return rol_nombre;
+            return rol_nombre.Trim();
         }
     }
 }

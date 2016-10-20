@@ -16,6 +16,14 @@
 
     public partial class MenuForm : Form
     {
+        //Size constants
+        private const int MENU_WIDTH = 180;
+        private const int MARGIN_RIGHT = 28;
+        private const int MARGIN_BOTTOM = 40;
+        private const int MARGIN_BOTTOM_BOTTOM = 57;
+        private const int MENU_MARGIN_RIGHT = 8;
+
+        //Auth user
         private Usuario _user;
         private Rol _rol;
 
@@ -38,8 +46,7 @@
                         CancelarTurnoForm cancelarTurnoForm,
                         RegistrarLlegadaForm registrarLlegadaForm,
                         DiagnosticarForm diagnosticarForm,
-                        VerEstadisticasForm verEstadisticasForm
-            )
+                        VerEstadisticasForm verEstadisticasForm)
         {
             _abmRolForm = abmRolForm;
             _abmAfiliadosForm = abmAfiliadosForm;
@@ -60,6 +67,17 @@
         public Rol Rol()
         {
             return _rol;
+        }
+
+        public void FixBounds(Control content)
+        {
+            Width = content.Width + MENU_WIDTH + MENU_MARGIN_RIGHT;
+            Height = content.Height + MARGIN_BOTTOM + MARGIN_BOTTOM_BOTTOM;
+
+            _functionsTabControl.Width = content.Width + MENU_WIDTH - MARGIN_RIGHT;
+            _functionsTabControl.Height = content.Height + MARGIN_BOTTOM;
+
+            content.BackColor = Color.WhiteSmoke;
         }
 
         public void Init(Usuario user, Rol rol, Action<object, FormClosingEventArgs> close)
@@ -92,6 +110,10 @@
         private void OnTabSelected(object sender, EventArgs e)
         {
             var tab = _functionsTabControl.SelectedTab;
+
+            tab.Controls.Clear();
+            tab.BackColor = Color.Gray;
+
             switch (tab.Name)
             {
                 case "ABM Roles": tab.Controls.Add(_abmRolForm.Init(this)); break;
@@ -105,6 +127,17 @@
                 case "Ver Estadisticas": tab.Controls.Add(_verEstadisticasForm.Init(this)); break;
                 default: break;
             }
+        }
+
+        private void MenuForm_DragDrop(object sender, DragEventArgs e)
+        {
+            MessageBox.Show(String.Format("{0}, {1}",this.Bounds.Location.X, this.Bounds.Location.Y));
+        }
+
+        private void MenuForm_DoubleClick(object sender, EventArgs e)
+        {
+            MessageBox.Show(String.Format("{0}, {1}", this.Bounds.Location.X, this.Bounds.Location.Y));
+
         }
     }
 }

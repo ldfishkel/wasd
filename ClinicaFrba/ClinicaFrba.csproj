@@ -63,17 +63,29 @@
     <Compile Include="AbmAfiliado\ABMAfiliados.Designer.cs">
       <DependentUpon>ABMAfiliados.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmAfiliado\AltaAfiliado.cs">
+    <Compile Include="AbmAfiliado\AltaAfiliadoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmAfiliado\AltaAfiliado.Designer.cs">
-      <DependentUpon>AltaAfiliado.cs</DependentUpon>
+    <Compile Include="AbmAfiliado\AltaAfiliadoForm.Designer.cs">
+      <DependentUpon>AltaAfiliadoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmRol\ABMRolForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AbmRol\ABMRolForm.Designer.cs">
       <DependentUpon>ABMRolForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmRol\AltaRolForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRol\AltaRolForm.Designer.cs">
+      <DependentUpon>AltaRolForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CancelarTurno\CancelarTurnoDetalleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CancelarTurno\CancelarTurnoDetalleForm.Designer.cs">
+      <DependentUpon>CancelarTurnoDetalleForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CancelarTurno\CancelarTurnoForm.cs">
       <SubType>Form</SubType>
@@ -95,6 +107,12 @@
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="IoC\Bootstrapper.cs" />
+    <Compile Include="RegistrarLlegada\BonosViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegistrarLlegada\BonosViewForm.Designer.cs">
+      <DependentUpon>BonosViewForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="VerEstadisticas\VerEstadisticasForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,11 +154,17 @@
     <EmbeddedResource Include="AbmAfiliado\ABMAfiliados.resx">
       <DependentUpon>ABMAfiliados.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AbmAfiliado\AltaAfiliado.resx">
-      <DependentUpon>AltaAfiliado.cs</DependentUpon>
+    <EmbeddedResource Include="AbmAfiliado\AltaAfiliadoForm.resx">
+      <DependentUpon>AltaAfiliadoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\ABMRolForm.resx">
       <DependentUpon>ABMRolForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRol\AltaRolForm.resx">
+      <DependentUpon>AltaRolForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CancelarTurno\CancelarTurnoDetalleForm.resx">
+      <DependentUpon>CancelarTurnoDetalleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CancelarTurno\CancelarTurnoForm.resx">
       <DependentUpon>CancelarTurnoForm.cs</DependentUpon>
@@ -171,6 +195,9 @@
     </Compile>
     <EmbeddedResource Include="RegistrarAgenda\RegistrarAgendaForm.resx">
       <DependentUpon>RegistrarAgendaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegistrarLlegada\BonosViewForm.resx">
+      <DependentUpon>BonosViewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RegistrarLlegada\RegistrarLlegadaForm.resx">
       <DependentUpon>RegistrarLlegadaForm.cs</DependentUpon>

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\lfishkel\Documents\Facultad\GDD\TP\Aplicacion Desktop\ClinicaFrba\ClinicaFrba.DataAccess\ClinicaFrba.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\lfishkel\Documents\Facultad\GDD\TP\AplicacionDesktop\ClinicaFrba\ClinicaFrba.DataAccess\ClinicaFrba.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

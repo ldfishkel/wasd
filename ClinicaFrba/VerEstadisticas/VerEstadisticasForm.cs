@@ -15,6 +15,7 @@
             InitializeComponent();
 
             parent.Text = "Estadisticas";
+            parent.FixBounds(_panel);
 
             return _panel;
         }

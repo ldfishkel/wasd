@@ -16,10 +16,15 @@ namespace ClinicaFrba.DataAccess
     public partial class Database : DbContext
     {
         public Database()
-            : base("name=Database")
+            : base("name=Database2")
         {
         }
-    
+
+        public Database(string connectionString)
+            : base(connectionString)
+        {
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -32,7 +37,8 @@ namespace ClinicaFrba.DataAccess
         public virtual DbSet<Especialidad> Especialidads { get; set; }
         public virtual DbSet<EstadoCivil> EstadoCivils { get; set; }
         public virtual DbSet<Funcionalidad> Funcionalidads { get; set; }
-        public virtual DbSet<Plan> Plans { get; set; }
+        public virtual DbSet<HistorialPlan> HistorialPlans { get; set; }
+        public virtual DbSet<PlanMedico> PlanMedicoes { get; set; }
         public virtual DbSet<Profesional> Profesionals { get; set; }
         public virtual DbSet<Rol> Rols { get; set; }
         public virtual DbSet<Sexo> Sexoes { get; set; }
@@ -40,7 +46,5 @@ namespace ClinicaFrba.DataAccess
         public virtual DbSet<TipoEspecialidad> TipoEspecialidads { get; set; }
         public virtual DbSet<Turno> Turnoes { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
-        public virtual DbSet<Diagnostico> Diagnosticoes { get; set; }
-        public virtual DbSet<HistorialPlan> HistorialPlans { get; set; }
     }
 }

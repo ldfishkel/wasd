@@ -15,7 +15,7 @@ namespace ClinicaFrba.DataAccess
     public partial class HistorialPlan
     {
         public int afiliado_id { get; set; }
-        public System.DateTime historial_fecha_cambio { get; set; }
+        public System.DateTime historial_fecha { get; set; }
         public string historial_motivo { get; set; }
     
         public virtual Afiliado Afiliado { get; set; }

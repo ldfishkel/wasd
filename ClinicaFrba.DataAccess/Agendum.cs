@@ -16,12 +16,12 @@ namespace ClinicaFrba.DataAccess
     {
         public int agenda_id { get; set; }
         public int profesional_id { get; set; }
+        public int especialidad_id { get; set; }
         public string agenda_dia { get; set; }
         public System.TimeSpan agenda_hora_desde { get; set; }
         public System.TimeSpan agenda_hora_hasta { get; set; }
         public System.DateTime agenda_fecha_desde { get; set; }
         public System.DateTime agenda_fecha_hasta { get; set; }
-        public int especialidad_id { get; set; }
     
         public virtual Especialidad Especialidad { get; set; }
         public virtual Profesional Profesional { get; set; }

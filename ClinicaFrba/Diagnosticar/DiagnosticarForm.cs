@@ -15,6 +15,7 @@
             InitializeComponent();
 
             parent.Text = "Diagnosticar";
+            parent.FixBounds(_panel);
 
             return _panel;
         }

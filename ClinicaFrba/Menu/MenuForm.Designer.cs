@@ -59,12 +59,16 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "MenuForm";
+            this.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menu";
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MenuForm_DragDrop);
+            this.DoubleClick += new System.EventHandler(this.MenuForm_DoubleClick);
             this.ResumeLayout(false);
 
         }
 
-        private void TabLabelDrawing(Object sender, System.Windows.Forms.DrawItemEventArgs e)
+        private void TabLabelDrawing(Object sender, DrawItemEventArgs e)
         {
             Graphics g = e.Graphics;
             Brush _textBrush;
@@ -79,7 +83,7 @@
             }
             else
             {
-                _textBrush = new System.Drawing.SolidBrush(e.ForeColor);
+                _textBrush = new SolidBrush(e.ForeColor);
                 e.DrawBackground();
             }
 

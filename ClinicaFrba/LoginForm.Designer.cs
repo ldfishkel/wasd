@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.MaximizeBox = false;
             this._loginGroupbox = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -136,7 +135,9 @@
             this.Controls.Add(this._rolSelectionGroupbox);
             this.Controls.Add(this._loginGroupbox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "LoginForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ingresar";
             this._loginGroupbox.ResumeLayout(false);
             this._loginGroupbox.PerformLayout();

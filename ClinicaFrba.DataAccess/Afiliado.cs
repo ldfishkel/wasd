@@ -19,46 +19,50 @@ namespace ClinicaFrba.DataAccess
         {
             this.Afiliado1 = new HashSet<Afiliado>();
             this.Bonoes = new HashSet<Bono>();
+            this.Bonoes1 = new HashSet<Bono>();
             this.Compras = new HashSet<Compra>();
-            this.HistorialPlans = new HashSet<HistorialPlan>();
             this.Turnoes = new HashSet<Turno>();
         }
     
         public int afiliado_id { get; set; }
+        public int usuario_id { get; set; }
+        public int estadocivil_id { get; set; }
+        public int tipodocumento_id { get; set; }
+        public int planmedico_id { get; set; }
+        public int sexo_id { get; set; }
         public int afiliado_numero { get; set; }
         public string afiliado_nombre { get; set; }
         public string afiliado_apellido { get; set; }
         public int afiliado_numero_documento { get; set; }
-        public int afiliado_tipo_documento { get; set; }
         public string afiliado_direccion { get; set; }
         public int afiliado_telefono { get; set; }
         public string afiliado_mail { get; set; }
         public System.DateTime afiliado_fecha_nacimiento { get; set; }
-        public int afiliado_sexo { get; set; }
-        public int afiliado_estado_civil { get; set; }
         public byte afiliado_familiares_dependientes { get; set; }
-        public int afiliado_plan { get; set; }
-        public System.DateTime afiliado_fecha_alta { get; set; }
-        public Nullable<System.DateTime> afiliado_fecha_baja { get; set; }
         public bool afiliado_activo { get; set; }
-        public int afiliado_usuario { get; set; }
         public Nullable<int> afiliado_grupo_familiar { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Afiliado> Afiliado1 { get; set; }
         public virtual Afiliado Afiliado2 { get; set; }
         public virtual EstadoCivil EstadoCivil { get; set; }
-        public virtual Plan Plan { get; set; }
+        public virtual PlanMedico PlanMedico { get; set; }
         public virtual Sexo Sexo { get; set; }
         public virtual TipoDocumento TipoDocumento { get; set; }
         public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bono> Bonoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Compra> Compras { get; set; }
+        public virtual ICollection<Bono> Bonoes1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HistorialPlan> HistorialPlans { get; set; }
+        public virtual ICollection<Compra> Compras { get; set; }
+        public virtual HistorialPlan HistorialPlan { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Turno> Turnoes { get; set; }
+
+        public override string ToString()
+        {
+            return afiliado_nombre.Trim() + " " + afiliado_apellido.Trim();
+        }
     }
 }

@@ -22,6 +22,8 @@
             InitializeComponent();
 
             menuForm.Text = "ABM Afiliados";
+            menuForm.FixBounds(_panel);
+
             _user = menuForm.User();
             _rol = menuForm.Rol();
 
@@ -33,12 +35,12 @@
         private void InitializeAfiliadosGrid()
         {
             foreach (Afiliado afiliado in _afiliadoDao.GetAfiliados())
-                _afiliadosGrid.Rows.Add(afiliado.afiliado_numero, afiliado.afiliado_nombre, afiliado.Plan, "Ver", "Baja", "Modificar");
+                _afiliadosGrid.Rows.Add(afiliado.afiliado_numero, afiliado.afiliado_nombre, afiliado.PlanMedico, "Ver", "Baja", "Modificar");
         }
 
         private void AltaClick(object sender, System.EventArgs e)
         {
-            var altaAfiliadoForm = new AltaAfiliado();
+            var altaAfiliadoForm = new AltaAfiliadoForm();
             altaAfiliadoForm.Show();
         }
     }

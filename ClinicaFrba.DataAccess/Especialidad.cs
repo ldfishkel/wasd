@@ -23,8 +23,8 @@ namespace ClinicaFrba.DataAccess
         }
     
         public int especialidad_id { get; set; }
+        public int tipoespecialidad_id { get; set; }
         public string especialidad_nombre { get; set; }
-        public int especialidad_tipo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Agendum> Agenda { get; set; }
@@ -33,5 +33,10 @@ namespace ClinicaFrba.DataAccess
         public virtual ICollection<Turno> Turnoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Profesional> Profesionals { get; set; }
+
+        public override string ToString()
+        {
+            return especialidad_nombre;
+        }
     }
 }
