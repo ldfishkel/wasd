@@ -101,8 +101,6 @@
             // _tipoDeDoc
             // 
             this._tipoDeDoc.FormattingEnabled = true;
-            this._tipoDeDoc.Items.AddRange(new object[] {
-            "DNI"});
             this._tipoDeDoc.Location = new System.Drawing.Point(127, 16);
             this._tipoDeDoc.Name = "_tipoDeDoc";
             this._tipoDeDoc.Size = new System.Drawing.Size(128, 21);

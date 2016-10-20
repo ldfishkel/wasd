@@ -13,6 +13,7 @@
     {
         private AfiliadoDao _afiliadoDao;
         private PlanMedico _planMedico;
+        private Afiliado _afiliado;
 
         public ComprarBonoForm(AfiliadoDao afiliadoDao)
         {
@@ -22,6 +23,8 @@
         public Panel Init(MenuForm parent, bool resize = true)
         {
             InitializeComponent();
+
+            InitializeCombo();
 
             if (parent != null)
             {
@@ -34,40 +37,43 @@
 
             if (rol.ToString() == "Afiliado")
             {
-                var afiliado = parent.User().Afiliadoes.FirstOrDefault();
+                _afiliado = parent.User().Afiliadoes.FirstOrDefault();
 
-                _searchGroupbox.Enabled = false;
-
-                _nombreYApellidoLbl.Text = afiliado.afiliado_nombre + " " + afiliado.afiliado_apellido;
-
-                _planLbl.Text = afiliado.PlanMedico.planmedico_nombre;
-
-                _nroAfliladoLbl.Text = "" + afiliado.afiliado_numero;
-
-                _planMedico = afiliado.PlanMedico;
-
-                _compraGroupBox.Enabled = true;
+                InitializeAfiliado();
             }
 
             return _panel;
         }
 
+        private void InitializeCombo()
+        {
+            _tipoDeDoc.Items.AddRange(_afiliadoDao.getTipoDeDocumentos().ToArray());
+        }
+
+
         private void BuscarAfiliadoClick(object sender, System.EventArgs e)
         {
             if (ValidateSearch())
             {
-                Afiliado afiliado = _afiliadoDao.GetAfiliado(_tipoDeDoc.SelectedItem.ToString(), Int32.Parse(_nroDocumento.Text));
+                _afiliado = _afiliadoDao.GetAfiliado(((TipoDocumento)_tipoDeDoc.SelectedItem).tipodocumento_id, Int32.Parse(_nroDocumento.Text));
 
-                _nombreYApellidoLbl.Text = afiliado.afiliado_nombre + " " + afiliado.afiliado_apellido;
-
-                _planLbl.Text = afiliado.PlanMedico.planmedico_nombre;
-
-                _nroAfliladoLbl.Text = "" + afiliado.afiliado_numero;
-
-                _planMedico = afiliado.PlanMedico;
-
-                _compraGroupBox.Enabled = true;
+                InitializeAfiliado();
             }
+        }
+
+        private void InitializeAfiliado()
+        {
+            _searchGroupbox.Enabled = false;
+
+            _nombreYApellidoLbl.Text = _afiliado.ToString();
+
+            _planMedico = _afiliado.PlanMedico;
+
+            _planLbl.Text = _planMedico.planmedico_nombre;
+
+            _nroAfliladoLbl.Text = "" + _afiliado.afiliado_numero;
+
+            _compraGroupBox.Enabled = true;
         }
 
         private bool ValidateSearch()
@@ -94,6 +100,8 @@
 
         private void ComprarClick(object sender, EventArgs e)
         {
+            _afiliadoDao.CompraDeBonos((int)_cantidadBonos.Value, _afiliado.afiliado_id, _planMedico.planmedico_id);
+
             MessageBox.Show(String.Format("Se han comprado {0} bonos para el afiliado {1}", _cantidadBonos.Value, _nroAfliladoLbl.Text));
 
             _cantidadBonos.Value = 0;

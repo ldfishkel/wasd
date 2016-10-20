@@ -12,11 +12,13 @@ namespace ClinicaFrba.DataAccess
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class Database : DbContext
     {
         public Database()
-            : base("name=Database2")
+            : base("name=Database3")
         {
         }
 
@@ -46,5 +48,22 @@ namespace ClinicaFrba.DataAccess
         public virtual DbSet<TipoEspecialidad> TipoEspecialidads { get; set; }
         public virtual DbSet<Turno> Turnoes { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
+    
+        public virtual int CompraBono(Nullable<int> afiliadoId, Nullable<int> cant, Nullable<int> planMedicoId)
+        {
+            var afiliadoIdParameter = afiliadoId.HasValue ?
+                new ObjectParameter("afiliadoId", afiliadoId) :
+                new ObjectParameter("afiliadoId", typeof(int));
+    
+            var cantParameter = cant.HasValue ?
+                new ObjectParameter("cant", cant) :
+                new ObjectParameter("cant", typeof(int));
+    
+            var planMedicoIdParameter = planMedicoId.HasValue ?
+                new ObjectParameter("planMedicoId", planMedicoId) :
+                new ObjectParameter("planMedicoId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CompraBono", afiliadoIdParameter, cantParameter, planMedicoIdParameter);
+        }
     }
 }
