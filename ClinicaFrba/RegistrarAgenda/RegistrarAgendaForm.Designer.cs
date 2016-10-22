@@ -60,6 +60,11 @@
             this._lunesEspecialidad = new System.Windows.Forms.ComboBox();
             this._lunesDesde = new System.Windows.Forms.ComboBox();
             this._lunesHasta = new System.Windows.Forms.ComboBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this._fechaDesde = new System.Windows.Forms.DateTimePicker();
+            this._fechaHasta = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this._panel.SuspendLayout();
             this._sabadoGroupBox.SuspendLayout();
             this._viernesGroupBox.SuspendLayout();
@@ -67,10 +72,12 @@
             this._miercolesGroupBox.SuspendLayout();
             this._martesGroupBox.SuspendLayout();
             this._lunesGroupBox.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // _panel
             // 
+            this._panel.Controls.Add(this.groupBox1);
             this._panel.Controls.Add(this._registrarAgendaBtn);
             this._panel.Controls.Add(this._sabadoGroupBox);
             this._panel.Controls.Add(this._viernesGroupBox);
@@ -80,12 +87,12 @@
             this._panel.Controls.Add(this._lunesGroupBox);
             this._panel.Location = new System.Drawing.Point(13, 13);
             this._panel.Name = "_panel";
-            this._panel.Size = new System.Drawing.Size(534, 327);
+            this._panel.Size = new System.Drawing.Size(534, 381);
             this._panel.TabIndex = 0;
             // 
             // _registrarAgendaBtn
             // 
-            this._registrarAgendaBtn.Location = new System.Drawing.Point(10, 296);
+            this._registrarAgendaBtn.Location = new System.Drawing.Point(10, 344);
             this._registrarAgendaBtn.Name = "_registrarAgendaBtn";
             this._registrarAgendaBtn.Size = new System.Drawing.Size(504, 23);
             this._registrarAgendaBtn.TabIndex = 12;
@@ -99,7 +106,7 @@
             this._sabadoGroupBox.Controls.Add(this._sabadoEspecialidad);
             this._sabadoGroupBox.Controls.Add(this._sabadoDesde);
             this._sabadoGroupBox.Controls.Add(this._sabadoHasta);
-            this._sabadoGroupBox.Location = new System.Drawing.Point(10, 246);
+            this._sabadoGroupBox.Location = new System.Drawing.Point(10, 294);
             this._sabadoGroupBox.Name = "_sabadoGroupBox";
             this._sabadoGroupBox.Size = new System.Drawing.Size(504, 43);
             this._sabadoGroupBox.TabIndex = 11;
@@ -115,7 +122,7 @@
             this._sabadoCheck.Text = "Sabado";
             this._sabadoCheck.UseVisualStyleBackColor = true;
             // 
-            // _sabadoDesde
+            // _sabadoEspecialidad
             // 
             this._sabadoEspecialidad.FormattingEnabled = true;
             this._sabadoEspecialidad.Location = new System.Drawing.Point(377, 17);
@@ -124,7 +131,7 @@
             this._sabadoEspecialidad.TabIndex = 8;
             this._sabadoEspecialidad.Text = "Especialidad";
             // 
-            // _sabadoHasta
+            // _sabadoDesde
             // 
             this._sabadoDesde.FormattingEnabled = true;
             this._sabadoDesde.Location = new System.Drawing.Point(103, 16);
@@ -133,7 +140,7 @@
             this._sabadoDesde.TabIndex = 6;
             this._sabadoDesde.Text = "Hora Desde";
             // 
-            // _sabadoEspecialidad
+            // _sabadoHasta
             // 
             this._sabadoHasta.FormattingEnabled = true;
             this._sabadoHasta.Location = new System.Drawing.Point(242, 17);
@@ -148,7 +155,7 @@
             this._viernesGroupBox.Controls.Add(this._viernesEspecialidad);
             this._viernesGroupBox.Controls.Add(this._viernesDesde);
             this._viernesGroupBox.Controls.Add(this._viernesHasta);
-            this._viernesGroupBox.Location = new System.Drawing.Point(10, 197);
+            this._viernesGroupBox.Location = new System.Drawing.Point(10, 245);
             this._viernesGroupBox.Name = "_viernesGroupBox";
             this._viernesGroupBox.Size = new System.Drawing.Size(504, 43);
             this._viernesGroupBox.TabIndex = 11;
@@ -164,16 +171,16 @@
             this._viernesCheck.Text = "Viernes";
             this._viernesCheck.UseVisualStyleBackColor = true;
             // 
-            // _viernesDesde
+            // _viernesEspecialidad
             // 
             this._viernesEspecialidad.FormattingEnabled = true;
             this._viernesEspecialidad.Location = new System.Drawing.Point(377, 17);
-            this._viernesEspecialidad.Name = "_viernesDesde";
+            this._viernesEspecialidad.Name = "_viernesEspecialidad";
             this._viernesEspecialidad.Size = new System.Drawing.Size(121, 21);
             this._viernesEspecialidad.TabIndex = 8;
             this._viernesEspecialidad.Text = "Especialidad";
             // 
-            // _viernesHasta
+            // _viernesDesde
             // 
             this._viernesDesde.FormattingEnabled = true;
             this._viernesDesde.Location = new System.Drawing.Point(103, 16);
@@ -182,7 +189,7 @@
             this._viernesDesde.TabIndex = 6;
             this._viernesDesde.Text = "Hora Desde";
             // 
-            // _viernesEspecialidad
+            // _viernesHasta
             // 
             this._viernesHasta.FormattingEnabled = true;
             this._viernesHasta.Location = new System.Drawing.Point(242, 17);
@@ -197,7 +204,7 @@
             this._juevesGroupBox.Controls.Add(this._juevesEspecialidad);
             this._juevesGroupBox.Controls.Add(this._juevesDesde);
             this._juevesGroupBox.Controls.Add(this._juevesHasta);
-            this._juevesGroupBox.Location = new System.Drawing.Point(10, 148);
+            this._juevesGroupBox.Location = new System.Drawing.Point(10, 196);
             this._juevesGroupBox.Name = "_juevesGroupBox";
             this._juevesGroupBox.Size = new System.Drawing.Size(504, 43);
             this._juevesGroupBox.TabIndex = 11;
@@ -213,16 +220,16 @@
             this._juevesCheck.Text = "Jueves";
             this._juevesCheck.UseVisualStyleBackColor = true;
             // 
-            // _juevesDesde
+            // _juevesEspecialidad
             // 
             this._juevesEspecialidad.FormattingEnabled = true;
             this._juevesEspecialidad.Location = new System.Drawing.Point(377, 17);
-            this._juevesEspecialidad.Name = "_juevesDesde";
+            this._juevesEspecialidad.Name = "_juevesEspecialidad";
             this._juevesEspecialidad.Size = new System.Drawing.Size(121, 21);
             this._juevesEspecialidad.TabIndex = 8;
             this._juevesEspecialidad.Text = "Especialidad";
             // 
-            // _juevesHasta
+            // _juevesDesde
             // 
             this._juevesDesde.FormattingEnabled = true;
             this._juevesDesde.Location = new System.Drawing.Point(103, 16);
@@ -231,7 +238,7 @@
             this._juevesDesde.TabIndex = 6;
             this._juevesDesde.Text = "Hora Desde";
             // 
-            // _juevesEspecialidad
+            // _juevesHasta
             // 
             this._juevesHasta.FormattingEnabled = true;
             this._juevesHasta.Location = new System.Drawing.Point(242, 17);
@@ -246,7 +253,7 @@
             this._miercolesGroupBox.Controls.Add(this._miercolesEspecialidad);
             this._miercolesGroupBox.Controls.Add(this._miercolesDesde);
             this._miercolesGroupBox.Controls.Add(this._miercolesHasta);
-            this._miercolesGroupBox.Location = new System.Drawing.Point(10, 99);
+            this._miercolesGroupBox.Location = new System.Drawing.Point(10, 147);
             this._miercolesGroupBox.Name = "_miercolesGroupBox";
             this._miercolesGroupBox.Size = new System.Drawing.Size(504, 43);
             this._miercolesGroupBox.TabIndex = 11;
@@ -262,7 +269,7 @@
             this._miercolesCheck.Text = "Miercoles";
             this._miercolesCheck.UseVisualStyleBackColor = true;
             // 
-            // _miercolesDesde
+            // _miercolesEspecialidad
             // 
             this._miercolesEspecialidad.FormattingEnabled = true;
             this._miercolesEspecialidad.Location = new System.Drawing.Point(377, 17);
@@ -271,7 +278,7 @@
             this._miercolesEspecialidad.TabIndex = 8;
             this._miercolesEspecialidad.Text = "Especialidad";
             // 
-            // _miercolesHasta
+            // _miercolesDesde
             // 
             this._miercolesDesde.FormattingEnabled = true;
             this._miercolesDesde.Location = new System.Drawing.Point(103, 16);
@@ -280,7 +287,7 @@
             this._miercolesDesde.TabIndex = 6;
             this._miercolesDesde.Text = "HoraDesde";
             // 
-            // _miercolesEspecialidad
+            // _miercolesHasta
             // 
             this._miercolesHasta.FormattingEnabled = true;
             this._miercolesHasta.Location = new System.Drawing.Point(242, 17);
@@ -295,7 +302,7 @@
             this._martesGroupBox.Controls.Add(this._martesEspecialidad);
             this._martesGroupBox.Controls.Add(this._martesDesde);
             this._martesGroupBox.Controls.Add(this._martesHasta);
-            this._martesGroupBox.Location = new System.Drawing.Point(10, 50);
+            this._martesGroupBox.Location = new System.Drawing.Point(10, 98);
             this._martesGroupBox.Name = "_martesGroupBox";
             this._martesGroupBox.Size = new System.Drawing.Size(504, 43);
             this._martesGroupBox.TabIndex = 10;
@@ -311,7 +318,7 @@
             this._martesCheck.Text = "Martes";
             this._martesCheck.UseVisualStyleBackColor = true;
             // 
-            // _martesDesde
+            // _martesEspecialidad
             // 
             this._martesEspecialidad.FormattingEnabled = true;
             this._martesEspecialidad.Location = new System.Drawing.Point(377, 17);
@@ -320,7 +327,7 @@
             this._martesEspecialidad.TabIndex = 8;
             this._martesEspecialidad.Text = "Especialidad";
             // 
-            // _martesHasta
+            // _martesDesde
             // 
             this._martesDesde.FormattingEnabled = true;
             this._martesDesde.Location = new System.Drawing.Point(103, 16);
@@ -329,7 +336,7 @@
             this._martesDesde.TabIndex = 6;
             this._martesDesde.Text = "Hora Desde";
             // 
-            // _martesEspecialidad
+            // _martesHasta
             // 
             this._martesHasta.FormattingEnabled = true;
             this._martesHasta.Location = new System.Drawing.Point(242, 17);
@@ -344,7 +351,7 @@
             this._lunesGroupBox.Controls.Add(this._lunesEspecialidad);
             this._lunesGroupBox.Controls.Add(this._lunesDesde);
             this._lunesGroupBox.Controls.Add(this._lunesHasta);
-            this._lunesGroupBox.Location = new System.Drawing.Point(10, 1);
+            this._lunesGroupBox.Location = new System.Drawing.Point(10, 49);
             this._lunesGroupBox.Name = "_lunesGroupBox";
             this._lunesGroupBox.Size = new System.Drawing.Size(504, 43);
             this._lunesGroupBox.TabIndex = 9;
@@ -387,11 +394,55 @@
             this._lunesHasta.TabIndex = 7;
             this._lunesHasta.Text = "Hora Hasta";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this._fechaHasta);
+            this.groupBox1.Controls.Add(this._fechaDesde);
+            this.groupBox1.Location = new System.Drawing.Point(10, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(504, 43);
+            this.groupBox1.TabIndex = 10;
+            this.groupBox1.TabStop = false;
+            // 
+            // _fechaDesde
+            // 
+            this._fechaDesde.Location = new System.Drawing.Point(68, 17);
+            this._fechaDesde.Name = "_fechaDesde";
+            this._fechaDesde.Size = new System.Drawing.Size(180, 20);
+            this._fechaDesde.TabIndex = 0;
+            // 
+            // _fechaHasta
+            // 
+            this._fechaHasta.Location = new System.Drawing.Point(313, 17);
+            this._fechaHasta.Name = "_fechaHasta";
+            this._fechaHasta.Size = new System.Drawing.Size(184, 20);
+            this._fechaHasta.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(17, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Desde";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(266, 20);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Hasta";
+            // 
             // RegistrarAgendaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(559, 352);
+            this.ClientSize = new System.Drawing.Size(561, 403);
             this.Controls.Add(this._panel);
             this.Name = "RegistrarAgendaForm";
             this.Text = "Form1";
@@ -408,6 +459,8 @@
             this._martesGroupBox.PerformLayout();
             this._lunesGroupBox.ResumeLayout(false);
             this._lunesGroupBox.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -446,5 +499,10 @@
         private System.Windows.Forms.ComboBox _lunesDesde;
         private System.Windows.Forms.ComboBox _lunesHasta;
         private System.Windows.Forms.Button _registrarAgendaBtn;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.DateTimePicker _fechaHasta;
+        private System.Windows.Forms.DateTimePicker _fechaDesde;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }

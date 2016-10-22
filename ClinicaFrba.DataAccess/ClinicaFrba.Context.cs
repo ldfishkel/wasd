@@ -18,12 +18,12 @@ namespace ClinicaFrba.DataAccess
     public partial class Database : DbContext
     {
         public Database()
-            : base("name=Database3")
+            : base("name=Database4")
         {
         }
 
-        public Database(string connectionString)
-            : base(connectionString)
+        public Database(string cs)
+            : base(cs)
         {
         }
 
@@ -49,6 +49,20 @@ namespace ClinicaFrba.DataAccess
         public virtual DbSet<Turno> Turnoes { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
     
+        [DbFunction("Database4", "FechasDisponibles")]
+        public virtual IQueryable<FechasDisponibles_Result> FechasDisponibles(Nullable<int> profesionalId, Nullable<int> especialidadId)
+        {
+            var profesionalIdParameter = profesionalId.HasValue ?
+                new ObjectParameter("profesionalId", profesionalId) :
+                new ObjectParameter("profesionalId", typeof(int));
+    
+            var especialidadIdParameter = especialidadId.HasValue ?
+                new ObjectParameter("especialidadId", especialidadId) :
+                new ObjectParameter("especialidadId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<FechasDisponibles_Result>("[Database4].[FechasDisponibles](@profesionalId, @especialidadId)", profesionalIdParameter, especialidadIdParameter);
+        }
+    
         public virtual int CompraBono(Nullable<int> afiliadoId, Nullable<int> cant, Nullable<int> planMedicoId)
         {
             var afiliadoIdParameter = afiliadoId.HasValue ?
@@ -64,6 +78,24 @@ namespace ClinicaFrba.DataAccess
                 new ObjectParameter("planMedicoId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CompraBono", afiliadoIdParameter, cantParameter, planMedicoIdParameter);
+        }
+    
+        [DbFunction("Database4", "HorasDisponibles")]
+        public virtual IQueryable<Nullable<int>> HorasDisponibles(Nullable<int> profesionalId, Nullable<int> especialidadId, Nullable<System.DateTime> fecha)
+        {
+            var profesionalIdParameter = profesionalId.HasValue ?
+                new ObjectParameter("profesionalId", profesionalId) :
+                new ObjectParameter("profesionalId", typeof(int));
+    
+            var especialidadIdParameter = especialidadId.HasValue ?
+                new ObjectParameter("especialidadId", especialidadId) :
+                new ObjectParameter("especialidadId", typeof(int));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Nullable<int>>("[Database4].[HorasDisponibles](@profesionalId, @especialidadId, @fecha)", profesionalIdParameter, especialidadIdParameter, fechaParameter);
         }
     }
 }

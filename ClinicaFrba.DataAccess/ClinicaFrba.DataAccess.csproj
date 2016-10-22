@@ -104,6 +104,9 @@
     <Compile Include="EstadoCivil.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
+    <Compile Include="FechasDisponibles_Result.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
     <Compile Include="Funcionalidad.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>

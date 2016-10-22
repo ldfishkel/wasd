@@ -3,16 +3,19 @@
     using DataAccess;
     using DataAccess.DAO;
     using Menu;
-    using System.Windows.Forms;
+    using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System;
+    using System.Windows.Forms;
 
     public partial class RegistrarAgendaForm : Form
     {
         private ProfesionalDao _profesionalDao;
 
         private Profesional _profesional;
+
+        private Dictionary<string, int> _horasNumero;
 
         public RegistrarAgendaForm(ProfesionalDao profesionalDao)
         {
@@ -28,9 +31,44 @@
 
             _profesional = _profesionalDao.GetProfesional(parent.User().usuario_id);
 
+            InitializeDictionary();
             InitializeAgenda();
 
             return _panel;
+        }
+
+        private void InitializeDictionary()
+        {
+            _horasNumero = new Dictionary<string, int>()
+            {
+               { "07:00", 0 },
+               { "07:30", 1 },
+               { "08:00", 2 },
+               { "08:30", 3 },
+               { "09:00", 4 },
+               { "09:30", 5 },
+               { "10:00", 6 },
+               { "10:30", 7 },
+               { "11:00", 8 },
+               { "11:30", 9 },
+               { "12:00", 10 },
+               { "12:30", 11 },
+               { "13:00", 12 },
+               { "13:30", 13 },
+               { "14:00", 14 },
+               { "14:30", 15 },
+               { "15:00", 16 },
+               { "15:30", 17 },
+               { "16:00", 18 },
+               { "16:30", 19 },
+               { "17:00", 20 },
+               { "17:30", 21 },
+               { "18:00", 22 },
+               { "18:30", 23 },
+               { "19:00", 24 },
+               { "19:30", 25 },
+               { "20:00", 26 }
+            };
         }
 
         private void InitializeAgenda()
@@ -43,6 +81,8 @@
 
         private void InitializeComboboxes()
         {
+            
+
             string[] horas = { "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00" };
             string[] horasSabado = { "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00" };
 
@@ -71,56 +111,29 @@
         {
             foreach (Agendum agenda in _profesional.Agenda)
             {
-                if (agenda.agenda_dia.Trim().Equals("LUNES"))
+                switch (agenda.agenda_dia.Trim())
                 {
-                    _lunesCheck.Checked = true;
-                    _lunesDesde.Text = agenda.agenda_hora_desde.ToString();
-                    _lunesHasta.Text = agenda.agenda_hora_hasta.ToString();
-                    _lunesEspecialidad.Text = agenda.Especialidad.ToString();
-                }
-
-                if (agenda.agenda_dia.Trim().Equals("MARTES"))
-                {
-                    _martesCheck.Checked = true;
-                    _martesDesde.Text = agenda.agenda_hora_desde.ToString();
-                    _martesHasta.Text = agenda.agenda_hora_hasta.ToString();
-                    _martesEspecialidad.Text = agenda.Especialidad.ToString();
-                }
-
-                if (agenda.agenda_dia.Trim().Equals("MIERCOLES"))
-                {
-                    _miercolesCheck.Checked = true;
-                    _miercolesDesde.Text = agenda.agenda_hora_desde.ToString();
-                    _miercolesHasta.Text = agenda.agenda_hora_hasta.ToString();
-                    _miercolesEspecialidad.Text = agenda.Especialidad.ToString();
-                }
-
-                if (agenda.agenda_dia.Trim().Equals("JUEVES"))
-                {
-                    _juevesCheck.Checked = true;
-                    _juevesDesde.Text = agenda.agenda_hora_desde.ToString();
-                    _juevesHasta.Text = agenda.agenda_hora_hasta.ToString();
-                    _juevesEspecialidad.Text = agenda.Especialidad.ToString();
-                }
-
-                if (agenda.agenda_dia.Trim().Equals("VIERNES"))
-                {
-                    _viernesCheck.Checked = true;
-                    _viernesDesde.Text = agenda.agenda_hora_desde.ToString();
-                    _viernesHasta.Text = agenda.agenda_hora_hasta.ToString();
-                    _viernesEspecialidad.Text = agenda.Especialidad.ToString();
-                }
-
-                if (agenda.agenda_dia.Trim().Equals("SABADO"))
-                {
-                    _sabadoCheck.Checked = true;
-                    _sabadoDesde.Text = agenda.agenda_hora_desde.ToString();
-                    _sabadoHasta.Text = agenda.agenda_hora_hasta.ToString();
-                    _sabadoEspecialidad.Text = agenda.Especialidad.ToString();
+                    case "LUNES": ShowAgenda(_lunesCheck, _lunesDesde, _lunesHasta, _lunesEspecialidad, agenda); break;
+                    case "MARTES": ShowAgenda(_martesCheck, _martesDesde, _martesHasta, _martesEspecialidad, agenda); break;
+                    case "MIERCOLES": ShowAgenda(_miercolesCheck, _miercolesDesde, _miercolesHasta, _miercolesEspecialidad, agenda); break;
+                    case "JUEVES": ShowAgenda(_juevesCheck, _juevesDesde, _juevesHasta, _juevesEspecialidad, agenda); break;
+                    case "VIERNES": ShowAgenda(_viernesCheck, _viernesDesde, _viernesHasta, _viernesEspecialidad, agenda); break;
+                    case "SABADO": ShowAgenda(_sabadoCheck, _sabadoDesde, _sabadoHasta, _sabadoEspecialidad, agenda); break;
                 }
             }
 
+            _fechaDesde.Value = _profesional.Agenda.First().agenda_fecha_desde;
+            _fechaHasta.Value = _profesional.Agenda.First().agenda_fecha_hasta;
+
             DisableFields();
+        }
+
+        private void ShowAgenda(CheckBox check, ComboBox desde, ComboBox hasta, ComboBox especialidad, Agendum agenda)
+        {
+            check.Checked = true;
+            desde.Text = _horasNumero.FirstOrDefault(x => x.Value == agenda.agenda_hora_desde).Key;
+            hasta.Text = _horasNumero.FirstOrDefault(x => x.Value == agenda.agenda_hora_hasta).Key;
+            especialidad.Text = agenda.Especialidad.ToString();
         }
 
         private void RegistrarAgendaBtnClick(object sender, System.EventArgs e)
@@ -135,79 +148,39 @@
         private void SaveAgendum()
         {
             if (_lunesCheck.Checked)
-            {
-                var agendaLunes = new Agendum();
-                agendaLunes.profesional_id = _profesional.profesional_id;
-                agendaLunes.especialidad_id = ((Especialidad)_lunesEspecialidad.SelectedItem).especialidad_id;
-                agendaLunes.agenda_hora_hasta = ToTimeSpan(_lunesHasta.SelectedItem);
-                agendaLunes.agenda_hora_desde = ToTimeSpan(_lunesDesde.SelectedItem);
-                agendaLunes.agenda_dia = "LUNES";
-                agendaLunes.agenda_id = Int32.Parse(new StringBuilder().Append(_profesional.profesional_id).Append(0).ToString());
-                _profesional.Agenda.Add(agendaLunes);
-            }
+                BuildAgenda((Especialidad)_lunesEspecialidad.SelectedItem, _lunesDesde.SelectedItem, _lunesHasta.SelectedItem, "LUNES");
 
             if (_martesCheck.Checked)
-            {
-                var agendamartes = new Agendum();
-                agendamartes.profesional_id = _profesional.profesional_id;
-                agendamartes.especialidad_id = ((Especialidad)_martesEspecialidad.SelectedItem).especialidad_id;
-                agendamartes.agenda_hora_hasta = ToTimeSpan(_martesHasta.SelectedItem);
-                agendamartes.agenda_hora_desde = ToTimeSpan(_martesDesde.SelectedItem);
-                agendamartes.agenda_dia = "MARTES";
-                agendamartes.agenda_id = Int32.Parse(new StringBuilder().Append(_profesional.profesional_id).Append(1).ToString());
-                _profesional.Agenda.Add(agendamartes);
-
-            }
+                BuildAgenda((Especialidad)_martesEspecialidad.SelectedItem, _martesDesde.SelectedItem, _martesHasta.SelectedItem, "MARTES");
 
             if (_miercolesCheck.Checked)
-            {
-                var agendamiercoles = new Agendum();
-                agendamiercoles.profesional_id = _profesional.profesional_id;
-                agendamiercoles.especialidad_id = ((Especialidad)_miercolesEspecialidad.SelectedItem).especialidad_id;
-                agendamiercoles.agenda_hora_hasta = ToTimeSpan(_miercolesHasta.SelectedItem);
-                agendamiercoles.agenda_hora_desde = ToTimeSpan(_miercolesDesde.SelectedItem);
-                agendamiercoles.agenda_dia = "MIERCOLES";
-                agendamiercoles.agenda_id = Int32.Parse(new StringBuilder().Append(_profesional.profesional_id).Append(2).ToString());
-                _profesional.Agenda.Add(agendamiercoles);
-            }
+                BuildAgenda((Especialidad)_miercolesEspecialidad.SelectedItem, _miercolesDesde.SelectedItem, _miercolesHasta.SelectedItem, "MIERCOLES");
 
             if (_juevesCheck.Checked)
-            {
-                var agendajueves = new Agendum();
-                agendajueves.profesional_id = _profesional.profesional_id;
-                agendajueves.especialidad_id = ((Especialidad)_juevesEspecialidad.SelectedItem).especialidad_id;
-                agendajueves.agenda_hora_hasta = ToTimeSpan(_juevesHasta.SelectedItem);
-                agendajueves.agenda_hora_desde = ToTimeSpan(_juevesDesde.SelectedItem);
-                agendajueves.agenda_dia = "JUEVES";
-                agendajueves.agenda_id = Int32.Parse(new StringBuilder().Append(_profesional.profesional_id).Append(3).ToString());
-                _profesional.Agenda.Add(agendajueves);
-            }
+                BuildAgenda((Especialidad)_juevesEspecialidad.SelectedItem, _juevesDesde.SelectedItem, _juevesHasta.SelectedItem, "JUEVES");
 
             if (_viernesCheck.Checked)
-            {
-                var agendaviernes = new Agendum();
-                agendaviernes.profesional_id = _profesional.profesional_id;
-                agendaviernes.especialidad_id = ((Especialidad)_viernesEspecialidad.SelectedItem).especialidad_id;
-                agendaviernes.agenda_hora_hasta = ToTimeSpan(_viernesHasta.SelectedItem);
-                agendaviernes.agenda_hora_desde = ToTimeSpan(_viernesDesde.SelectedItem);
-                agendaviernes.agenda_dia = "VIERNES";
-                agendaviernes.agenda_id = Int32.Parse(new StringBuilder().Append(_profesional.profesional_id).Append(4).ToString());
-                _profesional.Agenda.Add(agendaviernes);
-            }
+                BuildAgenda((Especialidad)_viernesEspecialidad.SelectedItem, _viernesDesde.SelectedItem, _viernesHasta.SelectedItem, "VIERNES");
 
             if (_sabadoCheck.Checked)
-            {
-                var agendasabado = new Agendum();
-                agendasabado.profesional_id = _profesional.profesional_id;
-                agendasabado.especialidad_id = ((Especialidad)_sabadoEspecialidad.SelectedItem).especialidad_id;
-                agendasabado.agenda_hora_hasta = ToTimeSpan(_sabadoHasta.SelectedItem);
-                agendasabado.agenda_hora_desde = ToTimeSpan(_sabadoDesde.SelectedItem);
-                agendasabado.agenda_dia = "SABADO";
-                agendasabado.agenda_id = Int32.Parse(new StringBuilder().Append(_profesional.profesional_id).Append(5).ToString());
-                _profesional.Agenda.Add(agendasabado);
-            }
+                BuildAgenda((Especialidad)_sabadoEspecialidad.SelectedItem, _sabadoDesde.SelectedItem, _sabadoHasta.SelectedItem, "SABADO");
 
             _profesionalDao.SaveAgendum(_profesional);
+        }
+
+        private void BuildAgenda(Especialidad especialidad, object horaDesde, object horaHasta, string dia)
+        {
+            var agenda = new Agendum();
+
+            agenda.profesional_id = _profesional.profesional_id;
+            agenda.especialidad_id = especialidad.especialidad_id;
+            agenda.agenda_hora_hasta = _horasNumero[(string)horaHasta];
+            agenda.agenda_hora_desde = _horasNumero[(string)horaDesde];
+            agenda.agenda_dia = dia;
+            agenda.agenda_fecha_desde = _fechaDesde.Value;
+            agenda.agenda_fecha_hasta = _fechaHasta.Value;
+
+            _profesional.Agenda.Add(agenda);
         }
 
         private void DisableFields()
@@ -219,6 +192,8 @@
             _viernesGroupBox.Enabled = false;
             _sabadoGroupBox.Enabled = false;
             _registrarAgendaBtn.Enabled = false;
+            _fechaDesde.Enabled = false;
+            _fechaHasta.Enabled = false;
         }
 
         private bool ValidateFields()
@@ -226,6 +201,9 @@
             StringBuilder sb = new StringBuilder();
             bool oneChecked = false;
             TimeSpan timeDiff = ToTimeSpan("00:00");
+
+            if (_fechaDesde.Value.CompareTo(_fechaHasta.Value) >= 0)
+                sb.AppendLine("Fecha desde debe ser anterior a fecha hasta");
 
             if (_lunesCheck.Checked)
             {
@@ -243,7 +221,7 @@
             }
 
             if (_martesCheck.Checked)
-            { 
+            {
                 if (_martesEspecialidad.SelectedItem == null || _martesDesde.SelectedItem == null | _martesHasta.SelectedItem == null)
                     sb.AppendLine("Debe seleccionar todos los campos en martes.");
                 else if (ToTimeSpan(_martesDesde.SelectedItem).CompareTo(ToTimeSpan(_martesHasta.SelectedItem)) >= 0)
@@ -267,7 +245,7 @@
                 oneChecked = true;
 
                 var desde = ToTimeSpan(_miercolesDesde.SelectedItem);
-                var hasta= ToTimeSpan(_miercolesHasta.SelectedItem);
+                var hasta = ToTimeSpan(_miercolesHasta.SelectedItem);
 
                 timeDiff = timeDiff.Add(hasta.Subtract(desde));
             }

@@ -89,60 +89,24 @@
 
         public List<Especialidad> GetEspecialidades()
         {
-            return new List<Especialidad>()
-            {
-                new Especialidad()
-                {
-                    especialidad_id = 1,
-                    especialidad_nombre = "Una Especialidad",
-                },
-                new Especialidad()
-                {
-                    especialidad_id = 2,
-                    especialidad_nombre = "Otra Especialidad"
-                }
-            };
+            return _ds.Especialidads.ToList();
         }
 
-        public List<DateTime> GetFechasDisponibles(Profesional selectedItem1, Especialidad selectedItem2)
+        public List<DateTime> GetFechasDisponibles(Profesional profesional, Especialidad especialidad)
         {
-            return new List<DateTime>()
-            {
-                new DateTime(),
-                new DateTime().AddDays(1),
-                new DateTime().AddDays(2),
-                new DateTime().AddDays(3),
-                new DateTime().AddDays(4),
-            };
+            return _ds.FechasDisponibles(profesional.profesional_id, especialidad.especialidad_id).Select(x => x.Fecha).ToList();
         }
 
-        public List<DateTime> GetHorasDisponibles(Profesional selectedItem1, Especialidad selectedItem2, object selectedItem3)
+        public List<int> GetHorasDisponibles(Profesional profesional, Especialidad especialidad, string fecha)
         {
-            return new List<DateTime>()
-            {
-                new DateTime(),
-                new DateTime().AddMinutes(30),
-                new DateTime().AddMinutes(60),
-                new DateTime().AddMinutes(90),
-                new DateTime().AddMinutes(120),
-            };
+            return _ds.HorasDisponibles(profesional.profesional_id, especialidad.especialidad_id, 
+                DateTime.ParseExact(fecha, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture))
+                .Select(x => x.Value).ToList();
         }
 
         public List<Profesional> GetProfesionales(Especialidad especialidad)
         {
-            List<Profesional> profesionales = new List<Profesional>();
-
-            for (int i = 0; i < 10; i++)
-            {
-                var pro = new Profesional();
-                pro.profesional_nombre = "Profesional " + i;
-                pro.Especialidads = new List<Especialidad>();
-                pro.Especialidads.Add(especialidad);
-                pro.Turnoes = this.GetTurnos(0, especialidad);
-                profesionales.Add(pro);
-            }
-
-            return profesionales;
+            return _ds.Profesionals.Where(x => x.Especialidads.Any(y => y.especialidad_id == especialidad.especialidad_id)).ToList();
         }
     }
 }

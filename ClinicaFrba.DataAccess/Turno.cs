@@ -20,6 +20,7 @@ namespace ClinicaFrba.DataAccess
         public Nullable<int> bono_id { get; set; }
         public int especialidad_id { get; set; }
         public System.DateTime turno_fecha_hora { get; set; }
+        public int turno_hora { get; set; }
         public string turno_cancelado { get; set; }
         public string turno_diagnostico { get; set; }
         public string turno_sintomas { get; set; }
