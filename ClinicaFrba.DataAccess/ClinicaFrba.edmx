@@ -5,39 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="GD2C2016Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'GD2C2016.gd_esquema.Maestra' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="Maestra">
-          <Property Name="Paciente_Nombre" Type="varchar" MaxLength="255" />
-          <Property Name="Paciente_Apellido" Type="varchar" MaxLength="255" />
-          <Property Name="Paciente_Dni" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="Paciente_Direccion" Type="varchar" MaxLength="255" />
-          <Property Name="Paciente_Telefono" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="Paciente_Mail" Type="varchar" MaxLength="255" />
-          <Property Name="Paciente_Fecha_Nac" Type="datetime" />
-          <Property Name="Plan_Med_Codigo" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="Plan_Med_Descripcion" Type="varchar" MaxLength="255" />
-          <Property Name="Plan_Med_Precio_Bono_Consulta" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="Plan_Med_Precio_Bono_Farmacia" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="Turno_Numero" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="Turno_Fecha" Type="datetime" />
-          <Property Name="Consulta_Sintomas" Type="varchar" MaxLength="255" />
-          <Property Name="Consulta_Enfermedades" Type="varchar" MaxLength="255" />
-          <Property Name="Medico_Nombre" Type="varchar" MaxLength="255" />
-          <Property Name="Medico_Apellido" Type="varchar" MaxLength="255" />
-          <Property Name="Medico_Dni" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="Medico_Direccion" Type="varchar" MaxLength="255" />
-          <Property Name="Medico_Telefono" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="Medico_Mail" Type="varchar" MaxLength="255" />
-          <Property Name="Medico_Fecha_Nac" Type="datetime" />
-          <Property Name="Especialidad_Codigo" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="Especialidad_Descripcion" Type="varchar" MaxLength="255" />
-          <Property Name="Tipo_Especialidad_Codigo" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="Tipo_Especialidad_Descripcion" Type="varchar" MaxLength="255" />
-          <Property Name="Compra_Bono_Fecha" Type="datetime" />
-          <Property Name="Bono_Consulta_Fecha_Impresion" Type="datetime" />
-          <Property Name="Bono_Consulta_Numero" Type="numeric" Precision="18" Scale="0" />
-        </EntityType>-->
         <EntityType Name="Afiliado">
           <Key>
             <PropertyRef Name="afiliado_id" />
@@ -605,6 +572,16 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="BonosNroAfiliado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="WASD">
+          <Parameter Name="nroAfiliado" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="bono_id" Type="int" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <Function Name="CompraBono" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="WASD">
           <Parameter Name="afiliadoId" Type="int" Mode="In" />
           <Parameter Name="cant" Type="int" Mode="In" />
@@ -663,6 +640,11 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
           <Parameter Name="profesionalId" Type="int" Mode="In" />
           <Parameter Name="especialidadId" Type="int" Mode="In" />
           <Parameter Name="fechaStr" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="TurnosProfesionalEspecialidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="WASD">
+          <Parameter Name="profesionalId" Type="int" Mode="In" />
+          <Parameter Name="especialidadId" Type="int" Mode="In" />
+          <Parameter Name="fecha" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="GD2C2016ModelStoreContainer">
           <EntitySet Name="Afiliado" EntityType="Self.Afiliado" Schema="WASD" store:Type="Tables" />
@@ -819,6 +801,9 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GD2C2016Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="BonosNroAfiliado_Result">
+          <Property Name="bono_id" Type="Int32" Nullable="false" />
+        </ComplexType>
         <ComplexType Name="F_ProfPorEsp_Result">
           <Property Name="profesional_id" Type="Int32" Nullable="false" />
           <Property Name="profesional_apellido" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
@@ -1486,6 +1471,9 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             <End Role="Rol" EntitySet="Rols" />
             <End Role="Usuario" EntitySet="Usuarios" />
           </AssociationSet>
+          <FunctionImport Name="BonosNroAfiliado" IsComposable="true" ReturnType="Collection(GD2C2016Model.BonosNroAfiliado_Result)">
+            <Parameter Name="nroAfiliado" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="F_ProfPorEsp" IsComposable="true" ReturnType="Collection(GD2C2016Model.F_ProfPorEsp_Result)">
             <Parameter Name="especialidad" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1512,7 +1500,25 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             <Parameter Name="especialidadId" Mode="In" Type="Int32" />
             <Parameter Name="fechaStr" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="TurnosProfesionalEspecialidad" ReturnType="Collection(GD2C2016Model.TurnosProfesionalEspecialidad_Result)">
+            <Parameter Name="profesionalId" Mode="In" Type="Int32" />
+            <Parameter Name="especialidadId" Mode="In" Type="Int32" />
+            <Parameter Name="fecha" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="TurnosProfesionalEspecialidad_Result">
+          <Property Type="Int32" Name="turno_id" Nullable="false" />
+          <Property Type="Int32" Name="afiliado_id" Nullable="false" />
+          <Property Type="Int32" Name="profesional_id" Nullable="false" />
+          <Property Type="Int32" Name="especialidad_id" Nullable="false" />
+          <Property Type="DateTime" Name="turno_fecha" Nullable="false" />
+          <Property Type="Time" Name="turno_hora" Nullable="false" />
+          <Property Type="String" Name="turno_cancelado" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="afiliado_nombre" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="afiliado_apellido" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="afiliado_numero" Nullable="false" />
+          <Property Type="Int32" Name="afiliado_numero_documento" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1761,6 +1767,13 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
               <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionName="GD2C2016Model.Store.BonosNroAfiliado" FunctionImportName="BonosNroAfiliado">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GD2C2016Model.BonosNroAfiliado_Result">
+                <ScalarProperty Name="bono_id" ColumnName="bono_id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionName="GD2C2016Model.Store.F_ProfPorEsp" FunctionImportName="F_ProfPorEsp">
             <ResultMapping>
               <ComplexTypeMapping TypeName="GD2C2016Model.F_ProfPorEsp_Result">
@@ -1796,6 +1809,23 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CompraBono" FunctionName="GD2C2016Model.Store.CompraBono" />
           <FunctionImportMapping FunctionImportName="HorasDisponibless" FunctionName="GD2C2016Model.Store.HorasDisponibless" />
+          <FunctionImportMapping FunctionImportName="TurnosProfesionalEspecialidad" FunctionName="GD2C2016Model.Store.TurnosProfesionalEspecialidad">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GD2C2016Model.TurnosProfesionalEspecialidad_Result">
+                <ScalarProperty Name="turno_id" ColumnName="turno_id" />
+                <ScalarProperty Name="afiliado_id" ColumnName="afiliado_id" />
+                <ScalarProperty Name="profesional_id" ColumnName="profesional_id" />
+                <ScalarProperty Name="especialidad_id" ColumnName="especialidad_id" />
+                <ScalarProperty Name="turno_fecha" ColumnName="turno_fecha" />
+                <ScalarProperty Name="turno_hora" ColumnName="turno_hora" />
+                <ScalarProperty Name="turno_cancelado" ColumnName="turno_cancelado" />
+                <ScalarProperty Name="afiliado_nombre" ColumnName="afiliado_nombre" />
+                <ScalarProperty Name="afiliado_apellido" ColumnName="afiliado_apellido" />
+                <ScalarProperty Name="afiliado_numero" ColumnName="afiliado_numero" />
+                <ScalarProperty Name="afiliado_numero_documento" ColumnName="afiliado_numero_documento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

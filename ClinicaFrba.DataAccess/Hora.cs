@@ -31,7 +31,7 @@ namespace ClinicaFrba.DataAccess
 
         public override string ToString()
         {
-            return hora_comienzo.Hours + ":" + hora_comienzo.Minutes;
+            return hora_comienzo.Hours + ":" + ((hora_comienzo.Minutes == 0) ? "00" : hora_comienzo.Minutes.ToString());
         }
     }
 }

@@ -39,7 +39,7 @@
             if (rol.rol_nombre.Trim() == "Afiliado")
                 turnos = _afiliadoDao.GetTurnos(usuario.usuario_id);
             else
-                turnos = _profesionalDao.GetTurnos(usuario.usuario_id, null);
+               // turnos = _profesionalDao.GetTurnos(usuario.usuario_id, null);
 
             foreach (Turno turno in turnos)
                 _turnosView.Rows.Add(turno.turno_fecha, turno.turno_hora, turno.Profesional.ToString(), turno.Especialidad.ToString(), turno.Afiliado.ToString(), "Cancelar");

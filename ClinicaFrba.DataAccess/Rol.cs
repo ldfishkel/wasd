@@ -32,7 +32,7 @@ namespace ClinicaFrba.DataAccess
 
         public override string ToString()
         {
-            return rol_nombre.Trim();
+            return rol_nombre;
         }
     }
 }

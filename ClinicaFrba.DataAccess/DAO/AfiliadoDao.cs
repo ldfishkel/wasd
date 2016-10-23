@@ -22,6 +22,8 @@
 
         public List<Turno> GetTurnos(int usuario_id)
         {
+            //llamar a un proc que traiga todos los turnos que no tengan un bono con el mismo afiliado y fecha
+
             List<Turno> turnos = new List<Turno>();
 
             Afiliado afiliado = new Afiliado();
@@ -54,17 +56,11 @@
 
         public List<Bono> GetBonos(int nroAfiliado)
         {
-            List<Bono> bonos = new List<Bono>();
-
-            for (int i = 0; i < 10; i++)
-            {
-                bonos.Add(new DataAccess.Bono()
+            return _ds.BonosNroAfiliado(nroAfiliado).Select(x =>
+                new Bono()
                 {
-                    bono_id = i
-                });
-            }
-
-            return bonos;
+                    bono_id = x.bono_id
+                }).ToList();
         }
 
         public void CompraDeBonos(int cant, int afiliado_id, int plan_id)
@@ -80,6 +76,18 @@
         public void PedirTurno(Turno turno)
         {
             _ds.Turnoes.Add(turno);
+            _ds.SaveChanges();
+        }
+
+        public void UsarBono(int bono_id, int turnoId)
+        {
+            Bono bono = _ds.Bonoes.SingleOrDefault(x => x.bono_id == bono_id);
+            Turno turno = _ds.Turnoes.SingleOrDefault(x => x.turno_id == turnoId);
+
+            bono.bono_fecha_uso = turno.turno_fecha;
+            bono.bono_afiliado_usado = turno.afiliado_id;
+
+            _ds.Bonoes.Add(bono);
             _ds.SaveChanges();
         }
     }

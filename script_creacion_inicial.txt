@@ -834,6 +834,55 @@ AS BEGIN
 END;
 GO
 
+IF EXISTS (
+        SELECT type_desc, type
+        FROM sys.procedures WITH(NOLOCK)
+        WHERE NAME = 'TurnosProfesionalEspecialidad'
+            AND type = 'P'
+      )
+     DROP PROCEDURE WASD.TurnosProfesionalEspecialidad;
+GO
+
+CREATE PROC "WASD".TurnosProfesionalEspecialidad
+(
+	@profesionalId INT, 
+	@especialidadId INT
+)
+
+AS BEGIN
+	SELECT
+		t.* 
+	FROM
+		"WASD".Turno t
+	WHERE
+		t.profesional_id = @profesionalId AND
+		t.especialidad_id = @especialidadId AND
+		t.turno_fecha NOT IN (SELECT 
+								bono_fecha_uso
+							FROM
+								"WASD".Bono b
+							WHERE
+								b.afiliado_id = t.afiliado_id AND
+								b.bono_fecha_uso <> NULL) --redundante
+		
+END;
+GO
+
+IF OBJECT_ID(N'WASD.BonosNroAfiliado', N'TF') IS NOT NULL
+DROP FUNCTION "WASD".BonosNroAfiliado;
+GO
+
+CREATE FUNCTION "WASD".BonosNroAfiliado (@nroAfiliado INT)
+RETURNS TABLE 
+AS RETURN 
+	SELECT 
+		b.bono_id 
+	FROM 
+		"WASD".Bono b,
+		"WASD".Afiliado a
+	WHERE 
+		b.afiliado_id = a.afiliado_id AND
+		CAST(ROUND(a.afiliado_numero / 100, 0, 1) AS INT) = CAST(ROUND(@nroAfiliado / 100, 0, 1) AS INT)
 
 /**TRIGGERS**/
 IF EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[WASD].[RolDeleted]'))
@@ -850,6 +899,37 @@ AS BEGIN
   
   IF (@activo = 0)
     DELETE "WASD".RolPorUsuario where rol_id = @rol
+    
+END;
+GO
+
+IF EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[WASD].[BonoUsado]'))
+DROP TRIGGER [WASD].[BonoUsado];
+GO
+
+CREATE TRIGGER "WASD".BonoUsado
+ON "WASD".Bono
+FOR UPDATE
+AS BEGIN
+  
+  DECLARE @bonoId INT, @afiliadoId INT, @fecha DATE, @hora TIME;
+  
+  SELECT 
+	@bonoId = inserted.bono_id,
+	@afiliadoId = inserted.afiliado_id
+  FROM 
+	inserted;
+  
+  SELECT
+	@fecha = turno_fecha,
+	@hora = turno_hora
+  FROM
+	"WASD".Turno
+  WHERE
+	afiliado_id = @afiliadoId;
+    
+    INSERT INTO "WASD".ConsultaMedica ([bono_id],[consultamedica_fecha_hora])VALUES 
+    (@bonoId, CAST(@fecha AS DATETIME) + CAST(@hora AS DATETIME));
     
 END;
 GO

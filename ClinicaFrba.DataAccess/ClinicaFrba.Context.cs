@@ -53,6 +53,16 @@ namespace ClinicaFrba.DataAccess
         public virtual DbSet<V_ListarEsp> V_ListarEsp { get; set; }
         public virtual DbSet<V_ListarProf> V_ListarProf { get; set; }
     
+        [DbFunction("Database", "BonosNroAfiliado")]
+        public virtual IQueryable<BonosNroAfiliado_Result> BonosNroAfiliado(Nullable<int> nroAfiliado)
+        {
+            var nroAfiliadoParameter = nroAfiliado.HasValue ?
+                new ObjectParameter("nroAfiliado", nroAfiliado) :
+                new ObjectParameter("nroAfiliado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<BonosNroAfiliado_Result>("[Database].[BonosNroAfiliado](@nroAfiliado)", nroAfiliadoParameter);
+        }
+    
         [DbFunction("Database", "F_ProfPorEsp")]
         public virtual IQueryable<F_ProfPorEsp_Result> F_ProfPorEsp(Nullable<int> especialidad)
         {
@@ -141,6 +151,23 @@ namespace ClinicaFrba.DataAccess
                 new ObjectParameter("fechaStr", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("HorasDisponibless", profesionalIdParameter, especialidadIdParameter, fechaStrParameter);
+        }
+    
+        public virtual ObjectResult<TurnosProfesionalEspecialidad_Result> TurnosProfesionalEspecialidad(Nullable<int> profesionalId, Nullable<int> especialidadId, string fecha)
+        {
+            var profesionalIdParameter = profesionalId.HasValue ?
+                new ObjectParameter("profesionalId", profesionalId) :
+                new ObjectParameter("profesionalId", typeof(int));
+    
+            var especialidadIdParameter = especialidadId.HasValue ?
+                new ObjectParameter("especialidadId", especialidadId) :
+                new ObjectParameter("especialidadId", typeof(int));
+    
+            var fechaParameter = fecha != null ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TurnosProfesionalEspecialidad_Result>("TurnosProfesionalEspecialidad", profesionalIdParameter, especialidadIdParameter, fechaParameter);
         }
     }
 }
