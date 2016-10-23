@@ -321,8 +321,8 @@ INSERT INTO "WASD".Usuario(usuario_id, usuario_nombre, usuario_password, usuario
 SET IDENTITY_INSERT "WASD".Usuario OFF;
 
 SET IDENTITY_INSERT "WASD".Afiliado ON;
-INSERT INTO [GD2C2016].[WASD].[Afiliado]([usuario_id],[estadocivil_id],[afiliado_tipodocumento],[planmedico_id],[afiliado_sexo],[afiliado_numero],[afiliado_nombre],[afiliado_apellido],[afiliado_numero_documento],[afiliado_direccion],[afiliado_telefono],[afiliado_mail],[afiliado_fecha_nacimiento],[afiliado_familiares_dependientes],[afiliado_activo],[afiliado_grupo_familiar],[afiliado_cantidad_bonos_usados])VALUES
-(1, 1, 'DNI', 555555, 'M', 999999900, 'Leonel', 'Dan', 36157488, 'Humboldt', 1168567706, 'asd@asd.asd', '9-1-1992', 0, 1, NULL, 0);
+INSERT INTO [GD2C2016].[WASD].[Afiliado]([afiliado_id], [usuario_id],[estadocivil_id],[afiliado_tipodocumento],[planmedico_id],[afiliado_sexo],[afiliado_numero],[afiliado_nombre],[afiliado_apellido],[afiliado_numero_documento],[afiliado_direccion],[afiliado_telefono],[afiliado_mail],[afiliado_fecha_nacimiento],[afiliado_familiares_dependientes],[afiliado_activo],[afiliado_grupo_familiar],[afiliado_cantidad_bonos_usados])VALUES
+(1, 1, 1, 'DNI', 555555, 'M', 999999900, 'Leonel', 'Dan', 36157488, 'Humboldt', 1168567706, 'asd@asd.asd', '9-1-1992', 0, 1, NULL, 0);
 SET IDENTITY_INSERT "WASD".Afiliado OFF;
 
 INSERT INTO [GD2C2016].[WASD].[Profesional]([usuario_id],[profesional_sexo],[profesional_tipodocumento],[profesional_numero_documento],[profesional_nombre],[profesional_apellido],[profesional_direccion],[profesional_telefono],[profesional_mail],[profesional_fecha_nacimiento],[profesional_matricula])VALUES
