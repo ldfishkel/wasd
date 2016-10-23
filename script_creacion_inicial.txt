@@ -306,7 +306,6 @@ INSERT INTO "WASD".FuncionalidadPorRol VALUES
 (1, 1),
 (1, 2),
 (1, 4),
-(1, 5),
 (1, 7),
 (1, 9),
 (2, 4),
@@ -321,8 +320,20 @@ INSERT INTO "WASD".Usuario(usuario_id, usuario_nombre, usuario_password, usuario
 (1, 'admin', 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7', 0, 1)
 SET IDENTITY_INSERT "WASD".Usuario OFF;
 
+SET IDENTITY_INSERT "WASD".Afiliado ON;
+INSERT INTO [GD2C2016].[WASD].[Afiliado]([usuario_id],[estadocivil_id],[afiliado_tipodocumento],[planmedico_id],[afiliado_sexo],[afiliado_numero],[afiliado_nombre],[afiliado_apellido],[afiliado_numero_documento],[afiliado_direccion],[afiliado_telefono],[afiliado_mail],[afiliado_fecha_nacimiento],[afiliado_familiares_dependientes],[afiliado_activo],[afiliado_grupo_familiar],[afiliado_cantidad_bonos_usados])VALUES
+(1, 1, 'DNI', 555555, 'M', 999999900, 'Leonel', 'Dan', 36157488, 'Humboldt', 1168567706, 'asd@asd.asd', '9-1-1992', 0, 1, NULL, 0);
+SET IDENTITY_INSERT "WASD".Afiliado OFF;
+
+INSERT INTO [GD2C2016].[WASD].[Profesional]([usuario_id],[profesional_sexo],[profesional_tipodocumento],[profesional_numero_documento],[profesional_nombre],[profesional_apellido],[profesional_direccion],[profesional_telefono],[profesional_mail],[profesional_fecha_nacimiento],[profesional_matricula])VALUES
+(1, 'M', 'DNI', 36157488, 'Dr Leonel', 'Dan', 'Uriburu', 12345, 'asd@asd.asd', '1-9-1992', 321561);
+
 INSERT INTO "WASD".RolPorUsuario VALUES
 (1, 1);
+INSERT INTO "WASD".RolPorUsuario VALUES
+(1, 2);
+INSERT INTO "WASD".RolPorUsuario VALUES
+(1, 3);
 
 INSERT INTO "WASD".Hora VALUES
 (1, '07:00'),
@@ -690,44 +701,86 @@ GO
 CREATE FUNCTION "WASD".FechasDisponibles (@profesionalId INT, @especialidadId INT)
 RETURNS @retFechas TABLE (Fecha DATE NOT NULL)
 AS BEGIN
+	
 	DECLARE @Date1 DATE, @Date2 DATE, @Fecha DATE;
 
-	select @Date1 = agenda_fecha_desde, @Date2 = agenda_fecha_hasta from "WASD".Agenda
-	where profesional_id = @profesionalId AND especialidad_id = @especialidadId;
+	SELECT 
+		@Date1 = agenda_fecha_desde, 
+		@Date2 = agenda_fecha_hasta 
+	FROM
+		"WASD".Agenda
+	WHERE 
+		profesional_id = @profesionalId AND 
+		especialidad_id = @especialidadId;
 		
 		
     DECLARE fechasCursor CURSOR FOR
-	SELECT DATEADD(DAY, number + 1, @Date1) 
-	FROM master..spt_values
-	WHERE type = 'P'
-	AND DATEADD(DAY, number + 1, @Date1) <= @Date2;
+	
+	SELECT 
+		DATEADD(DAY, number + 1, @Date1) 
+	FROM 
+		master..spt_values
+	WHERE 
+		type = 'P' AND 
+		DATEADD(DAY, number + 1, @Date1) <= @Date2;
 
 	OPEN fechasCursor
+
 	FETCH FROM fechasCursor INTO @Fecha
+	
 	WHILE @@FETCH_STATUS = 0
+	
 	BEGIN
-		INSERT INTO @retFechas VALUES (@Fecha)
+		if (DATEPART(dw, @Fecha) IN (SELECT 
+										CASE RTRIM(agenda_dia) 
+										WHEN 'LUNES' THEN 2
+										WHEN 'MARTES' THEN 3
+										WHEN 'MIERCOLES' THEN 4
+										WHEN 'JUEVES' THEN 5
+										WHEN 'VIERNES' THEN 6
+										WHEN 'SABADO' THEN 7
+										END
+									FROM 
+										"WASD".Agenda
+									WHERE
+										profesional_id = @profesionalId AND 
+										especialidad_id = @especialidadId))
+			INSERT INTO @retFechas VALUES (@Fecha)
+		
 		FETCH NEXT FROM fechasCursor INTO @Fecha
 	END
+
 	CLOSE fechasCursor
+	
 	DEALLOCATE fechasCursor;
 	
 	RETURN; 
 END;
 GO
 
-IF OBJECT_ID(N'WASD.HorasDisponibles', N'TF') IS NOT NULL
-    DROP FUNCTION "WASD".HorasDisponibles;
+IF EXISTS (
+        SELECT type_desc, type
+        FROM sys.procedures WITH(NOLOCK)
+        WHERE NAME = 'HorasDisponibless'
+            AND type = 'P'
+      )
+     DROP PROCEDURE WASD.HorasDisponibless;
 GO
 
-CREATE FUNCTION "WASD".HorasDisponibles (@profesionalId INT, @especialidadId INT, @fechaStr VARCHAR(10))
-RETURNS @retHoras TABLE (Hora INT)
+CREATE PROC "WASD".HorasDisponibless
+(
+	@profesionalId INT, 
+	@especialidadId INT, 
+	@fechaStr VARCHAR(10)
+)
+
 AS BEGIN
+	SET LANGUAGE Spanish
 
 	DECLARE @desde INT, @hasta INT, @hora INT;
-	DECLARE @fecha DATE = GETDATE()
+	DECLARE @fecha DATE = CONVERT(DATE, @fechaStr, 103);
+	DECLARE @horaDesde TIME, @horaHasta TIME;
 	
-
 	SELECT 
 		@desde = agenda_hora_desde, 
 		@hasta = agenda_hora_hasta 
@@ -736,64 +789,53 @@ AS BEGIN
 	WHERE 
 		profesional_id = @profesionalId AND 
 		especialidad_id = @especialidadId AND
-		UPPER(DATENAME(dw, @fecha)) = agenda_dia AND
-		@fecha BETWEEN agenda_fecha_desde AND agenda_fecha_hasta;
-	
-    DECLARE horasCursor CURSOR FOR
-	
+		@fecha BETWEEN agenda_fecha_desde AND agenda_fecha_hasta AND
+		UPPER(DATEPART(dw, @fecha)) = (CASE RTRIM(agenda_dia) 
+										WHEN 'LUNES' THEN 1
+										WHEN 'MARTES' THEN 2
+										WHEN 'MIERCOLES' THEN 3
+										WHEN 'JUEVES' THEN 4
+										WHEN 'VIERNES' THEN 5
+										WHEN 'SABADO' THEN 6
+										END);
+
+	SELECT
+		@horaDesde = hora_comienzo
+	FROM 
+		"WASD".Hora
+	WHERE hora_id = @desde;
+
+	SELECT
+		@horaHasta = hora_comienzo
+	FROM 
+		"WASD".Hora
+	WHERE hora_id = @hasta;
+		
 	WITH gen AS (
 		SELECT @desde AS num
 		UNION ALL
 		SELECT num + 1 FROM gen WHERE num + 1 <= @hasta
 	)
 	SELECT * FROM gen
-	WHERE
-		num not in (
-			SELECT 
-				turno_hora
-			FROM 
-				"WASD".Turno
-			WHERE 
-				turno_hora BETWEEN @desde AND @hasta AND
-				profesional_id = @profesionalId AND
-				especialidad_id = @especialidadId AND
-				CONVERT(DATE, turno_fecha_hora) = @fecha
-		)
-	OPTION (maxrecursion 10000);
-
-	OPEN horasCursor
-	FETCH FROM horasCursor INTO @hora
-	WHILE @@FETCH_STATUS = 0
-	BEGIN
-		
-		IF (@hora <> null)
-			INSERT INTO @retHoras VALUES (@hora)
-		
-		FETCH NEXT FROM horasCursor INTO @hora
-		
-	END
-	CLOSE horasCursor
-	DEALLOCATE horasCursor;
-	
-	RETURN; 
+	where num NOT IN (SELECT 
+						hora_id
+					FROM 
+						"WASD".Hora
+					WHERE hora_comienzo IN (SELECT 
+												turno_hora
+											FROM 
+												"WASD".Turno 
+											WHERE 
+												turno_hora BETWEEN @horaDesde AND @horaHasta AND
+												profesional_id = @profesionalId AND
+												especialidad_id = @especialidadId AND
+												turno_fecha = @fecha)
+					);
 END;
+GO
+
 
 /**TRIGGERS**/
-CREATE TRIGGER "WASD".RolDeleted
-ON "WASD".Rol
-FOR UPDATE
-AS BEGIN
-  declare @rol INT
-  declare @activo BIT 
-  select @rol = inserted.rol_id, @activo = inserted.rol_activo from inserted;
-  
-  IF (@activo = 0)
-    DELETE "WASD".RolPorUsuario where rol_id = @rol
-    
-END;
-GO
-
-GO
 IF EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[WASD].[RolDeleted]'))
 DROP TRIGGER [WASD].[RolDeleted];
 GO

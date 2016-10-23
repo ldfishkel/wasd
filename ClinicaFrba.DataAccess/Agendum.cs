@@ -23,6 +23,8 @@ namespace ClinicaFrba.DataAccess
         public System.DateTime agenda_fecha_desde { get; set; }
         public System.DateTime agenda_fecha_hasta { get; set; }
     
+        public virtual Hora Hora { get; set; }
+        public virtual Hora Hora1 { get; set; }
         public virtual Especialidad Especialidad { get; set; }
         public virtual Profesional Profesional { get; set; }
     }

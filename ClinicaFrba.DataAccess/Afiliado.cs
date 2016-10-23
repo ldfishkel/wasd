@@ -27,9 +27,9 @@ namespace ClinicaFrba.DataAccess
         public int afiliado_id { get; set; }
         public int usuario_id { get; set; }
         public int estadocivil_id { get; set; }
-        public int tipodocumento_id { get; set; }
+        public string afiliado_tipodocumento { get; set; }
         public int planmedico_id { get; set; }
-        public int sexo_id { get; set; }
+        public string afiliado_sexo { get; set; }
         public int afiliado_numero { get; set; }
         public string afiliado_nombre { get; set; }
         public string afiliado_apellido { get; set; }
@@ -41,14 +41,13 @@ namespace ClinicaFrba.DataAccess
         public byte afiliado_familiares_dependientes { get; set; }
         public bool afiliado_activo { get; set; }
         public Nullable<int> afiliado_grupo_familiar { get; set; }
+        public short afiliado_cantidad_bonos_usados { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Afiliado> Afiliado1 { get; set; }
         public virtual Afiliado Afiliado2 { get; set; }
         public virtual EstadoCivil EstadoCivil { get; set; }
         public virtual PlanMedico PlanMedico { get; set; }
-        public virtual Sexo Sexo { get; set; }
-        public virtual TipoDocumento TipoDocumento { get; set; }
         public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bono> Bonoes { get; set; }
@@ -62,7 +61,7 @@ namespace ClinicaFrba.DataAccess
 
         public override string ToString()
         {
-            return afiliado_nombre.Trim() + " " + afiliado_apellido.Trim();
+            return afiliado_nombre?.Trim() + " " + afiliado_apellido?.Trim();
         }
     }
 }

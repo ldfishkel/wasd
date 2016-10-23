@@ -15,7 +15,7 @@
 
         private Profesional _profesional;
 
-        private Dictionary<string, int> _horasNumero;
+        private List<Hora> _horas;
 
         public RegistrarAgendaForm(ProfesionalDao profesionalDao)
         {
@@ -29,46 +29,12 @@
             parent.Text = "Registrar Agenda";
             parent.FixBounds(_panel);
 
+            _horas = _profesionalDao.GetHoras();
             _profesional = _profesionalDao.GetProfesional(parent.User().usuario_id);
 
-            InitializeDictionary();
             InitializeAgenda();
 
             return _panel;
-        }
-
-        private void InitializeDictionary()
-        {
-            _horasNumero = new Dictionary<string, int>()
-            {
-               { "07:00", 0 },
-               { "07:30", 1 },
-               { "08:00", 2 },
-               { "08:30", 3 },
-               { "09:00", 4 },
-               { "09:30", 5 },
-               { "10:00", 6 },
-               { "10:30", 7 },
-               { "11:00", 8 },
-               { "11:30", 9 },
-               { "12:00", 10 },
-               { "12:30", 11 },
-               { "13:00", 12 },
-               { "13:30", 13 },
-               { "14:00", 14 },
-               { "14:30", 15 },
-               { "15:00", 16 },
-               { "15:30", 17 },
-               { "16:00", 18 },
-               { "16:30", 19 },
-               { "17:00", 20 },
-               { "17:30", 21 },
-               { "18:00", 22 },
-               { "18:30", 23 },
-               { "19:00", 24 },
-               { "19:30", 25 },
-               { "20:00", 26 }
-            };
         }
 
         private void InitializeAgenda()
@@ -81,23 +47,20 @@
 
         private void InitializeComboboxes()
         {
-            
-
-            string[] horas = { "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00" };
             string[] horasSabado = { "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00" };
 
-            _lunesDesde.Items.AddRange(horas);
-            _lunesHasta.Items.AddRange(horas);
-            _martesDesde.Items.AddRange(horas);
-            _martesHasta.Items.AddRange(horas);
-            _miercolesDesde.Items.AddRange(horas);
-            _miercolesHasta.Items.AddRange(horas);
-            _juevesDesde.Items.AddRange(horas);
-            _juevesHasta.Items.AddRange(horas);
-            _viernesDesde.Items.AddRange(horas);
-            _viernesHasta.Items.AddRange(horas);
-            _sabadoDesde.Items.AddRange(horasSabado);
-            _sabadoHasta.Items.AddRange(horasSabado);
+            _lunesDesde.Items.AddRange(_horas.ToArray());
+            _lunesHasta.Items.AddRange(_horas.ToArray());
+            _martesDesde.Items.AddRange(_horas.ToArray());
+            _martesHasta.Items.AddRange(_horas.ToArray());
+            _miercolesDesde.Items.AddRange(_horas.ToArray());
+            _miercolesHasta.Items.AddRange(_horas.ToArray());
+            _juevesDesde.Items.AddRange(_horas.ToArray());
+            _juevesHasta.Items.AddRange(_horas.ToArray());
+            _viernesDesde.Items.AddRange(_horas.ToArray());
+            _viernesHasta.Items.AddRange(_horas.ToArray());
+            _sabadoDesde.Items.AddRange(_horas.Where(x => horasSabado.Any(y => y == x.ToString())).ToArray());
+            _sabadoHasta.Items.AddRange(_horas.Where(x => horasSabado.Any(y => y == x.ToString())).ToArray());
 
             _lunesEspecialidad.Items.AddRange(_profesional.Especialidads.ToArray());
             _martesEspecialidad.Items.AddRange(_profesional.Especialidads.ToArray());
@@ -131,8 +94,8 @@
         private void ShowAgenda(CheckBox check, ComboBox desde, ComboBox hasta, ComboBox especialidad, Agendum agenda)
         {
             check.Checked = true;
-            desde.Text = _horasNumero.FirstOrDefault(x => x.Value == agenda.agenda_hora_desde).Key;
-            hasta.Text = _horasNumero.FirstOrDefault(x => x.Value == agenda.agenda_hora_hasta).Key;
+            desde.Text = agenda.Hora.ToString();
+            hasta.Text = agenda.Hora1.ToString();
             especialidad.Text = agenda.Especialidad.ToString();
         }
 
@@ -174,8 +137,8 @@
 
             agenda.profesional_id = _profesional.profesional_id;
             agenda.especialidad_id = especialidad.especialidad_id;
-            agenda.agenda_hora_hasta = _horasNumero[(string)horaHasta];
-            agenda.agenda_hora_desde = _horasNumero[(string)horaDesde];
+            agenda.Hora1 = (Hora)horaHasta;
+            agenda.Hora = (Hora)horaDesde;
             agenda.agenda_dia = dia;
             agenda.agenda_fecha_desde = _fechaDesde.Value;
             agenda.agenda_fecha_hasta = _fechaHasta.Value;
@@ -200,7 +163,7 @@
         {
             StringBuilder sb = new StringBuilder();
             bool oneChecked = false;
-            TimeSpan timeDiff = ToTimeSpan("00:00");
+            TimeSpan timeDiff = new TimeSpan(0, 0, 0);  
 
             if (_fechaDesde.Value.CompareTo(_fechaHasta.Value) >= 0)
                 sb.AppendLine("Fecha desde debe ser anterior a fecha hasta");
@@ -209,13 +172,13 @@
             {
                 if (_lunesDesde.SelectedItem == null || _lunesHasta.SelectedItem == null | _lunesEspecialidad.SelectedItem == null)
                     sb.AppendLine("Debe seleccionar todos los campos en Lunes.");
-                else if (ToTimeSpan(_lunesDesde.SelectedItem).CompareTo(ToTimeSpan(_lunesHasta.SelectedItem)) >= 0)
+                else if (((Hora)_lunesDesde.SelectedItem).hora_comienzo.CompareTo(((Hora)_lunesHasta.SelectedItem).hora_comienzo) >= 0)
                     sb.AppendLine("El horario hasta debe ser posterior al desde el dia Lunes.");
 
                 oneChecked = true;
 
-                var desde = ToTimeSpan(_lunesDesde.SelectedItem);
-                var hasta = ToTimeSpan(_lunesHasta.SelectedItem);
+                var desde = ((Hora)_lunesDesde.SelectedItem).hora_comienzo;
+                var hasta = ((Hora)_lunesHasta.SelectedItem).hora_comienzo;
 
                 timeDiff = timeDiff.Add(hasta.Subtract(desde));
             }
@@ -224,13 +187,13 @@
             {
                 if (_martesEspecialidad.SelectedItem == null || _martesDesde.SelectedItem == null | _martesHasta.SelectedItem == null)
                     sb.AppendLine("Debe seleccionar todos los campos en martes.");
-                else if (ToTimeSpan(_martesDesde.SelectedItem).CompareTo(ToTimeSpan(_martesHasta.SelectedItem)) >= 0)
+                else if (((Hora)_martesDesde.SelectedItem).hora_comienzo.CompareTo(((Hora)_martesHasta.SelectedItem).hora_comienzo) >= 0)
                     sb.AppendLine("El horario hasta debe ser posterior al desde el dia martes.");
 
                 oneChecked = true;
 
-                var desde = ToTimeSpan(_martesDesde.SelectedItem);
-                var hasta = ToTimeSpan(_martesHasta.SelectedItem);
+                var desde = ((Hora)_martesDesde.SelectedItem).hora_comienzo;
+                var hasta = ((Hora)_martesHasta.SelectedItem).hora_comienzo;
 
                 timeDiff = timeDiff.Add(hasta.Subtract(desde));
             }
@@ -239,13 +202,13 @@
             {
                 if (_miercolesEspecialidad.SelectedItem == null || _miercolesDesde.SelectedItem == null | _miercolesHasta.SelectedItem == null)
                     sb.AppendLine("Debe seleccionar todos los campos en miercoles.");
-                else if (ToTimeSpan(_miercolesDesde.SelectedItem).CompareTo(ToTimeSpan(_miercolesHasta.SelectedItem)) >= 0)
+                else if (((Hora)_miercolesDesde.SelectedItem).hora_comienzo.CompareTo(((Hora)_miercolesHasta.SelectedItem).hora_comienzo) >= 0)
                     sb.AppendLine("El horario hasta debe ser posterior al desde el dia miercoles.");
 
                 oneChecked = true;
 
-                var desde = ToTimeSpan(_miercolesDesde.SelectedItem);
-                var hasta = ToTimeSpan(_miercolesHasta.SelectedItem);
+                var desde = ((Hora)_miercolesDesde.SelectedItem).hora_comienzo;
+                var hasta = ((Hora)_miercolesHasta.SelectedItem).hora_comienzo;
 
                 timeDiff = timeDiff.Add(hasta.Subtract(desde));
             }
@@ -254,13 +217,13 @@
             {
                 if (_juevesEspecialidad.SelectedItem == null || _juevesDesde.SelectedItem == null | _juevesHasta.SelectedItem == null)
                     sb.AppendLine("Debe seleccionar todos los campos en jueves.");
-                else if (ToTimeSpan(_juevesDesde.SelectedItem).CompareTo(ToTimeSpan(_juevesHasta.SelectedItem)) >= 0)
+                else if (((Hora)_juevesDesde.SelectedItem).hora_comienzo.CompareTo(((Hora)_juevesHasta.SelectedItem).hora_comienzo) >= 0)
                     sb.AppendLine("El horario hasta debe ser posterior al desde el dia jueves.");
 
                 oneChecked = true;
 
-                var desde = ToTimeSpan(_juevesDesde.SelectedItem);
-                var hasta = ToTimeSpan(_juevesHasta.SelectedItem);
+                var desde = ((Hora)_juevesDesde.SelectedItem).hora_comienzo;
+                var hasta = ((Hora)_juevesHasta.SelectedItem).hora_comienzo;
 
                 timeDiff = timeDiff.Add(hasta.Subtract(desde));
             }
@@ -269,13 +232,13 @@
             {
                 if (_viernesEspecialidad.SelectedItem == null || _viernesDesde.SelectedItem == null | _viernesHasta.SelectedItem == null)
                     sb.AppendLine("Debe seleccionar todos los campos en viernes.");
-                else if (ToTimeSpan(_viernesDesde.SelectedItem).CompareTo(ToTimeSpan(_viernesHasta.SelectedItem)) >= 0)
+                else if (((Hora)_viernesDesde.SelectedItem).hora_comienzo.CompareTo(((Hora)_viernesHasta.SelectedItem).hora_comienzo) >= 0)
                     sb.AppendLine("El horario hasta debe ser posterior al desde el dia viernes.");
 
                 oneChecked = true;
 
-                var desde = ToTimeSpan(_viernesDesde.SelectedItem);
-                var hasta = ToTimeSpan(_viernesHasta.SelectedItem);
+                var desde = ((Hora)_viernesDesde.SelectedItem).hora_comienzo;
+                var hasta = ((Hora)_viernesHasta.SelectedItem).hora_comienzo;
 
                 timeDiff = timeDiff.Add(hasta.Subtract(desde));
             }
@@ -284,13 +247,13 @@
             {
                 if (_sabadoEspecialidad.SelectedItem == null || _sabadoDesde.SelectedItem == null | _sabadoHasta.SelectedItem == null)
                     sb.AppendLine("Debe seleccionar todos los campos en sabado.");
-                else if (ToTimeSpan(_sabadoDesde.SelectedItem).CompareTo(ToTimeSpan(_sabadoHasta.SelectedItem)) >= 0)
+                else if (((Hora)_sabadoDesde.SelectedItem).hora_comienzo.CompareTo(((Hora)_sabadoHasta.SelectedItem).hora_comienzo) >= 0)
                     sb.AppendLine("El horario hasta debe ser posterior al desde el dia sabado.");
 
                 oneChecked = true;
 
-                var desde = ToTimeSpan(_sabadoDesde.SelectedItem);
-                var hasta = ToTimeSpan(_sabadoHasta.SelectedItem);
+                var desde = ((Hora)_sabadoDesde.SelectedItem).hora_comienzo;
+                var hasta = ((Hora)_sabadoHasta.SelectedItem).hora_comienzo;
 
                 timeDiff = timeDiff.Add(hasta.Subtract(desde));
             }
@@ -298,7 +261,7 @@
             if (!oneChecked)
                 sb.AppendLine("Debe seleccionar algun dia.");
 
-            if (ToTimeSpan("48:00").CompareTo(timeDiff) < 0)
+            if (new TimeSpan(48, 0, 0).CompareTo(timeDiff) < 0)
                 sb.AppendLine("No debe superar las 48 horas por semana.");
 
 
@@ -309,15 +272,6 @@
             }
 
             return true;
-        }
-
-        private TimeSpan ToTimeSpan(object time)
-        {
-            var timeString = time as string;
-            var hour = timeString.Split(':')[0];
-            var minutes = timeString.Split(':')[1];
-
-            return new TimeSpan(Int32.Parse(hour), Int32.Parse(minutes), 0);
         }
     }
 }

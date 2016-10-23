@@ -92,12 +92,18 @@
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
     <Compile Include="Configuration\ExternalConfiguration.cs" />
+    <Compile Include="ConsultaMedica.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAO\DaoBase.cs" />
     <Compile Include="DAO\ProfesionalDao.cs" />
     <Compile Include="DAO\AfiliadoDao.cs" />
     <Compile Include="DAO\TurnoDao.cs" />
     <Compile Include="DAO\RolDao.cs" />
     <Compile Include="DAO\UsuarioDao.cs" />
+    <Compile Include="Diagnostico.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
     <Compile Include="Especialidad.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
@@ -110,7 +116,19 @@
     <Compile Include="Funcionalidad.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
+    <Compile Include="F_ProfPorEsp_Result.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="F_TurnosProf_Result.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
     <Compile Include="HistorialPlan.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Hora.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HorasDisponibles_Result.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
     <Compile Include="IoC\Bootstrapper.cs" />
@@ -125,10 +143,7 @@
     <Compile Include="Rol.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
-    <Compile Include="Sexo.cs">
-      <DependentUpon>ClinicaFrba.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TipoDocumento.cs">
+    <Compile Include="Sintoma.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
     <Compile Include="TipoEspecialidad.cs">
@@ -138,6 +153,12 @@
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
     <Compile Include="Usuario.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_ListarEsp.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_ListarProf.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
   </ItemGroup>

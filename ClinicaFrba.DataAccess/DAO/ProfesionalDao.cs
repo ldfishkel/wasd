@@ -15,6 +15,11 @@
             return _ds.Profesionals.SingleOrDefault(x => x.profesional_id == id);
         }
 
+        public List<Hora> GetHoras()
+        {
+            return _ds.Horas.ToList();
+        }
+
         public void SaveAgendum(Profesional profesional)
         {
             _ds.Profesionals.Attach(profesional);

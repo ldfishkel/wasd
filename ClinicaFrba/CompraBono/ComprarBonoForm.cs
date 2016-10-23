@@ -46,18 +46,19 @@
         }
 
         private void InitializeCombo()
-        {
-            _tipoDeDoc.Items.AddRange(_afiliadoDao.getTipoDeDocumentos().ToArray());
+        { 
+            _tipoDeDoc.Items.AddRange(_afiliadoDao.getTipoDeDocumentos());
         }
-
 
         private void BuscarAfiliadoClick(object sender, System.EventArgs e)
         {
             if (ValidateSearch())
             {
-                _afiliado = _afiliadoDao.GetAfiliado(((TipoDocumento)_tipoDeDoc.SelectedItem).tipodocumento_id, Int32.Parse(_nroDocumento.Text));
-
-                InitializeAfiliado();
+                _afiliado = _afiliadoDao.GetAfiliado((string)_tipoDeDoc.SelectedItem, Int32.Parse(_nroDocumento.Text));
+                if (_afiliado != null)
+                    InitializeAfiliado();
+                else
+                    MessageBox.Show("No se encontro al afiliado");
             }
         }
 

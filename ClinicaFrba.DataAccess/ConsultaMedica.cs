@@ -12,21 +12,23 @@ namespace ClinicaFrba.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class Sexo
+    public partial class ConsultaMedica
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Sexo()
+        public ConsultaMedica()
         {
-            this.Afiliadoes = new HashSet<Afiliado>();
-            this.Profesionals = new HashSet<Profesional>();
+            this.Diagnosticoes = new HashSet<Diagnostico>();
+            this.Sintomas = new HashSet<Sintoma>();
         }
     
-        public int sexo_id { get; set; }
-        public string sexo_nombre { get; set; }
+        public int consultamedica_id { get; set; }
+        public int bono_id { get; set; }
+        public System.DateTime consultamedica_fecha_hora { get; set; }
     
+        public virtual Bono Bono { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Afiliado> Afiliadoes { get; set; }
+        public virtual ICollection<Diagnostico> Diagnosticoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Profesional> Profesionals { get; set; }
+        public virtual ICollection<Sintoma> Sintomas { get; set; }
     }
 }

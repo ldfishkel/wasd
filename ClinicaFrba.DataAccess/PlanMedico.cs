@@ -30,10 +30,5 @@ namespace ClinicaFrba.DataAccess
         public virtual ICollection<Afiliado> Afiliadoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bono> Bonoes { get; set; }
-
-        public override string ToString()
-        {
-            return planmedico_nombre.Trim();
-        }
     }
 }

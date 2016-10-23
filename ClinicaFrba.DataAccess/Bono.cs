@@ -17,14 +17,13 @@ namespace ClinicaFrba.DataAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Bono()
         {
-            this.Turnoes = new HashSet<Turno>();
+            this.ConsultaMedicas = new HashSet<ConsultaMedica>();
         }
     
         public int bono_id { get; set; }
         public int planmedico_id { get; set; }
         public int afiliado_id { get; set; }
         public int compra_id { get; set; }
-        public Nullable<short> bono_numero_consulta { get; set; }
         public Nullable<int> bono_afiliado_usado { get; set; }
         public Nullable<System.DateTime> bono_fecha_uso { get; set; }
     
@@ -33,6 +32,6 @@ namespace ClinicaFrba.DataAccess
         public virtual Compra Compra { get; set; }
         public virtual PlanMedico PlanMedico { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Turno> Turnoes { get; set; }
+        public virtual ICollection<ConsultaMedica> ConsultaMedicas { get; set; }
     }
 }

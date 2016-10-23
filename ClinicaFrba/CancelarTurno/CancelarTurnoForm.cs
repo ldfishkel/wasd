@@ -42,7 +42,7 @@
                 turnos = _profesionalDao.GetTurnos(usuario.usuario_id, null);
 
             foreach (Turno turno in turnos)
-                _turnosView.Rows.Add(GetFecha(turno.turno_fecha_hora), GetHora(turno.turno_fecha_hora), turno.Profesional.ToString(), turno.Especialidad.ToString(), turno.Afiliado.ToString(), "Cancelar");
+                _turnosView.Rows.Add(turno.turno_fecha, turno.turno_hora, turno.Profesional.ToString(), turno.Especialidad.ToString(), turno.Afiliado.ToString(), "Cancelar");
         }
 
         private string GetHora(DateTime fecha)

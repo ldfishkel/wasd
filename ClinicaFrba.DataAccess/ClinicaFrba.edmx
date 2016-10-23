@@ -4,7 +4,40 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="GD2C2016Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="GD2C2016Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'GD2C2016.gd_esquema.Maestra' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Maestra">
+          <Property Name="Paciente_Nombre" Type="varchar" MaxLength="255" />
+          <Property Name="Paciente_Apellido" Type="varchar" MaxLength="255" />
+          <Property Name="Paciente_Dni" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Paciente_Direccion" Type="varchar" MaxLength="255" />
+          <Property Name="Paciente_Telefono" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Paciente_Mail" Type="varchar" MaxLength="255" />
+          <Property Name="Paciente_Fecha_Nac" Type="datetime" />
+          <Property Name="Plan_Med_Codigo" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Plan_Med_Descripcion" Type="varchar" MaxLength="255" />
+          <Property Name="Plan_Med_Precio_Bono_Consulta" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Plan_Med_Precio_Bono_Farmacia" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Turno_Numero" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Turno_Fecha" Type="datetime" />
+          <Property Name="Consulta_Sintomas" Type="varchar" MaxLength="255" />
+          <Property Name="Consulta_Enfermedades" Type="varchar" MaxLength="255" />
+          <Property Name="Medico_Nombre" Type="varchar" MaxLength="255" />
+          <Property Name="Medico_Apellido" Type="varchar" MaxLength="255" />
+          <Property Name="Medico_Dni" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Medico_Direccion" Type="varchar" MaxLength="255" />
+          <Property Name="Medico_Telefono" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Medico_Mail" Type="varchar" MaxLength="255" />
+          <Property Name="Medico_Fecha_Nac" Type="datetime" />
+          <Property Name="Especialidad_Codigo" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Especialidad_Descripcion" Type="varchar" MaxLength="255" />
+          <Property Name="Tipo_Especialidad_Codigo" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Tipo_Especialidad_Descripcion" Type="varchar" MaxLength="255" />
+          <Property Name="Compra_Bono_Fecha" Type="datetime" />
+          <Property Name="Bono_Consulta_Fecha_Impresion" Type="datetime" />
+          <Property Name="Bono_Consulta_Numero" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>-->
         <EntityType Name="Afiliado">
           <Key>
             <PropertyRef Name="afiliado_id" />
@@ -12,9 +45,9 @@
           <Property Name="afiliado_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="usuario_id" Type="int" Nullable="false" />
           <Property Name="estadocivil_id" Type="int" Nullable="false" />
-          <Property Name="tipodocumento_id" Type="int" Nullable="false" />
+          <Property Name="afiliado_tipodocumento" Type="char" MaxLength="3" />
           <Property Name="planmedico_id" Type="int" Nullable="false" />
-          <Property Name="sexo_id" Type="int" Nullable="false" />
+          <Property Name="afiliado_sexo" Type="char" MaxLength="1" />
           <Property Name="afiliado_numero" Type="int" Nullable="false" />
           <Property Name="afiliado_nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="afiliado_apellido" Type="varchar" MaxLength="50" Nullable="false" />
@@ -26,6 +59,7 @@
           <Property Name="afiliado_familiares_dependientes" Type="tinyint" Nullable="false" />
           <Property Name="afiliado_activo" Type="bit" Nullable="false" />
           <Property Name="afiliado_grupo_familiar" Type="int" />
+          <Property Name="afiliado_cantidad_bonos_usados" Type="smallint" Nullable="false" />
         </EntityType>
         <EntityType Name="Agenda">
           <Key>
@@ -48,7 +82,6 @@
           <Property Name="planmedico_id" Type="int" Nullable="false" />
           <Property Name="afiliado_id" Type="int" Nullable="false" />
           <Property Name="compra_id" Type="int" Nullable="false" />
-          <Property Name="bono_numero_consulta" Type="smallint" />
           <Property Name="bono_afiliado_usado" Type="int" />
           <Property Name="bono_fecha_uso" Type="date" />
         </EntityType>
@@ -61,6 +94,22 @@
           <Property Name="compra_fecha_hora" Type="datetime" Nullable="false" />
           <Property Name="compra_cantidad" Type="smallint" Nullable="false" />
           <Property Name="compra_monto" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConsultaMedica">
+          <Key>
+            <PropertyRef Name="consultamedica_id" />
+          </Key>
+          <Property Name="consultamedica_id" Type="int" Nullable="false" />
+          <Property Name="bono_id" Type="int" Nullable="false" />
+          <Property Name="consultamedica_fecha_hora" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Diagnostico">
+          <Key>
+            <PropertyRef Name="diagnostico_id" />
+          </Key>
+          <Property Name="diagnostico_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="consultamedica_id" Type="int" Nullable="false" />
+          <Property Name="diagnostico_descripcion" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="Especialidad">
           <Key>
@@ -108,6 +157,13 @@
           <Property Name="historial_fecha" Type="date" Nullable="false" />
           <Property Name="historial_motivo" Type="varchar" MaxLength="144" Nullable="false" />
         </EntityType>
+        <EntityType Name="Hora">
+          <Key>
+            <PropertyRef Name="hora_id" />
+          </Key>
+          <Property Name="hora_id" Type="int" Nullable="false" />
+          <Property Name="hora_comienzo" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
         <EntityType Name="PlanMedico">
           <Key>
             <PropertyRef Name="planmedico_id" />
@@ -123,8 +179,8 @@
           </Key>
           <Property Name="profesional_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="usuario_id" Type="int" Nullable="false" />
-          <Property Name="sexo_id" Type="int" Nullable="false" />
-          <Property Name="tipodocumento_id" Type="int" Nullable="false" />
+          <Property Name="profesional_sexo" Type="char" MaxLength="1" />
+          <Property Name="profesional_tipodocumento" Type="char" MaxLength="3" />
           <Property Name="profesional_numero_documento" Type="int" Nullable="false" />
           <Property Name="profesional_nombre" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="profesional_apellido" Type="varchar" MaxLength="25" Nullable="false" />
@@ -150,19 +206,13 @@
           <Property Name="usuario_id" Type="int" Nullable="false" />
           <Property Name="rol_id" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Sexo">
+        <EntityType Name="Sintoma">
           <Key>
-            <PropertyRef Name="sexo_id" />
+            <PropertyRef Name="sintoma_id" />
           </Key>
-          <Property Name="sexo_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="sexo_nombre" Type="char" MaxLength="10" Nullable="false" />
-        </EntityType>
-        <EntityType Name="TipoDocumento">
-          <Key>
-            <PropertyRef Name="tipodocumento_id" />
-          </Key>
-          <Property Name="tipodocumento_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="tipodocumento_nombre" Type="char" MaxLength="3" />
+          <Property Name="sintoma_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="consultamedica_id" Type="int" Nullable="false" />
+          <Property Name="sintoma_descripcion" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="TipoEspecialidad">
           <Key>
@@ -178,13 +228,10 @@
           <Property Name="turno_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="afiliado_id" Type="int" Nullable="false" />
           <Property Name="profesional_id" Type="int" Nullable="false" />
-          <Property Name="bono_id" Type="int" />
           <Property Name="especialidad_id" Type="int" Nullable="false" />
-          <Property Name="turno_fecha_hora" Type="datetime" Nullable="false" />
-          <Property Name="turno_hora" Type="int" Nullable="false" />
-          <Property Name="turno_cancelado" Type="char" MaxLength="1" />
-          <Property Name="turno_diagnostico" Type="varchar" MaxLength="200" />
-          <Property Name="turno_sintomas" Type="varchar" MaxLength="200" />
+          <Property Name="turno_fecha" Type="date" Nullable="false" />
+          <Property Name="turno_hora" Type="time" Precision="7" Nullable="false" />
+          <Property Name="turno_cancelado" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -196,7 +243,33 @@
           <Property Name="usuario_intentos" Type="tinyint" Nullable="false" />
           <Property Name="usuario_activo" Type="bit" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Afiliado__afilia__28ED12D1">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GD2C2016.WASD.V_ListarEsp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_ListarEsp">
+          <Key>
+            <PropertyRef Name="especialidad_id" />
+            <PropertyRef Name="especialidad_nombre" />
+            <PropertyRef Name="tipoespecialidad_id" />
+            <PropertyRef Name="tipoespecialidad_nombre" />
+          </Key>
+          <Property Name="especialidad_id" Type="int" Nullable="false" />
+          <Property Name="especialidad_nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="tipoespecialidad_id" Type="int" Nullable="false" />
+          <Property Name="tipoespecialidad_nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_ListarProf">
+          <Key>
+            <PropertyRef Name="profesional_id" />
+            <PropertyRef Name="profesional_apellido" />
+            <PropertyRef Name="profesional_nombre" />
+          </Key>
+          <Property Name="profesional_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="profesional_apellido" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="profesional_nombre" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Afiliado__afilia__1D114BD1">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="0..1" />
           <End Role="Afiliado1" Type="Self.Afiliado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -208,7 +281,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Afiliado__estado__251C81ED">
+        <Association Name="FK__Afiliado__estado__1940BAED">
           <End Role="EstadoCivil" Type="Self.EstadoCivil" Multiplicity="1" />
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -220,7 +293,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Afiliado__planme__2704CA5F">
+        <Association Name="FK__Afiliado__planme__1B29035F">
           <End Role="PlanMedico" Type="Self.PlanMedico" Multiplicity="1" />
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -232,31 +305,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Afiliado__sexo_i__27F8EE98">
-          <End Role="Sexo" Type="Self.Sexo" Multiplicity="1" />
-          <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sexo">
-              <PropertyRef Name="sexo_id" />
-            </Principal>
-            <Dependent Role="Afiliado">
-              <PropertyRef Name="sexo_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Afiliado__tipodo__2610A626">
-          <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="1" />
-          <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoDocumento">
-              <PropertyRef Name="tipodocumento_id" />
-            </Principal>
-            <Dependent Role="Afiliado">
-              <PropertyRef Name="tipodocumento_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Afiliado__usuari__24285DB4">
+        <Association Name="FK__Afiliado__usuari__184C96B4">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -268,7 +317,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Agenda__especial__36470DEF">
+        <Association Name="FK__Agenda__agenda_h__2F2FFC0C">
+          <End Role="Hora" Type="Self.Hora" Multiplicity="1" />
+          <End Role="Agenda" Type="Self.Agenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hora">
+              <PropertyRef Name="hora_id" />
+            </Principal>
+            <Dependent Role="Agenda">
+              <PropertyRef Name="agenda_hora_desde" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Agenda__agenda_h__30242045">
+          <End Role="Hora" Type="Self.Hora" Multiplicity="1" />
+          <End Role="Agenda" Type="Self.Agenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hora">
+              <PropertyRef Name="hora_id" />
+            </Principal>
+            <Dependent Role="Agenda">
+              <PropertyRef Name="agenda_hora_hasta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Agenda__especial__2D47B39A">
           <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
           <End Role="Agenda" Type="Self.Agenda" Multiplicity="*" />
           <ReferentialConstraint>
@@ -280,7 +353,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Agenda__profesio__3552E9B6">
+        <Association Name="FK__Agenda__profesio__2C538F61">
           <End Role="Profesional" Type="Self.Profesional" Multiplicity="1" />
           <End Role="Agenda" Type="Self.Agenda" Multiplicity="*" />
           <ReferentialConstraint>
@@ -292,7 +365,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bono__afiliado_i__3DE82FB7">
+        <Association Name="FK__Bono__afiliado_i__36D11DD4">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
           <End Role="Bono" Type="Self.Bono" Multiplicity="*" />
           <ReferentialConstraint>
@@ -304,7 +377,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bono__bono_afili__3FD07829">
+        <Association Name="FK__Bono__bono_afili__38B96646">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="0..1" />
           <End Role="Bono" Type="Self.Bono" Multiplicity="*" />
           <ReferentialConstraint>
@@ -316,7 +389,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bono__compra_id__3EDC53F0">
+        <Association Name="FK__Bono__compra_id__37C5420D">
           <End Role="Compra" Type="Self.Compra" Multiplicity="1" />
           <End Role="Bono" Type="Self.Bono" Multiplicity="*" />
           <ReferentialConstraint>
@@ -328,7 +401,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bono__planmedico__3CF40B7E">
+        <Association Name="FK__Bono__planmedico__35DCF99B">
           <End Role="PlanMedico" Type="Self.PlanMedico" Multiplicity="1" />
           <End Role="Bono" Type="Self.Bono" Multiplicity="*" />
           <ReferentialConstraint>
@@ -340,7 +413,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Compra__afiliado__3A179ED3">
+        <Association Name="FK__Compra__afiliado__33008CF0">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
           <End Role="Compra" Type="Self.Compra" Multiplicity="*" />
           <ReferentialConstraint>
@@ -352,7 +425,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Especiali__espec__43A1090D">
+        <Association Name="FK__ConsultaM__bono___52793849">
+          <End Role="Bono" Type="Self.Bono" Multiplicity="1" />
+          <End Role="ConsultaMedica" Type="Self.ConsultaMedica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bono">
+              <PropertyRef Name="bono_id" />
+            </Principal>
+            <Dependent Role="ConsultaMedica">
+              <PropertyRef Name="bono_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Diagnosti__consu__5832119F">
+          <End Role="ConsultaMedica" Type="Self.ConsultaMedica" Multiplicity="1" />
+          <End Role="Diagnostico" Type="Self.Diagnostico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConsultaMedica">
+              <PropertyRef Name="consultamedica_id" />
+            </Principal>
+            <Dependent Role="Diagnostico">
+              <PropertyRef Name="consultamedica_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Especiali__espec__3C89F72A">
           <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
           <End Role="EspecialidadPorProfesional" Type="Self.EspecialidadPorProfesional" Multiplicity="*" />
           <ReferentialConstraint>
@@ -364,7 +461,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Especiali__profe__42ACE4D4">
+        <Association Name="FK__Especiali__profe__3B95D2F1">
           <End Role="Profesional" Type="Self.Profesional" Multiplicity="1" />
           <End Role="EspecialidadPorProfesional" Type="Self.EspecialidadPorProfesional" Multiplicity="*" />
           <ReferentialConstraint>
@@ -376,7 +473,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Especiali__tipoe__2DB1C7EE">
+        <Association Name="FK__Especiali__tipoe__22CA2527">
           <End Role="TipoEspecialidad" Type="Self.TipoEspecialidad" Multiplicity="1" />
           <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="*" />
           <ReferentialConstraint>
@@ -388,7 +485,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Funcional__funci__4B422AD5">
+        <Association Name="FK__Funcional__funci__442B18F2">
           <End Role="Funcionalidad" Type="Self.Funcionalidad" Multiplicity="1" />
           <End Role="FuncionalidadPorRol" Type="Self.FuncionalidadPorRol" Multiplicity="*" />
           <ReferentialConstraint>
@@ -400,7 +497,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Funcional__rol_i__4A4E069C">
+        <Association Name="FK__Funcional__rol_i__4336F4B9">
           <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
           <End Role="FuncionalidadPorRol" Type="Self.FuncionalidadPorRol" Multiplicity="*" />
           <ReferentialConstraint>
@@ -412,7 +509,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Historial__afili__4E1E9780">
+        <Association Name="FK__Historial__afili__4707859D">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
           <End Role="HistorialPlan" Type="Self.HistorialPlan" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -424,31 +521,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Profesion__sexo___318258D2">
-          <End Role="Sexo" Type="Self.Sexo" Multiplicity="1" />
-          <End Role="Profesional" Type="Self.Profesional" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sexo">
-              <PropertyRef Name="sexo_id" />
-            </Principal>
-            <Dependent Role="Profesional">
-              <PropertyRef Name="sexo_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Profesion__tipod__32767D0B">
-          <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="1" />
-          <End Role="Profesional" Type="Self.Profesional" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoDocumento">
-              <PropertyRef Name="tipodocumento_id" />
-            </Principal>
-            <Dependent Role="Profesional">
-              <PropertyRef Name="tipodocumento_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Profesion__usuar__308E3499">
+        <Association Name="FK__Profesion__usuar__25A691D2">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="Profesional" Type="Self.Profesional" Multiplicity="*" />
           <ReferentialConstraint>
@@ -460,7 +533,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RolPorUsu__rol_i__51EF2864">
+        <Association Name="FK__RolPorUsu__rol_i__4AD81681">
           <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
           <End Role="RolPorUsuario" Type="Self.RolPorUsuario" Multiplicity="*" />
           <ReferentialConstraint>
@@ -472,7 +545,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RolPorUsu__usuar__50FB042B">
+        <Association Name="FK__RolPorUsu__usuar__49E3F248">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="RolPorUsuario" Type="Self.RolPorUsuario" Multiplicity="*" />
           <ReferentialConstraint>
@@ -484,7 +557,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Turno__afiliado___54CB950F">
+        <Association Name="FK__Sintoma__consult__5555A4F4">
+          <End Role="ConsultaMedica" Type="Self.ConsultaMedica" Multiplicity="1" />
+          <End Role="Sintoma" Type="Self.Sintoma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConsultaMedica">
+              <PropertyRef Name="consultamedica_id" />
+            </Principal>
+            <Dependent Role="Sintoma">
+              <PropertyRef Name="consultamedica_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Turno__afiliado___4DB4832C">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
           <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
           <ReferentialConstraint>
@@ -496,19 +581,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Turno__bono_id__56B3DD81">
-          <End Role="Bono" Type="Self.Bono" Multiplicity="0..1" />
-          <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Bono">
-              <PropertyRef Name="bono_id" />
-            </Principal>
-            <Dependent Role="Turno">
-              <PropertyRef Name="bono_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Turno__especiali__57A801BA">
+        <Association Name="FK__Turno__especiali__4F9CCB9E">
           <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
           <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
           <ReferentialConstraint>
@@ -520,7 +593,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Turno__profesion__55BFB948">
+        <Association Name="FK__Turno__profesion__4EA8A765">
           <End Role="Profesional" Type="Self.Profesional" Multiplicity="1" />
           <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
           <ReferentialConstraint>
@@ -536,6 +609,32 @@
           <Parameter Name="afiliadoId" Type="int" Mode="In" />
           <Parameter Name="cant" Type="int" Mode="In" />
           <Parameter Name="planMedicoId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="F_ProfPorEsp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="WASD">
+          <Parameter Name="especialidad" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="profesional_id" Type="int" Nullable="false" />
+                <Property Name="profesional_apellido" Type="varchar" MaxLength="25" Nullable="false" />
+                <Property Name="profesional_nombre" Type="varchar" MaxLength="25" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="F_TurnosProf" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="WASD">
+          <Parameter Name="prof" Type="int" Mode="In" />
+          <Parameter Name="fecha" Type="date" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="afiliado_id" Type="int" Nullable="false" />
+                <Property Name="afiliado_apellido" Type="varchar" MaxLength="50" Nullable="false" />
+                <Property Name="afiliado_nombre" Type="varchar" MaxLength="50" Nullable="false" />
+                <Property Name="turno_hora" Type="time" Precision="7" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
         </Function>
         <Function Name="FechasDisponibles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="WASD">
           <Parameter Name="profesionalId" Type="int" Mode="In" />
@@ -570,140 +669,172 @@
           <EntitySet Name="Agenda" EntityType="Self.Agenda" Schema="WASD" store:Type="Tables" />
           <EntitySet Name="Bono" EntityType="Self.Bono" Schema="WASD" store:Type="Tables" />
           <EntitySet Name="Compra" EntityType="Self.Compra" Schema="WASD" store:Type="Tables" />
+          <EntitySet Name="ConsultaMedica" EntityType="Self.ConsultaMedica" Schema="WASD" store:Type="Tables" />
+          <EntitySet Name="Diagnostico" EntityType="Self.Diagnostico" Schema="WASD" store:Type="Tables" />
           <EntitySet Name="Especialidad" EntityType="Self.Especialidad" Schema="WASD" store:Type="Tables" />
           <EntitySet Name="EspecialidadPorProfesional" EntityType="Self.EspecialidadPorProfesional" Schema="WASD" store:Type="Tables" />
           <EntitySet Name="EstadoCivil" EntityType="Self.EstadoCivil" Schema="WASD" store:Type="Tables" />
           <EntitySet Name="Funcionalidad" EntityType="Self.Funcionalidad" Schema="WASD" store:Type="Tables" />
           <EntitySet Name="FuncionalidadPorRol" EntityType="Self.FuncionalidadPorRol" Schema="WASD" store:Type="Tables" />
           <EntitySet Name="HistorialPlan" EntityType="Self.HistorialPlan" Schema="WASD" store:Type="Tables" />
+          <EntitySet Name="Hora" EntityType="Self.Hora" Schema="WASD" store:Type="Tables" />
           <EntitySet Name="PlanMedico" EntityType="Self.PlanMedico" Schema="WASD" store:Type="Tables" />
           <EntitySet Name="Profesional" EntityType="Self.Profesional" Schema="WASD" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="WASD" store:Type="Tables" />
           <EntitySet Name="RolPorUsuario" EntityType="Self.RolPorUsuario" Schema="WASD" store:Type="Tables" />
-          <EntitySet Name="Sexo" EntityType="Self.Sexo" Schema="WASD" store:Type="Tables" />
-          <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="WASD" store:Type="Tables" />
+          <EntitySet Name="Sintoma" EntityType="Self.Sintoma" Schema="WASD" store:Type="Tables" />
           <EntitySet Name="TipoEspecialidad" EntityType="Self.TipoEspecialidad" Schema="WASD" store:Type="Tables" />
           <EntitySet Name="Turno" EntityType="Self.Turno" Schema="WASD" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="WASD" store:Type="Tables" />
-          <AssociationSet Name="FK__Afiliado__afilia__28ED12D1" Association="Self.FK__Afiliado__afilia__28ED12D1">
+          <EntitySet Name="V_ListarEsp" EntityType="Self.V_ListarEsp" store:Type="Views" store:Schema="WASD">
+            <DefiningQuery>SELECT 
+    [V_ListarEsp].[especialidad_id] AS [especialidad_id], 
+    [V_ListarEsp].[especialidad_nombre] AS [especialidad_nombre], 
+    [V_ListarEsp].[tipoespecialidad_id] AS [tipoespecialidad_id], 
+    [V_ListarEsp].[tipoespecialidad_nombre] AS [tipoespecialidad_nombre]
+    FROM [WASD].[V_ListarEsp] AS [V_ListarEsp]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_ListarProf" EntityType="Self.V_ListarProf" store:Type="Views" store:Schema="WASD">
+            <DefiningQuery>SELECT 
+    [V_ListarProf].[profesional_id] AS [profesional_id], 
+    [V_ListarProf].[profesional_apellido] AS [profesional_apellido], 
+    [V_ListarProf].[profesional_nombre] AS [profesional_nombre]
+    FROM [WASD].[V_ListarProf] AS [V_ListarProf]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Afiliado__afilia__1D114BD1" Association="Self.FK__Afiliado__afilia__1D114BD1">
             <End Role="Afiliado" EntitySet="Afiliado" />
             <End Role="Afiliado1" EntitySet="Afiliado" />
           </AssociationSet>
-          <AssociationSet Name="FK__Afiliado__estado__251C81ED" Association="Self.FK__Afiliado__estado__251C81ED">
+          <AssociationSet Name="FK__Afiliado__estado__1940BAED" Association="Self.FK__Afiliado__estado__1940BAED">
             <End Role="EstadoCivil" EntitySet="EstadoCivil" />
             <End Role="Afiliado" EntitySet="Afiliado" />
           </AssociationSet>
-          <AssociationSet Name="FK__Afiliado__planme__2704CA5F" Association="Self.FK__Afiliado__planme__2704CA5F">
+          <AssociationSet Name="FK__Afiliado__planme__1B29035F" Association="Self.FK__Afiliado__planme__1B29035F">
             <End Role="PlanMedico" EntitySet="PlanMedico" />
             <End Role="Afiliado" EntitySet="Afiliado" />
           </AssociationSet>
-          <AssociationSet Name="FK__Afiliado__sexo_i__27F8EE98" Association="Self.FK__Afiliado__sexo_i__27F8EE98">
-            <End Role="Sexo" EntitySet="Sexo" />
-            <End Role="Afiliado" EntitySet="Afiliado" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Afiliado__tipodo__2610A626" Association="Self.FK__Afiliado__tipodo__2610A626">
-            <End Role="TipoDocumento" EntitySet="TipoDocumento" />
-            <End Role="Afiliado" EntitySet="Afiliado" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Afiliado__usuari__24285DB4" Association="Self.FK__Afiliado__usuari__24285DB4">
+          <AssociationSet Name="FK__Afiliado__usuari__184C96B4" Association="Self.FK__Afiliado__usuari__184C96B4">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Afiliado" EntitySet="Afiliado" />
           </AssociationSet>
-          <AssociationSet Name="FK__Agenda__especial__36470DEF" Association="Self.FK__Agenda__especial__36470DEF">
+          <AssociationSet Name="FK__Agenda__agenda_h__2F2FFC0C" Association="Self.FK__Agenda__agenda_h__2F2FFC0C">
+            <End Role="Hora" EntitySet="Hora" />
+            <End Role="Agenda" EntitySet="Agenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Agenda__agenda_h__30242045" Association="Self.FK__Agenda__agenda_h__30242045">
+            <End Role="Hora" EntitySet="Hora" />
+            <End Role="Agenda" EntitySet="Agenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Agenda__especial__2D47B39A" Association="Self.FK__Agenda__especial__2D47B39A">
             <End Role="Especialidad" EntitySet="Especialidad" />
             <End Role="Agenda" EntitySet="Agenda" />
           </AssociationSet>
-          <AssociationSet Name="FK__Agenda__profesio__3552E9B6" Association="Self.FK__Agenda__profesio__3552E9B6">
+          <AssociationSet Name="FK__Agenda__profesio__2C538F61" Association="Self.FK__Agenda__profesio__2C538F61">
             <End Role="Profesional" EntitySet="Profesional" />
             <End Role="Agenda" EntitySet="Agenda" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bono__afiliado_i__3DE82FB7" Association="Self.FK__Bono__afiliado_i__3DE82FB7">
+          <AssociationSet Name="FK__Bono__afiliado_i__36D11DD4" Association="Self.FK__Bono__afiliado_i__36D11DD4">
             <End Role="Afiliado" EntitySet="Afiliado" />
             <End Role="Bono" EntitySet="Bono" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bono__bono_afili__3FD07829" Association="Self.FK__Bono__bono_afili__3FD07829">
+          <AssociationSet Name="FK__Bono__bono_afili__38B96646" Association="Self.FK__Bono__bono_afili__38B96646">
             <End Role="Afiliado" EntitySet="Afiliado" />
             <End Role="Bono" EntitySet="Bono" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bono__compra_id__3EDC53F0" Association="Self.FK__Bono__compra_id__3EDC53F0">
+          <AssociationSet Name="FK__Bono__compra_id__37C5420D" Association="Self.FK__Bono__compra_id__37C5420D">
             <End Role="Compra" EntitySet="Compra" />
             <End Role="Bono" EntitySet="Bono" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bono__planmedico__3CF40B7E" Association="Self.FK__Bono__planmedico__3CF40B7E">
+          <AssociationSet Name="FK__Bono__planmedico__35DCF99B" Association="Self.FK__Bono__planmedico__35DCF99B">
             <End Role="PlanMedico" EntitySet="PlanMedico" />
             <End Role="Bono" EntitySet="Bono" />
           </AssociationSet>
-          <AssociationSet Name="FK__Compra__afiliado__3A179ED3" Association="Self.FK__Compra__afiliado__3A179ED3">
+          <AssociationSet Name="FK__Compra__afiliado__33008CF0" Association="Self.FK__Compra__afiliado__33008CF0">
             <End Role="Afiliado" EntitySet="Afiliado" />
             <End Role="Compra" EntitySet="Compra" />
           </AssociationSet>
-          <AssociationSet Name="FK__Especiali__espec__43A1090D" Association="Self.FK__Especiali__espec__43A1090D">
+          <AssociationSet Name="FK__ConsultaM__bono___52793849" Association="Self.FK__ConsultaM__bono___52793849">
+            <End Role="Bono" EntitySet="Bono" />
+            <End Role="ConsultaMedica" EntitySet="ConsultaMedica" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Diagnosti__consu__5832119F" Association="Self.FK__Diagnosti__consu__5832119F">
+            <End Role="ConsultaMedica" EntitySet="ConsultaMedica" />
+            <End Role="Diagnostico" EntitySet="Diagnostico" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Especiali__espec__3C89F72A" Association="Self.FK__Especiali__espec__3C89F72A">
             <End Role="Especialidad" EntitySet="Especialidad" />
             <End Role="EspecialidadPorProfesional" EntitySet="EspecialidadPorProfesional" />
           </AssociationSet>
-          <AssociationSet Name="FK__Especiali__profe__42ACE4D4" Association="Self.FK__Especiali__profe__42ACE4D4">
+          <AssociationSet Name="FK__Especiali__profe__3B95D2F1" Association="Self.FK__Especiali__profe__3B95D2F1">
             <End Role="Profesional" EntitySet="Profesional" />
             <End Role="EspecialidadPorProfesional" EntitySet="EspecialidadPorProfesional" />
           </AssociationSet>
-          <AssociationSet Name="FK__Especiali__tipoe__2DB1C7EE" Association="Self.FK__Especiali__tipoe__2DB1C7EE">
+          <AssociationSet Name="FK__Especiali__tipoe__22CA2527" Association="Self.FK__Especiali__tipoe__22CA2527">
             <End Role="TipoEspecialidad" EntitySet="TipoEspecialidad" />
             <End Role="Especialidad" EntitySet="Especialidad" />
           </AssociationSet>
-          <AssociationSet Name="FK__Funcional__funci__4B422AD5" Association="Self.FK__Funcional__funci__4B422AD5">
+          <AssociationSet Name="FK__Funcional__funci__442B18F2" Association="Self.FK__Funcional__funci__442B18F2">
             <End Role="Funcionalidad" EntitySet="Funcionalidad" />
             <End Role="FuncionalidadPorRol" EntitySet="FuncionalidadPorRol" />
           </AssociationSet>
-          <AssociationSet Name="FK__Funcional__rol_i__4A4E069C" Association="Self.FK__Funcional__rol_i__4A4E069C">
+          <AssociationSet Name="FK__Funcional__rol_i__4336F4B9" Association="Self.FK__Funcional__rol_i__4336F4B9">
             <End Role="Rol" EntitySet="Rol" />
             <End Role="FuncionalidadPorRol" EntitySet="FuncionalidadPorRol" />
           </AssociationSet>
-          <AssociationSet Name="FK__Historial__afili__4E1E9780" Association="Self.FK__Historial__afili__4E1E9780">
+          <AssociationSet Name="FK__Historial__afili__4707859D" Association="Self.FK__Historial__afili__4707859D">
             <End Role="Afiliado" EntitySet="Afiliado" />
             <End Role="HistorialPlan" EntitySet="HistorialPlan" />
           </AssociationSet>
-          <AssociationSet Name="FK__Profesion__sexo___318258D2" Association="Self.FK__Profesion__sexo___318258D2">
-            <End Role="Sexo" EntitySet="Sexo" />
-            <End Role="Profesional" EntitySet="Profesional" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Profesion__tipod__32767D0B" Association="Self.FK__Profesion__tipod__32767D0B">
-            <End Role="TipoDocumento" EntitySet="TipoDocumento" />
-            <End Role="Profesional" EntitySet="Profesional" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Profesion__usuar__308E3499" Association="Self.FK__Profesion__usuar__308E3499">
+          <AssociationSet Name="FK__Profesion__usuar__25A691D2" Association="Self.FK__Profesion__usuar__25A691D2">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Profesional" EntitySet="Profesional" />
           </AssociationSet>
-          <AssociationSet Name="FK__RolPorUsu__rol_i__51EF2864" Association="Self.FK__RolPorUsu__rol_i__51EF2864">
+          <AssociationSet Name="FK__RolPorUsu__rol_i__4AD81681" Association="Self.FK__RolPorUsu__rol_i__4AD81681">
             <End Role="Rol" EntitySet="Rol" />
             <End Role="RolPorUsuario" EntitySet="RolPorUsuario" />
           </AssociationSet>
-          <AssociationSet Name="FK__RolPorUsu__usuar__50FB042B" Association="Self.FK__RolPorUsu__usuar__50FB042B">
+          <AssociationSet Name="FK__RolPorUsu__usuar__49E3F248" Association="Self.FK__RolPorUsu__usuar__49E3F248">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="RolPorUsuario" EntitySet="RolPorUsuario" />
           </AssociationSet>
-          <AssociationSet Name="FK__Turno__afiliado___54CB950F" Association="Self.FK__Turno__afiliado___54CB950F">
+          <AssociationSet Name="FK__Sintoma__consult__5555A4F4" Association="Self.FK__Sintoma__consult__5555A4F4">
+            <End Role="ConsultaMedica" EntitySet="ConsultaMedica" />
+            <End Role="Sintoma" EntitySet="Sintoma" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Turno__afiliado___4DB4832C" Association="Self.FK__Turno__afiliado___4DB4832C">
             <End Role="Afiliado" EntitySet="Afiliado" />
             <End Role="Turno" EntitySet="Turno" />
           </AssociationSet>
-          <AssociationSet Name="FK__Turno__bono_id__56B3DD81" Association="Self.FK__Turno__bono_id__56B3DD81">
-            <End Role="Bono" EntitySet="Bono" />
-            <End Role="Turno" EntitySet="Turno" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Turno__especiali__57A801BA" Association="Self.FK__Turno__especiali__57A801BA">
+          <AssociationSet Name="FK__Turno__especiali__4F9CCB9E" Association="Self.FK__Turno__especiali__4F9CCB9E">
             <End Role="Especialidad" EntitySet="Especialidad" />
             <End Role="Turno" EntitySet="Turno" />
           </AssociationSet>
-          <AssociationSet Name="FK__Turno__profesion__55BFB948" Association="Self.FK__Turno__profesion__55BFB948">
+          <AssociationSet Name="FK__Turno__profesion__4EA8A765" Association="Self.FK__Turno__profesion__4EA8A765">
             <End Role="Profesional" EntitySet="Profesional" />
             <End Role="Turno" EntitySet="Turno" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GD2C2016Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="F_ProfPorEsp_Result">
+          <Property Name="profesional_id" Type="Int32" Nullable="false" />
+          <Property Name="profesional_apellido" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="profesional_nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="F_TurnosProf_Result">
+          <Property Name="afiliado_id" Type="Int32" Nullable="false" />
+          <Property Name="afiliado_apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="afiliado_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="turno_hora" Type="Time" Nullable="false" />
+        </ComplexType>
         <ComplexType Name="FechasDisponibles_Result">
           <Property Name="Fecha" Type="DateTime" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="HorasDisponibles_Result">
+          <Property Name="Hora" Type="Int32" />
         </ComplexType>
         <EntityType Name="Afiliado">
           <Key>
@@ -712,9 +843,9 @@
           <Property Name="afiliado_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="usuario_id" Type="Int32" Nullable="false" />
           <Property Name="estadocivil_id" Type="Int32" Nullable="false" />
-          <Property Name="tipodocumento_id" Type="Int32" Nullable="false" />
+          <Property Name="afiliado_tipodocumento" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
           <Property Name="planmedico_id" Type="Int32" Nullable="false" />
-          <Property Name="sexo_id" Type="Int32" Nullable="false" />
+          <Property Name="afiliado_sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="afiliado_numero" Type="Int32" Nullable="false" />
           <Property Name="afiliado_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="afiliado_apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
@@ -726,18 +857,17 @@
           <Property Name="afiliado_familiares_dependientes" Type="Byte" Nullable="false" />
           <Property Name="afiliado_activo" Type="Boolean" Nullable="false" />
           <Property Name="afiliado_grupo_familiar" Type="Int32" />
-          <NavigationProperty Name="Afiliado1" Relationship="Self.FK__Afiliado__afilia__28ED12D1" FromRole="Afiliado" ToRole="Afiliado1" />
-          <NavigationProperty Name="Afiliado2" Relationship="Self.FK__Afiliado__afilia__28ED12D1" FromRole="Afiliado1" ToRole="Afiliado" />
-          <NavigationProperty Name="EstadoCivil" Relationship="Self.FK__Afiliado__estado__251C81ED" FromRole="Afiliado" ToRole="EstadoCivil" />
-          <NavigationProperty Name="PlanMedico" Relationship="Self.FK__Afiliado__planme__2704CA5F" FromRole="Afiliado" ToRole="PlanMedico" />
-          <NavigationProperty Name="Sexo" Relationship="Self.FK__Afiliado__sexo_i__27F8EE98" FromRole="Afiliado" ToRole="Sexo" />
-          <NavigationProperty Name="TipoDocumento" Relationship="Self.FK__Afiliado__tipodo__2610A626" FromRole="Afiliado" ToRole="TipoDocumento" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK__Afiliado__usuari__24285DB4" FromRole="Afiliado" ToRole="Usuario" />
-          <NavigationProperty Name="Bonoes" Relationship="Self.FK__Bono__afiliado_i__3DE82FB7" FromRole="Afiliado" ToRole="Bono" />
-          <NavigationProperty Name="Bonoes1" Relationship="Self.FK__Bono__bono_afili__3FD07829" FromRole="Afiliado" ToRole="Bono" />
-          <NavigationProperty Name="Compras" Relationship="Self.FK__Compra__afiliado__3A179ED3" FromRole="Afiliado" ToRole="Compra" />
-          <NavigationProperty Name="HistorialPlan" Relationship="Self.FK__Historial__afili__4E1E9780" FromRole="Afiliado" ToRole="HistorialPlan" />
-          <NavigationProperty Name="Turnoes" Relationship="Self.FK__Turno__afiliado___54CB950F" FromRole="Afiliado" ToRole="Turno" />
+          <Property Name="afiliado_cantidad_bonos_usados" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Afiliado1" Relationship="Self.FK__Afiliado__afilia__1D114BD1" FromRole="Afiliado" ToRole="Afiliado1" />
+          <NavigationProperty Name="Afiliado2" Relationship="Self.FK__Afiliado__afilia__1D114BD1" FromRole="Afiliado1" ToRole="Afiliado" />
+          <NavigationProperty Name="EstadoCivil" Relationship="Self.FK__Afiliado__estado__1940BAED" FromRole="Afiliado" ToRole="EstadoCivil" />
+          <NavigationProperty Name="PlanMedico" Relationship="Self.FK__Afiliado__planme__1B29035F" FromRole="Afiliado" ToRole="PlanMedico" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Afiliado__usuari__184C96B4" FromRole="Afiliado" ToRole="Usuario" />
+          <NavigationProperty Name="Bonoes" Relationship="Self.FK__Bono__afiliado_i__36D11DD4" FromRole="Afiliado" ToRole="Bono" />
+          <NavigationProperty Name="Bonoes1" Relationship="Self.FK__Bono__bono_afili__38B96646" FromRole="Afiliado" ToRole="Bono" />
+          <NavigationProperty Name="Compras" Relationship="Self.FK__Compra__afiliado__33008CF0" FromRole="Afiliado" ToRole="Compra" />
+          <NavigationProperty Name="HistorialPlan" Relationship="Self.FK__Historial__afili__4707859D" FromRole="Afiliado" ToRole="HistorialPlan" />
+          <NavigationProperty Name="Turnoes" Relationship="Self.FK__Turno__afiliado___4DB4832C" FromRole="Afiliado" ToRole="Turno" />
         </EntityType>
         <EntityType Name="Agendum">
           <Key>
@@ -751,8 +881,10 @@
           <Property Name="agenda_hora_hasta" Type="Int32" Nullable="false" />
           <Property Name="agenda_fecha_desde" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="agenda_fecha_hasta" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Especialidad" Relationship="Self.FK__Agenda__especial__36470DEF" FromRole="Agenda" ToRole="Especialidad" />
-          <NavigationProperty Name="Profesional" Relationship="Self.FK__Agenda__profesio__3552E9B6" FromRole="Agenda" ToRole="Profesional" />
+          <NavigationProperty Name="Hora" Relationship="Self.FK__Agenda__agenda_h__2F2FFC0C" FromRole="Agenda" ToRole="Hora" />
+          <NavigationProperty Name="Hora1" Relationship="Self.FK__Agenda__agenda_h__30242045" FromRole="Agenda" ToRole="Hora" />
+          <NavigationProperty Name="Especialidad" Relationship="Self.FK__Agenda__especial__2D47B39A" FromRole="Agenda" ToRole="Especialidad" />
+          <NavigationProperty Name="Profesional" Relationship="Self.FK__Agenda__profesio__2C538F61" FromRole="Agenda" ToRole="Profesional" />
         </EntityType>
         <EntityType Name="Bono">
           <Key>
@@ -762,14 +894,13 @@
           <Property Name="planmedico_id" Type="Int32" Nullable="false" />
           <Property Name="afiliado_id" Type="Int32" Nullable="false" />
           <Property Name="compra_id" Type="Int32" Nullable="false" />
-          <Property Name="bono_numero_consulta" Type="Int16" />
           <Property Name="bono_afiliado_usado" Type="Int32" />
           <Property Name="bono_fecha_uso" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Afiliado" Relationship="Self.FK__Bono__afiliado_i__3DE82FB7" FromRole="Bono" ToRole="Afiliado" />
-          <NavigationProperty Name="Afiliado1" Relationship="Self.FK__Bono__bono_afili__3FD07829" FromRole="Bono" ToRole="Afiliado" />
-          <NavigationProperty Name="Compra" Relationship="Self.FK__Bono__compra_id__3EDC53F0" FromRole="Bono" ToRole="Compra" />
-          <NavigationProperty Name="PlanMedico" Relationship="Self.FK__Bono__planmedico__3CF40B7E" FromRole="Bono" ToRole="PlanMedico" />
-          <NavigationProperty Name="Turnoes" Relationship="Self.FK__Turno__bono_id__56B3DD81" FromRole="Bono" ToRole="Turno" />
+          <NavigationProperty Name="Afiliado" Relationship="Self.FK__Bono__afiliado_i__36D11DD4" FromRole="Bono" ToRole="Afiliado" />
+          <NavigationProperty Name="Afiliado1" Relationship="Self.FK__Bono__bono_afili__38B96646" FromRole="Bono" ToRole="Afiliado" />
+          <NavigationProperty Name="Compra" Relationship="Self.FK__Bono__compra_id__37C5420D" FromRole="Bono" ToRole="Compra" />
+          <NavigationProperty Name="PlanMedico" Relationship="Self.FK__Bono__planmedico__35DCF99B" FromRole="Bono" ToRole="PlanMedico" />
+          <NavigationProperty Name="ConsultaMedicas" Relationship="Self.FK__ConsultaM__bono___52793849" FromRole="Bono" ToRole="ConsultaMedica" />
         </EntityType>
         <EntityType Name="Compra">
           <Key>
@@ -780,8 +911,28 @@
           <Property Name="compra_fecha_hora" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="compra_cantidad" Type="Int16" Nullable="false" />
           <Property Name="compra_monto" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <NavigationProperty Name="Afiliado" Relationship="Self.FK__Compra__afiliado__3A179ED3" FromRole="Compra" ToRole="Afiliado" />
-          <NavigationProperty Name="Bonoes" Relationship="Self.FK__Bono__compra_id__3EDC53F0" FromRole="Compra" ToRole="Bono" />
+          <NavigationProperty Name="Afiliado" Relationship="Self.FK__Compra__afiliado__33008CF0" FromRole="Compra" ToRole="Afiliado" />
+          <NavigationProperty Name="Bonoes" Relationship="Self.FK__Bono__compra_id__37C5420D" FromRole="Compra" ToRole="Bono" />
+        </EntityType>
+        <EntityType Name="ConsultaMedica">
+          <Key>
+            <PropertyRef Name="consultamedica_id" />
+          </Key>
+          <Property Name="consultamedica_id" Type="Int32" Nullable="false" />
+          <Property Name="bono_id" Type="Int32" Nullable="false" />
+          <Property Name="consultamedica_fecha_hora" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Bono" Relationship="Self.FK__ConsultaM__bono___52793849" FromRole="ConsultaMedica" ToRole="Bono" />
+          <NavigationProperty Name="Diagnosticoes" Relationship="Self.FK__Diagnosti__consu__5832119F" FromRole="ConsultaMedica" ToRole="Diagnostico" />
+          <NavigationProperty Name="Sintomas" Relationship="Self.FK__Sintoma__consult__5555A4F4" FromRole="ConsultaMedica" ToRole="Sintoma" />
+        </EntityType>
+        <EntityType Name="Diagnostico">
+          <Key>
+            <PropertyRef Name="diagnostico_id" />
+          </Key>
+          <Property Name="diagnostico_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="consultamedica_id" Type="Int32" Nullable="false" />
+          <Property Name="diagnostico_descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ConsultaMedica" Relationship="Self.FK__Diagnosti__consu__5832119F" FromRole="Diagnostico" ToRole="ConsultaMedica" />
         </EntityType>
         <EntityType Name="Especialidad">
           <Key>
@@ -790,9 +941,9 @@
           <Property Name="especialidad_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tipoespecialidad_id" Type="Int32" Nullable="false" />
           <Property Name="especialidad_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Agenda" Relationship="Self.FK__Agenda__especial__36470DEF" FromRole="Especialidad" ToRole="Agenda" />
-          <NavigationProperty Name="TipoEspecialidad" Relationship="Self.FK__Especiali__tipoe__2DB1C7EE" FromRole="Especialidad" ToRole="TipoEspecialidad" />
-          <NavigationProperty Name="Turnoes" Relationship="Self.FK__Turno__especiali__57A801BA" FromRole="Especialidad" ToRole="Turno" />
+          <NavigationProperty Name="Agenda" Relationship="Self.FK__Agenda__especial__2D47B39A" FromRole="Especialidad" ToRole="Agenda" />
+          <NavigationProperty Name="TipoEspecialidad" Relationship="Self.FK__Especiali__tipoe__22CA2527" FromRole="Especialidad" ToRole="TipoEspecialidad" />
+          <NavigationProperty Name="Turnoes" Relationship="Self.FK__Turno__especiali__4F9CCB9E" FromRole="Especialidad" ToRole="Turno" />
           <NavigationProperty Name="Profesionals" Relationship="Self.EspecialidadPorProfesional" FromRole="Especialidad" ToRole="Profesional" />
         </EntityType>
         <EntityType Name="EstadoCivil">
@@ -801,7 +952,7 @@
           </Key>
           <Property Name="estadocivil_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="estadocivil_nombre" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Afiliadoes" Relationship="Self.FK__Afiliado__estado__251C81ED" FromRole="EstadoCivil" ToRole="Afiliado" />
+          <NavigationProperty Name="Afiliadoes" Relationship="Self.FK__Afiliado__estado__1940BAED" FromRole="EstadoCivil" ToRole="Afiliado" />
         </EntityType>
         <EntityType Name="Funcionalidad">
           <Key>
@@ -818,7 +969,16 @@
           <Property Name="afiliado_id" Type="Int32" Nullable="false" />
           <Property Name="historial_fecha" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="historial_motivo" Type="String" MaxLength="144" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Afiliado" Relationship="Self.FK__Historial__afili__4E1E9780" FromRole="HistorialPlan" ToRole="Afiliado" />
+          <NavigationProperty Name="Afiliado" Relationship="Self.FK__Historial__afili__4707859D" FromRole="HistorialPlan" ToRole="Afiliado" />
+        </EntityType>
+        <EntityType Name="Hora">
+          <Key>
+            <PropertyRef Name="hora_id" />
+          </Key>
+          <Property Name="hora_id" Type="Int32" Nullable="false" />
+          <Property Name="hora_comienzo" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Agenda" Relationship="Self.FK__Agenda__agenda_h__2F2FFC0C" FromRole="Hora" ToRole="Agenda" />
+          <NavigationProperty Name="Agenda1" Relationship="Self.FK__Agenda__agenda_h__30242045" FromRole="Hora" ToRole="Agenda" />
         </EntityType>
         <EntityType Name="PlanMedico">
           <Key>
@@ -828,8 +988,8 @@
           <Property Name="planmedico_nombre" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="planmedico_cuota" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="planmedico_precio_bono" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <NavigationProperty Name="Afiliadoes" Relationship="Self.FK__Afiliado__planme__2704CA5F" FromRole="PlanMedico" ToRole="Afiliado" />
-          <NavigationProperty Name="Bonoes" Relationship="Self.FK__Bono__planmedico__3CF40B7E" FromRole="PlanMedico" ToRole="Bono" />
+          <NavigationProperty Name="Afiliadoes" Relationship="Self.FK__Afiliado__planme__1B29035F" FromRole="PlanMedico" ToRole="Afiliado" />
+          <NavigationProperty Name="Bonoes" Relationship="Self.FK__Bono__planmedico__35DCF99B" FromRole="PlanMedico" ToRole="Bono" />
         </EntityType>
         <EntityType Name="Profesional">
           <Key>
@@ -837,8 +997,8 @@
           </Key>
           <Property Name="profesional_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="usuario_id" Type="Int32" Nullable="false" />
-          <Property Name="sexo_id" Type="Int32" Nullable="false" />
-          <Property Name="tipodocumento_id" Type="Int32" Nullable="false" />
+          <Property Name="profesional_sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="profesional_tipodocumento" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
           <Property Name="profesional_numero_documento" Type="Int32" Nullable="false" />
           <Property Name="profesional_nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="profesional_apellido" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
@@ -847,11 +1007,9 @@
           <Property Name="profesional_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="profesional_fecha_nacimiento" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="profesional_matricula" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Agenda" Relationship="Self.FK__Agenda__profesio__3552E9B6" FromRole="Profesional" ToRole="Agenda" />
-          <NavigationProperty Name="Sexo" Relationship="Self.FK__Profesion__sexo___318258D2" FromRole="Profesional" ToRole="Sexo" />
-          <NavigationProperty Name="TipoDocumento" Relationship="Self.FK__Profesion__tipod__32767D0B" FromRole="Profesional" ToRole="TipoDocumento" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK__Profesion__usuar__308E3499" FromRole="Profesional" ToRole="Usuario" />
-          <NavigationProperty Name="Turnoes" Relationship="Self.FK__Turno__profesion__55BFB948" FromRole="Profesional" ToRole="Turno" />
+          <NavigationProperty Name="Agenda" Relationship="Self.FK__Agenda__profesio__2C538F61" FromRole="Profesional" ToRole="Agenda" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Profesion__usuar__25A691D2" FromRole="Profesional" ToRole="Usuario" />
+          <NavigationProperty Name="Turnoes" Relationship="Self.FK__Turno__profesion__4EA8A765" FromRole="Profesional" ToRole="Turno" />
           <NavigationProperty Name="Especialidads" Relationship="Self.EspecialidadPorProfesional" FromRole="Profesional" ToRole="Especialidad" />
         </EntityType>
         <EntityType Name="Rol">
@@ -864,23 +1022,14 @@
           <NavigationProperty Name="Funcionalidads" Relationship="Self.FuncionalidadPorRol" FromRole="Rol" ToRole="Funcionalidad" />
           <NavigationProperty Name="Usuarios" Relationship="Self.RolPorUsuario" FromRole="Rol" ToRole="Usuario" />
         </EntityType>
-        <EntityType Name="Sexo">
+        <EntityType Name="Sintoma">
           <Key>
-            <PropertyRef Name="sexo_id" />
+            <PropertyRef Name="sintoma_id" />
           </Key>
-          <Property Name="sexo_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="sexo_nombre" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Afiliadoes" Relationship="Self.FK__Afiliado__sexo_i__27F8EE98" FromRole="Sexo" ToRole="Afiliado" />
-          <NavigationProperty Name="Profesionals" Relationship="Self.FK__Profesion__sexo___318258D2" FromRole="Sexo" ToRole="Profesional" />
-        </EntityType>
-        <EntityType Name="TipoDocumento">
-          <Key>
-            <PropertyRef Name="tipodocumento_id" />
-          </Key>
-          <Property Name="tipodocumento_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="tipodocumento_nombre" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="Afiliadoes" Relationship="Self.FK__Afiliado__tipodo__2610A626" FromRole="TipoDocumento" ToRole="Afiliado" />
-          <NavigationProperty Name="Profesionals" Relationship="Self.FK__Profesion__tipod__32767D0B" FromRole="TipoDocumento" ToRole="Profesional" />
+          <Property Name="sintoma_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="consultamedica_id" Type="Int32" Nullable="false" />
+          <Property Name="sintoma_descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ConsultaMedica" Relationship="Self.FK__Sintoma__consult__5555A4F4" FromRole="Sintoma" ToRole="ConsultaMedica" />
         </EntityType>
         <EntityType Name="TipoEspecialidad">
           <Key>
@@ -888,7 +1037,7 @@
           </Key>
           <Property Name="tipoespecialidad_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tipoespecialidad_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Especialidads" Relationship="Self.FK__Especiali__tipoe__2DB1C7EE" FromRole="TipoEspecialidad" ToRole="Especialidad" />
+          <NavigationProperty Name="Especialidads" Relationship="Self.FK__Especiali__tipoe__22CA2527" FromRole="TipoEspecialidad" ToRole="Especialidad" />
         </EntityType>
         <EntityType Name="Turno">
           <Key>
@@ -897,17 +1046,13 @@
           <Property Name="turno_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="afiliado_id" Type="Int32" Nullable="false" />
           <Property Name="profesional_id" Type="Int32" Nullable="false" />
-          <Property Name="bono_id" Type="Int32" />
           <Property Name="especialidad_id" Type="Int32" Nullable="false" />
-          <Property Name="turno_fecha_hora" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="turno_hora" Type="Int32" Nullable="false" />
-          <Property Name="turno_cancelado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="turno_diagnostico" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="turno_sintomas" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Afiliado" Relationship="Self.FK__Turno__afiliado___54CB950F" FromRole="Turno" ToRole="Afiliado" />
-          <NavigationProperty Name="Bono" Relationship="Self.FK__Turno__bono_id__56B3DD81" FromRole="Turno" ToRole="Bono" />
-          <NavigationProperty Name="Especialidad" Relationship="Self.FK__Turno__especiali__57A801BA" FromRole="Turno" ToRole="Especialidad" />
-          <NavigationProperty Name="Profesional" Relationship="Self.FK__Turno__profesion__55BFB948" FromRole="Turno" ToRole="Profesional" />
+          <Property Name="turno_fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="turno_hora" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="turno_cancelado" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Afiliado" Relationship="Self.FK__Turno__afiliado___4DB4832C" FromRole="Turno" ToRole="Afiliado" />
+          <NavigationProperty Name="Especialidad" Relationship="Self.FK__Turno__especiali__4F9CCB9E" FromRole="Turno" ToRole="Especialidad" />
+          <NavigationProperty Name="Profesional" Relationship="Self.FK__Turno__profesion__4EA8A765" FromRole="Turno" ToRole="Profesional" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -918,11 +1063,33 @@
           <Property Name="usuario_password" Type="String" MaxLength="64" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="usuario_intentos" Type="Byte" Nullable="false" />
           <Property Name="usuario_activo" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Afiliadoes" Relationship="Self.FK__Afiliado__usuari__24285DB4" FromRole="Usuario" ToRole="Afiliado" />
-          <NavigationProperty Name="Profesionals" Relationship="Self.FK__Profesion__usuar__308E3499" FromRole="Usuario" ToRole="Profesional" />
+          <NavigationProperty Name="Afiliadoes" Relationship="Self.FK__Afiliado__usuari__184C96B4" FromRole="Usuario" ToRole="Afiliado" />
+          <NavigationProperty Name="Profesionals" Relationship="Self.FK__Profesion__usuar__25A691D2" FromRole="Usuario" ToRole="Profesional" />
           <NavigationProperty Name="Rols" Relationship="Self.RolPorUsuario" FromRole="Usuario" ToRole="Rol" />
         </EntityType>
-        <Association Name="FK__Afiliado__afilia__28ED12D1">
+        <EntityType Name="V_ListarEsp">
+          <Key>
+            <PropertyRef Name="especialidad_id" />
+            <PropertyRef Name="especialidad_nombre" />
+            <PropertyRef Name="tipoespecialidad_id" />
+            <PropertyRef Name="tipoespecialidad_nombre" />
+          </Key>
+          <Property Name="especialidad_id" Type="Int32" Nullable="false" />
+          <Property Name="especialidad_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipoespecialidad_id" Type="Int32" Nullable="false" />
+          <Property Name="tipoespecialidad_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="V_ListarProf">
+          <Key>
+            <PropertyRef Name="profesional_id" />
+            <PropertyRef Name="profesional_apellido" />
+            <PropertyRef Name="profesional_nombre" />
+          </Key>
+          <Property Name="profesional_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="profesional_apellido" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="profesional_nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Afiliado__afilia__1D114BD1">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="0..1" />
           <End Role="Afiliado1" Type="Self.Afiliado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -934,7 +1101,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Afiliado__estado__251C81ED">
+        <Association Name="FK__Afiliado__estado__1940BAED">
           <End Role="EstadoCivil" Type="Self.EstadoCivil" Multiplicity="1" />
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -946,7 +1113,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Afiliado__planme__2704CA5F">
+        <Association Name="FK__Afiliado__planme__1B29035F">
           <End Role="PlanMedico" Type="Self.PlanMedico" Multiplicity="1" />
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -958,31 +1125,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Afiliado__sexo_i__27F8EE98">
-          <End Role="Sexo" Type="Self.Sexo" Multiplicity="1" />
-          <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sexo">
-              <PropertyRef Name="sexo_id" />
-            </Principal>
-            <Dependent Role="Afiliado">
-              <PropertyRef Name="sexo_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Afiliado__tipodo__2610A626">
-          <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="1" />
-          <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoDocumento">
-              <PropertyRef Name="tipodocumento_id" />
-            </Principal>
-            <Dependent Role="Afiliado">
-              <PropertyRef Name="tipodocumento_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Afiliado__usuari__24285DB4">
+        <Association Name="FK__Afiliado__usuari__184C96B4">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -994,7 +1137,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bono__afiliado_i__3DE82FB7">
+        <Association Name="FK__Bono__afiliado_i__36D11DD4">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
           <End Role="Bono" Type="Self.Bono" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1006,7 +1149,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bono__bono_afili__3FD07829">
+        <Association Name="FK__Bono__bono_afili__38B96646">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="0..1" />
           <End Role="Bono" Type="Self.Bono" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1018,7 +1161,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Compra__afiliado__3A179ED3">
+        <Association Name="FK__Compra__afiliado__33008CF0">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
           <End Role="Compra" Type="Self.Compra" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1030,7 +1173,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Historial__afili__4E1E9780">
+        <Association Name="FK__Historial__afili__4707859D">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
           <End Role="HistorialPlan" Type="Self.HistorialPlan" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -1042,7 +1185,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Turno__afiliado___54CB950F">
+        <Association Name="FK__Turno__afiliado___4DB4832C">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
           <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1054,7 +1197,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Agenda__especial__36470DEF">
+        <Association Name="FK__Agenda__agenda_h__2F2FFC0C">
+          <End Role="Hora" Type="Self.Hora" Multiplicity="1" />
+          <End Role="Agenda" Type="Self.Agendum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hora">
+              <PropertyRef Name="hora_id" />
+            </Principal>
+            <Dependent Role="Agenda">
+              <PropertyRef Name="agenda_hora_desde" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Agenda__agenda_h__30242045">
+          <End Role="Hora" Type="Self.Hora" Multiplicity="1" />
+          <End Role="Agenda" Type="Self.Agendum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hora">
+              <PropertyRef Name="hora_id" />
+            </Principal>
+            <Dependent Role="Agenda">
+              <PropertyRef Name="agenda_hora_hasta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Agenda__especial__2D47B39A">
           <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
           <End Role="Agenda" Type="Self.Agendum" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1066,7 +1233,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Agenda__profesio__3552E9B6">
+        <Association Name="FK__Agenda__profesio__2C538F61">
           <End Role="Profesional" Type="Self.Profesional" Multiplicity="1" />
           <End Role="Agenda" Type="Self.Agendum" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1078,7 +1245,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bono__compra_id__3EDC53F0">
+        <Association Name="FK__Bono__compra_id__37C5420D">
           <End Role="Compra" Type="Self.Compra" Multiplicity="1" />
           <End Role="Bono" Type="Self.Bono" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1090,7 +1257,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bono__planmedico__3CF40B7E">
+        <Association Name="FK__Bono__planmedico__35DCF99B">
           <End Role="PlanMedico" Type="Self.PlanMedico" Multiplicity="1" />
           <End Role="Bono" Type="Self.Bono" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1102,19 +1269,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Turno__bono_id__56B3DD81">
-          <End Role="Bono" Type="Self.Bono" Multiplicity="0..1" />
-          <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
+        <Association Name="FK__ConsultaM__bono___52793849">
+          <End Role="Bono" Type="Self.Bono" Multiplicity="1" />
+          <End Role="ConsultaMedica" Type="Self.ConsultaMedica" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Bono">
               <PropertyRef Name="bono_id" />
             </Principal>
-            <Dependent Role="Turno">
+            <Dependent Role="ConsultaMedica">
               <PropertyRef Name="bono_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Especiali__tipoe__2DB1C7EE">
+        <Association Name="FK__Diagnosti__consu__5832119F">
+          <End Role="ConsultaMedica" Type="Self.ConsultaMedica" Multiplicity="1" />
+          <End Role="Diagnostico" Type="Self.Diagnostico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConsultaMedica">
+              <PropertyRef Name="consultamedica_id" />
+            </Principal>
+            <Dependent Role="Diagnostico">
+              <PropertyRef Name="consultamedica_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sintoma__consult__5555A4F4">
+          <End Role="ConsultaMedica" Type="Self.ConsultaMedica" Multiplicity="1" />
+          <End Role="Sintoma" Type="Self.Sintoma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConsultaMedica">
+              <PropertyRef Name="consultamedica_id" />
+            </Principal>
+            <Dependent Role="Sintoma">
+              <PropertyRef Name="consultamedica_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Especiali__tipoe__22CA2527">
           <End Role="TipoEspecialidad" Type="Self.TipoEspecialidad" Multiplicity="1" />
           <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1126,7 +1317,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Turno__especiali__57A801BA">
+        <Association Name="FK__Turno__especiali__4F9CCB9E">
           <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
           <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1138,31 +1329,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Profesion__sexo___318258D2">
-          <End Role="Sexo" Type="Self.Sexo" Multiplicity="1" />
-          <End Role="Profesional" Type="Self.Profesional" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sexo">
-              <PropertyRef Name="sexo_id" />
-            </Principal>
-            <Dependent Role="Profesional">
-              <PropertyRef Name="sexo_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Profesion__tipod__32767D0B">
-          <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="1" />
-          <End Role="Profesional" Type="Self.Profesional" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoDocumento">
-              <PropertyRef Name="tipodocumento_id" />
-            </Principal>
-            <Dependent Role="Profesional">
-              <PropertyRef Name="tipodocumento_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Profesion__usuar__308E3499">
+        <Association Name="FK__Profesion__usuar__25A691D2">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="Profesional" Type="Self.Profesional" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1174,7 +1341,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Turno__profesion__55BFB948">
+        <Association Name="FK__Turno__profesion__4EA8A765">
           <End Role="Profesional" Type="Self.Profesional" Multiplicity="1" />
           <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1198,108 +1365,112 @@
           <End Role="Rol" Type="Self.Rol" Multiplicity="*" />
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="Database4" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Database" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Afiliadoes" EntityType="Self.Afiliado" />
           <EntitySet Name="Agenda" EntityType="Self.Agendum" />
           <EntitySet Name="Bonoes" EntityType="Self.Bono" />
           <EntitySet Name="Compras" EntityType="Self.Compra" />
+          <EntitySet Name="ConsultaMedicas" EntityType="Self.ConsultaMedica" />
+          <EntitySet Name="Diagnosticoes" EntityType="Self.Diagnostico" />
           <EntitySet Name="Especialidads" EntityType="Self.Especialidad" />
           <EntitySet Name="EstadoCivils" EntityType="Self.EstadoCivil" />
           <EntitySet Name="Funcionalidads" EntityType="Self.Funcionalidad" />
           <EntitySet Name="HistorialPlans" EntityType="Self.HistorialPlan" />
+          <EntitySet Name="Horas" EntityType="Self.Hora" />
           <EntitySet Name="PlanMedicoes" EntityType="Self.PlanMedico" />
           <EntitySet Name="Profesionals" EntityType="Self.Profesional" />
           <EntitySet Name="Rols" EntityType="Self.Rol" />
-          <EntitySet Name="Sexoes" EntityType="Self.Sexo" />
-          <EntitySet Name="TipoDocumentoes" EntityType="Self.TipoDocumento" />
+          <EntitySet Name="Sintomas" EntityType="Self.Sintoma" />
           <EntitySet Name="TipoEspecialidads" EntityType="Self.TipoEspecialidad" />
           <EntitySet Name="Turnoes" EntityType="Self.Turno" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
-          <AssociationSet Name="FK__Afiliado__afilia__28ED12D1" Association="Self.FK__Afiliado__afilia__28ED12D1">
+          <EntitySet Name="V_ListarEsp" EntityType="Self.V_ListarEsp" />
+          <EntitySet Name="V_ListarProf" EntityType="Self.V_ListarProf" />
+          <AssociationSet Name="FK__Afiliado__afilia__1D114BD1" Association="Self.FK__Afiliado__afilia__1D114BD1">
             <End Role="Afiliado" EntitySet="Afiliadoes" />
             <End Role="Afiliado1" EntitySet="Afiliadoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Afiliado__estado__251C81ED" Association="Self.FK__Afiliado__estado__251C81ED">
+          <AssociationSet Name="FK__Afiliado__estado__1940BAED" Association="Self.FK__Afiliado__estado__1940BAED">
             <End Role="EstadoCivil" EntitySet="EstadoCivils" />
             <End Role="Afiliado" EntitySet="Afiliadoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Afiliado__planme__2704CA5F" Association="Self.FK__Afiliado__planme__2704CA5F">
+          <AssociationSet Name="FK__Afiliado__planme__1B29035F" Association="Self.FK__Afiliado__planme__1B29035F">
             <End Role="PlanMedico" EntitySet="PlanMedicoes" />
             <End Role="Afiliado" EntitySet="Afiliadoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Afiliado__sexo_i__27F8EE98" Association="Self.FK__Afiliado__sexo_i__27F8EE98">
-            <End Role="Sexo" EntitySet="Sexoes" />
-            <End Role="Afiliado" EntitySet="Afiliadoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Afiliado__tipodo__2610A626" Association="Self.FK__Afiliado__tipodo__2610A626">
-            <End Role="TipoDocumento" EntitySet="TipoDocumentoes" />
-            <End Role="Afiliado" EntitySet="Afiliadoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Afiliado__usuari__24285DB4" Association="Self.FK__Afiliado__usuari__24285DB4">
+          <AssociationSet Name="FK__Afiliado__usuari__184C96B4" Association="Self.FK__Afiliado__usuari__184C96B4">
             <End Role="Usuario" EntitySet="Usuarios" />
             <End Role="Afiliado" EntitySet="Afiliadoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bono__afiliado_i__3DE82FB7" Association="Self.FK__Bono__afiliado_i__3DE82FB7">
+          <AssociationSet Name="FK__Bono__afiliado_i__36D11DD4" Association="Self.FK__Bono__afiliado_i__36D11DD4">
             <End Role="Afiliado" EntitySet="Afiliadoes" />
             <End Role="Bono" EntitySet="Bonoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bono__bono_afili__3FD07829" Association="Self.FK__Bono__bono_afili__3FD07829">
+          <AssociationSet Name="FK__Bono__bono_afili__38B96646" Association="Self.FK__Bono__bono_afili__38B96646">
             <End Role="Afiliado" EntitySet="Afiliadoes" />
             <End Role="Bono" EntitySet="Bonoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Compra__afiliado__3A179ED3" Association="Self.FK__Compra__afiliado__3A179ED3">
+          <AssociationSet Name="FK__Compra__afiliado__33008CF0" Association="Self.FK__Compra__afiliado__33008CF0">
             <End Role="Afiliado" EntitySet="Afiliadoes" />
             <End Role="Compra" EntitySet="Compras" />
           </AssociationSet>
-          <AssociationSet Name="FK__Historial__afili__4E1E9780" Association="Self.FK__Historial__afili__4E1E9780">
+          <AssociationSet Name="FK__Historial__afili__4707859D" Association="Self.FK__Historial__afili__4707859D">
             <End Role="Afiliado" EntitySet="Afiliadoes" />
             <End Role="HistorialPlan" EntitySet="HistorialPlans" />
           </AssociationSet>
-          <AssociationSet Name="FK__Turno__afiliado___54CB950F" Association="Self.FK__Turno__afiliado___54CB950F">
+          <AssociationSet Name="FK__Turno__afiliado___4DB4832C" Association="Self.FK__Turno__afiliado___4DB4832C">
             <End Role="Afiliado" EntitySet="Afiliadoes" />
             <End Role="Turno" EntitySet="Turnoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Agenda__especial__36470DEF" Association="Self.FK__Agenda__especial__36470DEF">
+          <AssociationSet Name="FK__Agenda__agenda_h__2F2FFC0C" Association="Self.FK__Agenda__agenda_h__2F2FFC0C">
+            <End Role="Hora" EntitySet="Horas" />
+            <End Role="Agenda" EntitySet="Agenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Agenda__agenda_h__30242045" Association="Self.FK__Agenda__agenda_h__30242045">
+            <End Role="Hora" EntitySet="Horas" />
+            <End Role="Agenda" EntitySet="Agenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Agenda__especial__2D47B39A" Association="Self.FK__Agenda__especial__2D47B39A">
             <End Role="Especialidad" EntitySet="Especialidads" />
             <End Role="Agenda" EntitySet="Agenda" />
           </AssociationSet>
-          <AssociationSet Name="FK__Agenda__profesio__3552E9B6" Association="Self.FK__Agenda__profesio__3552E9B6">
+          <AssociationSet Name="FK__Agenda__profesio__2C538F61" Association="Self.FK__Agenda__profesio__2C538F61">
             <End Role="Profesional" EntitySet="Profesionals" />
             <End Role="Agenda" EntitySet="Agenda" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bono__compra_id__3EDC53F0" Association="Self.FK__Bono__compra_id__3EDC53F0">
+          <AssociationSet Name="FK__Bono__compra_id__37C5420D" Association="Self.FK__Bono__compra_id__37C5420D">
             <End Role="Compra" EntitySet="Compras" />
             <End Role="Bono" EntitySet="Bonoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bono__planmedico__3CF40B7E" Association="Self.FK__Bono__planmedico__3CF40B7E">
+          <AssociationSet Name="FK__Bono__planmedico__35DCF99B" Association="Self.FK__Bono__planmedico__35DCF99B">
             <End Role="PlanMedico" EntitySet="PlanMedicoes" />
             <End Role="Bono" EntitySet="Bonoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Turno__bono_id__56B3DD81" Association="Self.FK__Turno__bono_id__56B3DD81">
+          <AssociationSet Name="FK__ConsultaM__bono___52793849" Association="Self.FK__ConsultaM__bono___52793849">
             <End Role="Bono" EntitySet="Bonoes" />
-            <End Role="Turno" EntitySet="Turnoes" />
+            <End Role="ConsultaMedica" EntitySet="ConsultaMedicas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Especiali__tipoe__2DB1C7EE" Association="Self.FK__Especiali__tipoe__2DB1C7EE">
+          <AssociationSet Name="FK__Diagnosti__consu__5832119F" Association="Self.FK__Diagnosti__consu__5832119F">
+            <End Role="ConsultaMedica" EntitySet="ConsultaMedicas" />
+            <End Role="Diagnostico" EntitySet="Diagnosticoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sintoma__consult__5555A4F4" Association="Self.FK__Sintoma__consult__5555A4F4">
+            <End Role="ConsultaMedica" EntitySet="ConsultaMedicas" />
+            <End Role="Sintoma" EntitySet="Sintomas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Especiali__tipoe__22CA2527" Association="Self.FK__Especiali__tipoe__22CA2527">
             <End Role="TipoEspecialidad" EntitySet="TipoEspecialidads" />
             <End Role="Especialidad" EntitySet="Especialidads" />
           </AssociationSet>
-          <AssociationSet Name="FK__Turno__especiali__57A801BA" Association="Self.FK__Turno__especiali__57A801BA">
+          <AssociationSet Name="FK__Turno__especiali__4F9CCB9E" Association="Self.FK__Turno__especiali__4F9CCB9E">
             <End Role="Especialidad" EntitySet="Especialidads" />
             <End Role="Turno" EntitySet="Turnoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Profesion__sexo___318258D2" Association="Self.FK__Profesion__sexo___318258D2">
-            <End Role="Sexo" EntitySet="Sexoes" />
-            <End Role="Profesional" EntitySet="Profesionals" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Profesion__tipod__32767D0B" Association="Self.FK__Profesion__tipod__32767D0B">
-            <End Role="TipoDocumento" EntitySet="TipoDocumentoes" />
-            <End Role="Profesional" EntitySet="Profesionals" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Profesion__usuar__308E3499" Association="Self.FK__Profesion__usuar__308E3499">
+          <AssociationSet Name="FK__Profesion__usuar__25A691D2" Association="Self.FK__Profesion__usuar__25A691D2">
             <End Role="Usuario" EntitySet="Usuarios" />
             <End Role="Profesional" EntitySet="Profesionals" />
           </AssociationSet>
-          <AssociationSet Name="FK__Turno__profesion__55BFB948" Association="Self.FK__Turno__profesion__55BFB948">
+          <AssociationSet Name="FK__Turno__profesion__4EA8A765" Association="Self.FK__Turno__profesion__4EA8A765">
             <End Role="Profesional" EntitySet="Profesionals" />
             <End Role="Turno" EntitySet="Turnoes" />
           </AssociationSet>
@@ -1315,19 +1486,26 @@
             <End Role="Rol" EntitySet="Rols" />
             <End Role="Usuario" EntitySet="Usuarios" />
           </AssociationSet>
+          <FunctionImport Name="F_ProfPorEsp" IsComposable="true" ReturnType="Collection(GD2C2016Model.F_ProfPorEsp_Result)">
+            <Parameter Name="especialidad" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="F_TurnosProf" IsComposable="true" ReturnType="Collection(GD2C2016Model.F_TurnosProf_Result)">
+            <Parameter Name="prof" Mode="In" Type="Int32" />
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+          </FunctionImport>
           <FunctionImport Name="FechasDisponibles" IsComposable="true" ReturnType="Collection(GD2C2016Model.FechasDisponibles_Result)">
             <Parameter Name="profesionalId" Mode="In" Type="Int32" />
             <Parameter Name="especialidadId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="HorasDisponibles" IsComposable="true" ReturnType="Collection(GD2C2016Model.HorasDisponibles_Result)">
+            <Parameter Name="profesionalId" Mode="In" Type="Int32" />
+            <Parameter Name="especialidadId" Mode="In" Type="Int32" />
+            <Parameter Name="fechaStr" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="CompraBono">
             <Parameter Name="afiliadoId" Mode="In" Type="Int32" />
             <Parameter Name="cant" Mode="In" Type="Int32" />
             <Parameter Name="planMedicoId" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="HorasDisponibles" IsComposable="true" ReturnType="Collection(Int32)">
-            <Parameter Name="profesionalId" Mode="In" Type="Int32" />
-            <Parameter Name="especialidadId" Mode="In" Type="Int32" />
-            <Parameter Name="fechaStr" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="HorasDisponibless" ReturnType="Collection(Int32)">
             <Parameter Name="profesionalId" Mode="In" Type="Int32" />
@@ -1340,16 +1518,16 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="GD2C2016ModelStoreContainer" CdmEntityContainer="Database4">
+        <EntityContainerMapping StorageEntityContainer="GD2C2016ModelStoreContainer" CdmEntityContainer="Database">
           <EntitySetMapping Name="Afiliadoes">
             <EntityTypeMapping TypeName="GD2C2016Model.Afiliado">
               <MappingFragment StoreEntitySet="Afiliado">
                 <ScalarProperty Name="afiliado_id" ColumnName="afiliado_id" />
                 <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
                 <ScalarProperty Name="estadocivil_id" ColumnName="estadocivil_id" />
-                <ScalarProperty Name="tipodocumento_id" ColumnName="tipodocumento_id" />
+                <ScalarProperty Name="afiliado_tipodocumento" ColumnName="afiliado_tipodocumento" />
                 <ScalarProperty Name="planmedico_id" ColumnName="planmedico_id" />
-                <ScalarProperty Name="sexo_id" ColumnName="sexo_id" />
+                <ScalarProperty Name="afiliado_sexo" ColumnName="afiliado_sexo" />
                 <ScalarProperty Name="afiliado_numero" ColumnName="afiliado_numero" />
                 <ScalarProperty Name="afiliado_nombre" ColumnName="afiliado_nombre" />
                 <ScalarProperty Name="afiliado_apellido" ColumnName="afiliado_apellido" />
@@ -1361,6 +1539,7 @@
                 <ScalarProperty Name="afiliado_familiares_dependientes" ColumnName="afiliado_familiares_dependientes" />
                 <ScalarProperty Name="afiliado_activo" ColumnName="afiliado_activo" />
                 <ScalarProperty Name="afiliado_grupo_familiar" ColumnName="afiliado_grupo_familiar" />
+                <ScalarProperty Name="afiliado_cantidad_bonos_usados" ColumnName="afiliado_cantidad_bonos_usados" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1385,7 +1564,6 @@
                 <ScalarProperty Name="planmedico_id" ColumnName="planmedico_id" />
                 <ScalarProperty Name="afiliado_id" ColumnName="afiliado_id" />
                 <ScalarProperty Name="compra_id" ColumnName="compra_id" />
-                <ScalarProperty Name="bono_numero_consulta" ColumnName="bono_numero_consulta" />
                 <ScalarProperty Name="bono_afiliado_usado" ColumnName="bono_afiliado_usado" />
                 <ScalarProperty Name="bono_fecha_uso" ColumnName="bono_fecha_uso" />
               </MappingFragment>
@@ -1399,6 +1577,24 @@
                 <ScalarProperty Name="compra_fecha_hora" ColumnName="compra_fecha_hora" />
                 <ScalarProperty Name="compra_cantidad" ColumnName="compra_cantidad" />
                 <ScalarProperty Name="compra_monto" ColumnName="compra_monto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConsultaMedicas">
+            <EntityTypeMapping TypeName="GD2C2016Model.ConsultaMedica">
+              <MappingFragment StoreEntitySet="ConsultaMedica">
+                <ScalarProperty Name="consultamedica_id" ColumnName="consultamedica_id" />
+                <ScalarProperty Name="bono_id" ColumnName="bono_id" />
+                <ScalarProperty Name="consultamedica_fecha_hora" ColumnName="consultamedica_fecha_hora" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Diagnosticoes">
+            <EntityTypeMapping TypeName="GD2C2016Model.Diagnostico">
+              <MappingFragment StoreEntitySet="Diagnostico">
+                <ScalarProperty Name="diagnostico_id" ColumnName="diagnostico_id" />
+                <ScalarProperty Name="consultamedica_id" ColumnName="consultamedica_id" />
+                <ScalarProperty Name="diagnostico_descripcion" ColumnName="diagnostico_descripcion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1436,6 +1632,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Horas">
+            <EntityTypeMapping TypeName="GD2C2016Model.Hora">
+              <MappingFragment StoreEntitySet="Hora">
+                <ScalarProperty Name="hora_id" ColumnName="hora_id" />
+                <ScalarProperty Name="hora_comienzo" ColumnName="hora_comienzo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="PlanMedicoes">
             <EntityTypeMapping TypeName="GD2C2016Model.PlanMedico">
               <MappingFragment StoreEntitySet="PlanMedico">
@@ -1451,8 +1655,8 @@
               <MappingFragment StoreEntitySet="Profesional">
                 <ScalarProperty Name="profesional_id" ColumnName="profesional_id" />
                 <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
-                <ScalarProperty Name="sexo_id" ColumnName="sexo_id" />
-                <ScalarProperty Name="tipodocumento_id" ColumnName="tipodocumento_id" />
+                <ScalarProperty Name="profesional_sexo" ColumnName="profesional_sexo" />
+                <ScalarProperty Name="profesional_tipodocumento" ColumnName="profesional_tipodocumento" />
                 <ScalarProperty Name="profesional_numero_documento" ColumnName="profesional_numero_documento" />
                 <ScalarProperty Name="profesional_nombre" ColumnName="profesional_nombre" />
                 <ScalarProperty Name="profesional_apellido" ColumnName="profesional_apellido" />
@@ -1473,19 +1677,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Sexoes">
-            <EntityTypeMapping TypeName="GD2C2016Model.Sexo">
-              <MappingFragment StoreEntitySet="Sexo">
-                <ScalarProperty Name="sexo_id" ColumnName="sexo_id" />
-                <ScalarProperty Name="sexo_nombre" ColumnName="sexo_nombre" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TipoDocumentoes">
-            <EntityTypeMapping TypeName="GD2C2016Model.TipoDocumento">
-              <MappingFragment StoreEntitySet="TipoDocumento">
-                <ScalarProperty Name="tipodocumento_id" ColumnName="tipodocumento_id" />
-                <ScalarProperty Name="tipodocumento_nombre" ColumnName="tipodocumento_nombre" />
+          <EntitySetMapping Name="Sintomas">
+            <EntityTypeMapping TypeName="GD2C2016Model.Sintoma">
+              <MappingFragment StoreEntitySet="Sintoma">
+                <ScalarProperty Name="sintoma_id" ColumnName="sintoma_id" />
+                <ScalarProperty Name="consultamedica_id" ColumnName="consultamedica_id" />
+                <ScalarProperty Name="sintoma_descripcion" ColumnName="sintoma_descripcion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1503,13 +1700,10 @@
                 <ScalarProperty Name="turno_id" ColumnName="turno_id" />
                 <ScalarProperty Name="afiliado_id" ColumnName="afiliado_id" />
                 <ScalarProperty Name="profesional_id" ColumnName="profesional_id" />
-                <ScalarProperty Name="bono_id" ColumnName="bono_id" />
                 <ScalarProperty Name="especialidad_id" ColumnName="especialidad_id" />
-                <ScalarProperty Name="turno_fecha_hora" ColumnName="turno_fecha_hora" />
+                <ScalarProperty Name="turno_fecha" ColumnName="turno_fecha" />
                 <ScalarProperty Name="turno_hora" ColumnName="turno_hora" />
                 <ScalarProperty Name="turno_cancelado" ColumnName="turno_cancelado" />
-                <ScalarProperty Name="turno_diagnostico" ColumnName="turno_diagnostico" />
-                <ScalarProperty Name="turno_sintomas" ColumnName="turno_sintomas" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1521,6 +1715,25 @@
                 <ScalarProperty Name="usuario_password" ColumnName="usuario_password" />
                 <ScalarProperty Name="usuario_intentos" ColumnName="usuario_intentos" />
                 <ScalarProperty Name="usuario_activo" ColumnName="usuario_activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_ListarEsp">
+            <EntityTypeMapping TypeName="GD2C2016Model.V_ListarEsp">
+              <MappingFragment StoreEntitySet="V_ListarEsp">
+                <ScalarProperty Name="especialidad_id" ColumnName="especialidad_id" />
+                <ScalarProperty Name="especialidad_nombre" ColumnName="especialidad_nombre" />
+                <ScalarProperty Name="tipoespecialidad_id" ColumnName="tipoespecialidad_id" />
+                <ScalarProperty Name="tipoespecialidad_nombre" ColumnName="tipoespecialidad_nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_ListarProf">
+            <EntityTypeMapping TypeName="GD2C2016Model.V_ListarProf">
+              <MappingFragment StoreEntitySet="V_ListarProf">
+                <ScalarProperty Name="profesional_id" ColumnName="profesional_id" />
+                <ScalarProperty Name="profesional_apellido" ColumnName="profesional_apellido" />
+                <ScalarProperty Name="profesional_nombre" ColumnName="profesional_nombre" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1548,6 +1761,25 @@
               <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionName="GD2C2016Model.Store.F_ProfPorEsp" FunctionImportName="F_ProfPorEsp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GD2C2016Model.F_ProfPorEsp_Result">
+                <ScalarProperty Name="profesional_id" ColumnName="profesional_id" />
+                <ScalarProperty Name="profesional_apellido" ColumnName="profesional_apellido" />
+                <ScalarProperty Name="profesional_nombre" ColumnName="profesional_nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="GD2C2016Model.Store.F_TurnosProf" FunctionImportName="F_TurnosProf">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GD2C2016Model.F_TurnosProf_Result">
+                <ScalarProperty Name="afiliado_id" ColumnName="afiliado_id" />
+                <ScalarProperty Name="afiliado_apellido" ColumnName="afiliado_apellido" />
+                <ScalarProperty Name="afiliado_nombre" ColumnName="afiliado_nombre" />
+                <ScalarProperty Name="turno_hora" ColumnName="turno_hora" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionName="GD2C2016Model.Store.FechasDisponibles" FunctionImportName="FechasDisponibles">
             <ResultMapping>
               <ComplexTypeMapping TypeName="GD2C2016Model.FechasDisponibles_Result">
@@ -1555,8 +1787,14 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="GD2C2016Model.Store.HorasDisponibles" FunctionImportName="HorasDisponibles">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GD2C2016Model.HorasDisponibles_Result">
+                <ScalarProperty Name="Hora" ColumnName="Hora" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CompraBono" FunctionName="GD2C2016Model.Store.CompraBono" />
-          <FunctionImportMapping FunctionImportName="HorasDisponibles" FunctionName="GD2C2016Model.Store.HorasDisponibles" />
           <FunctionImportMapping FunctionImportName="HorasDisponibless" FunctionName="GD2C2016Model.Store.HorasDisponibless" />
         </EntityContainerMapping>
       </Mapping>

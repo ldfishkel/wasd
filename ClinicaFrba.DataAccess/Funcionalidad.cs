@@ -28,7 +28,7 @@ namespace ClinicaFrba.DataAccess
 
         public override string ToString()
         {
-            return funcionalidad_nombre.Trim();
+            return funcionalidad_nombre;
         }
     }
 }

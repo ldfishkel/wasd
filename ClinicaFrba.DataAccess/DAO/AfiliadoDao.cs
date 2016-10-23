@@ -15,9 +15,9 @@
             return _ds.Afiliadoes.ToList();
         }
 
-        public List<TipoDocumento> getTipoDeDocumentos()
+        public string[] getTipoDeDocumentos()
         {
-            return _ds.TipoDocumentoes.ToList();
+            return new string[] { "DNI" };
         }
 
         public List<Turno> GetTurnos(int usuario_id)
@@ -72,9 +72,15 @@
             _ds.CompraBono(afiliado_id, cant, plan_id);
         }
 
-        public Afiliado GetAfiliado(int tipoDocId, int nroDoc)
+        public Afiliado GetAfiliado(string tipoDoc, int nroDoc)
         {
-            return _ds.Afiliadoes.SingleOrDefault(x => x.TipoDocumento.tipodocumento_id== tipoDocId && x.afiliado_numero_documento == nroDoc);
+            return _ds.Afiliadoes.SingleOrDefault(x => x.afiliado_tipodocumento == tipoDoc && x.afiliado_numero_documento == nroDoc);
+        }
+
+        public void PedirTurno(Turno turno)
+        {
+            _ds.Turnoes.Add(turno);
+            _ds.SaveChanges();
         }
     }
 }

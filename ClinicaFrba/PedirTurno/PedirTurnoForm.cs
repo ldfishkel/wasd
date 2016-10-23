@@ -11,69 +11,35 @@
     public partial class PedirTurnoForm : Form
     {
         private ProfesionalDao _profesionalDao;
+        private AfiliadoDao _afiliadoDao;
+        private Afiliado _afiliado;
 
-        private IDictionary<string, int> _horasNumero;
+        private List<Hora> _horas;
 
-        public PedirTurnoForm(ProfesionalDao profesionalDao)
+        public PedirTurnoForm(ProfesionalDao profesionalDao, AfiliadoDao afiliadoDao)
         {
             _profesionalDao = profesionalDao;
+            _afiliadoDao = afiliadoDao;
         }
 
         public Panel Init(MenuForm parent)
         {
             InitializeComponent();
 
-            InitializeHoras();
             parent.Text = "Pedir Turno";
             parent.FixBounds(_panel);
+
+            _horas = _profesionalDao.GetHoras();
+            _afiliado = parent.User().Afiliadoes.FirstOrDefault();
 
             InitializeCombo();
 
             return _panel;
         }
 
-        private void InitializeHoras()
-        {
-            _horasNumero = new Dictionary<string, int>()
-            {
-               { "07:00", 0 },
-               { "07:30", 1 },
-               { "08:00", 2 },
-               { "08:30", 3 },
-               { "09:00", 4 },
-               { "09:30", 5 },
-               { "10:00", 6 },
-               { "10:30", 7 },
-               { "11:00", 8 },
-               { "11:30", 9 },
-               { "12:00", 10 },
-               { "12:30", 11 },
-               { "13:00", 12 },
-               { "13:30", 13 },
-               { "14:00", 14 },
-               { "14:30", 15 },
-               { "15:00", 16 },
-               { "15:30", 17 },
-               { "16:00", 18 },
-               { "16:30", 19 },
-               { "17:00", 20 },
-               { "17:30", 21 },
-               { "18:00", 22 },
-               { "18:30", 23 },
-               { "19:00", 24 },
-               { "19:30", 25 },
-               { "20:00", 26 }
-            };
-        }
-
         private void InitializeCombo()
         {
             _especialidad.Items.AddRange(_profesionalDao.GetEspecialidades().ToArray());
-        }
-
-        private void CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         private void EspecialidadChanged(object sender, EventArgs e)
@@ -110,11 +76,22 @@
             List<int> horas = _profesionalDao.GetHorasDisponibles((Profesional)_profesionalCombo.SelectedItem, (Especialidad)_especialidad.SelectedItem, (string)_fecha.SelectedItem);
 
             _hora.Items.Clear();
-            _hora.Items.AddRange(horas.Select(z => _horasNumero.FirstOrDefault(x => x.Value == z).Key).ToArray());
+            _hora.Items.AddRange(_horas.Where(z => horas.Any(y => y == z.hora_id)).ToArray());
         }
 
         private void SolicitarTurnoClick(object sender, EventArgs e)
         {
+            Turno turno = new Turno();
+
+            turno.afiliado_id = _afiliado.afiliado_id;
+            turno.profesional_id = ((Profesional)_profesionalCombo.SelectedItem).profesional_id;
+            turno.especialidad_id = ((Especialidad)_especialidad.SelectedItem).especialidad_id;
+            var splitted = ((string)_fecha.SelectedItem).Split('/').Select(x => Int32.Parse(x)).ToArray();
+            turno.turno_fecha = new DateTime(splitted[2], splitted[1], splitted[0]);
+            turno.turno_hora = ((Hora)_hora.SelectedItem).hora_comienzo;
+
+            _afiliadoDao.PedirTurno(turno);
+
             MessageBox.Show("Turno Solicitado");
         }
     }

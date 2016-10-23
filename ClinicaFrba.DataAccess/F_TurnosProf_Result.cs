@@ -10,20 +10,12 @@
 namespace ClinicaFrba.DataAccess
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Turno
+    public partial class F_TurnosProf_Result
     {
-        public int turno_id { get; set; }
         public int afiliado_id { get; set; }
-        public int profesional_id { get; set; }
-        public int especialidad_id { get; set; }
-        public System.DateTime turno_fecha { get; set; }
+        public string afiliado_apellido { get; set; }
+        public string afiliado_nombre { get; set; }
         public System.TimeSpan turno_hora { get; set; }
-        public string turno_cancelado { get; set; }
-    
-        public virtual Afiliado Afiliado { get; set; }
-        public virtual Especialidad Especialidad { get; set; }
-        public virtual Profesional Profesional { get; set; }
     }
 }

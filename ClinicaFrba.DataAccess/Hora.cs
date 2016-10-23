@@ -12,26 +12,26 @@ namespace ClinicaFrba.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class TipoDocumento
+    public partial class Hora
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TipoDocumento()
+        public Hora()
         {
-            this.Afiliadoes = new HashSet<Afiliado>();
-            this.Profesionals = new HashSet<Profesional>();
+            this.Agenda = new HashSet<Agendum>();
+            this.Agenda1 = new HashSet<Agendum>();
         }
     
-        public int tipodocumento_id { get; set; }
-        public string tipodocumento_nombre { get; set; }
+        public int hora_id { get; set; }
+        public System.TimeSpan hora_comienzo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Afiliado> Afiliadoes { get; set; }
+        public virtual ICollection<Agendum> Agenda { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Profesional> Profesionals { get; set; }
+        public virtual ICollection<Agendum> Agenda1 { get; set; }
 
         public override string ToString()
         {
-            return tipodocumento_nombre.Trim();
+            return hora_comienzo.Hours + ":" + hora_comienzo.Minutes;
         }
     }
 }

@@ -24,8 +24,8 @@ namespace ClinicaFrba.DataAccess
     
         public int profesional_id { get; set; }
         public int usuario_id { get; set; }
-        public int sexo_id { get; set; }
-        public int tipodocumento_id { get; set; }
+        public string profesional_sexo { get; set; }
+        public string profesional_tipodocumento { get; set; }
         public int profesional_numero_documento { get; set; }
         public string profesional_nombre { get; set; }
         public string profesional_apellido { get; set; }
@@ -37,8 +37,6 @@ namespace ClinicaFrba.DataAccess
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Agendum> Agenda { get; set; }
-        public virtual Sexo Sexo { get; set; }
-        public virtual TipoDocumento TipoDocumento { get; set; }
         public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Turno> Turnoes { get; set; }
@@ -47,7 +45,7 @@ namespace ClinicaFrba.DataAccess
 
         public override string ToString()
         {
-            return profesional_nombre?.Trim() + " " + profesional_apellido?.Trim(); 
+            return profesional_nombre?.Trim() + " " + profesional_apellido?.Trim();
         }
     }
 }
