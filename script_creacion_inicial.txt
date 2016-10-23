@@ -203,8 +203,7 @@ CREATE TABLE "WASD".Bono (
 	planmedico_id INT NOT NULL REFERENCES "WASD".PlanMedico(planmedico_id),
 	afiliado_id INT NOT NULL REFERENCES "WASD".Afiliado(afiliado_id),
 	compra_id INT NOT NULL REFERENCES "WASD".Compra(compra_id),
-	bono_afiliado_usado INT REFERENCES "WASD".Afiliado(afiliado_id),
-	bono_fecha_uso DATE
+	bono_afiliado_usado INT REFERENCES "WASD".Afiliado(afiliado_id)
 );
 
 CREATE TABLE "WASD".EspecialidadPorProfesional (
@@ -256,7 +255,8 @@ CREATE TABLE "WASD".Turno (
 CREATE TABLE "WASD".ConsultaMedica (
 	consultamedica_id INT PRIMARY KEY,
 	bono_id INT NOT NULL REFERENCES "WASD".Bono(bono_id),
-	consultamedica_fecha_hora DATETIME NOT NULL
+	consultamedica_fecha_hora DATETIME NOT NULL,
+	consultamedica_ocurrio BIT DEFAULT 0
 );
 
 CREATE TABLE "WASD".Sintoma (
@@ -531,10 +531,8 @@ GO
 
 /**BONOS**/
 SET IDENTITY_INSERT "WASD".Bono ON
-INSERT INTO "WASD".Bono(bono_id, planmedico_id, afiliado_id, compra_id, bono_afiliado_usado,
-bono_fecha_uso)
-SELECT m1.Bono_Consulta_Numero, m1.Plan_Med_Codigo, a.afiliado_id, c.compra_id, a.afiliado_id,
-(SELECT CAST(m1.Turno_Fecha AS DATE))
+INSERT INTO "WASD".Bono(bono_id, planmedico_id, afiliado_id, compra_id, bono_afiliado_usado)
+SELECT m1.Bono_Consulta_Numero, m1.Plan_Med_Codigo, a.afiliado_id, c.compra_id, a.afiliado_id
 FROM WASD.Afiliado a, WASD.Compra c,
 (SELECT
 	MAX(Plan_Med_Codigo) as Plan_Med_Codigo,
@@ -618,15 +616,13 @@ BEGIN
 	INSERT INTO "WASD".Compra (afiliado_id, compra_fecha_hora, compra_cantidad, compra_monto)
      VALUES (@afiliadoId, @fecha, @cant, @monto);
 
-    select TOP 1 @compra_id = compra_id 
-    from "WASD".Compra
-    ORDER BY compra_id desc;
+    SET @compra_id = (SELECT SCOPE_IDENTITY())
 	
 	WHILE (@intFlag <= @cant)
 	BEGIN
 	
-		INSERT INTO "WASD".Bono([planmedico_id],[afiliado_id],[compra_id],[bono_afiliado_usado],[bono_fecha_uso])
-		VALUES(@planMedicoId, @afiliadoId, @compra_id, NULL, NULL);
+		INSERT INTO "WASD".Bono([planmedico_id],[afiliado_id],[compra_id],[bono_afiliado_usado])
+		VALUES(@planMedicoId, @afiliadoId, @compra_id, NULL);
 		
 		SET @intFlag = @intFlag + 1
 	END
@@ -843,31 +839,6 @@ IF EXISTS (
      DROP PROCEDURE WASD.TurnosProfesionalEspecialidad;
 GO
 
-CREATE PROC "WASD".TurnosProfesionalEspecialidad
-(
-	@profesionalId INT, 
-	@especialidadId INT
-)
-
-AS BEGIN
-	SELECT
-		t.* 
-	FROM
-		"WASD".Turno t
-	WHERE
-		t.profesional_id = @profesionalId AND
-		t.especialidad_id = @especialidadId AND
-		t.turno_fecha NOT IN (SELECT 
-								bono_fecha_uso
-							FROM
-								"WASD".Bono b
-							WHERE
-								b.afiliado_id = t.afiliado_id AND
-								b.bono_fecha_uso <> NULL) --redundante
-		
-END;
-GO
-
 IF OBJECT_ID(N'WASD.BonosNroAfiliado', N'TF') IS NOT NULL
 DROP FUNCTION "WASD".BonosNroAfiliado;
 GO
@@ -883,6 +854,7 @@ AS RETURN
 	WHERE 
 		b.afiliado_id = a.afiliado_id AND
 		CAST(ROUND(a.afiliado_numero / 100, 0, 1) AS INT) = CAST(ROUND(@nroAfiliado / 100, 0, 1) AS INT)
+		AND a.planmedico_id = b.planmedico_id
 
 /**TRIGGERS**/
 IF EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[WASD].[RolDeleted]'))
@@ -903,33 +875,3 @@ AS BEGIN
 END;
 GO
 
-IF EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[WASD].[BonoUsado]'))
-DROP TRIGGER [WASD].[BonoUsado];
-GO
-
-CREATE TRIGGER "WASD".BonoUsado
-ON "WASD".Bono
-FOR UPDATE
-AS BEGIN
-  
-  DECLARE @bonoId INT, @afiliadoId INT, @fecha DATE, @hora TIME;
-  
-  SELECT 
-	@bonoId = inserted.bono_id,
-	@afiliadoId = inserted.afiliado_id
-  FROM 
-	inserted;
-  
-  SELECT
-	@fecha = turno_fecha,
-	@hora = turno_hora
-  FROM
-	"WASD".Turno
-  WHERE
-	afiliado_id = @afiliadoId;
-    
-    INSERT INTO "WASD".ConsultaMedica ([bono_id],[consultamedica_fecha_hora])VALUES 
-    (@bonoId, CAST(@fecha AS DATETIME) + CAST(@hora AS DATETIME));
-    
-END;
-GO
