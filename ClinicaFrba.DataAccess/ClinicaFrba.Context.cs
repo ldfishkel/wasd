@@ -81,7 +81,7 @@ namespace ClinicaFrba.DataAccess
         }
     
         [DbFunction("Database4", "HorasDisponibles")]
-        public virtual IQueryable<Nullable<int>> HorasDisponibles(Nullable<int> profesionalId, Nullable<int> especialidadId, Nullable<System.DateTime> fecha)
+        public virtual IQueryable<Nullable<int>> HorasDisponibles(Nullable<int> profesionalId, Nullable<int> especialidadId, string fechaStr)
         {
             var profesionalIdParameter = profesionalId.HasValue ?
                 new ObjectParameter("profesionalId", profesionalId) :
@@ -91,11 +91,28 @@ namespace ClinicaFrba.DataAccess
                 new ObjectParameter("especialidadId", especialidadId) :
                 new ObjectParameter("especialidadId", typeof(int));
     
-            var fechaParameter = fecha.HasValue ?
-                new ObjectParameter("fecha", fecha) :
-                new ObjectParameter("fecha", typeof(System.DateTime));
+            var fechaStrParameter = fechaStr != null ?
+                new ObjectParameter("fechaStr", fechaStr) :
+                new ObjectParameter("fechaStr", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Nullable<int>>("[Database4].[HorasDisponibles](@profesionalId, @especialidadId, @fecha)", profesionalIdParameter, especialidadIdParameter, fechaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Nullable<int>>("[Database4].[HorasDisponibles](@profesionalId, @especialidadId, @fechaStr)", profesionalIdParameter, especialidadIdParameter, fechaStrParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> HorasDisponibless(Nullable<int> profesionalId, Nullable<int> especialidadId, string fechaStr)
+        {
+            var profesionalIdParameter = profesionalId.HasValue ?
+                new ObjectParameter("profesionalId", profesionalId) :
+                new ObjectParameter("profesionalId", typeof(int));
+    
+            var especialidadIdParameter = especialidadId.HasValue ?
+                new ObjectParameter("especialidadId", especialidadId) :
+                new ObjectParameter("especialidadId", typeof(int));
+    
+            var fechaStrParameter = fechaStr != null ?
+                new ObjectParameter("fechaStr", fechaStr) :
+                new ObjectParameter("fechaStr", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("HorasDisponibless", profesionalIdParameter, especialidadIdParameter, fechaStrParameter);
         }
     }
 }

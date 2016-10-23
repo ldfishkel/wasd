@@ -551,14 +551,19 @@
         <Function Name="HorasDisponibles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="WASD">
           <Parameter Name="profesionalId" Type="int" Mode="In" />
           <Parameter Name="especialidadId" Type="int" Mode="In" />
-          <Parameter Name="fecha" Type="date" Mode="In" />
+          <Parameter Name="fechaStr" Type="varchar" Mode="In" />
           <ReturnType>
             <CollectionType>
               <RowType>
-                <Property Name="Hora" Type="int" Nullable="false" />
+                <Property Name="Hora" Type="int" />
               </RowType>
             </CollectionType>
           </ReturnType>
+        </Function>
+        <Function Name="HorasDisponibless" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="WASD">
+          <Parameter Name="profesionalId" Type="int" Mode="In" />
+          <Parameter Name="especialidadId" Type="int" Mode="In" />
+          <Parameter Name="fechaStr" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="GD2C2016ModelStoreContainer">
           <EntitySet Name="Afiliado" EntityType="Self.Afiliado" Schema="WASD" store:Type="Tables" />
@@ -1322,7 +1327,12 @@
           <FunctionImport Name="HorasDisponibles" IsComposable="true" ReturnType="Collection(Int32)">
             <Parameter Name="profesionalId" Mode="In" Type="Int32" />
             <Parameter Name="especialidadId" Mode="In" Type="Int32" />
-            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaStr" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="HorasDisponibless" ReturnType="Collection(Int32)">
+            <Parameter Name="profesionalId" Mode="In" Type="Int32" />
+            <Parameter Name="especialidadId" Mode="In" Type="Int32" />
+            <Parameter Name="fechaStr" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
       </Schema>
@@ -1547,6 +1557,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CompraBono" FunctionName="GD2C2016Model.Store.CompraBono" />
           <FunctionImportMapping FunctionImportName="HorasDisponibles" FunctionName="GD2C2016Model.Store.HorasDisponibles" />
+          <FunctionImportMapping FunctionImportName="HorasDisponibless" FunctionName="GD2C2016Model.Store.HorasDisponibless" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

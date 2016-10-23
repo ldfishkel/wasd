@@ -99,9 +99,7 @@
 
         public List<int> GetHorasDisponibles(Profesional profesional, Especialidad especialidad, string fecha)
         {
-            return _ds.HorasDisponibles(profesional.profesional_id, especialidad.especialidad_id, 
-                DateTime.ParseExact(fecha, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture).Date)
-                .Select(x => x.Value).ToList();
+            return _ds.HorasDisponibless(profesional.profesional_id, especialidad.especialidad_id, fecha).Select(x => x.Value).ToList();
         }
 
         public List<Profesional> GetProfesionales(Especialidad especialidad)
