@@ -7,7 +7,9 @@ GO
 
 SET LANGUAGE Spanish
 
+/****************************************************************************************************************/
 /**CREAR SCHEMA**/
+/****************************************************************************************************************/
 IF NOT EXISTS
 (
   SELECT  schema_name
@@ -19,7 +21,9 @@ BEGIN
   EXEC sp_executesql N'CREATE SCHEMA "WASD" AUTHORIZATION gd'
 END
 
+/****************************************************************************************************************/
 /**BORRAR TABLAS**/
+/****************************************************************************************************************/
 IF OBJECT_ID('WASD.Agenda', 'U') IS NOT NULL
   DROP TABLE "WASD".Agenda
 GO
@@ -104,7 +108,9 @@ IF OBJECT_ID('WASD.Usuario', 'U') IS NOT NULL
   DROP TABLE "WASD".Usuario
 GO
 
+/****************************************************************************************************************/
 /**CREAR TABLAS**/
+/****************************************************************************************************************/
 
 CREATE TABLE "WASD".Usuario (
 	usuario_id INT PRIMARY KEY IDENTITY(1,1),
@@ -271,7 +277,9 @@ CREATE TABLE "WASD".Diagnostico (
 	diagnostico_descripcion VARCHAR(255) NOT NULL
 );
 
-/**CARGA**/
+/****************************************************************************************************************/
+/**SEED INICIAL**/
+/****************************************************************************************************************/
 SET IDENTITY_INSERT "WASD".EstadoCivil ON
 INSERT INTO "WASD".EstadoCivil(estadocivil_id, estadocivil_nombre) VALUES
 (1, 'Soltero/a'),
@@ -358,7 +366,10 @@ INSERT INTO "WASD".Hora VALUES
 (25, '19:00'),
 (26, '19:30');
 
+/****************************************************************************************************************/
 /**MIGRACION**/
+/****************************************************************************************************************/
+
 /**PLANES**/
 SET IDENTITY_INSERT "WASD".PlanMedico ON
 INSERT INTO "WASD".PlanMedico(planmedico_id, planmedico_nombre, planmedico_cuota, planmedico_precio_bono)
@@ -590,138 +601,80 @@ WHERE Consulta_Enfermedades IS NOT NULL
 ORDER BY Turno_Numero ASC;
 GO
 
-/**STORED PROCEDURES**/
-
 
 /****************************************************************************************************************/
 /**VISTAS**/
-/****************************************************************************************************************/
-/**LISTADO DE PROFESIONALES**/
-/****************************************************************************************************************/
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE name = 'V_ListarProf' AND xtype = 'V')
-DROP VIEW WASD.V_ListarProf;
-GO
+/***********************************************************************************************************/
 
-CREATE VIEW "WASD".V_ListarProf
-AS
-	SELECT profesional_id, profesional_apellido, profesional_nombre
-	FROM "WASD".Profesional;
-GO
-
-/****************************************************************************************************************/
 /**LISTADO DE ESPECIALIDADES**/
-/****************************************************************************************************************/
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE name = 'V_ListarEsp' AND xtype = 'V')
-DROP VIEW WASD.V_ListarEsp;
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE name = 'ListaEspecialidades' AND xtype = 'V')
+	DROP VIEW WASD.ListaEspecialidades;
 GO
 
-CREATE VIEW "WASD".V_ListarEsp
+CREATE VIEW "WASD".ListaEspecialidades
 AS
-	SELECT e.especialidad_id, e.especialidad_nombre, t.tipoespecialidad_id, t.tipoespecialidad_nombre
-	FROM "WASD".Especialidad e
-	JOIN "WASD".TipoEspecialidad t
-	ON e.tipoespecialidad_id = t.tipoespecialidad_id;
+	SELECT 
+		*
+	FROM 
+		"WASD".Especialidad;
+GO
+
+/**LISTADO DE TIPO DE ESPECIALIDADES**/
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE name = 'ListaTipoEspecialidades' AND xtype = 'V')
+	DROP VIEW WASD.ListaTipoEspecialidades;
+GO
+
+CREATE VIEW "WASD".ListaTipoEspecialidades
+AS
+	SELECT 
+		*
+	FROM 
+		"WASD".TipoEspecialidad;
 GO
 
 /****************************************************************************************************************/
-/**FUNCIONES, PROCEDURES Y TRIGGERS**/
+/**FUNCIONES**/
 /****************************************************************************************************************/
+
 /**LISTADO DE PROFESIONALES POR ESPECIALIDAD**/
-/****************************************************************************************************************/
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE name = 'F_ProfPorEsp' AND xtype = 'IF')
-DROP FUNCTION WASD.F_ProfPorEsp;
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE name = 'ProfesionalesDeEspecialidad' AND xtype = 'IF')
+	DROP FUNCTION WASD.ProfesionalesDeEspecialidad;
 GO
 
-CREATE FUNCTION "WASD".F_ProfPorEsp(@especialidad INT) RETURNS TABLE
+CREATE FUNCTION "WASD".ProfesionalesDeEspecialidad (@especialidad INT) RETURNS TABLE
 AS RETURN (
-	SELECT p.profesional_id, p.profesional_apellido, p.profesional_nombre
-	FROM WASD.EspecialidadPorProfesional e
-	JOIN WASD.Profesional p
-	ON e.profesional_id = p.profesional_id
-	WHERE e.especialidad_id = @especialidad
+	SELECT 
+		p.profesional_id, 
+		p.profesional_apellido, 
+		p.profesional_nombre
+	FROM 
+		WASD.Profesional p,
+		WASD.EspecialidadPorProfesional e
+	WHERE
+		p.profesional_id = e.profesional_id AND
+		e.especialidad_id = @especialidad
 );
 GO
 
-/****************************************************************************************************************/
-/**COMPRA DE BONOS**/
-/****************************************************************************************************************/
-IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'CompraBono' AND type = 'P')
-DROP PROCEDURE WASD.CompraBono;
+/**LISTADO DE ESPECIALIDADES POR TIO DE ESPECIALIDAD**/
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE name = 'EspecialidadesDeTipo' AND xtype = 'IF')
+	DROP FUNCTION WASD.EspecialidadesDeTipo;
 GO
 
-CREATE PROCEDURE "WASD".CompraBono @afiliadoId INT, @cant INT, @planMedicoId INT
-AS
-BEGIN
-	DECLARE @fecha DATETIME = GETDATE(); --parametrizar este campo
-	DECLARE @monto MONEY;
-	DECLARE @compra_id INT
-	DECLARE @intFlag INT = 1;
-
+CREATE FUNCTION "WASD".EspecialidadesDeTipo(@tipoEspecialidad INT) RETURNS TABLE
+AS RETURN (
 	SELECT 
-		@monto = planmedico_precio_bono * @cant
-    FROM 
-    	"WASD".PlanMedico
-    WHERE 
-    	planmedico_id = @planMedicoId; 
-
-	INSERT INTO 
-		"WASD".Compra (afiliado_id, compra_fecha_hora, compra_cantidad, compra_monto)
-    VALUES 
-    	(@afiliadoId, @fecha, @cant, @monto);
-
-    SET @compra_id = (SELECT SCOPE_IDENTITY())
-	
-	WHILE (@intFlag <= @cant)
-	BEGIN
-	
-		INSERT INTO 
-			"WASD".Bono(planmedico_id, afiliado_id, compra_id, bono_afiliado_usado)
-		VALUES
-			(@planMedicoId, @afiliadoId, @compra_id, NULL);
-		
-		SET @intFlag = @intFlag + 1
-	END
-END;
-GO
-
-/****************************************************************************************************************/
-/**REGISTRO DE LLEGADA, USO DE BONO, CREACION DE CONSULTA MEDICA**/
-/****************************************************************************************************************/
-IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'RegistroLlegada' AND type = 'P')
-DROP PROCEDURE WASD.RegistroLlegada;
-GO
-
-CREATE PROCEDURE "WASD".RegistroLlegada @turnoId INT, @bonoId INT, @fechaActual DATETIME
-AS
-BEGIN
-	DECLARE @afiliadoId INT;
-
-	SELECT 
-		@afiliadoId = afiliado_id
+		*
 	FROM 
-		WASD.Turno
+		WASD.Especialidad
 	WHERE 
-		turno_id = @turnoId;
-
-	UPDATE 
-		WASD.Bono
-	SET
-		bono_afiliado_usado = @afiliadoId
-	WHERE
-		bono_id = @bonoId;
-
-	INSERT INTO 
-		WASD.ConsultaMedica (consultamedica_id,	bono_id, consultamedica_fecha_hora, consultamedica_ocurrio)
-	VALUES
-		(@turnoId, @bonoId, @fechaActual, 0);
-END;
+	 	tipoespecialidad_id = @tipoEspecialidad
+);
 GO
 
-/****************************************************************************************************************/
 /**FECHAS DISPONIBLES DE UN PROFESIONAL EN UNA ESPECIALIDAD SEGUN SU AGENDA**/
-/****************************************************************************************************************/
 IF OBJECT_ID(N'WASD.FechasDisponibles', N'TF') IS NOT NULL
-DROP FUNCTION "WASD".FechasDisponibles;
+	DROP FUNCTION "WASD".FechasDisponibles;
 GO
 
 CREATE FUNCTION "WASD".FechasDisponibles (@profesionalId INT, @especialidadId INT) RETURNS @retFechas TABLE (Fecha DATE NOT NULL)
@@ -781,9 +734,135 @@ AS BEGIN
 END;
 GO
 
+/**BONOS DISPONIBLES PARA USAR DE UN AFILIADO Y SU GRUPO FAMILIAR**/
+IF EXISTS (SELECT * FROM sysobjects WHERE id = object_id(N'WASD.BonosNroAfiliado') AND xtype IN (N'FN', N'IF', N'TF')) 
+	DROP FUNCTION "WASD".BonosNroAfiliado
+GO
+
+CREATE FUNCTION "WASD".BonosNroAfiliado (@nroAfiliado INT) RETURNS TABLE 
+AS RETURN 
+	SELECT 
+		b.bono_id 
+	FROM 
+		"WASD".Bono b,
+		"WASD".Afiliado a
+	WHERE 
+		b.bono_afiliado_usado IS NULL AND
+		b.afiliado_id = a.afiliado_id AND
+		CAST(ROUND(a.afiliado_numero / 100, 0, 1) AS INT) = CAST(ROUND(@nroAfiliado / 100, 0, 1) AS INT) AND
+		a.planmedico_id = b.planmedico_id;
+GO
+
+/**LISTA DE TURNOS DEL DIA DE UN PROFESIONAL FILTRADO POR ESPECIALIDAD PARA EL REGISTRO DE LLEGADA**/
+IF OBJECT_ID(N'WASD.TurnosProfesionalEspecialidad', N'TF') IS NOT NULL
+	DROP FUNCTION "WASD".TurnosProfesionalEspecialidad;
+GO
+
+CREATE FUNCTION "WASD".TurnosProfesionalEspecialidad (@profesionalId INT, @especialidadId INT, @fecha VARCHAR(10)) RETURNS TABLE 
+AS RETURN 
+	SELECT
+		t.*, 
+		a.afiliado_nombre, 
+		a.afiliado_apellido, 
+		a.afiliado_numero, 
+		a.afiliado_numero_documento,
+		e.especialidad_nombre
+	FROM
+		"WASD".Turno t, 
+		"WASD".Afiliado a, 
+		"WASD".Especialidad e
+	WHERE
+		t.especialidad_id = e.especialidad_id AND
+		t.afiliado_id = a.afiliado_id AND
+		t.profesional_id = @profesionalId AND
+		t.especialidad_id = @especialidadId AND
+		t.turno_fecha = CONVERT(DATE,@fecha, 103) AND
+		t.turno_id NOT IN (SELECT 
+								consultamedica_id
+							FROM
+								"WASD".ConsultaMedica
+							WHERE
+								profesional_id = t.profesional_id);
+GO
+
+
 /****************************************************************************************************************/
+/**PROCEDURES**/
+/****************************************************************************************************************/
+
+/**COMPRA DE BONOS**/
+IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'CompraBono' AND type = 'P')
+DROP PROCEDURE WASD.CompraBono;
+GO
+
+CREATE PROCEDURE "WASD".CompraBono @afiliadoId INT, @cant INT, @planMedicoId INT
+AS
+BEGIN
+	DECLARE @fecha DATETIME = GETDATE(); --parametrizar este campo
+	DECLARE @monto MONEY;
+	DECLARE @compra_id INT
+	DECLARE @intFlag INT = 1;
+
+	SELECT 
+		@monto = planmedico_precio_bono * @cant
+    FROM 
+    	"WASD".PlanMedico
+    WHERE 
+    	planmedico_id = @planMedicoId; 
+
+	INSERT INTO 
+		"WASD".Compra (afiliado_id, compra_fecha_hora, compra_cantidad, compra_monto)
+    VALUES 
+    	(@afiliadoId, @fecha, @cant, @monto);
+
+    SET @compra_id = (SELECT SCOPE_IDENTITY())
+	
+	WHILE (@intFlag <= @cant)
+	BEGIN
+	
+		INSERT INTO 
+			"WASD".Bono(planmedico_id, afiliado_id, compra_id, bono_afiliado_usado)
+		VALUES
+			(@planMedicoId, @afiliadoId, @compra_id, NULL);
+		
+		SET @intFlag = @intFlag + 1
+	END
+END;
+GO
+
+/**REGISTRO DE LLEGADA, USO DE BONO, CREACION DE CONSULTA MEDICA**/
+IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'RegistroLlegada' AND type = 'P')
+DROP PROCEDURE WASD.RegistroLlegada;
+GO
+
+CREATE PROCEDURE "WASD".RegistroLlegada @turnoId INT, @bonoId INT, @fechaActual DATETIME
+AS
+BEGIN
+	DECLARE @afiliadoId INT;
+
+	SELECT 
+		@afiliadoId = afiliado_id
+	FROM 
+		WASD.Turno
+	WHERE 
+		turno_id = @turnoId;
+
+	UPDATE 
+		WASD.Bono
+	SET
+		bono_afiliado_usado = @afiliadoId
+	WHERE
+		bono_id = @bonoId;
+
+	INSERT INTO 
+		WASD.ConsultaMedica (consultamedica_id,	bono_id, consultamedica_fecha_hora, consultamedica_ocurrio)
+	VALUES
+		(@turnoId, @bonoId, @fechaActual, 0);
+END;
+GO
+
+
 /**HORAS DISPONIBLES DADA UNA FECHA DISPONIBLE **/
-/****************************************************************************************************************/
 IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'HorasDisponibles' AND type = 'P')
      DROP PROCEDURE WASD.HorasDisponibles;
 GO
@@ -854,61 +933,10 @@ END;
 GO
 
 /****************************************************************************************************************/
-/**LISTA DE TURNOS DEL DIA DE UN PROFESIONAL FILTRADO POR ESPECIALIDAD PARA EL REGISTRO DE LLEGADA**/
+/**TRIGGERS**/
 /****************************************************************************************************************/
-IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'TurnosProfesionalEspecialidad' AND type = 'P')
-     DROP PROCEDURE WASD.TurnosProfesionalEspecialidad;
-GO
 
-CREATE PROC "WASD".TurnosProfesionalEspecialidad (@profesionalId INT, @especialidadId INT, @fecha VARCHAR(10))
-AS BEGIN
-	SELECT
-		t.*, 
-		a.afiliado_nombre, 
-		a.afiliado_apellido, 
-		a.afiliado_numero, 
-		a.afiliado_numero_documento
-	FROM
-		"WASD".Turno t, "WASD".Afiliado a
-	WHERE
-		t.afiliado_id = a.afiliado_id AND
-		t.profesional_id = @profesionalId AND
-		t.especialidad_id = @especialidadId AND
-		t.turno_fecha = CONVERT(DATE,@fecha, 103) AND
-		t.turno_id NOT IN (SELECT 
-								consultamedica_id
-							FROM
-								"WASD".ConsultaMedica
-							WHERE
-								profesional_id = t.profesional_id)
-		
-END;
-GO
-
-/****************************************************************************************************************/
-/**BONOS DISPONIBLES PARA USAR DE UN AFILIADO Y SU GRUPO FAMILIAR**/
-/****************************************************************************************************************/
-IF EXISTS (SELECT * FROM sysobjects WHERE id = object_id(N'WASD.BonosNroAfiliado') AND xtype IN (N'FN', N'IF', N'TF')) 
-	DROP FUNCTION "WASD".BonosNroAfiliado
-GO
-
-CREATE FUNCTION "WASD".BonosNroAfiliado (@nroAfiliado INT) RETURNS TABLE 
-AS RETURN 
-	SELECT 
-		b.bono_id 
-	FROM 
-		"WASD".Bono b,
-		"WASD".Afiliado a
-	WHERE 
-		b.bono_afiliado_usado = NULL AND
-		b.afiliado_id = a.afiliado_id AND
-		CAST(ROUND(a.afiliado_numero / 100, 0, 1) AS INT) = CAST(ROUND(@nroAfiliado / 100, 0, 1) AS INT) AND
-		a.planmedico_id = b.planmedico_id;
-GO
-
-/****************************************************************************************************************/
 /**TRIGGER DEL BORRADO LOGICO DE UN ROL**/
-/****************************************************************************************************************/
 IF EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[WASD].[RolDeleted]'))
 DROP TRIGGER [WASD].[RolDeleted];
 GO
@@ -934,6 +962,10 @@ AS BEGIN
 END;
 GO
 
+
+/****************************************************************************************************************/
+/**SEED FINAL**/
+/****************************************************************************************************************/
 /*Relacion entre Profesional de pruebas y especialidades de la migracion*/
 INSERT INTO "WASD".EspecialidadPorProfesional VALUES
 (1, 10016),
