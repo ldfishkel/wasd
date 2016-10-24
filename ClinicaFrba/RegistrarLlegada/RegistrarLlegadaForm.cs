@@ -67,7 +67,7 @@
             _turnosView.Rows.Clear();
 
             foreach (Turno turno in turnos)
-                _turnosView.Rows.Add(turno.turno_id, turno.turno_hora, turno.Especialidad.especialidad_nombre, 
+                _turnosView.Rows.Add(turno.turno_id, turno.turno_hora, "asd",//turno.Especialidad?.especialidad_nombre, 
                      turno.Afiliado.afiliado_nombre + " " + turno.Afiliado.afiliado_apellido, turno.Afiliado.afiliado_numero, turno.turno_cancelado == null ? "No" : turno.turno_cancelado, "Llego");
 
             _turnosView.Refresh();

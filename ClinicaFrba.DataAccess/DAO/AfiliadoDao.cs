@@ -56,7 +56,7 @@
 
         public List<Bono> GetBonos(int nroAfiliado)
         {
-            return _ds.BonosNroAfiliado(nroAfiliado).Select(x =>
+            return _ds.BonosNroAfiliado(nroAfiliado).ToList().Select(x =>
                 new Bono()
                 {
                     bono_id = x.bono_id

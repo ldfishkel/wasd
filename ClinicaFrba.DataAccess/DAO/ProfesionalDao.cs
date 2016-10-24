@@ -31,7 +31,7 @@
             var today = DateTime.Today;
             string fecha = today.Day + "/" + today.Month + "/" + today.Year;
 
-            fecha = "29/10/2016";
+            fecha = "26/10/2016";
 
             List<Turno> turnos = new List<Turno>();
 
@@ -52,7 +52,9 @@
                 {
                     afiliado_id = x.afiliado_id,
                     afiliado_nombre = x.afiliado_nombre,
-                    afiliado_apellido = x.afiliado_apellido
+                    afiliado_apellido = x.afiliado_apellido,
+                    afiliado_numero = x.afiliado_numero,
+                    afiliado_numero_documento = x.afiliado_numero_documento
                 };
 
                 turnos.Add(turno);
@@ -80,7 +82,7 @@
 
     public List<int> GetHorasDisponibles(Profesional profesional, Especialidad especialidad, string fecha)
     {
-        return _ds.HorasDisponibless(profesional.profesional_id, especialidad.especialidad_id, fecha).Select(x => x.Value).ToList();
+        return _ds.HorasDisponibles(profesional.profesional_id, especialidad.especialidad_id, fecha).Select(x => x.Value).ToList();
     }
 
     public List<Profesional> GetProfesionales(Especialidad especialidad)

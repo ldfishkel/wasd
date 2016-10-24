@@ -236,7 +236,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
           <Property Name="profesional_apellido" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="profesional_nombre" Type="varchar" MaxLength="25" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Afiliado__afilia__186C9245">
+        <Association Name="FK__Afiliado__afilia__5BD88551">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="0..1" />
           <End Role="Afiliado1" Type="Self.Afiliado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -248,7 +248,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Afiliado__estado__149C0161">
+        <Association Name="FK__Afiliado__estado__5807F46D">
           <End Role="EstadoCivil" Type="Self.EstadoCivil" Multiplicity="1" />
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -260,7 +260,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Afiliado__planme__168449D3">
+        <Association Name="FK__Afiliado__planme__59F03CDF">
           <End Role="PlanMedico" Type="Self.PlanMedico" Multiplicity="1" />
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -272,7 +272,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Afiliado__usuari__13A7DD28">
+        <Association Name="FK__Afiliado__usuari__5713D034">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -284,7 +284,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Agenda__agenda_h__2A8B4280">
+        <Association Name="FK__Agenda__agenda_h__6DF7358C">
           <End Role="Hora" Type="Self.Hora" Multiplicity="1" />
           <End Role="Agenda" Type="Self.Agenda" Multiplicity="*" />
           <ReferentialConstraint>
@@ -296,7 +296,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Agenda__agenda_h__2B7F66B9">
+        <Association Name="FK__Agenda__agenda_h__6EEB59C5">
           <End Role="Hora" Type="Self.Hora" Multiplicity="1" />
           <End Role="Agenda" Type="Self.Agenda" Multiplicity="*" />
           <ReferentialConstraint>
@@ -308,7 +308,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Agenda__especial__28A2FA0E">
+        <Association Name="FK__Agenda__especial__6C0EED1A">
           <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
           <End Role="Agenda" Type="Self.Agenda" Multiplicity="*" />
           <ReferentialConstraint>
@@ -320,7 +320,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Agenda__profesio__27AED5D5">
+        <Association Name="FK__Agenda__profesio__6B1AC8E1">
           <End Role="Profesional" Type="Self.Profesional" Multiplicity="1" />
           <End Role="Agenda" Type="Self.Agenda" Multiplicity="*" />
           <ReferentialConstraint>
@@ -332,7 +332,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bono__afiliado_i__322C6448">
+        <Association Name="FK__Bono__afiliado_i__75985754">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
           <End Role="Bono" Type="Self.Bono" Multiplicity="*" />
           <ReferentialConstraint>
@@ -344,7 +344,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bono__bono_afili__3414ACBA">
+        <Association Name="FK__Bono__bono_afili__77809FC6">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="0..1" />
           <End Role="Bono" Type="Self.Bono" Multiplicity="*" />
           <ReferentialConstraint>
@@ -356,7 +356,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bono__compra_id__33208881">
+        <Association Name="FK__Bono__compra_id__768C7B8D">
           <End Role="Compra" Type="Self.Compra" Multiplicity="1" />
           <End Role="Bono" Type="Self.Bono" Multiplicity="*" />
           <ReferentialConstraint>
@@ -368,7 +368,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bono__planmedico__3138400F">
+        <Association Name="FK__Bono__planmedico__74A4331B">
           <End Role="PlanMedico" Type="Self.PlanMedico" Multiplicity="1" />
           <End Role="Bono" Type="Self.Bono" Multiplicity="*" />
           <ReferentialConstraint>
@@ -380,7 +380,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Compra__afiliado__2E5BD364">
+        <Association Name="FK__Compra__afiliado__71C7C670">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
           <End Role="Compra" Type="Self.Compra" Multiplicity="*" />
           <ReferentialConstraint>
@@ -392,7 +392,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ConsultaM__bono___4DD47EBD">
+        <Association Name="FK__ConsultaM__bono___114071C9">
           <End Role="Bono" Type="Self.Bono" Multiplicity="1" />
           <End Role="ConsultaMedica" Type="Self.ConsultaMedica" Multiplicity="*" />
           <ReferentialConstraint>
@@ -404,7 +404,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Diagnosti__consu__54817C4C">
+        <Association Name="FK__Diagnosti__consu__17ED6F58">
           <End Role="ConsultaMedica" Type="Self.ConsultaMedica" Multiplicity="1" />
           <End Role="Diagnostico" Type="Self.Diagnostico" Multiplicity="*" />
           <ReferentialConstraint>
@@ -416,7 +416,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Especiali__espec__37E53D9E">
+        <Association Name="FK__Especiali__espec__7B5130AA">
           <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
           <End Role="EspecialidadPorProfesional" Type="Self.EspecialidadPorProfesional" Multiplicity="*" />
           <ReferentialConstraint>
@@ -428,7 +428,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Especiali__profe__36F11965">
+        <Association Name="FK__Especiali__profe__7A5D0C71">
           <End Role="Profesional" Type="Self.Profesional" Multiplicity="1" />
           <End Role="EspecialidadPorProfesional" Type="Self.EspecialidadPorProfesional" Multiplicity="*" />
           <ReferentialConstraint>
@@ -440,7 +440,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Especiali__tipoe__1E256B9B">
+        <Association Name="FK__Especiali__tipoe__61915EA7">
           <End Role="TipoEspecialidad" Type="Self.TipoEspecialidad" Multiplicity="1" />
           <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="*" />
           <ReferentialConstraint>
@@ -452,7 +452,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Funcional__funci__3F865F66">
+        <Association Name="FK__Funcional__funci__02F25272">
           <End Role="Funcionalidad" Type="Self.Funcionalidad" Multiplicity="1" />
           <End Role="FuncionalidadPorRol" Type="Self.FuncionalidadPorRol" Multiplicity="*" />
           <ReferentialConstraint>
@@ -464,7 +464,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Funcional__rol_i__3E923B2D">
+        <Association Name="FK__Funcional__rol_i__01FE2E39">
           <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
           <End Role="FuncionalidadPorRol" Type="Self.FuncionalidadPorRol" Multiplicity="*" />
           <ReferentialConstraint>
@@ -476,7 +476,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Historial__afili__4262CC11">
+        <Association Name="FK__Historial__afili__05CEBF1D">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
           <End Role="HistorialPlan" Type="Self.HistorialPlan" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -488,7 +488,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Profesion__usuar__2101D846">
+        <Association Name="FK__Profesion__usuar__646DCB52">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="Profesional" Type="Self.Profesional" Multiplicity="*" />
           <ReferentialConstraint>
@@ -500,7 +500,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RolPorUsu__rol_i__46335CF5">
+        <Association Name="FK__RolPorUsu__rol_i__099F5001">
           <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
           <End Role="RolPorUsuario" Type="Self.RolPorUsuario" Multiplicity="*" />
           <ReferentialConstraint>
@@ -512,7 +512,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RolPorUsu__usuar__453F38BC">
+        <Association Name="FK__RolPorUsu__usuar__08AB2BC8">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="RolPorUsuario" Type="Self.RolPorUsuario" Multiplicity="*" />
           <ReferentialConstraint>
@@ -524,7 +524,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Sintoma__consult__51A50FA1">
+        <Association Name="FK__Sintoma__consult__151102AD">
           <End Role="ConsultaMedica" Type="Self.ConsultaMedica" Multiplicity="1" />
           <End Role="Sintoma" Type="Self.Sintoma" Multiplicity="*" />
           <ReferentialConstraint>
@@ -536,7 +536,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Turno__afiliado___490FC9A0">
+        <Association Name="FK__Turno__afiliado___0C7BBCAC">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
           <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
           <ReferentialConstraint>
@@ -548,7 +548,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Turno__especiali__4AF81212">
+        <Association Name="FK__Turno__especiali__0E64051E">
           <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
           <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
           <ReferentialConstraint>
@@ -560,7 +560,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Turno__profesion__4A03EDD9">
+        <Association Name="FK__Turno__profesion__0D6FE0E5">
           <End Role="Profesional" Type="Self.Profesional" Multiplicity="1" />
           <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
           <ReferentialConstraint>
@@ -624,19 +624,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </CollectionType>
           </ReturnType>
         </Function>
-        <Function Name="HorasDisponibles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="WASD">
-          <Parameter Name="profesionalId" Type="int" Mode="In" />
-          <Parameter Name="especialidadId" Type="int" Mode="In" />
-          <Parameter Name="fechaStr" Type="varchar" Mode="In" />
-          <ReturnType>
-            <CollectionType>
-              <RowType>
-                <Property Name="Hora" Type="int" />
-              </RowType>
-            </CollectionType>
-          </ReturnType>
-        </Function>
-        <Function Name="HorasDisponibless" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="WASD">
+        <Function Name="HorasDisponibles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="WASD">
           <Parameter Name="profesionalId" Type="int" Mode="In" />
           <Parameter Name="especialidadId" Type="int" Mode="In" />
           <Parameter Name="fechaStr" Type="varchar" Mode="In" />
@@ -688,115 +676,115 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
     [V_ListarProf].[profesional_nombre] AS [profesional_nombre]
     FROM [WASD].[V_ListarProf] AS [V_ListarProf]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__Afiliado__afilia__186C9245" Association="Self.FK__Afiliado__afilia__186C9245">
+          <AssociationSet Name="FK__Afiliado__afilia__5BD88551" Association="Self.FK__Afiliado__afilia__5BD88551">
             <End Role="Afiliado" EntitySet="Afiliado" />
             <End Role="Afiliado1" EntitySet="Afiliado" />
           </AssociationSet>
-          <AssociationSet Name="FK__Afiliado__estado__149C0161" Association="Self.FK__Afiliado__estado__149C0161">
+          <AssociationSet Name="FK__Afiliado__estado__5807F46D" Association="Self.FK__Afiliado__estado__5807F46D">
             <End Role="EstadoCivil" EntitySet="EstadoCivil" />
             <End Role="Afiliado" EntitySet="Afiliado" />
           </AssociationSet>
-          <AssociationSet Name="FK__Afiliado__planme__168449D3" Association="Self.FK__Afiliado__planme__168449D3">
+          <AssociationSet Name="FK__Afiliado__planme__59F03CDF" Association="Self.FK__Afiliado__planme__59F03CDF">
             <End Role="PlanMedico" EntitySet="PlanMedico" />
             <End Role="Afiliado" EntitySet="Afiliado" />
           </AssociationSet>
-          <AssociationSet Name="FK__Afiliado__usuari__13A7DD28" Association="Self.FK__Afiliado__usuari__13A7DD28">
+          <AssociationSet Name="FK__Afiliado__usuari__5713D034" Association="Self.FK__Afiliado__usuari__5713D034">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Afiliado" EntitySet="Afiliado" />
           </AssociationSet>
-          <AssociationSet Name="FK__Agenda__agenda_h__2A8B4280" Association="Self.FK__Agenda__agenda_h__2A8B4280">
+          <AssociationSet Name="FK__Agenda__agenda_h__6DF7358C" Association="Self.FK__Agenda__agenda_h__6DF7358C">
             <End Role="Hora" EntitySet="Hora" />
             <End Role="Agenda" EntitySet="Agenda" />
           </AssociationSet>
-          <AssociationSet Name="FK__Agenda__agenda_h__2B7F66B9" Association="Self.FK__Agenda__agenda_h__2B7F66B9">
+          <AssociationSet Name="FK__Agenda__agenda_h__6EEB59C5" Association="Self.FK__Agenda__agenda_h__6EEB59C5">
             <End Role="Hora" EntitySet="Hora" />
             <End Role="Agenda" EntitySet="Agenda" />
           </AssociationSet>
-          <AssociationSet Name="FK__Agenda__especial__28A2FA0E" Association="Self.FK__Agenda__especial__28A2FA0E">
+          <AssociationSet Name="FK__Agenda__especial__6C0EED1A" Association="Self.FK__Agenda__especial__6C0EED1A">
             <End Role="Especialidad" EntitySet="Especialidad" />
             <End Role="Agenda" EntitySet="Agenda" />
           </AssociationSet>
-          <AssociationSet Name="FK__Agenda__profesio__27AED5D5" Association="Self.FK__Agenda__profesio__27AED5D5">
+          <AssociationSet Name="FK__Agenda__profesio__6B1AC8E1" Association="Self.FK__Agenda__profesio__6B1AC8E1">
             <End Role="Profesional" EntitySet="Profesional" />
             <End Role="Agenda" EntitySet="Agenda" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bono__afiliado_i__322C6448" Association="Self.FK__Bono__afiliado_i__322C6448">
+          <AssociationSet Name="FK__Bono__afiliado_i__75985754" Association="Self.FK__Bono__afiliado_i__75985754">
             <End Role="Afiliado" EntitySet="Afiliado" />
             <End Role="Bono" EntitySet="Bono" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bono__bono_afili__3414ACBA" Association="Self.FK__Bono__bono_afili__3414ACBA">
+          <AssociationSet Name="FK__Bono__bono_afili__77809FC6" Association="Self.FK__Bono__bono_afili__77809FC6">
             <End Role="Afiliado" EntitySet="Afiliado" />
             <End Role="Bono" EntitySet="Bono" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bono__compra_id__33208881" Association="Self.FK__Bono__compra_id__33208881">
+          <AssociationSet Name="FK__Bono__compra_id__768C7B8D" Association="Self.FK__Bono__compra_id__768C7B8D">
             <End Role="Compra" EntitySet="Compra" />
             <End Role="Bono" EntitySet="Bono" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bono__planmedico__3138400F" Association="Self.FK__Bono__planmedico__3138400F">
+          <AssociationSet Name="FK__Bono__planmedico__74A4331B" Association="Self.FK__Bono__planmedico__74A4331B">
             <End Role="PlanMedico" EntitySet="PlanMedico" />
             <End Role="Bono" EntitySet="Bono" />
           </AssociationSet>
-          <AssociationSet Name="FK__Compra__afiliado__2E5BD364" Association="Self.FK__Compra__afiliado__2E5BD364">
+          <AssociationSet Name="FK__Compra__afiliado__71C7C670" Association="Self.FK__Compra__afiliado__71C7C670">
             <End Role="Afiliado" EntitySet="Afiliado" />
             <End Role="Compra" EntitySet="Compra" />
           </AssociationSet>
-          <AssociationSet Name="FK__ConsultaM__bono___4DD47EBD" Association="Self.FK__ConsultaM__bono___4DD47EBD">
+          <AssociationSet Name="FK__ConsultaM__bono___114071C9" Association="Self.FK__ConsultaM__bono___114071C9">
             <End Role="Bono" EntitySet="Bono" />
             <End Role="ConsultaMedica" EntitySet="ConsultaMedica" />
           </AssociationSet>
-          <AssociationSet Name="FK__Diagnosti__consu__54817C4C" Association="Self.FK__Diagnosti__consu__54817C4C">
+          <AssociationSet Name="FK__Diagnosti__consu__17ED6F58" Association="Self.FK__Diagnosti__consu__17ED6F58">
             <End Role="ConsultaMedica" EntitySet="ConsultaMedica" />
             <End Role="Diagnostico" EntitySet="Diagnostico" />
           </AssociationSet>
-          <AssociationSet Name="FK__Especiali__espec__37E53D9E" Association="Self.FK__Especiali__espec__37E53D9E">
+          <AssociationSet Name="FK__Especiali__espec__7B5130AA" Association="Self.FK__Especiali__espec__7B5130AA">
             <End Role="Especialidad" EntitySet="Especialidad" />
             <End Role="EspecialidadPorProfesional" EntitySet="EspecialidadPorProfesional" />
           </AssociationSet>
-          <AssociationSet Name="FK__Especiali__profe__36F11965" Association="Self.FK__Especiali__profe__36F11965">
+          <AssociationSet Name="FK__Especiali__profe__7A5D0C71" Association="Self.FK__Especiali__profe__7A5D0C71">
             <End Role="Profesional" EntitySet="Profesional" />
             <End Role="EspecialidadPorProfesional" EntitySet="EspecialidadPorProfesional" />
           </AssociationSet>
-          <AssociationSet Name="FK__Especiali__tipoe__1E256B9B" Association="Self.FK__Especiali__tipoe__1E256B9B">
+          <AssociationSet Name="FK__Especiali__tipoe__61915EA7" Association="Self.FK__Especiali__tipoe__61915EA7">
             <End Role="TipoEspecialidad" EntitySet="TipoEspecialidad" />
             <End Role="Especialidad" EntitySet="Especialidad" />
           </AssociationSet>
-          <AssociationSet Name="FK__Funcional__funci__3F865F66" Association="Self.FK__Funcional__funci__3F865F66">
+          <AssociationSet Name="FK__Funcional__funci__02F25272" Association="Self.FK__Funcional__funci__02F25272">
             <End Role="Funcionalidad" EntitySet="Funcionalidad" />
             <End Role="FuncionalidadPorRol" EntitySet="FuncionalidadPorRol" />
           </AssociationSet>
-          <AssociationSet Name="FK__Funcional__rol_i__3E923B2D" Association="Self.FK__Funcional__rol_i__3E923B2D">
+          <AssociationSet Name="FK__Funcional__rol_i__01FE2E39" Association="Self.FK__Funcional__rol_i__01FE2E39">
             <End Role="Rol" EntitySet="Rol" />
             <End Role="FuncionalidadPorRol" EntitySet="FuncionalidadPorRol" />
           </AssociationSet>
-          <AssociationSet Name="FK__Historial__afili__4262CC11" Association="Self.FK__Historial__afili__4262CC11">
+          <AssociationSet Name="FK__Historial__afili__05CEBF1D" Association="Self.FK__Historial__afili__05CEBF1D">
             <End Role="Afiliado" EntitySet="Afiliado" />
             <End Role="HistorialPlan" EntitySet="HistorialPlan" />
           </AssociationSet>
-          <AssociationSet Name="FK__Profesion__usuar__2101D846" Association="Self.FK__Profesion__usuar__2101D846">
+          <AssociationSet Name="FK__Profesion__usuar__646DCB52" Association="Self.FK__Profesion__usuar__646DCB52">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Profesional" EntitySet="Profesional" />
           </AssociationSet>
-          <AssociationSet Name="FK__RolPorUsu__rol_i__46335CF5" Association="Self.FK__RolPorUsu__rol_i__46335CF5">
+          <AssociationSet Name="FK__RolPorUsu__rol_i__099F5001" Association="Self.FK__RolPorUsu__rol_i__099F5001">
             <End Role="Rol" EntitySet="Rol" />
             <End Role="RolPorUsuario" EntitySet="RolPorUsuario" />
           </AssociationSet>
-          <AssociationSet Name="FK__RolPorUsu__usuar__453F38BC" Association="Self.FK__RolPorUsu__usuar__453F38BC">
+          <AssociationSet Name="FK__RolPorUsu__usuar__08AB2BC8" Association="Self.FK__RolPorUsu__usuar__08AB2BC8">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="RolPorUsuario" EntitySet="RolPorUsuario" />
           </AssociationSet>
-          <AssociationSet Name="FK__Sintoma__consult__51A50FA1" Association="Self.FK__Sintoma__consult__51A50FA1">
+          <AssociationSet Name="FK__Sintoma__consult__151102AD" Association="Self.FK__Sintoma__consult__151102AD">
             <End Role="ConsultaMedica" EntitySet="ConsultaMedica" />
             <End Role="Sintoma" EntitySet="Sintoma" />
           </AssociationSet>
-          <AssociationSet Name="FK__Turno__afiliado___490FC9A0" Association="Self.FK__Turno__afiliado___490FC9A0">
+          <AssociationSet Name="FK__Turno__afiliado___0C7BBCAC" Association="Self.FK__Turno__afiliado___0C7BBCAC">
             <End Role="Afiliado" EntitySet="Afiliado" />
             <End Role="Turno" EntitySet="Turno" />
           </AssociationSet>
-          <AssociationSet Name="FK__Turno__especiali__4AF81212" Association="Self.FK__Turno__especiali__4AF81212">
+          <AssociationSet Name="FK__Turno__especiali__0E64051E" Association="Self.FK__Turno__especiali__0E64051E">
             <End Role="Especialidad" EntitySet="Especialidad" />
             <End Role="Turno" EntitySet="Turno" />
           </AssociationSet>
-          <AssociationSet Name="FK__Turno__profesion__4A03EDD9" Association="Self.FK__Turno__profesion__4A03EDD9">
+          <AssociationSet Name="FK__Turno__profesion__0D6FE0E5" Association="Self.FK__Turno__profesion__0D6FE0E5">
             <End Role="Profesional" EntitySet="Profesional" />
             <End Role="Turno" EntitySet="Turno" />
           </AssociationSet>
@@ -823,9 +811,6 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
         <ComplexType Name="FechasDisponibles_Result">
           <Property Name="Fecha" Type="DateTime" Nullable="false" />
         </ComplexType>
-        <ComplexType Name="HorasDisponibles_Result">
-          <Property Name="Hora" Type="Int32" />
-        </ComplexType>
         <EntityType Name="Afiliado">
           <Key>
             <PropertyRef Name="afiliado_id" />
@@ -848,16 +833,16 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
           <Property Name="afiliado_activo" Type="Boolean" Nullable="false" />
           <Property Name="afiliado_grupo_familiar" Type="Int32" />
           <Property Name="afiliado_cantidad_bonos_usados" Type="Int16" Nullable="false" />
-          <NavigationProperty Name="Afiliado1" Relationship="Self.FK__Afiliado__afilia__186C9245" FromRole="Afiliado" ToRole="Afiliado1" />
-          <NavigationProperty Name="Afiliado2" Relationship="Self.FK__Afiliado__afilia__186C9245" FromRole="Afiliado1" ToRole="Afiliado" />
-          <NavigationProperty Name="EstadoCivil" Relationship="Self.FK__Afiliado__estado__149C0161" FromRole="Afiliado" ToRole="EstadoCivil" />
-          <NavigationProperty Name="PlanMedico" Relationship="Self.FK__Afiliado__planme__168449D3" FromRole="Afiliado" ToRole="PlanMedico" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK__Afiliado__usuari__13A7DD28" FromRole="Afiliado" ToRole="Usuario" />
-          <NavigationProperty Name="Bonoes" Relationship="Self.FK__Bono__afiliado_i__322C6448" FromRole="Afiliado" ToRole="Bono" />
-          <NavigationProperty Name="Bonoes1" Relationship="Self.FK__Bono__bono_afili__3414ACBA" FromRole="Afiliado" ToRole="Bono" />
-          <NavigationProperty Name="Compras" Relationship="Self.FK__Compra__afiliado__2E5BD364" FromRole="Afiliado" ToRole="Compra" />
-          <NavigationProperty Name="HistorialPlan" Relationship="Self.FK__Historial__afili__4262CC11" FromRole="Afiliado" ToRole="HistorialPlan" />
-          <NavigationProperty Name="Turnoes" Relationship="Self.FK__Turno__afiliado___490FC9A0" FromRole="Afiliado" ToRole="Turno" />
+          <NavigationProperty Name="Afiliado1" Relationship="Self.FK__Afiliado__afilia__5BD88551" FromRole="Afiliado" ToRole="Afiliado1" />
+          <NavigationProperty Name="Afiliado2" Relationship="Self.FK__Afiliado__afilia__5BD88551" FromRole="Afiliado1" ToRole="Afiliado" />
+          <NavigationProperty Name="EstadoCivil" Relationship="Self.FK__Afiliado__estado__5807F46D" FromRole="Afiliado" ToRole="EstadoCivil" />
+          <NavigationProperty Name="PlanMedico" Relationship="Self.FK__Afiliado__planme__59F03CDF" FromRole="Afiliado" ToRole="PlanMedico" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Afiliado__usuari__5713D034" FromRole="Afiliado" ToRole="Usuario" />
+          <NavigationProperty Name="Bonoes" Relationship="Self.FK__Bono__afiliado_i__75985754" FromRole="Afiliado" ToRole="Bono" />
+          <NavigationProperty Name="Bonoes1" Relationship="Self.FK__Bono__bono_afili__77809FC6" FromRole="Afiliado" ToRole="Bono" />
+          <NavigationProperty Name="Compras" Relationship="Self.FK__Compra__afiliado__71C7C670" FromRole="Afiliado" ToRole="Compra" />
+          <NavigationProperty Name="HistorialPlan" Relationship="Self.FK__Historial__afili__05CEBF1D" FromRole="Afiliado" ToRole="HistorialPlan" />
+          <NavigationProperty Name="Turnoes" Relationship="Self.FK__Turno__afiliado___0C7BBCAC" FromRole="Afiliado" ToRole="Turno" />
         </EntityType>
         <EntityType Name="Agendum">
           <Key>
@@ -871,10 +856,10 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
           <Property Name="agenda_hora_hasta" Type="Int32" Nullable="false" />
           <Property Name="agenda_fecha_desde" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="agenda_fecha_hasta" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Hora" Relationship="Self.FK__Agenda__agenda_h__2A8B4280" FromRole="Agenda" ToRole="Hora" />
-          <NavigationProperty Name="Hora1" Relationship="Self.FK__Agenda__agenda_h__2B7F66B9" FromRole="Agenda" ToRole="Hora" />
-          <NavigationProperty Name="Especialidad" Relationship="Self.FK__Agenda__especial__28A2FA0E" FromRole="Agenda" ToRole="Especialidad" />
-          <NavigationProperty Name="Profesional" Relationship="Self.FK__Agenda__profesio__27AED5D5" FromRole="Agenda" ToRole="Profesional" />
+          <NavigationProperty Name="Hora" Relationship="Self.FK__Agenda__agenda_h__6DF7358C" FromRole="Agenda" ToRole="Hora" />
+          <NavigationProperty Name="Hora1" Relationship="Self.FK__Agenda__agenda_h__6EEB59C5" FromRole="Agenda" ToRole="Hora" />
+          <NavigationProperty Name="Especialidad" Relationship="Self.FK__Agenda__especial__6C0EED1A" FromRole="Agenda" ToRole="Especialidad" />
+          <NavigationProperty Name="Profesional" Relationship="Self.FK__Agenda__profesio__6B1AC8E1" FromRole="Agenda" ToRole="Profesional" />
         </EntityType>
         <EntityType Name="Bono">
           <Key>
@@ -885,11 +870,11 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
           <Property Name="afiliado_id" Type="Int32" Nullable="false" />
           <Property Name="compra_id" Type="Int32" Nullable="false" />
           <Property Name="bono_afiliado_usado" Type="Int32" />
-          <NavigationProperty Name="Afiliado" Relationship="Self.FK__Bono__afiliado_i__322C6448" FromRole="Bono" ToRole="Afiliado" />
-          <NavigationProperty Name="Afiliado1" Relationship="Self.FK__Bono__bono_afili__3414ACBA" FromRole="Bono" ToRole="Afiliado" />
-          <NavigationProperty Name="Compra" Relationship="Self.FK__Bono__compra_id__33208881" FromRole="Bono" ToRole="Compra" />
-          <NavigationProperty Name="PlanMedico" Relationship="Self.FK__Bono__planmedico__3138400F" FromRole="Bono" ToRole="PlanMedico" />
-          <NavigationProperty Name="ConsultaMedicas" Relationship="Self.FK__ConsultaM__bono___4DD47EBD" FromRole="Bono" ToRole="ConsultaMedica" />
+          <NavigationProperty Name="Afiliado" Relationship="Self.FK__Bono__afiliado_i__75985754" FromRole="Bono" ToRole="Afiliado" />
+          <NavigationProperty Name="Afiliado1" Relationship="Self.FK__Bono__bono_afili__77809FC6" FromRole="Bono" ToRole="Afiliado" />
+          <NavigationProperty Name="Compra" Relationship="Self.FK__Bono__compra_id__768C7B8D" FromRole="Bono" ToRole="Compra" />
+          <NavigationProperty Name="PlanMedico" Relationship="Self.FK__Bono__planmedico__74A4331B" FromRole="Bono" ToRole="PlanMedico" />
+          <NavigationProperty Name="ConsultaMedicas" Relationship="Self.FK__ConsultaM__bono___114071C9" FromRole="Bono" ToRole="ConsultaMedica" />
         </EntityType>
         <EntityType Name="Compra">
           <Key>
@@ -900,8 +885,8 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
           <Property Name="compra_fecha_hora" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="compra_cantidad" Type="Int16" Nullable="false" />
           <Property Name="compra_monto" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <NavigationProperty Name="Afiliado" Relationship="Self.FK__Compra__afiliado__2E5BD364" FromRole="Compra" ToRole="Afiliado" />
-          <NavigationProperty Name="Bonoes" Relationship="Self.FK__Bono__compra_id__33208881" FromRole="Compra" ToRole="Bono" />
+          <NavigationProperty Name="Afiliado" Relationship="Self.FK__Compra__afiliado__71C7C670" FromRole="Compra" ToRole="Afiliado" />
+          <NavigationProperty Name="Bonoes" Relationship="Self.FK__Bono__compra_id__768C7B8D" FromRole="Compra" ToRole="Bono" />
         </EntityType>
         <EntityType Name="ConsultaMedica">
           <Key>
@@ -911,9 +896,9 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
           <Property Name="bono_id" Type="Int32" Nullable="false" />
           <Property Name="consultamedica_fecha_hora" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="consultamedica_ocurrio" Type="Boolean" />
-          <NavigationProperty Name="Bono" Relationship="Self.FK__ConsultaM__bono___4DD47EBD" FromRole="ConsultaMedica" ToRole="Bono" />
-          <NavigationProperty Name="Diagnosticoes" Relationship="Self.FK__Diagnosti__consu__54817C4C" FromRole="ConsultaMedica" ToRole="Diagnostico" />
-          <NavigationProperty Name="Sintomas" Relationship="Self.FK__Sintoma__consult__51A50FA1" FromRole="ConsultaMedica" ToRole="Sintoma" />
+          <NavigationProperty Name="Bono" Relationship="Self.FK__ConsultaM__bono___114071C9" FromRole="ConsultaMedica" ToRole="Bono" />
+          <NavigationProperty Name="Diagnosticoes" Relationship="Self.FK__Diagnosti__consu__17ED6F58" FromRole="ConsultaMedica" ToRole="Diagnostico" />
+          <NavigationProperty Name="Sintomas" Relationship="Self.FK__Sintoma__consult__151102AD" FromRole="ConsultaMedica" ToRole="Sintoma" />
         </EntityType>
         <EntityType Name="Diagnostico">
           <Key>
@@ -922,7 +907,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
           <Property Name="diagnostico_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="consultamedica_id" Type="Int32" Nullable="false" />
           <Property Name="diagnostico_descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="ConsultaMedica" Relationship="Self.FK__Diagnosti__consu__54817C4C" FromRole="Diagnostico" ToRole="ConsultaMedica" />
+          <NavigationProperty Name="ConsultaMedica" Relationship="Self.FK__Diagnosti__consu__17ED6F58" FromRole="Diagnostico" ToRole="ConsultaMedica" />
         </EntityType>
         <EntityType Name="Especialidad">
           <Key>
@@ -931,9 +916,9 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
           <Property Name="especialidad_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tipoespecialidad_id" Type="Int32" Nullable="false" />
           <Property Name="especialidad_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Agenda" Relationship="Self.FK__Agenda__especial__28A2FA0E" FromRole="Especialidad" ToRole="Agenda" />
-          <NavigationProperty Name="TipoEspecialidad" Relationship="Self.FK__Especiali__tipoe__1E256B9B" FromRole="Especialidad" ToRole="TipoEspecialidad" />
-          <NavigationProperty Name="Turnoes" Relationship="Self.FK__Turno__especiali__4AF81212" FromRole="Especialidad" ToRole="Turno" />
+          <NavigationProperty Name="Agenda" Relationship="Self.FK__Agenda__especial__6C0EED1A" FromRole="Especialidad" ToRole="Agenda" />
+          <NavigationProperty Name="TipoEspecialidad" Relationship="Self.FK__Especiali__tipoe__61915EA7" FromRole="Especialidad" ToRole="TipoEspecialidad" />
+          <NavigationProperty Name="Turnoes" Relationship="Self.FK__Turno__especiali__0E64051E" FromRole="Especialidad" ToRole="Turno" />
           <NavigationProperty Name="Profesionals" Relationship="Self.EspecialidadPorProfesional" FromRole="Especialidad" ToRole="Profesional" />
         </EntityType>
         <EntityType Name="EstadoCivil">
@@ -942,7 +927,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
           </Key>
           <Property Name="estadocivil_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="estadocivil_nombre" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Afiliadoes" Relationship="Self.FK__Afiliado__estado__149C0161" FromRole="EstadoCivil" ToRole="Afiliado" />
+          <NavigationProperty Name="Afiliadoes" Relationship="Self.FK__Afiliado__estado__5807F46D" FromRole="EstadoCivil" ToRole="Afiliado" />
         </EntityType>
         <EntityType Name="Funcionalidad">
           <Key>
@@ -959,7 +944,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
           <Property Name="afiliado_id" Type="Int32" Nullable="false" />
           <Property Name="historial_fecha" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="historial_motivo" Type="String" MaxLength="144" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Afiliado" Relationship="Self.FK__Historial__afili__4262CC11" FromRole="HistorialPlan" ToRole="Afiliado" />
+          <NavigationProperty Name="Afiliado" Relationship="Self.FK__Historial__afili__05CEBF1D" FromRole="HistorialPlan" ToRole="Afiliado" />
         </EntityType>
         <EntityType Name="Hora">
           <Key>
@@ -967,8 +952,8 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
           </Key>
           <Property Name="hora_id" Type="Int32" Nullable="false" />
           <Property Name="hora_comienzo" Type="Time" Nullable="false" Precision="7" />
-          <NavigationProperty Name="Agenda" Relationship="Self.FK__Agenda__agenda_h__2A8B4280" FromRole="Hora" ToRole="Agenda" />
-          <NavigationProperty Name="Agenda1" Relationship="Self.FK__Agenda__agenda_h__2B7F66B9" FromRole="Hora" ToRole="Agenda" />
+          <NavigationProperty Name="Agenda" Relationship="Self.FK__Agenda__agenda_h__6DF7358C" FromRole="Hora" ToRole="Agenda" />
+          <NavigationProperty Name="Agenda1" Relationship="Self.FK__Agenda__agenda_h__6EEB59C5" FromRole="Hora" ToRole="Agenda" />
         </EntityType>
         <EntityType Name="PlanMedico">
           <Key>
@@ -978,8 +963,8 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
           <Property Name="planmedico_nombre" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="planmedico_cuota" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="planmedico_precio_bono" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <NavigationProperty Name="Afiliadoes" Relationship="Self.FK__Afiliado__planme__168449D3" FromRole="PlanMedico" ToRole="Afiliado" />
-          <NavigationProperty Name="Bonoes" Relationship="Self.FK__Bono__planmedico__3138400F" FromRole="PlanMedico" ToRole="Bono" />
+          <NavigationProperty Name="Afiliadoes" Relationship="Self.FK__Afiliado__planme__59F03CDF" FromRole="PlanMedico" ToRole="Afiliado" />
+          <NavigationProperty Name="Bonoes" Relationship="Self.FK__Bono__planmedico__74A4331B" FromRole="PlanMedico" ToRole="Bono" />
         </EntityType>
         <EntityType Name="Profesional">
           <Key>
@@ -997,9 +982,9 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
           <Property Name="profesional_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="profesional_fecha_nacimiento" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="profesional_matricula" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Agenda" Relationship="Self.FK__Agenda__profesio__27AED5D5" FromRole="Profesional" ToRole="Agenda" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK__Profesion__usuar__2101D846" FromRole="Profesional" ToRole="Usuario" />
-          <NavigationProperty Name="Turnoes" Relationship="Self.FK__Turno__profesion__4A03EDD9" FromRole="Profesional" ToRole="Turno" />
+          <NavigationProperty Name="Agenda" Relationship="Self.FK__Agenda__profesio__6B1AC8E1" FromRole="Profesional" ToRole="Agenda" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Profesion__usuar__646DCB52" FromRole="Profesional" ToRole="Usuario" />
+          <NavigationProperty Name="Turnoes" Relationship="Self.FK__Turno__profesion__0D6FE0E5" FromRole="Profesional" ToRole="Turno" />
           <NavigationProperty Name="Especialidads" Relationship="Self.EspecialidadPorProfesional" FromRole="Profesional" ToRole="Especialidad" />
         </EntityType>
         <EntityType Name="Rol">
@@ -1019,7 +1004,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
           <Property Name="sintoma_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="consultamedica_id" Type="Int32" Nullable="false" />
           <Property Name="sintoma_descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="ConsultaMedica" Relationship="Self.FK__Sintoma__consult__51A50FA1" FromRole="Sintoma" ToRole="ConsultaMedica" />
+          <NavigationProperty Name="ConsultaMedica" Relationship="Self.FK__Sintoma__consult__151102AD" FromRole="Sintoma" ToRole="ConsultaMedica" />
         </EntityType>
         <EntityType Name="TipoEspecialidad">
           <Key>
@@ -1027,7 +1012,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
           </Key>
           <Property Name="tipoespecialidad_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tipoespecialidad_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Especialidads" Relationship="Self.FK__Especiali__tipoe__1E256B9B" FromRole="TipoEspecialidad" ToRole="Especialidad" />
+          <NavigationProperty Name="Especialidads" Relationship="Self.FK__Especiali__tipoe__61915EA7" FromRole="TipoEspecialidad" ToRole="Especialidad" />
         </EntityType>
         <EntityType Name="Turno">
           <Key>
@@ -1040,9 +1025,9 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
           <Property Name="turno_fecha" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="turno_hora" Type="Time" Nullable="false" Precision="7" />
           <Property Name="turno_cancelado" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Afiliado" Relationship="Self.FK__Turno__afiliado___490FC9A0" FromRole="Turno" ToRole="Afiliado" />
-          <NavigationProperty Name="Especialidad" Relationship="Self.FK__Turno__especiali__4AF81212" FromRole="Turno" ToRole="Especialidad" />
-          <NavigationProperty Name="Profesional" Relationship="Self.FK__Turno__profesion__4A03EDD9" FromRole="Turno" ToRole="Profesional" />
+          <NavigationProperty Name="Afiliado" Relationship="Self.FK__Turno__afiliado___0C7BBCAC" FromRole="Turno" ToRole="Afiliado" />
+          <NavigationProperty Name="Especialidad" Relationship="Self.FK__Turno__especiali__0E64051E" FromRole="Turno" ToRole="Especialidad" />
+          <NavigationProperty Name="Profesional" Relationship="Self.FK__Turno__profesion__0D6FE0E5" FromRole="Turno" ToRole="Profesional" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -1053,8 +1038,8 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
           <Property Name="usuario_password" Type="String" MaxLength="64" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="usuario_intentos" Type="Byte" Nullable="false" />
           <Property Name="usuario_activo" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Afiliadoes" Relationship="Self.FK__Afiliado__usuari__13A7DD28" FromRole="Usuario" ToRole="Afiliado" />
-          <NavigationProperty Name="Profesionals" Relationship="Self.FK__Profesion__usuar__2101D846" FromRole="Usuario" ToRole="Profesional" />
+          <NavigationProperty Name="Afiliadoes" Relationship="Self.FK__Afiliado__usuari__5713D034" FromRole="Usuario" ToRole="Afiliado" />
+          <NavigationProperty Name="Profesionals" Relationship="Self.FK__Profesion__usuar__646DCB52" FromRole="Usuario" ToRole="Profesional" />
           <NavigationProperty Name="Rols" Relationship="Self.RolPorUsuario" FromRole="Usuario" ToRole="Rol" />
         </EntityType>
         <EntityType Name="V_ListarEsp">
@@ -1079,7 +1064,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
           <Property Name="profesional_apellido" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="profesional_nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Afiliado__afilia__186C9245">
+        <Association Name="FK__Afiliado__afilia__5BD88551">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="0..1" />
           <End Role="Afiliado1" Type="Self.Afiliado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1091,7 +1076,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Afiliado__estado__149C0161">
+        <Association Name="FK__Afiliado__estado__5807F46D">
           <End Role="EstadoCivil" Type="Self.EstadoCivil" Multiplicity="1" />
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1103,7 +1088,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Afiliado__planme__168449D3">
+        <Association Name="FK__Afiliado__planme__59F03CDF">
           <End Role="PlanMedico" Type="Self.PlanMedico" Multiplicity="1" />
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1115,7 +1100,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Afiliado__usuari__13A7DD28">
+        <Association Name="FK__Afiliado__usuari__5713D034">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1127,7 +1112,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bono__afiliado_i__322C6448">
+        <Association Name="FK__Bono__afiliado_i__75985754">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
           <End Role="Bono" Type="Self.Bono" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1139,7 +1124,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bono__bono_afili__3414ACBA">
+        <Association Name="FK__Bono__bono_afili__77809FC6">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="0..1" />
           <End Role="Bono" Type="Self.Bono" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1151,7 +1136,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Compra__afiliado__2E5BD364">
+        <Association Name="FK__Compra__afiliado__71C7C670">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
           <End Role="Compra" Type="Self.Compra" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1163,7 +1148,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Historial__afili__4262CC11">
+        <Association Name="FK__Historial__afili__05CEBF1D">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
           <End Role="HistorialPlan" Type="Self.HistorialPlan" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -1175,7 +1160,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Turno__afiliado___490FC9A0">
+        <Association Name="FK__Turno__afiliado___0C7BBCAC">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
           <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1187,7 +1172,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Agenda__agenda_h__2A8B4280">
+        <Association Name="FK__Agenda__agenda_h__6DF7358C">
           <End Role="Hora" Type="Self.Hora" Multiplicity="1" />
           <End Role="Agenda" Type="Self.Agendum" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1199,7 +1184,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Agenda__agenda_h__2B7F66B9">
+        <Association Name="FK__Agenda__agenda_h__6EEB59C5">
           <End Role="Hora" Type="Self.Hora" Multiplicity="1" />
           <End Role="Agenda" Type="Self.Agendum" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1211,7 +1196,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Agenda__especial__28A2FA0E">
+        <Association Name="FK__Agenda__especial__6C0EED1A">
           <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
           <End Role="Agenda" Type="Self.Agendum" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1223,7 +1208,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Agenda__profesio__27AED5D5">
+        <Association Name="FK__Agenda__profesio__6B1AC8E1">
           <End Role="Profesional" Type="Self.Profesional" Multiplicity="1" />
           <End Role="Agenda" Type="Self.Agendum" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1235,7 +1220,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bono__compra_id__33208881">
+        <Association Name="FK__Bono__compra_id__768C7B8D">
           <End Role="Compra" Type="Self.Compra" Multiplicity="1" />
           <End Role="Bono" Type="Self.Bono" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1247,7 +1232,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bono__planmedico__3138400F">
+        <Association Name="FK__Bono__planmedico__74A4331B">
           <End Role="PlanMedico" Type="Self.PlanMedico" Multiplicity="1" />
           <End Role="Bono" Type="Self.Bono" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1259,7 +1244,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ConsultaM__bono___4DD47EBD">
+        <Association Name="FK__ConsultaM__bono___114071C9">
           <End Role="Bono" Type="Self.Bono" Multiplicity="1" />
           <End Role="ConsultaMedica" Type="Self.ConsultaMedica" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1271,7 +1256,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Diagnosti__consu__54817C4C">
+        <Association Name="FK__Diagnosti__consu__17ED6F58">
           <End Role="ConsultaMedica" Type="Self.ConsultaMedica" Multiplicity="1" />
           <End Role="Diagnostico" Type="Self.Diagnostico" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1283,7 +1268,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Sintoma__consult__51A50FA1">
+        <Association Name="FK__Sintoma__consult__151102AD">
           <End Role="ConsultaMedica" Type="Self.ConsultaMedica" Multiplicity="1" />
           <End Role="Sintoma" Type="Self.Sintoma" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1295,7 +1280,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Especiali__tipoe__1E256B9B">
+        <Association Name="FK__Especiali__tipoe__61915EA7">
           <End Role="TipoEspecialidad" Type="Self.TipoEspecialidad" Multiplicity="1" />
           <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1307,7 +1292,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Turno__especiali__4AF81212">
+        <Association Name="FK__Turno__especiali__0E64051E">
           <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
           <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1319,7 +1304,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Profesion__usuar__2101D846">
+        <Association Name="FK__Profesion__usuar__646DCB52">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="Profesional" Type="Self.Profesional" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1331,7 +1316,7 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Turno__profesion__4A03EDD9">
+        <Association Name="FK__Turno__profesion__0D6FE0E5">
           <End Role="Profesional" Type="Self.Profesional" Multiplicity="1" />
           <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1376,91 +1361,91 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
           <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
           <EntitySet Name="V_ListarEsp" EntityType="Self.V_ListarEsp" />
           <EntitySet Name="V_ListarProf" EntityType="Self.V_ListarProf" />
-          <AssociationSet Name="FK__Afiliado__afilia__186C9245" Association="Self.FK__Afiliado__afilia__186C9245">
+          <AssociationSet Name="FK__Afiliado__afilia__5BD88551" Association="Self.FK__Afiliado__afilia__5BD88551">
             <End Role="Afiliado" EntitySet="Afiliadoes" />
             <End Role="Afiliado1" EntitySet="Afiliadoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Afiliado__estado__149C0161" Association="Self.FK__Afiliado__estado__149C0161">
+          <AssociationSet Name="FK__Afiliado__estado__5807F46D" Association="Self.FK__Afiliado__estado__5807F46D">
             <End Role="EstadoCivil" EntitySet="EstadoCivils" />
             <End Role="Afiliado" EntitySet="Afiliadoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Afiliado__planme__168449D3" Association="Self.FK__Afiliado__planme__168449D3">
+          <AssociationSet Name="FK__Afiliado__planme__59F03CDF" Association="Self.FK__Afiliado__planme__59F03CDF">
             <End Role="PlanMedico" EntitySet="PlanMedicoes" />
             <End Role="Afiliado" EntitySet="Afiliadoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Afiliado__usuari__13A7DD28" Association="Self.FK__Afiliado__usuari__13A7DD28">
+          <AssociationSet Name="FK__Afiliado__usuari__5713D034" Association="Self.FK__Afiliado__usuari__5713D034">
             <End Role="Usuario" EntitySet="Usuarios" />
             <End Role="Afiliado" EntitySet="Afiliadoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bono__afiliado_i__322C6448" Association="Self.FK__Bono__afiliado_i__322C6448">
+          <AssociationSet Name="FK__Bono__afiliado_i__75985754" Association="Self.FK__Bono__afiliado_i__75985754">
             <End Role="Afiliado" EntitySet="Afiliadoes" />
             <End Role="Bono" EntitySet="Bonoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bono__bono_afili__3414ACBA" Association="Self.FK__Bono__bono_afili__3414ACBA">
+          <AssociationSet Name="FK__Bono__bono_afili__77809FC6" Association="Self.FK__Bono__bono_afili__77809FC6">
             <End Role="Afiliado" EntitySet="Afiliadoes" />
             <End Role="Bono" EntitySet="Bonoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Compra__afiliado__2E5BD364" Association="Self.FK__Compra__afiliado__2E5BD364">
+          <AssociationSet Name="FK__Compra__afiliado__71C7C670" Association="Self.FK__Compra__afiliado__71C7C670">
             <End Role="Afiliado" EntitySet="Afiliadoes" />
             <End Role="Compra" EntitySet="Compras" />
           </AssociationSet>
-          <AssociationSet Name="FK__Historial__afili__4262CC11" Association="Self.FK__Historial__afili__4262CC11">
+          <AssociationSet Name="FK__Historial__afili__05CEBF1D" Association="Self.FK__Historial__afili__05CEBF1D">
             <End Role="Afiliado" EntitySet="Afiliadoes" />
             <End Role="HistorialPlan" EntitySet="HistorialPlans" />
           </AssociationSet>
-          <AssociationSet Name="FK__Turno__afiliado___490FC9A0" Association="Self.FK__Turno__afiliado___490FC9A0">
+          <AssociationSet Name="FK__Turno__afiliado___0C7BBCAC" Association="Self.FK__Turno__afiliado___0C7BBCAC">
             <End Role="Afiliado" EntitySet="Afiliadoes" />
             <End Role="Turno" EntitySet="Turnoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Agenda__agenda_h__2A8B4280" Association="Self.FK__Agenda__agenda_h__2A8B4280">
+          <AssociationSet Name="FK__Agenda__agenda_h__6DF7358C" Association="Self.FK__Agenda__agenda_h__6DF7358C">
             <End Role="Hora" EntitySet="Horas" />
             <End Role="Agenda" EntitySet="Agenda" />
           </AssociationSet>
-          <AssociationSet Name="FK__Agenda__agenda_h__2B7F66B9" Association="Self.FK__Agenda__agenda_h__2B7F66B9">
+          <AssociationSet Name="FK__Agenda__agenda_h__6EEB59C5" Association="Self.FK__Agenda__agenda_h__6EEB59C5">
             <End Role="Hora" EntitySet="Horas" />
             <End Role="Agenda" EntitySet="Agenda" />
           </AssociationSet>
-          <AssociationSet Name="FK__Agenda__especial__28A2FA0E" Association="Self.FK__Agenda__especial__28A2FA0E">
+          <AssociationSet Name="FK__Agenda__especial__6C0EED1A" Association="Self.FK__Agenda__especial__6C0EED1A">
             <End Role="Especialidad" EntitySet="Especialidads" />
             <End Role="Agenda" EntitySet="Agenda" />
           </AssociationSet>
-          <AssociationSet Name="FK__Agenda__profesio__27AED5D5" Association="Self.FK__Agenda__profesio__27AED5D5">
+          <AssociationSet Name="FK__Agenda__profesio__6B1AC8E1" Association="Self.FK__Agenda__profesio__6B1AC8E1">
             <End Role="Profesional" EntitySet="Profesionals" />
             <End Role="Agenda" EntitySet="Agenda" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bono__compra_id__33208881" Association="Self.FK__Bono__compra_id__33208881">
+          <AssociationSet Name="FK__Bono__compra_id__768C7B8D" Association="Self.FK__Bono__compra_id__768C7B8D">
             <End Role="Compra" EntitySet="Compras" />
             <End Role="Bono" EntitySet="Bonoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bono__planmedico__3138400F" Association="Self.FK__Bono__planmedico__3138400F">
+          <AssociationSet Name="FK__Bono__planmedico__74A4331B" Association="Self.FK__Bono__planmedico__74A4331B">
             <End Role="PlanMedico" EntitySet="PlanMedicoes" />
             <End Role="Bono" EntitySet="Bonoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__ConsultaM__bono___4DD47EBD" Association="Self.FK__ConsultaM__bono___4DD47EBD">
+          <AssociationSet Name="FK__ConsultaM__bono___114071C9" Association="Self.FK__ConsultaM__bono___114071C9">
             <End Role="Bono" EntitySet="Bonoes" />
             <End Role="ConsultaMedica" EntitySet="ConsultaMedicas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Diagnosti__consu__54817C4C" Association="Self.FK__Diagnosti__consu__54817C4C">
+          <AssociationSet Name="FK__Diagnosti__consu__17ED6F58" Association="Self.FK__Diagnosti__consu__17ED6F58">
             <End Role="ConsultaMedica" EntitySet="ConsultaMedicas" />
             <End Role="Diagnostico" EntitySet="Diagnosticoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Sintoma__consult__51A50FA1" Association="Self.FK__Sintoma__consult__51A50FA1">
+          <AssociationSet Name="FK__Sintoma__consult__151102AD" Association="Self.FK__Sintoma__consult__151102AD">
             <End Role="ConsultaMedica" EntitySet="ConsultaMedicas" />
             <End Role="Sintoma" EntitySet="Sintomas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Especiali__tipoe__1E256B9B" Association="Self.FK__Especiali__tipoe__1E256B9B">
+          <AssociationSet Name="FK__Especiali__tipoe__61915EA7" Association="Self.FK__Especiali__tipoe__61915EA7">
             <End Role="TipoEspecialidad" EntitySet="TipoEspecialidads" />
             <End Role="Especialidad" EntitySet="Especialidads" />
           </AssociationSet>
-          <AssociationSet Name="FK__Turno__especiali__4AF81212" Association="Self.FK__Turno__especiali__4AF81212">
+          <AssociationSet Name="FK__Turno__especiali__0E64051E" Association="Self.FK__Turno__especiali__0E64051E">
             <End Role="Especialidad" EntitySet="Especialidads" />
             <End Role="Turno" EntitySet="Turnoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Profesion__usuar__2101D846" Association="Self.FK__Profesion__usuar__2101D846">
+          <AssociationSet Name="FK__Profesion__usuar__646DCB52" Association="Self.FK__Profesion__usuar__646DCB52">
             <End Role="Usuario" EntitySet="Usuarios" />
             <End Role="Profesional" EntitySet="Profesionals" />
           </AssociationSet>
-          <AssociationSet Name="FK__Turno__profesion__4A03EDD9" Association="Self.FK__Turno__profesion__4A03EDD9">
+          <AssociationSet Name="FK__Turno__profesion__0D6FE0E5" Association="Self.FK__Turno__profesion__0D6FE0E5">
             <End Role="Profesional" EntitySet="Profesionals" />
             <End Role="Turno" EntitySet="Turnoes" />
           </AssociationSet>
@@ -1490,17 +1475,12 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
             <Parameter Name="profesionalId" Mode="In" Type="Int32" />
             <Parameter Name="especialidadId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="HorasDisponibles" IsComposable="true" ReturnType="Collection(GD2C2016Model.HorasDisponibles_Result)">
-            <Parameter Name="profesionalId" Mode="In" Type="Int32" />
-            <Parameter Name="especialidadId" Mode="In" Type="Int32" />
-            <Parameter Name="fechaStr" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="CompraBono">
             <Parameter Name="afiliadoId" Mode="In" Type="Int32" />
             <Parameter Name="cant" Mode="In" Type="Int32" />
             <Parameter Name="planMedicoId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="HorasDisponibless" ReturnType="Collection(Int32)">
+          <FunctionImport Name="HorasDisponibles" ReturnType="Collection(Int32)">
             <Parameter Name="profesionalId" Mode="In" Type="Int32" />
             <Parameter Name="especialidadId" Mode="In" Type="Int32" />
             <Parameter Name="fechaStr" Mode="In" Type="String" />
@@ -1810,15 +1790,8 @@ warning 6002: The table/view 'GD2C2016.WASD.V_ListarProf' does not have a primar
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionName="GD2C2016Model.Store.HorasDisponibles" FunctionImportName="HorasDisponibles">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="GD2C2016Model.HorasDisponibles_Result">
-                <ScalarProperty Name="Hora" ColumnName="Hora" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CompraBono" FunctionName="GD2C2016Model.Store.CompraBono" />
-          <FunctionImportMapping FunctionImportName="HorasDisponibless" FunctionName="GD2C2016Model.Store.HorasDisponibless" />
+          <FunctionImportMapping FunctionImportName="HorasDisponibles" FunctionName="GD2C2016Model.Store.HorasDisponibles" />
           <FunctionImportMapping FunctionImportName="RegistroLlegada" FunctionName="GD2C2016Model.Store.RegistroLlegada" />
           <FunctionImportMapping FunctionImportName="TurnosProfesionalEspecialidad" FunctionName="GD2C2016Model.Store.TurnosProfesionalEspecialidad">
             <ResultMapping>

@@ -31,6 +31,7 @@
             this._panel = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this._turnosView = new System.Windows.Forms.DataGridView();
+            this.turno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Hora = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Especialidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NombreAfiliado = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,7 +56,7 @@
             this._panel.Controls.Add(this.groupBox1);
             this._panel.Location = new System.Drawing.Point(13, 13);
             this._panel.Name = "_panel";
-            this._panel.Size = new System.Drawing.Size(645, 325);
+            this._panel.Size = new System.Drawing.Size(761, 325);
             this._panel.TabIndex = 0;
             // 
             // groupBox2
@@ -63,7 +64,7 @@
             this.groupBox2.Controls.Add(this._turnosView);
             this.groupBox2.Location = new System.Drawing.Point(11, 91);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(624, 220);
+            this.groupBox2.Size = new System.Drawing.Size(738, 220);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Turnos";
@@ -72,6 +73,7 @@
             // 
             this._turnosView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this._turnosView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.turno,
             this.Hora,
             this.Especialidad,
             this.NombreAfiliado,
@@ -85,9 +87,15 @@
             this._turnosView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this._turnosView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this._turnosView.ShowEditingIcon = false;
-            this._turnosView.Size = new System.Drawing.Size(605, 183);
+            this._turnosView.Size = new System.Drawing.Size(721, 183);
             this._turnosView.TabIndex = 0;
             this._turnosView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellContentClick);
+            // 
+            // turno
+            // 
+            this.turno.HeaderText = "turno";
+            this.turno.Name = "turno";
+            this.turno.ReadOnly = true;
             // 
             // Hora
             // 
@@ -133,15 +141,15 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(10, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(624, 79);
+            this.groupBox1.Size = new System.Drawing.Size(739, 79);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(538, 39);
+            this.button1.Location = new System.Drawing.Point(633, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(76, 28);
+            this.button1.Size = new System.Drawing.Size(94, 28);
             this.button1.TabIndex = 4;
             this.button1.Text = "Buscar";
             this.button1.UseVisualStyleBackColor = true;
@@ -152,7 +160,7 @@
             this._profesionalCombo.FormattingEnabled = true;
             this._profesionalCombo.Location = new System.Drawing.Point(204, 46);
             this._profesionalCombo.Name = "_profesionalCombo";
-            this._profesionalCombo.Size = new System.Drawing.Size(328, 21);
+            this._profesionalCombo.Size = new System.Drawing.Size(527, 21);
             this._profesionalCombo.TabIndex = 3;
             this._profesionalCombo.Text = "Profesional";
             this._profesionalCombo.SelectedIndexChanged += new System.EventHandler(this.ProfesionalChanged);
@@ -187,7 +195,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(669, 349);
+            this.ClientSize = new System.Drawing.Size(786, 349);
             this.Controls.Add(this._panel);
             this.Name = "RegistrarLlegadaForm";
             this.Text = "Registrar Llegada";
@@ -211,6 +219,7 @@
         private System.Windows.Forms.TextBox _nombreProfesional;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView _turnosView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn turno;
         private System.Windows.Forms.DataGridViewTextBoxColumn Hora;
         private System.Windows.Forms.DataGridViewTextBoxColumn Especialidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn NombreAfiliado;

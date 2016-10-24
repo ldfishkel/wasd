@@ -131,9 +131,6 @@
     <Compile Include="Hora.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
-    <Compile Include="HorasDisponibles_Result.cs">
-      <DependentUpon>ClinicaFrba.tt</DependentUpon>
-    </Compile>
     <Compile Include="IoC\Bootstrapper.cs" />
     <Compile Include="IoC\DataAccessModule.cs" />
     <Compile Include="PlanMedico.cs">
