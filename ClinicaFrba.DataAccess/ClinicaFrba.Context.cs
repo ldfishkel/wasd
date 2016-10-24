@@ -153,6 +153,23 @@ namespace ClinicaFrba.DataAccess
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("HorasDisponibless", profesionalIdParameter, especialidadIdParameter, fechaStrParameter);
         }
     
+        public virtual int RegistroLlegada(Nullable<int> turnoId, Nullable<int> bonoId, Nullable<System.DateTime> fechaActual)
+        {
+            var turnoIdParameter = turnoId.HasValue ?
+                new ObjectParameter("turnoId", turnoId) :
+                new ObjectParameter("turnoId", typeof(int));
+    
+            var bonoIdParameter = bonoId.HasValue ?
+                new ObjectParameter("bonoId", bonoId) :
+                new ObjectParameter("bonoId", typeof(int));
+    
+            var fechaActualParameter = fechaActual.HasValue ?
+                new ObjectParameter("fechaActual", fechaActual) :
+                new ObjectParameter("fechaActual", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegistroLlegada", turnoIdParameter, bonoIdParameter, fechaActualParameter);
+        }
+    
         public virtual ObjectResult<TurnosProfesionalEspecialidad_Result> TurnosProfesionalEspecialidad(Nullable<int> profesionalId, Nullable<int> especialidadId, string fecha)
         {
             var profesionalIdParameter = profesionalId.HasValue ?

@@ -79,16 +79,9 @@
             _ds.SaveChanges();
         }
 
-        public void UsarBono(int bono_id, int turnoId)
+        public void UsarBono(int bonoId, int turnoId)
         {
-            Bono bono = _ds.Bonoes.SingleOrDefault(x => x.bono_id == bono_id);
-            Turno turno = _ds.Turnoes.SingleOrDefault(x => x.turno_id == turnoId);
-
-            bono.bono_fecha_uso = turno.turno_fecha;
-            bono.bono_afiliado_usado = turno.afiliado_id;
-
-            _ds.Bonoes.Add(bono);
-            _ds.SaveChanges();
+            _ds.RegistroLlegada(turnoId, bonoId, DateTime.Now);
         }
     }
 }

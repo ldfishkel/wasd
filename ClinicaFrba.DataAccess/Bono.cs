@@ -25,7 +25,6 @@ namespace ClinicaFrba.DataAccess
         public int afiliado_id { get; set; }
         public int compra_id { get; set; }
         public Nullable<int> bono_afiliado_usado { get; set; }
-        public Nullable<System.DateTime> bono_fecha_uso { get; set; }
     
         public virtual Afiliado Afiliado { get; set; }
         public virtual Afiliado Afiliado1 { get; set; }

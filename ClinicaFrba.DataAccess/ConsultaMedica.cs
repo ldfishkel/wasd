@@ -24,6 +24,7 @@ namespace ClinicaFrba.DataAccess
         public int consultamedica_id { get; set; }
         public int bono_id { get; set; }
         public System.DateTime consultamedica_fecha_hora { get; set; }
+        public Nullable<bool> consultamedica_ocurrio { get; set; }
     
         public virtual Bono Bono { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

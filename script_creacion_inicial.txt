@@ -320,12 +320,7 @@ INSERT INTO "WASD".Usuario(usuario_id, usuario_nombre, usuario_password, usuario
 (1, 'admin', 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7', 0, 1)
 SET IDENTITY_INSERT "WASD".Usuario OFF;
 
-SET IDENTITY_INSERT "WASD".Afiliado ON;
-INSERT INTO [GD2C2016].[WASD].[Afiliado]([afiliado_id], [usuario_id],[estadocivil_id],[afiliado_tipodocumento],[planmedico_id],[afiliado_sexo],[afiliado_numero],[afiliado_nombre],[afiliado_apellido],[afiliado_numero_documento],[afiliado_direccion],[afiliado_telefono],[afiliado_mail],[afiliado_fecha_nacimiento],[afiliado_familiares_dependientes],[afiliado_activo],[afiliado_grupo_familiar],[afiliado_cantidad_bonos_usados])VALUES
-(1, 1, 1, 'DNI', 555555, 'M', 999999900, 'Leonel', 'Dan', 36157488, 'Humboldt', 1168567706, 'asd@asd.asd', '9-1-1992', 0, 1, NULL, 0);
-SET IDENTITY_INSERT "WASD".Afiliado OFF;
-
-INSERT INTO [GD2C2016].[WASD].[Profesional]([usuario_id],[profesional_sexo],[profesional_tipodocumento],[profesional_numero_documento],[profesional_nombre],[profesional_apellido],[profesional_direccion],[profesional_telefono],[profesional_mail],[profesional_fecha_nacimiento],[profesional_matricula])VALUES
+INSERT INTO GD2C2016. WASD. Profesional( usuario_id, profesional_sexo, profesional_tipodocumento, profesional_numero_documento, profesional_nombre, profesional_apellido, profesional_direccion, profesional_telefono, profesional_mail, profesional_fecha_nacimiento, profesional_matricula) VALUES
 (1, 'M', 'DNI', 36157488, 'Dr Leonel', 'Dan', 'Uriburu', 12345, 'asd@asd.asd', '1-9-1992', 321561);
 
 INSERT INTO "WASD".RolPorUsuario VALUES
@@ -373,6 +368,12 @@ WHERE Plan_Med_Codigo IS NOT NULL
 ORDER BY Plan_Med_Codigo ASC
 SET IDENTITY_INSERT "WASD".PlanMedico OFF;
 
+/*Afiliado de pruebas puesto aca por la necesidad de tener planes medicos creados previamente*/
+SET IDENTITY_INSERT "WASD".Afiliado ON;
+INSERT INTO "WASD".Afiliado(afiliado_id,  usuario_id, estadocivil_id, afiliado_tipodocumento, planmedico_id, afiliado_sexo, afiliado_numero, afiliado_nombre, afiliado_apellido, afiliado_numero_documento, afiliado_direccion, afiliado_telefono, afiliado_mail, afiliado_fecha_nacimiento, afiliado_familiares_dependientes, afiliado_activo, afiliado_grupo_familiar, afiliado_cantidad_bonos_usados) VALUES
+(1, 1, 1, 'DNI', 555555, 'M', 999999900, 'Leonel', 'Dan', 36157488, 'Humboldt', 1168567706, 'asd@asd.asd', '9-1-1992', 0, 1, NULL, 0);
+SET IDENTITY_INSERT "WASD".Afiliado OFF;
+
 /**TIPOS DE ESPECIALIDADES**/
 SET IDENTITY_INSERT "WASD".TipoEspecialidad ON
 INSERT INTO "WASD".TipoEspecialidad(tipoespecialidad_id, tipoespecialidad_nombre)
@@ -390,6 +391,11 @@ FROM gd_esquema.Maestra
 WHERE Especialidad_Codigo IS NOT NULL
 ORDER BY Especialidad_Codigo ASC
 SET IDENTITY_INSERT "WASD".Especialidad OFF;
+
+/*Relacion entre Profesional de pruebas y especialidades de la migracion*/
+INSERT INTO "WASD".EspecialidadPorProfesional VALUES
+(1, 10016),
+(1, 10017),
 
 /**PROFESIONALES**/
 DECLARE profesionales CURSOR FOR
@@ -630,6 +636,42 @@ BEGIN
 END;
 GO
 
+IF EXISTS (
+        SELECT type_desc, type
+        FROM sys.procedures WITH(NOLOCK)
+        WHERE NAME = 'RegistroLlegada'
+            AND type = 'P'
+      )
+DROP PROCEDURE WASD.RegistroLlegada;
+GO
+
+CREATE PROCEDURE "WASD".RegistroLlegada @turnoId INT, @bonoId INT, @fechaActual DATETIME
+AS
+BEGIN
+	DECLARE @afiliadoId INT;
+
+	SELECT 
+		@afiliadoId = afiliado_id
+	FROM 
+		WASD.Turno
+	WHERE 
+		turno_id = @turnoId;
+
+	UPDATE 
+		WASD.Bono
+	SET
+		bono_afiliado_usado = @afiliadoId
+	WHERE
+		bono_id = @bonoId;
+
+	INSERT INTO 
+		WASD.ConsultaMedica (consultamedica_id,	bono_id, consultamedica_fecha_hora, consultamedica_ocurrio)
+	VALUES
+		(@turnoId, @bonoId, @fechaActual, 0);
+
+END;
+GO
+
 /**VISTAS**/
 
 /**LISTADO DE PROFESIONALES**/
@@ -839,8 +881,38 @@ IF EXISTS (
      DROP PROCEDURE WASD.TurnosProfesionalEspecialidad;
 GO
 
-IF OBJECT_ID(N'WASD.BonosNroAfiliado', N'TF') IS NOT NULL
-DROP FUNCTION "WASD".BonosNroAfiliado;
+CREATE PROC "WASD".TurnosProfesionalEspecialidad
+(
+	@profesionalId INT, 
+	@especialidadId INT,
+	@fecha VARCHAR(10)
+)
+
+AS BEGIN
+	SELECT
+		t.*, 
+		a.afiliado_nombre, 
+		a.afiliado_apellido, 
+		a.afiliado_numero, 
+		a.afiliado_numero_documento
+	FROM
+		"WASD".Turno t, "WASD".Afiliado a
+	WHERE
+		t.profesional_id = @profesionalId AND
+		t.especialidad_id = @especialidadId AND
+		t.turno_fecha = CONVERT(DATE,@fecha, 103) AND
+		t.turno_id NOT IN (SELECT 
+								consultamedica_id
+							FROM
+								"WASD".ConsultaMedica
+							WHERE
+								profesional_id = t.profesional_id)
+		
+END;
+GO
+
+IF EXISTS (SELECT * FROM sysobjects WHERE id = object_id(N'WASD.BonosNroAfiliado') AND xtype IN (N'FN', N'IF', N'TF')) 
+	DROP FUNCTION "WASD".BonosNroAfiliado
 GO
 
 CREATE FUNCTION "WASD".BonosNroAfiliado (@nroAfiliado INT)
@@ -853,8 +925,8 @@ AS RETURN
 		"WASD".Afiliado a
 	WHERE 
 		b.afiliado_id = a.afiliado_id AND
-		CAST(ROUND(a.afiliado_numero / 100, 0, 1) AS INT) = CAST(ROUND(@nroAfiliado / 100, 0, 1) AS INT)
-		AND a.planmedico_id = b.planmedico_id
+		CAST(ROUND(a.afiliado_numero / 100, 0, 1) AS INT) = CAST(ROUND(@nroAfiliado / 100, 0, 1) AS INT) AND
+		a.planmedico_id = b.planmedico_id;
 
 /**TRIGGERS**/
 IF EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[WASD].[RolDeleted]'))

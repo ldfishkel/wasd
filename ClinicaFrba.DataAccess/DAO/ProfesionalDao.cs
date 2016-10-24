@@ -31,6 +31,8 @@
             var today = DateTime.Today;
             string fecha = today.Day + "/" + today.Month + "/" + today.Year;
 
+            fecha = "29/10/2016";
+
             List<Turno> turnos = new List<Turno>();
 
             foreach (TurnosProfesionalEspecialidad_Result x in _ds.TurnosProfesionalEspecialidad(idProfesional, idEspecialidad, fecha))

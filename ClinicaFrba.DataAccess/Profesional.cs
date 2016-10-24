@@ -45,7 +45,7 @@ namespace ClinicaFrba.DataAccess
 
         public override string ToString()
         {
-            return profesional_nombre?.Trim() + " " + profesional_apellido?.Trim();
+            return profesional_nombre.Trim() + " " + profesional_apellido.Trim();
         }
     }
 }

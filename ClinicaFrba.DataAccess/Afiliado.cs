@@ -61,8 +61,7 @@ namespace ClinicaFrba.DataAccess
 
         public override string ToString()
         {
-            return afiliado_nombre?.Trim() + " " + afiliado_apellido?.Trim();
+            return afiliado_nombre.Trim() + " " + afiliado_apellido.Trim();
         }
-
     }
 }
