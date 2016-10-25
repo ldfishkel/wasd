@@ -53,7 +53,8 @@
                     turno.Afiliado.ToString(), 
                     turno.Afiliado.afiliado_numero, 
                     turno.turno_cancelado == null ? "No" : turno.turno_cancelado,
-                    "Llego");
+                    turno.turno_llego ? "Si" : "No",
+                    turno.turno_llego ? null : "Llego");
 
             _turnosView.Refresh();
         }
@@ -62,7 +63,7 @@
         {
             var senderGrid = (DataGridView)sender;
 
-            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0 && (string)senderGrid.Rows[e.RowIndex].Cells[7].Value == "No")
             {
                 var afiliadoNro = (int)senderGrid.Rows[e.RowIndex].Cells[5].Value;
 
@@ -84,9 +85,7 @@
 
                 _afiliadoDao.UsarBono(form.Bono().bono_id, turnoId);
 
-                _turnosView.Rows.RemoveAt(form.RowIndex());
-
-                _turnosView.Refresh();
+                ProfesionalChanged(null, null);
             }
         }
 

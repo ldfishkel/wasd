@@ -16,6 +16,7 @@ namespace ClinicaFrba.DataAccess
         public int turno_id { get; set; }
         public string turno_cancelado { get; set; }
         public System.TimeSpan turno_hora { get; set; }
+        public bool turno_llego { get; set; }
         public string afiliado_nombre { get; set; }
         public string afiliado_apellido { get; set; }
         public int afiliado_numero { get; set; }

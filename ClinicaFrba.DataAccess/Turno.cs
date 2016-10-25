@@ -21,6 +21,7 @@ namespace ClinicaFrba.DataAccess
         public System.DateTime turno_fecha { get; set; }
         public System.TimeSpan turno_hora { get; set; }
         public string turno_cancelado { get; set; }
+        public bool turno_llego { get; set; }
     
         public virtual Afiliado Afiliado { get; set; }
         public virtual Especialidad Especialidad { get; set; }

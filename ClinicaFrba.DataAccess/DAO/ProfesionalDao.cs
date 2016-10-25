@@ -65,7 +65,8 @@
                 {
                     turno_id = x.turno_id,
                     turno_hora = x.turno_hora,
-                    turno_cancelado = x.turno_cancelado
+                    turno_cancelado = x.turno_cancelado,
+                    turno_llego = x.turno_llego
                 };
 
                 turno.Afiliado = new Afiliado()

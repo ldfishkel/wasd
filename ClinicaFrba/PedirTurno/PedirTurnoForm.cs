@@ -39,7 +39,22 @@
 
         private void InitializeCombo()
         {
+            _especialidad.Items.Clear();
+            _tipoEspecialidad.Items.Clear();
+            _profesionalCombo.Items.Clear();
+
             _especialidad.Items.AddRange(_profesionalDao.GetEspecialidades().ToArray());
+            _tipoEspecialidad.Items.AddRange(_profesionalDao.GetTipoDeEspecialidades().ToArray());
+
+            _tipoEspecialidad.Text = "Tipo de Especialidad";
+            _especialidad.Text = "Especialidad";
+            _profesionalCombo.Text = "Profesional";
+
+            _fecha.Items.Clear();
+            _hora.Items.Clear();
+            _fecha.Text = "Fecha";
+            _hora.Text = "Hora";
+            _fechaHoraGroupbox.Enabled = false;
         }
 
         private void EspecialidadChanged(object sender, EventArgs e)
@@ -93,12 +108,23 @@
             var splitted = ((string)_fecha.SelectedItem).Split('/').Select(x => Int32.Parse(x)).ToArray();
             turno.turno_fecha = new DateTime(splitted[2], splitted[1], splitted[0]);
             turno.turno_hora = ((Hora)_hora.SelectedItem).hora_comienzo;
+            turno.turno_llego = false;
 
             _afiliadoDao.PedirTurno(turno);
 
             MessageBox.Show("Turno Solicitado");
 
-            //TODO: reload all
+            InitializeCombo();
+        }
+
+        private void TipoEspecialidadChanged(object sender, EventArgs e)
+        {
+            TipoEspecialidad tipoEspecialidad = (TipoEspecialidad)_tipoEspecialidad.SelectedItem;
+
+            List<Especialidad> especialidades = _profesionalDao.GetEspecialidades(tipoEspecialidad.tipoespecialidad_id);
+
+            _especialidad.Items.Clear();
+            _especialidad.Items.AddRange(especialidades.ToArray());
         }
     }
 }
