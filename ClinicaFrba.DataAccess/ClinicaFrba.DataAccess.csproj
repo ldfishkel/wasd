@@ -42,6 +42,10 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFrameworkExtras.EF6, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFrameworkExtras.EF6.1.0.0\lib\net45\EntityFrameworkExtras.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -60,6 +64,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Afiliado.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AfiliadoBy_Result.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AfiliadoDeUsuario_Result.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
     <Compile Include="Agendum.cs">
@@ -94,6 +104,7 @@
     <Compile Include="Compra.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
+    <Compile Include="Configuration\Config.cs" />
     <Compile Include="Configuration\ExternalConfiguration.cs" />
     <Compile Include="ConsultaMedica.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
@@ -101,13 +112,20 @@
     <Compile Include="DAO\DaoBase.cs" />
     <Compile Include="DAO\ProfesionalDao.cs" />
     <Compile Include="DAO\AfiliadoDao.cs" />
-    <Compile Include="DAO\TurnoDao.cs" />
     <Compile Include="DAO\RolDao.cs" />
+    <Compile Include="DAO\StoredProcedures\AltaAgendaStoreProcedure.cs" />
+    <Compile Include="DAO\UserDefinedTypes\AgendaParam.cs" />
     <Compile Include="DAO\UsuarioDao.cs" />
     <Compile Include="Diagnostico.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
     <Compile Include="Especialidad.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EspecialidadesDeProfesional_Result.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EspecialidadesDeTipo_Result.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
     <Compile Include="EstadoCivil.cs">
@@ -119,12 +137,6 @@
     <Compile Include="Funcionalidad.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
-    <Compile Include="F_ProfPorEsp_Result.cs">
-      <DependentUpon>ClinicaFrba.tt</DependentUpon>
-    </Compile>
-    <Compile Include="F_TurnosProf_Result.cs">
-      <DependentUpon>ClinicaFrba.tt</DependentUpon>
-    </Compile>
     <Compile Include="HistorialPlan.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
@@ -133,14 +145,50 @@
     </Compile>
     <Compile Include="IoC\Bootstrapper.cs" />
     <Compile Include="IoC\DataAccessModule.cs" />
+    <Compile Include="ListaAfiliado.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListaEspecialidade.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListaFuncionalidade.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListaHorasSabado.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListaHorasSemana.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListaRole.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListaTipoDocumento.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListaTipoEspecialidade.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Login_Result.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
     <Compile Include="PlanMedico.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
     <Compile Include="Profesional.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
+    <Compile Include="ProfesionalDeUsuario_Result.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProfesionalesDeEspecialidad_Result.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rol.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RolesDeUsuario_Result.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
     <Compile Include="Sintoma.cs">
@@ -156,12 +204,6 @@
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
     <Compile Include="Usuario.cs">
-      <DependentUpon>ClinicaFrba.tt</DependentUpon>
-    </Compile>
-    <Compile Include="V_ListarEsp.cs">
-      <DependentUpon>ClinicaFrba.tt</DependentUpon>
-    </Compile>
-    <Compile Include="V_ListarProf.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
   </ItemGroup>

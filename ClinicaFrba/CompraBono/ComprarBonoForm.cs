@@ -4,7 +4,6 @@
     using DataAccess.DAO;
     using Menu;
     using System;
-    using System.Linq;
     using System.Text;
     using System.Text.RegularExpressions;
     using System.Windows.Forms;
@@ -37,7 +36,7 @@
 
             if (rol.ToString() == "Afiliado")
             {
-                _afiliado = parent.User().Afiliadoes.FirstOrDefault();
+                _afiliado = _afiliadoDao.GetAfiliado(parent.UserId());
 
                 InitializeAfiliado();
             }
@@ -47,7 +46,7 @@
 
         private void InitializeCombo()
         { 
-            _tipoDeDoc.Items.AddRange(_afiliadoDao.getTipoDeDocumentos());
+            _tipoDeDoc.Items.AddRange(_afiliadoDao.GetTipoDeDocumentos());
         }
 
         private void BuscarAfiliadoClick(object sender, System.EventArgs e)
@@ -68,7 +67,7 @@
 
             _nombreYApellidoLbl.Text = _afiliado.ToString();
 
-            _planMedico = _afiliado.PlanMedico;
+            _planMedico = _afiliadoDao.GetPlanMedico(_afiliado.planmedico_id);
 
             _planLbl.Text = _planMedico.planmedico_nombre;
 

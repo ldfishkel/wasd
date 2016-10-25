@@ -4,6 +4,7 @@
     using DataAccess.DAO;
     using Menu;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Forms;
 
@@ -13,7 +14,7 @@
         private UsuarioDao _usuarioDao;
         private MenuForm _menuForm;
 
-        private Usuario _user;
+        private int _userId;
 
         public LoginForm(UsuarioDao usuarioDao, MenuForm menuForm)
         {
@@ -33,23 +34,27 @@
 
             UsuarioDao userDao = new UsuarioDao();
 
-            _user = _usuarioDao.Login(_username.Text, _password.Text);
+            Login_Result result = _usuarioDao.Login(_username.Text, _password.Text);
 
-            if (_user == null)
+            if (result.usuario_id == null)
             {
-                MessageBox.Show("Username o contraseña invalido");
+                MessageBox.Show(result.message);
                 return;
             }
 
-            if (_user.Rols == null || _user.Rols.Count == 0)
+            _userId = result.usuario_id.Value;
+
+            List<Rol> roles = userDao.GetRoles(result.usuario_id.Value);
+
+            if (roles == null || roles.Count == 0)
             {
                 MessageBox.Show("El usuario ingresado no tiene ningun rol");
                 return;
             }
 
-            if (_user.Rols.Count > 1)
+            if (roles.Count > 1)
             {
-                _rolCombobox.Items.AddRange(_user.Rols.ToArray());
+                _rolCombobox.Items.AddRange(roles.ToArray());
 
                 _rolSelectionGroupbox.Enabled = true;
                 _loginGroupbox.Enabled = false;
@@ -57,14 +62,14 @@
                 return;
             }
 
-            OpenMenuForm(_user.Rols.FirstOrDefault());
+            OpenMenuForm(roles.FirstOrDefault());
         }
 
         private void OpenMenuForm(Rol rol)
         {
             this.Hide();
 
-            _menuForm.Init(_user, rol, this.CloseForm);
+            _menuForm.Init(_userId, rol, this.CloseForm);
             _menuForm.Show();
         }
 

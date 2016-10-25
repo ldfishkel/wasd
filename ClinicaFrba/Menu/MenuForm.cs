@@ -5,6 +5,7 @@
     using CancelarTurno;
     using CompraBono;
     using DataAccess;
+    using DataAccess.DAO;
     using Diagnosticar;
     using PedirTurno;
     using RegistrarAgenda;
@@ -24,7 +25,7 @@
         private const int MENU_MARGIN_RIGHT = 8;
 
         //Auth user
-        private Usuario _user;
+        private int _userId;
         private Rol _rol;
 
         //forms
@@ -46,7 +47,8 @@
                         CancelarTurnoForm cancelarTurnoForm,
                         RegistrarLlegadaForm registrarLlegadaForm,
                         DiagnosticarForm diagnosticarForm,
-                        VerEstadisticasForm verEstadisticasForm)
+                        VerEstadisticasForm verEstadisticasForm,
+                        RolDao rolDao)
         {
             _abmRolForm = abmRolForm;
             _abmAfiliadosForm = abmAfiliadosForm;
@@ -59,9 +61,9 @@
             _verEstadisticasForm = verEstadisticasForm;
         }
 
-        public Usuario User()
+        public int UserId()
         {
-            return _user;
+            return _userId;
         }
 
         public Rol Rol()
@@ -80,9 +82,9 @@
             content.BackColor = Color.WhiteSmoke;
         }
 
-        public void Init(Usuario user, Rol rol, Action<object, FormClosingEventArgs> close)
+        public void Init(int userId, Rol rol, Action<object, FormClosingEventArgs> close)
         {
-            _user = user;
+            _userId = userId;
             _rol = rol;
 
             InitializeComponent();
@@ -127,17 +129,6 @@
                 case "Ver Estadisticas": tab.Controls.Add(_verEstadisticasForm.Init(this)); break;
                 default: break;
             }
-        }
-
-        private void MenuForm_DragDrop(object sender, DragEventArgs e)
-        {
-            MessageBox.Show(String.Format("{0}, {1}",this.Bounds.Location.X, this.Bounds.Location.Y));
-        }
-
-        private void MenuForm_DoubleClick(object sender, EventArgs e)
-        {
-            MessageBox.Show(String.Format("{0}, {1}", this.Bounds.Location.X, this.Bounds.Location.Y));
-
         }
     }
 }

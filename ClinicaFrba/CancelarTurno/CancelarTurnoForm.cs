@@ -1,23 +1,21 @@
 ﻿namespace ClinicaFrba.CancelarTurno
 {
-    using Menu;
-    using System.Windows.Forms;
     using DataAccess;
-    using System;
     using DataAccess.DAO;
+    using Menu;
+    using System;
     using System.Collections.Generic;
+    using System.Windows.Forms;
 
     public partial class CancelarTurnoForm : Form
     {
         private ProfesionalDao _profesionalDao;
         private AfiliadoDao _afiliadoDao;
-        private TurnoDao _turnoDao;
 
-        public CancelarTurnoForm(ProfesionalDao profesionalDao, AfiliadoDao afiliadoDao, TurnoDao turnoDao)
+        public CancelarTurnoForm(ProfesionalDao profesionalDao, AfiliadoDao afiliadoDao)
         {
             _profesionalDao = profesionalDao;
             _afiliadoDao = afiliadoDao;
-            _turnoDao = turnoDao;
         }
 
         public Panel Init(MenuForm parent)
@@ -27,22 +25,22 @@
             parent.Text = "Cancelar Turno";
             parent.FixBounds(_panel);
 
-            LoadTurnos(parent.User(), parent.Rol());
+            LoadTurnos(parent.UserId(), parent.Rol());
 
             return _panel;
         }
 
-        private void LoadTurnos(Usuario usuario, Rol rol)
+        private void LoadTurnos(int userId, Rol rol)
         {
             List<Turno> turnos = null;
 
             if (rol.rol_nombre.Trim() == "Afiliado")
-                turnos = _afiliadoDao.GetTurnos(usuario.usuario_id);
+                turnos = _afiliadoDao.GetTurnos(userId);
             else
-               // turnos = _profesionalDao.GetTurnos(usuario.usuario_id, null);
+                // turnos = _profesionalDao.GetTurnos(usuario.usuario_id, null);
 
-            foreach (Turno turno in turnos)
-                _turnosView.Rows.Add(turno.turno_fecha, turno.turno_hora, turno.Profesional.ToString(), turno.Especialidad.ToString(), turno.Afiliado.ToString(), "Cancelar");
+                foreach (Turno turno in turnos)
+                    _turnosView.Rows.Add(turno.turno_fecha, turno.turno_hora, turno.Profesional.ToString(), turno.Especialidad.ToString(), turno.Afiliado.ToString(), "Cancelar");
         }
 
         private string GetHora(DateTime fecha)
@@ -61,7 +59,7 @@
 
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
-                CancelarTurnoDetalleForm cancelarTurnoDetalle = new CancelarTurnoDetalleForm(_turnoDao, e.RowIndex);
+                CancelarTurnoDetalleForm cancelarTurnoDetalle = new CancelarTurnoDetalleForm(e.RowIndex);
 
                 cancelarTurnoDetalle.FormClosed += CanecelarTurnoDetalleClosed;
 

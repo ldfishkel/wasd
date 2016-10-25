@@ -10,11 +10,12 @@
 namespace ClinicaFrba.DataAccess
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class F_ProfPorEsp_Result
+    public partial class ListaRole
     {
-        public int profesional_id { get; set; }
-        public string profesional_apellido { get; set; }
-        public string profesional_nombre { get; set; }
+        public int rol_id { get; set; }
+        public string rol_nombre { get; set; }
+        public bool rol_activo { get; set; }
     }
 }

@@ -15,6 +15,8 @@
 
         private int _rowIndex;
 
+        private int _nroAfiliado;
+
         private Form _parent;
 
         public BonosViewForm(Form form, AfiliadoDao afiliadoDao, int nroAfiliado, int rowIndex)
@@ -24,6 +26,8 @@
             _parent = form;
 
             _afiliadoDao = afiliadoDao;
+
+            _nroAfiliado = nroAfiliado;
 
             _bonosCombo.Items.AddRange(_afiliadoDao.GetBonos(nroAfiliado).ToArray());
 
@@ -53,7 +57,8 @@
 
         private void CompraBonoFormClosed(object sender, EventArgs eventArgs)
         {
-            MessageBox.Show("refresh Bonos");
+            _bonosCombo.Items.Clear();
+            _bonosCombo.Items.AddRange(_afiliadoDao.GetBonos(_nroAfiliado).ToArray());
         }
 
         private void _bonosCombo_SelectedIndexChanged(object sender, EventArgs e)

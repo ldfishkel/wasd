@@ -12,46 +12,73 @@
 
         public List<Afiliado> GetAfiliados()
         {
-            return _ds.Afiliadoes.ToList();
+            return _ds.ListaAfiliados.ToList().Select(x => new Afiliado()
+            {
+                afiliado_id = x.afiliado_id,
+                usuario_id = x.usuario_id,
+                estadocivil_id = x.estadocivil_id,
+                afiliado_tipodocumento = x.afiliado_tipodocumento,
+                planmedico_id = x.planmedico_id,
+                afiliado_sexo = x.afiliado_sexo,
+                afiliado_numero = x.afiliado_numero,
+                afiliado_nombre = x.afiliado_nombre,
+                afiliado_apellido = x.afiliado_apellido,
+                afiliado_numero_documento = x.afiliado_numero_documento,
+                afiliado_direccion = x.afiliado_direccion,
+                afiliado_telefono = x.afiliado_telefono,
+                afiliado_mail = x.afiliado_mail,
+                afiliado_fecha_nacimiento = x.afiliado_fecha_nacimiento,
+                afiliado_familiares_dependientes = x.afiliado_familiares_dependientes,
+                afiliado_activo = x.afiliado_activo,
+                afiliado_grupo_familiar = x.afiliado_grupo_familiar,
+                afiliado_cantidad_bonos_usados = x.afiliado_cantidad_bonos_usados
+            }).ToList();
         }
 
-        public string[] getTipoDeDocumentos()
+        public string[] GetTipoDeDocumentos()
         {
-            return new string[] { "DNI" };
+            return _ds.ListaTipoDocumentoes.ToList().Select(x => x.tipoDocumento).ToArray();
         }
 
         public List<Turno> GetTurnos(int usuario_id)
         {
-            //llamar a un proc que traiga todos los turnos que no tengan un bono con el mismo afiliado y fecha
+            return new List<Turno>(); //TODO CREAR FUNCTION
+        }
 
-            List<Turno> turnos = new List<Turno>();
+        public Afiliado GetAfiliado(int userId)
+        {
+            var x = _ds.AfiliadoDeUsuario(userId).SingleOrDefault();
 
-            Afiliado afiliado = new Afiliado();
+            if (x == null)
+                return null;
 
-            afiliado.afiliado_nombre = "Leonel";
-            afiliado.afiliado_apellido = "Dan";
-            afiliado.PlanMedico = new PlanMedico();
-            afiliado.PlanMedico.planmedico_nombre = "OSDE 210";
-            afiliado.PlanMedico.planmedico_precio_bono = 100;
-            afiliado.afiliado_numero = 1564215100;
-
-            var pro = new Profesional();
-            pro.profesional_nombre = "Profesional ";
-            pro.Especialidads = new List<Especialidad>();
-
-            for (int i = 0; i < 10; i++)
+            return new Afiliado()
             {
-                var turno = new Turno();
-                turno.Afiliado = afiliado;
-                turno.Profesional = pro;
-                turno.Especialidad = new Especialidad()
-                {
-                    especialidad_nombre = "Sarasa"
-                };
-                turnos.Add(turno);
-            }
+                afiliado_id = x.afiliado_id,
+                usuario_id = x.usuario_id,
+                estadocivil_id = x.estadocivil_id,
+                afiliado_tipodocumento = x.afiliado_tipodocumento,
+                planmedico_id = x.planmedico_id,
+                afiliado_sexo = x.afiliado_sexo,
+                afiliado_numero = x.afiliado_numero,
+                afiliado_nombre = x.afiliado_nombre,
+                afiliado_apellido = x.afiliado_apellido,
+                afiliado_numero_documento = x.afiliado_numero_documento,
+                afiliado_direccion = x.afiliado_direccion,
+                afiliado_telefono = x.afiliado_telefono,
+                afiliado_mail = x.afiliado_mail,
+                afiliado_fecha_nacimiento = x.afiliado_fecha_nacimiento,
+                afiliado_familiares_dependientes = x.afiliado_familiares_dependientes,
+                afiliado_activo = x.afiliado_activo,
+                afiliado_grupo_familiar = x.afiliado_grupo_familiar,
+                afiliado_cantidad_bonos_usados = x.afiliado_cantidad_bonos_usados
+            };
+        }
 
-            return turnos;
+        public PlanMedico GetPlanMedico(int planmedico_id)
+        {
+            //TODO CREATE FUNCTION PlanMedicoBy @planmedico_id RETURNS TABLE
+            return _ds.PlanMedicoes.SingleOrDefault(x => x.planmedico_id == planmedico_id);
         }
 
         public List<Bono> GetBonos(int nroAfiliado)
@@ -70,7 +97,32 @@
 
         public Afiliado GetAfiliado(string tipoDoc, int nroDoc)
         {
-            return _ds.Afiliadoes.SingleOrDefault(x => x.afiliado_tipodocumento == tipoDoc && x.afiliado_numero_documento == nroDoc);
+            var x = _ds.AfiliadoBy(tipoDoc, nroDoc).SingleOrDefault();
+
+            if (x == null)
+                return null;
+
+            return new Afiliado()
+            {
+                afiliado_id = x.afiliado_id,
+                usuario_id = x.usuario_id,
+                estadocivil_id = x.estadocivil_id,
+                afiliado_tipodocumento = x.afiliado_tipodocumento,
+                planmedico_id = x.planmedico_id,
+                afiliado_sexo = x.afiliado_sexo,
+                afiliado_numero = x.afiliado_numero,
+                afiliado_nombre = x.afiliado_nombre,
+                afiliado_apellido = x.afiliado_apellido,
+                afiliado_numero_documento = x.afiliado_numero_documento,
+                afiliado_direccion = x.afiliado_direccion,
+                afiliado_telefono = x.afiliado_telefono,
+                afiliado_mail = x.afiliado_mail,
+                afiliado_fecha_nacimiento = x.afiliado_fecha_nacimiento,
+                afiliado_familiares_dependientes = x.afiliado_familiares_dependientes,
+                afiliado_activo = x.afiliado_activo,
+                afiliado_grupo_familiar = x.afiliado_grupo_familiar,
+                afiliado_cantidad_bonos_usados = x.afiliado_cantidad_bonos_usados
+            };
         }
 
         public void PedirTurno(Turno turno)

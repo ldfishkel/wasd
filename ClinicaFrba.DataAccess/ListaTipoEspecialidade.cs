@@ -12,22 +12,9 @@ namespace ClinicaFrba.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class TipoEspecialidad
+    public partial class ListaTipoEspecialidade
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TipoEspecialidad()
-        {
-            this.Especialidads = new HashSet<Especialidad>();
-        }
-    
         public int tipoespecialidad_id { get; set; }
         public string tipoespecialidad_nombre { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Especialidad> Especialidads { get; set; }
-        public override string ToString()
-        {
-            return tipoespecialidad_nombre;
-        }
     }
 }

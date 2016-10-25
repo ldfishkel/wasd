@@ -20,11 +20,13 @@ namespace ClinicaFrba.DataAccess.DAO
 
         public List<Rol> GetAll()
         {
+            //vista ListaRoles
             return _ds.Rols.ToList();
         }
 
         public List<Funcionalidad> GetFuncionalidades()
         {
+            //vista ListaFuncionalidades
             return _ds.Funcionalidads.ToList();
         }
 

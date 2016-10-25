@@ -255,7 +255,8 @@ CREATE TABLE "WASD".Turno (
 	especialidad_id INT NOT NULL REFERENCES "WASD".Especialidad(especialidad_id),
 	turno_fecha DATE NOT NULL,
 	turno_hora TIME NOT NULL,
-	turno_cancelado VARCHAR(255)
+	turno_cancelado VARCHAR(255),
+	turno_llego BIT NOT NULL
 );
 
 CREATE TABLE "WASD".ConsultaMedica (
@@ -564,9 +565,9 @@ GO
 
 /**TURNOS**/
 SET IDENTITY_INSERT "WASD".Turno ON
-INSERT INTO "WASD".Turno(turno_id, afiliado_id, profesional_id, especialidad_id, turno_fecha, turno_hora, turno_cancelado)
+INSERT INTO "WASD".Turno(turno_id, afiliado_id, profesional_id, especialidad_id, turno_fecha, turno_hora, turno_cancelado, turno_llego)
 SELECT m.Turno_Numero, a.afiliado_id, p.profesional_id, m.Especialidad_Codigo, (SELECT CAST(m.Turno_Fecha AS DATE)),
-(SELECT CAST(m.Turno_Fecha AS TIME)), NULL
+(SELECT CAST(m.Turno_Fecha AS TIME)), NULL, 1
 FROM gd_esquema.Maestra m, "WASD".Afiliado a, "WASD".Profesional p
 WHERE m.Turno_Numero IS NOT NULL
 AND m.Consulta_Sintomas IS NOT NULL
@@ -632,6 +633,88 @@ AS
 		"WASD".TipoEspecialidad;
 GO
 
+/**LISTADO DE HORAS DE ATENCION DURANTE LA SEMANA**/
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE name = 'ListaHorasSemana' AND xtype = 'V')
+	DROP VIEW WASD.ListaHorasSemana;
+GO
+
+CREATE VIEW "WASD".ListaHorasSemana
+AS
+	SELECT 
+		*
+	FROM 
+		"WASD".Hora;
+GO
+
+/**LISTADO DE HORAS DE ATENCION DURANTE EL SABADO**/
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE name = 'ListaHorasSabado' AND xtype = 'V')
+	DROP VIEW WASD.ListaHorasSabado;
+GO
+
+CREATE VIEW "WASD".ListaHorasSabado
+AS
+	SELECT 
+		*
+	FROM 
+		"WASD".Hora
+	WHERE 
+		hora_id BETWEEN 7 AND  17;
+GO
+
+/**LISTADO DE ROLES**/
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE name = 'ListaRoles' AND xtype = 'V')
+	DROP VIEW WASD.ListaRoles;
+GO
+
+CREATE VIEW "WASD".ListaRoles
+AS
+	SELECT 
+		*
+	FROM 
+		"WASD".Rol;
+GO
+
+/**LISTADO DE FUNCIONALIDADES**/
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE name = 'ListaFuncionalidades' AND xtype = 'V')
+	DROP VIEW WASD.ListaFuncionalidades;
+GO
+
+CREATE VIEW "WASD".ListaFuncionalidades
+AS
+	SELECT 
+		*
+	FROM 
+		"WASD".Funcionalidad;
+GO
+
+
+/**LISTADO DE AFILIADOS**/
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE name = 'ListaAfiliados' AND xtype = 'V')
+	DROP VIEW WASD.ListaAfiliados;
+GO
+
+CREATE VIEW "WASD".ListaAfiliados
+AS
+	SELECT 
+		*
+	FROM 
+		"WASD".Afiliado;
+GO
+
+/**LISTADO DE TIPO DE DOCUMENTO**/
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE name = 'ListaTipoDocumento' AND xtype = 'V')
+	DROP VIEW WASD.ListaTipoDocumento;
+GO
+
+CREATE VIEW "WASD".ListaTipoDocumento
+AS
+	SELECT 'DNI' as tipoDocumento
+	UNION SELECT 'CI' as tipoDocumento
+	UNION SELECT 'LC' as tipoDocumento
+	UNION SELECT 'LE' as tipoDocumento;
+GO
+
+
 /****************************************************************************************************************/
 /**FUNCIONES**/
 /****************************************************************************************************************/
@@ -656,6 +739,23 @@ AS RETURN (
 );
 GO
 
+
+/**PROFESIONALES POR USUARIO ID**/
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE name = 'ProfesionalDeUsuario' AND xtype = 'IF')
+	DROP FUNCTION WASD.ProfesionalDeUsuario;
+GO
+
+CREATE FUNCTION "WASD".ProfesionalDeUsuario (@usuarioId INT) RETURNS TABLE
+AS RETURN (
+	SELECT 
+		*
+	FROM 
+		WASD.Profesional
+	WHERE
+		usuario_id = @usuarioId
+);
+GO
+
 /**LISTADO DE ESPECIALIDADES POR TIO DE ESPECIALIDAD**/
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE name = 'EspecialidadesDeTipo' AND xtype = 'IF')
 	DROP FUNCTION WASD.EspecialidadesDeTipo;
@@ -669,6 +769,80 @@ AS RETURN (
 		WASD.Especialidad
 	WHERE 
 	 	tipoespecialidad_id = @tipoEspecialidad
+);
+GO
+
+/**LISTADO DE ESPECIALIDADES QUE TIENE UN PROFESIONAL**/
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE name = 'EspecialidadesDeProfesional' AND xtype = 'IF')
+	DROP FUNCTION WASD.EspecialidadesDeProfesional;
+GO
+
+CREATE FUNCTION "WASD".EspecialidadesDeProfesional(@profesionalId INT) RETURNS TABLE
+AS RETURN (
+	SELECT 
+		e.*
+	FROM 
+		WASD.Especialidad e,
+		WASD.EspecialidadPorProfesional p
+	WHERE 
+		p.profesional_id = @profesionalId AND
+		e.especialidad_id = p.especialidad_id
+);
+GO
+
+/**LISTADO DE ROLES POR ID DE USUARIO**/
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE name = 'RolesDeUsuario' AND xtype = 'IF')
+	DROP FUNCTION WASD.RolesDeUsuario;
+GO
+
+CREATE FUNCTION "WASD".RolesDeUsuario(@usuarioId INT) RETURNS TABLE
+AS RETURN (
+	SELECT 
+		r.*,
+		f.*
+	FROM 
+		WASD.Rol r,
+		WASD.RolPorUsuario u, 
+		WASD.FuncionalidadPorRol fr,
+		WASD.Funcionalidad f
+	WHERE 
+		u.usuario_id = @usuarioId AND
+		f.funcionalidad_id = fr.funcionalidad_id AND 
+		r.rol_id = fr.rol_id AND
+	 	r.rol_id = u.rol_id
+);
+GO
+
+/**AFILIADO DADO UN TIPO DE DOCUMENTO Y SU RESPECTIVO NUMERO**/
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE name = 'AfiliadoBy' AND xtype = 'IF')
+	DROP FUNCTION WASD.AfiliadoBy;
+GO
+
+CREATE FUNCTION "WASD".AfiliadoBy(@tipoDocumento CHAR(3), @nroDocumento INT) RETURNS TABLE
+AS RETURN (
+	SELECT 
+		a.*
+	FROM 
+		WASD.Afiliado a
+	WHERE 
+		a.afiliado_tipodocumento = @tipoDocumento AND
+	 	a.afiliado_numero_documento = @nroDocumento
+);
+GO
+
+/**AFILIADO DADO UN ID DE USUARIO**/
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE name = 'AfiliadoDeUsuario' AND xtype = 'IF')
+	DROP FUNCTION WASD.AfiliadoDeUsuario;
+GO
+
+CREATE FUNCTION "WASD".AfiliadoDeUsuario(@usuarioId INT) RETURNS TABLE
+AS RETURN (
+	SELECT 
+		a.*
+	FROM 
+		WASD.Afiliado a
+	WHERE 
+		a.usuario_id = @usuarioId 
 );
 GO
 
@@ -754,35 +928,34 @@ AS RETURN
 GO
 
 /**LISTA DE TURNOS DEL DIA DE UN PROFESIONAL FILTRADO POR ESPECIALIDAD PARA EL REGISTRO DE LLEGADA**/
-IF OBJECT_ID(N'WASD.TurnosProfesionalEspecialidad', N'TF') IS NOT NULL
-	DROP FUNCTION "WASD".TurnosProfesionalEspecialidad;
+IF EXISTS (SELECT type_desc, type FROM sys.all_objects WITH(NOLOCK) WHERE NAME = 'TurnosProfesionalEspecialidad' AND type = 'IF')
+	DROP FUNCTION WASD.TurnosProfesionalEspecialidad;
 GO
 
 CREATE FUNCTION "WASD".TurnosProfesionalEspecialidad (@profesionalId INT, @especialidadId INT, @fecha VARCHAR(10)) RETURNS TABLE 
 AS RETURN 
 	SELECT
-		t.*, 
+		t.turno_id,
+		t.turno_cancelado, 
+		t.turno_hora, 
+		t.turno_llego, 
 		a.afiliado_nombre, 
 		a.afiliado_apellido, 
 		a.afiliado_numero, 
-		a.afiliado_numero_documento,
-		e.especialidad_nombre
+		e.especialidad_nombre,
+		p.profesional_nombre
 	FROM
 		"WASD".Turno t, 
 		"WASD".Afiliado a, 
-		"WASD".Especialidad e
+		"WASD".Especialidad e,
+		"WASD".Profesional p
 	WHERE
 		t.especialidad_id = e.especialidad_id AND
+		p.profesional_id = t.profesional_id AND
 		t.afiliado_id = a.afiliado_id AND
 		t.profesional_id = @profesionalId AND
 		t.especialidad_id = @especialidadId AND
-		t.turno_fecha = CONVERT(DATE,@fecha, 103) AND
-		t.turno_id NOT IN (SELECT 
-								consultamedica_id
-							FROM
-								"WASD".ConsultaMedica
-							WHERE
-								profesional_id = t.profesional_id);
+		t.turno_fecha = CONVERT(DATE, @fecha, 103);
 GO
 
 
@@ -790,9 +963,94 @@ GO
 /**PROCEDURES**/
 /****************************************************************************************************************/
 
+/**Login**/
+IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'Login' AND type = 'P')
+DROP PROCEDURE WASD.Login;
+GO
+
+CREATE PROCEDURE "WASD".Login @username VARCHAR(10), @password VARCHAR(64)
+AS
+BEGIN
+	DECLARE @hashedPassword VARCHAR(64), @usuarioId INT, @intentos TINYINT, @usuarioActivo BIT, @retMessage VARCHAR(30);
+	
+	SELECT @hashedPassword = SUBSTRING(master.dbo.fn_varbintohexstr(HASHBYTES('SHA2_256', @password)), 3, 64);
+	
+	SELECT 
+		@usuarioId = usuario_id,
+		@intentos = usuario_intentos, 
+		@usuarioActivo = usuario_activo
+	FROM 
+		WASD.Usuario
+	WHERE 
+	 	usuario_nombre = @username AND
+	 	usuario_password = @hashedPassword;
+
+	IF (@usuarioId IS NULL)
+
+		SELECT
+			@usuarioActivo = usuario_activo,
+			@intentos = usuario_intentos
+		FROM 
+			WASD.Usuario
+		WHERE
+			usuario_nombre = @username;
+
+	IF (@usuarioId IS NOT NULL) BEGIN
+
+		IF (@usuarioActivo = 0)
+			SET @retMessage = 'USUARIO INACTIVO';
+
+		ELSE BEGIN
+			SET @retMessage = 'BIENVENIDO';
+
+			UPDATE 
+				WASD.Usuario
+			SET
+				usuario_intentos = 0
+			WHERE
+				usuario_nombre = @username;
+
+		END
+	END
+	ELSE BEGIN
+			
+		IF (@intentos < 2) BEGIN
+			SET @retMessage = 'INCORRECTO';
+
+			UPDATE 
+				WASD.Usuario
+			SET
+				usuario_intentos = usuario_intentos + 1
+			WHERE
+				usuario_nombre = @username;
+
+		END
+		
+		IF (@intentos = 2) BEGIN
+			SET @retMessage = '3 INTENTOS, INACTIVO';
+			UPDATE 
+				WASD.Usuario
+			SET
+				usuario_activo = 0,
+				usuario_intentos = usuario_intentos + 1
+			WHERE
+				usuario_nombre = @username;
+		END
+		
+		IF (@usuarioActivo = 0)
+			SET @retMessage = 'USUARIO INACTIVO';
+
+	END
+
+	SELECT 
+		@usuarioId as usuario_id,
+		@retMessage as message;
+
+END;
+GO
 /**COMPRA DE BONOS**/
-IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'CompraBono' AND type = 'P')
-DROP PROCEDURE WASD.CompraBono;
+IF EXISTS (SELECT type_desc, type FROM sys.all_objects WITH(NOLOCK) WHERE NAME = 'CompraBono' AND type = 'P')
+	DROP PROCEDURE WASD.CompraBono;
 GO
 
 CREATE PROCEDURE "WASD".CompraBono @afiliadoId INT, @cant INT, @planMedicoId INT
@@ -845,6 +1103,13 @@ BEGIN
 	FROM 
 		WASD.Turno
 	WHERE 
+		turno_id = @turnoId;
+
+	UPDATE 
+		WASD.Turno
+	SET
+		turno_llego = 1
+	WHERE
 		turno_id = @turnoId;
 
 	UPDATE 

@@ -14,7 +14,7 @@
         private AfiliadoDao _afiliadoDao;
         private Afiliado _afiliado;
 
-        private List<Hora> _horas;
+        private List<Hora> _horasSemana;
 
         public PedirTurnoForm(ProfesionalDao profesionalDao, AfiliadoDao afiliadoDao)
         {
@@ -29,8 +29,8 @@
             parent.Text = "Pedir Turno";
             parent.FixBounds(_panel);
 
-            _horas = _profesionalDao.GetHoras();
-            _afiliado = parent.User().Afiliadoes.FirstOrDefault();
+            _horasSemana = _profesionalDao.GetHorasSemana();
+            _afiliado = _afiliadoDao.GetAfiliado(parent.UserId());
 
             InitializeCombo();
 
@@ -44,7 +44,8 @@
 
         private void EspecialidadChanged(object sender, EventArgs e)
         {
-            List<Profesional> profesionales = _profesionalDao.GetProfesionales((Especialidad)_especialidad.SelectedItem);
+            Especialidad especialidad = (Especialidad)_especialidad.SelectedItem;
+            List<Profesional> profesionales = _profesionalDao.GetProfesionales(especialidad.especialidad_id);
 
             _profesionalCombo.Items.Clear();
             _profesionalCombo.Items.AddRange(profesionales.ToArray());
@@ -73,10 +74,13 @@
             _turnoBtn.Enabled = false;
             _hora.Enabled = true;
 
-            List<int> horas = _profesionalDao.GetHorasDisponibles((Profesional)_profesionalCombo.SelectedItem, (Especialidad)_especialidad.SelectedItem, (string)_fecha.SelectedItem);
+            Profesional profesional = (Profesional)_profesionalCombo.SelectedItem;
+            Especialidad especialidad = (Especialidad)_especialidad.SelectedItem;
+
+            List<int> horas = _profesionalDao.GetHorasDisponibles(profesional, especialidad, (string)_fecha.SelectedItem);
 
             _hora.Items.Clear();
-            _hora.Items.AddRange(_horas.Where(z => horas.Any(y => y == z.hora_id)).ToArray());
+            _hora.Items.AddRange(_horasSemana.Where(z => horas.Any(y => y == z.hora_id)).ToArray());
         }
 
         private void SolicitarTurnoClick(object sender, EventArgs e)
@@ -93,6 +97,8 @@
             _afiliadoDao.PedirTurno(turno);
 
             MessageBox.Show("Turno Solicitado");
+
+            //TODO: reload all
         }
     }
 }

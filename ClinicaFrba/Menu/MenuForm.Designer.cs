@@ -62,8 +62,6 @@
             this.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menu";
-            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MenuForm_DragDrop);
-            this.DoubleClick += new System.EventHandler(this.MenuForm_DoubleClick);
             this.ResumeLayout(false);
 
         }

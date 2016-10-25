@@ -1,6 +1,7 @@
 ﻿namespace ClinicaFrba.RegistrarAgenda
 {
     using DataAccess;
+    using DataAccess.Configuration;
     using DataAccess.DAO;
     using Menu;
     using System;
@@ -15,7 +16,8 @@
 
         private Profesional _profesional;
 
-        private List<Hora> _horas;
+        private List<Hora> _horasSemena;
+        private List<Hora> _horasSabado;
 
         public RegistrarAgendaForm(ProfesionalDao profesionalDao)
         {
@@ -29,8 +31,11 @@
             parent.Text = "Registrar Agenda";
             parent.FixBounds(_panel);
 
-            _horas = _profesionalDao.GetHoras();
-            _profesional = _profesionalDao.GetProfesional(parent.User().usuario_id);
+            _fechaDesde.Value = Config.SystemDate();
+            _fechaHasta.Value = Config.SystemDate();
+            _horasSemena = _profesionalDao.GetHorasSemana();
+            _horasSabado = _profesionalDao.GetHorasSabado();
+            _profesional = _profesionalDao.GetProfesional(parent.UserId());
 
             InitializeAgenda();
 
@@ -47,27 +52,20 @@
 
         private void InitializeComboboxes()
         {
-            string[] horasSabado = { "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00" };
+            List<ComboBox> combos = new List<ComboBox>() { _lunesDesde, _lunesHasta, _martesDesde, _martesHasta, _miercolesDesde, _miercolesHasta, _juevesDesde, _juevesHasta, _viernesDesde, _viernesHasta };
 
-            _lunesDesde.Items.AddRange(_horas.ToArray());
-            _lunesHasta.Items.AddRange(_horas.ToArray());
-            _martesDesde.Items.AddRange(_horas.ToArray());
-            _martesHasta.Items.AddRange(_horas.ToArray());
-            _miercolesDesde.Items.AddRange(_horas.ToArray());
-            _miercolesHasta.Items.AddRange(_horas.ToArray());
-            _juevesDesde.Items.AddRange(_horas.ToArray());
-            _juevesHasta.Items.AddRange(_horas.ToArray());
-            _viernesDesde.Items.AddRange(_horas.ToArray());
-            _viernesHasta.Items.AddRange(_horas.ToArray());
-            _sabadoDesde.Items.AddRange(_horas.Where(x => horasSabado.Any(y => y == x.ToString())).ToArray());
-            _sabadoHasta.Items.AddRange(_horas.Where(x => horasSabado.Any(y => y == x.ToString())).ToArray());
+            foreach (ComboBox combo in combos)
+                combo.Items.AddRange(_horasSemena.ToArray());
 
-            _lunesEspecialidad.Items.AddRange(_profesional.Especialidads.ToArray());
-            _martesEspecialidad.Items.AddRange(_profesional.Especialidads.ToArray());
-            _miercolesEspecialidad.Items.AddRange(_profesional.Especialidads.ToArray());
-            _juevesEspecialidad.Items.AddRange(_profesional.Especialidads.ToArray());
-            _viernesEspecialidad.Items.AddRange(_profesional.Especialidads.ToArray());
-            _sabadoEspecialidad.Items.AddRange(_profesional.Especialidads.ToArray());
+            combos = new List<ComboBox>() { _sabadoDesde, _sabadoHasta };
+
+            foreach (ComboBox combo in combos)
+                combo.Items.AddRange(_horasSabado.ToArray());
+
+            combos = new List<ComboBox>() { _lunesEspecialidad, _martesEspecialidad, _miercolesEspecialidad, _juevesEspecialidad, _viernesEspecialidad, _sabadoEspecialidad };
+
+            foreach (ComboBox combo in combos)
+                combo.Items.AddRange(_profesionalDao.GetEspecialidadesDeProfesional(_profesional.profesional_id).ToArray());
         }
 
         private void ShowAgenda()
@@ -127,7 +125,7 @@
 
             if (_sabadoCheck.Checked)
                 BuildAgenda((Especialidad)_sabadoEspecialidad.SelectedItem, _sabadoDesde.SelectedItem, _sabadoHasta.SelectedItem, "SABADO");
-
+            //Por ahora dejar asi, fijarse si se puede usar un store procedure para esto
             _profesionalDao.SaveAgendum(_profesional);
         }
 
@@ -137,8 +135,8 @@
 
             agenda.profesional_id = _profesional.profesional_id;
             agenda.especialidad_id = especialidad.especialidad_id;
-            agenda.Hora1 = (Hora)horaHasta;
-            agenda.Hora = (Hora)horaDesde;
+            agenda.agenda_hora_desde = ((Hora)horaDesde).hora_id;
+            agenda.agenda_hora_hasta= ((Hora)horaHasta).hora_id;
             agenda.agenda_dia = dia;
             agenda.agenda_fecha_desde = _fechaDesde.Value;
             agenda.agenda_fecha_hasta = _fechaHasta.Value;
@@ -148,22 +146,14 @@
 
         private void DisableFields()
         {
-            _lunesGroupBox.Enabled = false;
-            _martesGroupBox.Enabled = false;
-            _miercolesGroupBox.Enabled = false;
-            _juevesGroupBox.Enabled = false;
-            _viernesGroupBox.Enabled = false;
-            _sabadoGroupBox.Enabled = false;
-            _registrarAgendaBtn.Enabled = false;
-            _fechaDesde.Enabled = false;
-            _fechaHasta.Enabled = false;
+            _panel.Enabled = false;
         }
 
         private bool ValidateFields()
         {
             StringBuilder sb = new StringBuilder();
             bool oneChecked = false;
-            TimeSpan timeDiff = new TimeSpan(0, 0, 0);  
+            TimeSpan timeDiff = new TimeSpan(0, 0, 0);
 
             if (_fechaDesde.Value.CompareTo(_fechaHasta.Value) >= 0)
                 sb.AppendLine("Fecha desde debe ser anterior a fecha hasta");

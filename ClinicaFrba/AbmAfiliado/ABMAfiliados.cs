@@ -9,9 +9,6 @@
     {
         private AfiliadoDao _afiliadoDao;
 
-        private Usuario _user;
-        private Rol _rol;
-
         public ABMAfiliadosForm(AfiliadoDao afiliadoDao)
         {
             _afiliadoDao = afiliadoDao;
@@ -23,9 +20,6 @@
 
             menuForm.Text = "ABM Afiliados";
             menuForm.FixBounds(_panel);
-
-            _user = menuForm.User();
-            _rol = menuForm.Rol();
 
             InitializeAfiliadosGrid();
 

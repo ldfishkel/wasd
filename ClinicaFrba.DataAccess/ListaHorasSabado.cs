@@ -10,16 +10,11 @@
 namespace ClinicaFrba.DataAccess
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class TurnosProfesionalEspecialidad_Result
+    public partial class ListaHorasSabado
     {
-        public int turno_id { get; set; }
-        public string turno_cancelado { get; set; }
-        public System.TimeSpan turno_hora { get; set; }
-        public string afiliado_nombre { get; set; }
-        public string afiliado_apellido { get; set; }
-        public int afiliado_numero { get; set; }
-        public string especialidad_nombre { get; set; }
-        public string profesional_nombre { get; set; }
+        public int hora_id { get; set; }
+        public System.TimeSpan hora_comienzo { get; set; }
     }
 }
