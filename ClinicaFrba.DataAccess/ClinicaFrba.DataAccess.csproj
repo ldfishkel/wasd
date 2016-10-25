@@ -42,10 +42,6 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EntityFrameworkExtras.EF6, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFrameworkExtras.EF6.1.0.0\lib\net45\EntityFrameworkExtras.EF6.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -113,8 +109,7 @@
     <Compile Include="DAO\ProfesionalDao.cs" />
     <Compile Include="DAO\AfiliadoDao.cs" />
     <Compile Include="DAO\RolDao.cs" />
-    <Compile Include="DAO\StoredProcedures\AltaAgendaStoreProcedure.cs" />
-    <Compile Include="DAO\UserDefinedTypes\AgendaParam.cs" />
+    <Compile Include="DAO\TurnoDao.cs" />
     <Compile Include="DAO\UsuarioDao.cs" />
     <Compile Include="Diagnostico.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>

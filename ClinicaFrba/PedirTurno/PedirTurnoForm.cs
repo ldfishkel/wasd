@@ -10,16 +10,24 @@
 
     public partial class PedirTurnoForm : Form
     {
-        private ProfesionalDao _profesionalDao;
-        private AfiliadoDao _afiliadoDao;
-        private Afiliado _afiliado;
+        #region [FIELDS]
 
+        private readonly ProfesionalDao _profesionalDao;
+        private readonly AfiliadoDao _afiliadoDao;
+        private readonly TurnoDao _turnoDao;
+
+        private Afiliado _afiliado;
         private List<Hora> _horasSemana;
 
-        public PedirTurnoForm(ProfesionalDao profesionalDao, AfiliadoDao afiliadoDao)
+        #endregion
+
+        #region [INIT]
+
+        public PedirTurnoForm(ProfesionalDao profesionalDao, AfiliadoDao afiliadoDao, TurnoDao turnoDao)
         {
             _profesionalDao = profesionalDao;
             _afiliadoDao = afiliadoDao;
+            _turnoDao = turnoDao;
         }
 
         public Panel Init(MenuForm parent)
@@ -55,6 +63,20 @@
             _fecha.Text = "Fecha";
             _hora.Text = "Hora";
             _fechaHoraGroupbox.Enabled = false;
+        }
+
+        #endregion
+
+        #region [SEARCH]
+
+        private void TipoEspecialidadChanged(object sender, EventArgs e)
+        {
+            TipoEspecialidad tipoEspecialidad = (TipoEspecialidad)_tipoEspecialidad.SelectedItem;
+
+            List<Especialidad> especialidades = _profesionalDao.GetEspecialidades(tipoEspecialidad.tipoespecialidad_id);
+
+            _especialidad.Items.Clear();
+            _especialidad.Items.AddRange(especialidades.ToArray());
         }
 
         private void EspecialidadChanged(object sender, EventArgs e)
@@ -98,6 +120,10 @@
             _hora.Items.AddRange(_horasSemana.Where(z => horas.Any(y => y == z.hora_id)).ToArray());
         }
 
+        #endregion
+
+        #region [ACTION]
+
         private void SolicitarTurnoClick(object sender, EventArgs e)
         {
             Turno turno = new Turno();
@@ -110,21 +136,13 @@
             turno.turno_hora = ((Hora)_hora.SelectedItem).hora_comienzo;
             turno.turno_llego = false;
 
-            _afiliadoDao.PedirTurno(turno);
+            _turnoDao.PedirTurno(turno);
 
             MessageBox.Show("Turno Solicitado");
 
             InitializeCombo();
         }
 
-        private void TipoEspecialidadChanged(object sender, EventArgs e)
-        {
-            TipoEspecialidad tipoEspecialidad = (TipoEspecialidad)_tipoEspecialidad.SelectedItem;
-
-            List<Especialidad> especialidades = _profesionalDao.GetEspecialidades(tipoEspecialidad.tipoespecialidad_id);
-
-            _especialidad.Items.Clear();
-            _especialidad.Items.AddRange(especialidades.ToArray());
-        }
+        #endregion
     }
 }

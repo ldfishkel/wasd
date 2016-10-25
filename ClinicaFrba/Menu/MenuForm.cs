@@ -17,6 +17,8 @@
 
     public partial class MenuForm : Form
     {
+        #region [FIELDS]
+
         //Size constants
         private const int MENU_WIDTH = 180;
         private const int MARGIN_RIGHT = 28;
@@ -29,15 +31,19 @@
         private Rol _rol;
 
         //forms
-        private ABMRolForm _abmRolForm;
-        private ABMAfiliadosForm _abmAfiliadosForm;
-        private RegistrarAgendaForm _registrarAgendaForm;
-        private ComprarBonoForm _comprarBonoForm;
-        private PedirTurnoForm _pedirTurnoForm;
-        private CancelarTurnoForm _cancelarTurnoForm;
-        private RegistrarLlegadaForm _registrarLlegadaForm;
-        private DiagnosticarForm _diagnosticarForm;
-        private VerEstadisticasForm _verEstadisticasForm;
+        private readonly ABMRolForm _abmRolForm;
+        private readonly ABMAfiliadosForm _abmAfiliadosForm;
+        private readonly RegistrarAgendaForm _registrarAgendaForm;
+        private readonly ComprarBonoForm _comprarBonoForm;
+        private readonly PedirTurnoForm _pedirTurnoForm;
+        private readonly CancelarTurnoForm _cancelarTurnoForm;
+        private readonly RegistrarLlegadaForm _registrarLlegadaForm;
+        private readonly DiagnosticarForm _diagnosticarForm;
+        private readonly VerEstadisticasForm _verEstadisticasForm;
+
+        #endregion
+
+        #region [INIT]
 
         public MenuForm(ABMRolForm abmRolForm,
                         ABMAfiliadosForm abmAfiliadosForm,
@@ -59,27 +65,6 @@
             _registrarLlegadaForm = registrarLlegadaForm;
             _diagnosticarForm = diagnosticarForm;
             _verEstadisticasForm = verEstadisticasForm;
-        }
-
-        public int UserId()
-        {
-            return _userId;
-        }
-
-        public Rol Rol()
-        {
-            return _rol;
-        }
-
-        public void FixBounds(Control content)
-        {
-            Width = content.Width + MENU_WIDTH + MENU_MARGIN_RIGHT;
-            Height = content.Height + MARGIN_BOTTOM + MARGIN_BOTTOM_BOTTOM;
-
-            _functionsTabControl.Width = content.Width + MENU_WIDTH - MARGIN_RIGHT;
-            _functionsTabControl.Height = content.Height + MARGIN_BOTTOM;
-
-            content.BackColor = Color.WhiteSmoke;
         }
 
         public void Init(int userId, Rol rol, Action<object, FormClosingEventArgs> close)
@@ -109,6 +94,35 @@
             OnTabSelected(null, null);
         }
 
+        #endregion
+
+        #region [PROVIDERS]
+
+        public int UserId()
+        {
+            return _userId;
+        }
+
+        public Rol Rol()
+        {
+            return _rol;
+        }
+
+        #endregion
+
+        #region [ACTIONS]
+
+        public void FixBounds(Control content)
+        {
+            Width = content.Width + MENU_WIDTH + MENU_MARGIN_RIGHT;
+            Height = content.Height + MARGIN_BOTTOM + MARGIN_BOTTOM_BOTTOM;
+
+            _functionsTabControl.Width = content.Width + MENU_WIDTH - MARGIN_RIGHT;
+            _functionsTabControl.Height = content.Height + MARGIN_BOTTOM;
+
+            content.BackColor = Color.WhiteSmoke;
+        }
+
         private void OnTabSelected(object sender, EventArgs e)
         {
             var tab = _functionsTabControl.SelectedTab;
@@ -130,5 +144,7 @@
                 default: break;
             }
         }
+
+        #endregion
     }
 }

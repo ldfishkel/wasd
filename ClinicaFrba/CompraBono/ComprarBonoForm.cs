@@ -10,9 +10,16 @@
 
     public partial class ComprarBonoForm : Form
     {
-        private AfiliadoDao _afiliadoDao;
+        #region [FIELDS]
+
+        private readonly AfiliadoDao _afiliadoDao;
+
         private PlanMedico _planMedico;
         private Afiliado _afiliado;
+
+        #endregion
+
+        #region [INIT]
 
         public ComprarBonoForm(AfiliadoDao afiliadoDao)
         {
@@ -45,20 +52,8 @@
         }
 
         private void InitializeCombo()
-        { 
-            _tipoDeDoc.Items.AddRange(_afiliadoDao.GetTipoDeDocumentos());
-        }
-
-        private void BuscarAfiliadoClick(object sender, System.EventArgs e)
         {
-            if (ValidateSearch())
-            {
-                _afiliado = _afiliadoDao.GetAfiliado((string)_tipoDeDoc.SelectedItem, Int32.Parse(_nroDocumento.Text));
-                if (_afiliado != null)
-                    InitializeAfiliado();
-                else
-                    MessageBox.Show("No se encontro al afiliado");
-            }
+            _tipoDeDoc.Items.AddRange(_afiliadoDao.GetTipoDeDocumentos());
         }
 
         private void InitializeAfiliado()
@@ -75,6 +70,33 @@
 
             _compraGroupBox.Enabled = true;
         }
+
+        #endregion
+
+        #region [SEARCH]
+
+        private void BuscarAfiliadoClick(object sender, System.EventArgs e)
+        {
+            if (ValidateSearch())
+            {
+                _afiliado = _afiliadoDao.GetAfiliado((string)_tipoDeDoc.SelectedItem, Int32.Parse(_nroDocumento.Text));
+                if (_afiliado != null)
+                    InitializeAfiliado();
+                else
+                    MessageBox.Show("No se encontro al afiliado");
+            }
+        }
+
+        private void CantidadBonosChanged(object sender, EventArgs e)
+        {
+            _precio.Text = "" + _cantidadBonos.Value * _planMedico.planmedico_precio_bono;
+
+            _comprarBtn.Enabled = _cantidadBonos.Value > 0;
+        }
+
+        #endregion
+
+        #region [ACTION]
 
         private bool ValidateSearch()
         {
@@ -107,11 +129,6 @@
             _cantidadBonos.Value = 0;
         }
 
-        private void CantidadBonosChanged(object sender, EventArgs e)
-        {
-            _precio.Text = "" + _cantidadBonos.Value * _planMedico.planmedico_precio_bono;
-
-            _comprarBtn.Enabled = _cantidadBonos.Value > 0;
-        }
+        #endregion
     }
 }

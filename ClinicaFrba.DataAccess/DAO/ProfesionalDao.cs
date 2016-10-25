@@ -30,6 +30,31 @@
             }).SingleOrDefault();
         }
 
+        public List<ConsultaMedica> GetConsultasMedicas(int profesional_id)
+        {
+            //TODO 05 CREATE FUNCTION ConsultasMedicasDeProfesional @profesionalId
+            return new List<ConsultaMedica>()
+            {
+                new ConsultaMedica()
+                {
+                    consultamedica_id = 12345,
+                    Bono = new Bono()
+                    {
+                        Afiliado = new Afiliado()
+                        {
+                            afiliado_nombre = "Juan",
+                            afiliado_apellido = "Perez"
+                        }
+                    }
+                }
+            };
+        }
+
+        public void SaveResultadoConsulta(int _consultaId, List<string> _diagnosticos, List<string> _sintomas)
+        {
+            //TODO 08 Agregar tablas Diagnostico y Sintoma con consultamedica_id
+        }
+
         public List<Hora> GetHorasSemana()
         {
             return _ds.ListaHorasSemanas.ToList().Select(x => new Hora()
@@ -37,6 +62,12 @@
                 hora_comienzo = x.hora_comienzo,
                 hora_id = x.hora_id
             }).ToList();
+        }
+
+        public List<Agendum> GetAgenda(int profesional_id)
+        {
+            //TODO 03 CREATE FUNCTION AgendaDeProfesional @profesionalId
+            return _ds.Agenda.Where(x => x.profesional_id == profesional_id).ToList(); 
         }
 
         public List<Hora> GetHorasSabado()
@@ -50,46 +81,8 @@
 
         public void SaveAgendum(Profesional profesional)
         {
-            //TODO reemplazar por StoreProcedure
             _ds.Agenda.AddRange(profesional.Agenda);
             _ds.SaveChanges();
-        }
-
-        public List<Turno> GetTurnos(int idProfesional, int idEspecialidad)
-        {
-            List<Turno> turnos = new List<Turno>();
-
-            foreach (TurnosProfesionalEspecialidad_Result x in _ds.TurnosProfesionalEspecialidad(idProfesional, idEspecialidad, GetFecha()))
-            {
-                Turno turno = new Turno()
-                {
-                    turno_id = x.turno_id,
-                    turno_hora = x.turno_hora,
-                    turno_cancelado = x.turno_cancelado,
-                    turno_llego = x.turno_llego
-                };
-
-                turno.Afiliado = new Afiliado()
-                {
-                    afiliado_nombre = x.afiliado_nombre,
-                    afiliado_apellido = x.afiliado_apellido,
-                    afiliado_numero = x.afiliado_numero,
-                };
-
-                turno.Especialidad = new Especialidad()
-                {
-                    especialidad_nombre = x.especialidad_nombre
-                };
-
-                turno.Profesional = new Profesional()
-                {
-                    profesional_nombre = x.profesional_nombre
-                };
-
-                turnos.Add(turno);
-            }
-
-            return turnos;
         }
 
         public List<Especialidad> GetEspecialidadesDeProfesional(int profesionalId)
@@ -109,42 +102,6 @@
                 tipoespecialidad_nombre = x.tipoespecialidad_nombre,
                 tipoespecialidad_id = x.tipoespecialidad_id
             }).ToList();
-        }
-
-        public List<Turno> GetTurnos(string nombreProfesional)
-        {
-            // TODO Function TurnosProfesionalNombre @nombreProfesional
-
-            List<Turno> turnos = new List<Turno>();
-
-                /*
-                foreach (var x in _ds.TurnosProfesionalNombre(nombreProfesional, GetFecha()))
-                {
-                    Turno turno = new Turno()
-                    {
-                        turno_id = x.turno_id,
-                        afiliado_id = x.afiliado_id,
-                        profesional_id = x.profesional_id,
-                        especialidad_id = x.especialidad_id,
-                        turno_fecha = x.turno_fecha,
-                        turno_hora = x.turno_hora,
-                        turno_cancelado = x.turno_cancelado
-                    };
-
-                    turno.Afiliado = new Afiliado()
-                    {
-                        afiliado_id = x.afiliado_id,
-                        afiliado_nombre = x.afiliado_nombre,
-                        afiliado_apellido = x.afiliado_apellido,
-                        afiliado_numero = x.afiliado_numero,
-                        afiliado_numero_documento = x.afiliado_numero_documento
-                    };
-
-                    turnos.Add(turno);
-                }
-                */
-
-            return turnos;
         }
 
         public List<Especialidad> GetEspecialidades(int tipoEspecialidadId)

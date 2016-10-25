@@ -9,7 +9,7 @@
 
     public partial class BonosViewForm : Form
     {
-        private AfiliadoDao _afiliadoDao;
+        private readonly AfiliadoDao _afiliadoDao;
 
         private Bono _bono;
 

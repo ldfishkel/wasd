@@ -99,6 +99,12 @@
     <Compile Include="CompraBono\ComprarBonoForm.Designer.cs">
       <DependentUpon>ComprarBonoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Diagnosticar\ResultadoConsultaMedicaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Diagnosticar\ResultadoConsultaMedicaForm.Designer.cs">
+      <DependentUpon>ResultadoConsultaMedicaForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="IoC\ClinicaFrbaModule.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -174,6 +180,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Diagnosticar\DiagnosticarForm.resx">
       <DependentUpon>DiagnosticarForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Diagnosticar\ResultadoConsultaMedicaForm.resx">
+      <DependentUpon>ResultadoConsultaMedicaForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

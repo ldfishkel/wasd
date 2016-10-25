@@ -1,5 +1,6 @@
 ﻿namespace ClinicaFrba.DataAccess.DAO
 {
+    using Configuration;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -40,11 +41,6 @@
             return _ds.ListaTipoDocumentoes.ToList().Select(x => x.tipoDocumento).ToArray();
         }
 
-        public List<Turno> GetTurnos(int usuario_id)
-        {
-            return new List<Turno>(); //TODO CREAR FUNCTION
-        }
-
         public Afiliado GetAfiliado(int userId)
         {
             var x = _ds.AfiliadoDeUsuario(userId).SingleOrDefault();
@@ -77,7 +73,7 @@
 
         public PlanMedico GetPlanMedico(int planmedico_id)
         {
-            //TODO CREATE FUNCTION PlanMedicoBy @planmedico_id RETURNS TABLE
+            //TODO 06 CREATE FUNCTION PlanMedicoBy @planmedico_id RETURNS TABLE
             return _ds.PlanMedicoes.SingleOrDefault(x => x.planmedico_id == planmedico_id);
         }
 
@@ -123,17 +119,6 @@
                 afiliado_grupo_familiar = x.afiliado_grupo_familiar,
                 afiliado_cantidad_bonos_usados = x.afiliado_cantidad_bonos_usados
             };
-        }
-
-        public void PedirTurno(Turno turno)
-        {
-            _ds.Turnoes.Add(turno);
-            _ds.SaveChanges();
-        }
-
-        public void UsarBono(int bonoId, int turnoId)
-        {
-            _ds.RegistroLlegada(turnoId, bonoId, DateTime.Now);
         }
     }
 }

@@ -9,8 +9,15 @@
 
     public partial class ABMRolForm : Form
     {
-        private RolDao _rolDao;
+        #region [FIELD]
+
+        private readonly RolDao _rolDao;
+
         private List<Rol> _roles;
+
+        #endregion
+
+        #region [INIT]
 
         public ABMRolForm(RolDao rolDao)
         {
@@ -39,14 +46,9 @@
                     _rolView.Rows.Add(rol.rol_id, rol.rol_nombre, "Modificar", "Borrar");
         }
 
-        private void AltaClick(object sender, System.EventArgs e)
-        {
-            AltaRolForm form = new AltaRolForm(_rolDao);
+        #endregion
 
-            form.FormClosed += AltaRolClosed;
-
-            form.Show();
-        }
+        #region [GRID MANIPULATION]
 
         private void AltaRolClosed(object sender, EventArgs e)
         {
@@ -60,7 +62,9 @@
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0 && e.ColumnIndex == 3)
             {
                 int id = (int)_rolView.Rows[e.RowIndex].Cells[0].Value;
+
                 _rolDao.Delete(id);
+
                 Initialize();
             }
 
@@ -75,5 +79,20 @@
                 form.Show();
             }
         }
+
+        #endregion
+
+        #region [ACTION]
+
+        private void AltaClick(object sender, System.EventArgs e)
+        {
+            AltaRolForm form = new AltaRolForm(_rolDao);
+
+            form.FormClosed += AltaRolClosed;
+
+            form.Show();
+        }
+
+        #endregion
     }
 }

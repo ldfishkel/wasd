@@ -4,15 +4,22 @@
     using DataAccess.DAO;
     using System;
     using System.Collections.Generic;
-    using System.Windows.Forms;
     using System.Linq;
     using System.Text;
+    using System.Windows.Forms;
 
     public partial class AltaRolForm : Form
     {
-        private RolDao _rolDao;
+        #region [FILEDS]
+
+        private readonly RolDao _rolDao;
+
         private Rol _rol;
         private bool _modify;
+
+        #endregion
+
+        #region [INIT]
 
         public AltaRolForm(RolDao rolDao)
         {
@@ -45,34 +52,20 @@
             _funcionalidadCombo.Items.AddRange(_rolDao.GetFuncionalidades().ToArray());
         }
 
+        #endregion
+
+        #region [GRID MANIPULATION]
+
         private void AgregarClick(object sender, EventArgs e)
         {
             if ((Funcionalidad)_funcionalidadCombo.SelectedItem != null)
                 _rol.Funcionalidads.Add((Funcionalidad)_funcionalidadCombo.SelectedItem);
 
             _funcionalidadesView.Rows.Clear();
+
             foreach (Funcionalidad funcionalidad in _rol.Funcionalidads)
             {
                 _funcionalidadesView.Rows.Add(funcionalidad.funcionalidad_id, funcionalidad.funcionalidad_nombre, "Quitar");
-            }
-        }
-
-        private void GuardarClick(object sender, EventArgs e)
-        {
-            if (ValidateFields())
-            {
-                _rol.rol_nombre = _nombre.Text;
-                _rol.rol_activo = true;
-
-                bool success = false;
-
-                if (_modify)
-                   success = _rolDao.Modify(_rol);
-                else
-                    success = _rolDao.Guardar(_rol);
-
-                if (success)
-                    Close();
             }
         }
 
@@ -87,6 +80,26 @@
                 _rol.Funcionalidads.Remove(_rol.Funcionalidads.First(x => x.funcionalidad_id == id));
 
                 senderGrid.Rows.RemoveAt(e.RowIndex);
+            }
+        }
+
+        #endregion
+
+        #region [ACTION]
+
+        private void GuardarClick(object sender, EventArgs e)
+        {
+            if (ValidateFields())
+            {
+                _rol.rol_nombre = _nombre.Text;
+                _rol.rol_activo = true;
+
+                if (_modify)
+                    _rolDao.Modify(_rol);
+                else
+                    _rolDao.Guardar(_rol);
+
+                Close();
             }
         }
 
@@ -108,5 +121,7 @@
 
             return true;
         }
+
+        #endregion
     }
 }

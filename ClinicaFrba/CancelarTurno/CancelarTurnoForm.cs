@@ -1,21 +1,36 @@
 ﻿namespace ClinicaFrba.CancelarTurno
 {
     using DataAccess;
+    using DataAccess.Configuration;
     using DataAccess.DAO;
     using Menu;
     using System;
     using System.Collections.Generic;
+    using System.Text;
     using System.Windows.Forms;
 
     public partial class CancelarTurnoForm : Form
     {
-        private ProfesionalDao _profesionalDao;
-        private AfiliadoDao _afiliadoDao;
+        #region [FIELDS]
 
-        public CancelarTurnoForm(ProfesionalDao profesionalDao, AfiliadoDao afiliadoDao)
+        private readonly ProfesionalDao _profesionalDao;
+        private readonly AfiliadoDao _afiliadoDao;
+        private readonly TurnoDao _turnoDao;
+
+        private Profesional _profesional;
+        private Afiliado _afiliado;
+
+        private DateTime _systemDate;
+
+        #endregion
+
+        #region [INIT]
+
+        public CancelarTurnoForm(ProfesionalDao profesionalDao, AfiliadoDao afiliadoDao, TurnoDao turnoDao)
         {
             _profesionalDao = profesionalDao;
             _afiliadoDao = afiliadoDao;
+            _turnoDao = turnoDao;
         }
 
         public Panel Init(MenuForm parent)
@@ -25,32 +40,45 @@
             parent.Text = "Cancelar Turno";
             parent.FixBounds(_panel);
 
-            LoadTurnos(parent.UserId(), parent.Rol());
+            _systemDate = Config.SystemDate();
+
+            if (parent.Rol().ToString().ToString() == "Afiliado")
+                _afiliado = _afiliadoDao.GetAfiliado(parent.UserId());
+            else
+                _profesional = _profesionalDao.GetProfesional(parent.UserId());
+
+            LoadTurnos();
 
             return _panel;
         }
 
-        private void LoadTurnos(int userId, Rol rol)
+        #endregion
+
+        #region [GRID MANIPULATION]
+
+        private void LoadTurnos()
         {
-            List<Turno> turnos = null;
+            List<Turno> turnos = new List<Turno>();
 
-            if (rol.rol_nombre.Trim() == "Afiliado")
-                turnos = _afiliadoDao.GetTurnos(userId);
-            else
-                // turnos = _profesionalDao.GetTurnos(usuario.usuario_id, null);
+            if (_afiliado != null)
+            {
+                turnos = _turnoDao.GetTurnosAfiliado(_afiliado.afiliado_id);
 
-                foreach (Turno turno in turnos)
-                    _turnosView.Rows.Add(turno.turno_fecha, turno.turno_hora, turno.Profesional.ToString(), turno.Especialidad.ToString(), turno.Afiliado.ToString(), "Cancelar");
-        }
+                _rangoGruopBox.Hide();
+            }
+            else if (_profesional != null)
+            {
+                turnos = _turnoDao.GetTurnosProfesional(_profesional.profesional_id);
 
-        private string GetHora(DateTime fecha)
-        {
-            return String.Format("{0}/{1}/{2}", fecha.Day, fecha.Month, fecha.Year);
-        }
+                _rangoGruopBox.Show();
+                _fechaDesde.Value = _systemDate;
+                _fechaHasta.Value = _systemDate;
+            }
 
-        private string GetFecha(DateTime fecha)
-        {
-            return String.Format("{0}:{1}", fecha.Hour, fecha.Minute);
+            _turnosView.Rows.Clear();
+
+            foreach (Turno turno in turnos)
+                _turnosView.Rows.Add(turno.turno_id, turno.turno_fecha, turno.turno_hora, turno.Profesional.ToString(), turno.Especialidad.ToString(), turno.Afiliado.ToString(), "Cancelar");
         }
 
         private void CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -69,7 +97,48 @@
 
         private void CanecelarTurnoDetalleClosed(object sender, EventArgs e)
         {
-            MessageBox.Show("Turno Cancelado");
+            LoadTurnos();
         }
+
+        #endregion
+
+        #region [ACTION]
+
+        private void CancelarRangoClick(object sender, EventArgs e)
+        {
+            if (ValidateFields())
+            {
+                CancelarTurnoDetalleForm cancelarTurnoDetalle = new CancelarTurnoDetalleForm(_fechaDesde.Value, _fechaHasta.Value, _profesional.profesional_id);
+
+                cancelarTurnoDetalle.FormClosed += CanecelarTurnoDetalleClosed;
+
+                cancelarTurnoDetalle.Show();
+
+                _turnoDao.CancelarTurnos(_fechaDesde.Value, _fechaHasta.Value, _profesional.profesional_id);
+
+                LoadTurnos();
+            }
+        }
+
+        private bool ValidateFields()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            if (_fechaDesde.Value.CompareTo(_systemDate) <= 0)
+                sb.AppendLine(String.Format("La fecha desde debe ser posterior al dia de hoy: {0}", _systemDate.ToString()));
+
+            if (_fechaHasta.Value.CompareTo(_fechaDesde.Value) < 0)
+                sb.AppendLine("La fecha hasta debe ser igual o posterior a la fecha desde");
+
+            if (sb.Length > 0)
+            {
+                MessageBox.Show(sb.ToString());
+                return false;
+            }
+
+            return true;
+        }
+
+        #endregion
     }
 }

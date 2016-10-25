@@ -12,12 +12,18 @@
 
     public partial class RegistrarAgendaForm : Form
     {
-        private ProfesionalDao _profesionalDao;
+        #region [FIELDS]
+
+        private readonly ProfesionalDao _profesionalDao;
 
         private Profesional _profesional;
 
         private List<Hora> _horasSemena;
         private List<Hora> _horasSabado;
+
+        #endregion
+
+        #region [INIT]
 
         public RegistrarAgendaForm(ProfesionalDao profesionalDao)
         {
@@ -33,8 +39,10 @@
 
             _fechaDesde.Value = Config.SystemDate();
             _fechaHasta.Value = Config.SystemDate();
+
             _horasSemena = _profesionalDao.GetHorasSemana();
             _horasSabado = _profesionalDao.GetHorasSabado();
+
             _profesional = _profesionalDao.GetProfesional(parent.UserId());
 
             InitializeAgenda();
@@ -44,6 +52,8 @@
 
         private void InitializeAgenda()
         {
+            _profesional.Agenda = _profesionalDao.GetAgenda(_profesional.profesional_id);
+
             if (_profesional.Agenda != null && _profesional.Agenda.Count == 0)
                 InitializeComboboxes();
             else
@@ -86,7 +96,7 @@
             _fechaDesde.Value = _profesional.Agenda.First().agenda_fecha_desde;
             _fechaHasta.Value = _profesional.Agenda.First().agenda_fecha_hasta;
 
-            DisableFields();
+            _panel.Enabled = false;
         }
 
         private void ShowAgenda(CheckBox check, ComboBox desde, ComboBox hasta, ComboBox especialidad, Agendum agenda)
@@ -97,12 +107,16 @@
             especialidad.Text = agenda.Especialidad.ToString();
         }
 
+        #endregion
+
+        #region [ACTION]
+
         private void RegistrarAgendaBtnClick(object sender, System.EventArgs e)
         {
             if (ValidateFields())
             {
                 SaveAgendum();
-                DisableFields();
+                _panel.Enabled = false;
             }
         }
 
@@ -125,7 +139,7 @@
 
             if (_sabadoCheck.Checked)
                 BuildAgenda((Especialidad)_sabadoEspecialidad.SelectedItem, _sabadoDesde.SelectedItem, _sabadoHasta.SelectedItem, "SABADO");
-            //Por ahora dejar asi, fijarse si se puede usar un store procedure para esto
+
             _profesionalDao.SaveAgendum(_profesional);
         }
 
@@ -136,17 +150,12 @@
             agenda.profesional_id = _profesional.profesional_id;
             agenda.especialidad_id = especialidad.especialidad_id;
             agenda.agenda_hora_desde = ((Hora)horaDesde).hora_id;
-            agenda.agenda_hora_hasta= ((Hora)horaHasta).hora_id;
+            agenda.agenda_hora_hasta = ((Hora)horaHasta).hora_id;
             agenda.agenda_dia = dia;
             agenda.agenda_fecha_desde = _fechaDesde.Value;
             agenda.agenda_fecha_hasta = _fechaHasta.Value;
 
             _profesional.Agenda.Add(agenda);
-        }
-
-        private void DisableFields()
-        {
-            _panel.Enabled = false;
         }
 
         private bool ValidateFields()
@@ -263,5 +272,7 @@
 
             return true;
         }
+
+        #endregion
     }
 }
