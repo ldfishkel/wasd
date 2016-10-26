@@ -34,8 +34,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button3 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this._nombreFamiliar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this._apellidoFamiliar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._nombre_familiar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._apellido_familiar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._sexo = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -144,13 +144,14 @@
             this.button3.TabIndex = 1;
             this.button3.Text = "Agregar";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this._nombreFamiliar,
-            this._apellidoFamiliar});
+            this._nombre_familiar,
+            this._apellido_familiar});
             this.dataGridView1.Location = new System.Drawing.Point(7, 58);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
@@ -159,15 +160,15 @@
             // 
             // _nombre_familiar
             // 
-            this._nombreFamiliar.HeaderText = "Nombre";
-            this._nombreFamiliar.Name = "_nombre_familiar";
-            this._nombreFamiliar.Width = 200;
+            this._nombre_familiar.HeaderText = "Nombre";
+            this._nombre_familiar.Name = "_nombre_familiar";
+            this._nombre_familiar.Width = 200;
             // 
             // _apellido_familiar
             // 
-            this._apellidoFamiliar.HeaderText = "Apellido";
-            this._apellidoFamiliar.Name = "_apellido_familiar";
-            this._apellidoFamiliar.Width = 200;
+            this._apellido_familiar.HeaderText = "Apellido";
+            this._apellido_familiar.Name = "_apellido_familiar";
+            this._apellido_familiar.Width = 200;
             // 
             // _sexo
             // 
@@ -212,6 +213,7 @@
             this._estado_civil.Size = new System.Drawing.Size(132, 24);
             this._estado_civil.TabIndex = 23;
             this._estado_civil.Text = "Seleccione uno";
+            this._estado_civil.SelectedIndexChanged += new System.EventHandler(this._estado_civil_SelectedIndexChanged);
             // 
             // label9
             // 
@@ -222,10 +224,10 @@
             this.label9.TabIndex = 22;
             this.label9.Text = "Sexo";
             // 
-            // _fecha_nacimiento
+            // _fechaNacimiento
             // 
             this._fechaNacimiento.Location = new System.Drawing.Point(117, 180);
-            this._fechaNacimiento.Name = "_fecha_nacimiento";
+            this._fechaNacimiento.Name = "_fechaNacimiento";
             this._fechaNacimiento.Size = new System.Drawing.Size(271, 22);
             this._fechaNacimiento.TabIndex = 21;
             // 
@@ -286,22 +288,22 @@
             this.label5.TabIndex = 14;
             this.label5.Text = "Direccion";
             // 
-            // _cancelar
+            // _cancelarBtn
             // 
             this._cancelarBtn.Location = new System.Drawing.Point(423, 519);
             this._cancelarBtn.Margin = new System.Windows.Forms.Padding(4);
-            this._cancelarBtn.Name = "_cancelar";
+            this._cancelarBtn.Name = "_cancelarBtn";
             this._cancelarBtn.Size = new System.Drawing.Size(100, 28);
             this._cancelarBtn.TabIndex = 13;
             this._cancelarBtn.Text = "Cancelar";
             this._cancelarBtn.UseVisualStyleBackColor = true;
             this._cancelarBtn.Click += new System.EventHandler(this.CancelarClick);
             // 
-            // _aceptar
+            // _aceptarBtn
             // 
             this._aceptarBtn.Location = new System.Drawing.Point(315, 519);
             this._aceptarBtn.Margin = new System.Windows.Forms.Padding(4);
-            this._aceptarBtn.Name = "_aceptar";
+            this._aceptarBtn.Name = "_aceptarBtn";
             this._aceptarBtn.Size = new System.Drawing.Size(100, 28);
             this._aceptarBtn.TabIndex = 12;
             this._aceptarBtn.Text = "Aceptar";
@@ -348,19 +350,19 @@
             this.label1.TabIndex = 8;
             this.label1.Text = "Nombre";
             // 
-            // _numero_documento
+            // _numeroDocumento
             // 
             this._numeroDocumento.Location = new System.Drawing.Point(359, 94);
             this._numeroDocumento.Margin = new System.Windows.Forms.Padding(4);
-            this._numeroDocumento.Name = "_numero_documento";
+            this._numeroDocumento.Name = "_numeroDocumento";
             this._numeroDocumento.Size = new System.Drawing.Size(164, 22);
             this._numeroDocumento.TabIndex = 3;
             // 
-            // _tipo_documento
+            // _tipoDocumento
             // 
             this._tipoDocumento.Location = new System.Drawing.Point(117, 94);
             this._tipoDocumento.Margin = new System.Windows.Forms.Padding(4);
-            this._tipoDocumento.Name = "_tipo_documento";
+            this._tipoDocumento.Name = "_tipoDocumento";
             this._tipoDocumento.Size = new System.Drawing.Size(132, 22);
             this._tipoDocumento.TabIndex = 2;
             // 
@@ -380,14 +382,14 @@
             this._nombre.Size = new System.Drawing.Size(406, 22);
             this._nombre.TabIndex = 0;
             // 
-            // AltaAfiliado
+            // AltaAfiliadoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(561, 584);
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "AltaAfiliado";
+            this.Name = "AltaAfiliadoForm";
             this.Text = "AltaAfiliado";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -420,15 +422,17 @@
         private System.Windows.Forms.TextBox _telefono;
         private System.Windows.Forms.ComboBox _estado_civil;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox _sexo;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.RadioButton _no_familia;
-        private System.Windows.Forms.RadioButton _si_familia;
         private System.Windows.Forms.DataGridViewTextBoxColumn _nombreFamiliar;
         private System.Windows.Forms.DataGridViewTextBoxColumn _apellidoFamiliar;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn _nombre_familiar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn _apellido_familiar;
+        protected System.Windows.Forms.GroupBox groupBox2;
+        protected System.Windows.Forms.Label label11;
+        protected System.Windows.Forms.RadioButton _no_familia;
+        protected System.Windows.Forms.RadioButton _si_familia;
     }
 }

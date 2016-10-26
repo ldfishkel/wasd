@@ -72,5 +72,23 @@
 
             return true;
         }
+
+        private void _estado_civil_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_estado_civil.SelectedText == "Casado/a" || _estado_civil.SelectedText == "Concubinato")
+            {
+                groupBox2.Enabled = true;
+            }
+            if (_estado_civil.SelectedText == "Soltero/a" || _estado_civil.SelectedText == "Viudo/a" || _estado_civil.SelectedText == "Divorciado/a")
+            {
+                groupBox2.Enabled = false;
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            AltaCirculoFamiliarForm altaCirculoFamiliar = new AltaCirculoFamiliarForm();
+            altaCirculoFamiliar.Show();
+        }
     }
 }

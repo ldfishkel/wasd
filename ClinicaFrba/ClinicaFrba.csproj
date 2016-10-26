@@ -69,6 +69,12 @@
     <Compile Include="AbmAfiliado\AltaAfiliadoForm.Designer.cs">
       <DependentUpon>AltaAfiliadoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmAfiliado\AltaCirculoFamiliarForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmAfiliado\AltaCirculoFamiliarForm.Designer.cs">
+      <DependentUpon>AltaCirculoFamiliarForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmRol\ABMRolForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +150,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmAfiliado\AltaAfiliadoForm.resx">
       <DependentUpon>AltaAfiliadoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmAfiliado\AltaCirculoFamiliarForm.resx">
+      <DependentUpon>AltaCirculoFamiliarForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\ABMRolForm.resx">
       <DependentUpon>ABMRolForm.cs</DependentUpon>
