@@ -389,9 +389,10 @@ INSERT INTO "WASD".Hora VALUES
 (26, '19:30');
 
 INSERT INTO "WASD".TipoCancelacion(tipocancelacion_nombre)VALUES
- ('Emergencia'),
- ('Falta de tiempo');
-
+('Emergencia'),
+('Falta de tiempo'),
+('Vacaciones'),
+('Acto de Dios');
 GO
 
 /****************************************************************************************************************/
@@ -501,10 +502,13 @@ GO
 
 /**AFILIADOS**/
 DECLARE afiliados CURSOR FOR
-SELECT DISTINCT Paciente_Dni, Paciente_Apellido, Paciente_Nombre, Paciente_Direccion, Paciente_Telefono, Paciente_Mail,
-Paciente_Fecha_Nac, Plan_Med_Codigo
+SELECT COUNT(Consulta_Sintomas), Paciente_Dni, Paciente_Apellido, Paciente_Nombre, Paciente_Direccion, Paciente_Telefono,
+Paciente_Mail, Paciente_Fecha_Nac, Plan_Med_Codigo
 FROM gd_esquema.Maestra
 WHERE Paciente_Dni IS NOT NULL
+AND Consulta_Sintomas IS NOT NULL
+GROUP BY Paciente_Dni, Paciente_Apellido, Paciente_Nombre, Paciente_Direccion, Paciente_Telefono, Paciente_Mail,
+Paciente_Fecha_Nac, Plan_Med_Codigo
 ORDER BY Paciente_Apellido ASC
 
 DECLARE @ape VARCHAR(50)
@@ -523,7 +527,7 @@ DECLARE @bonos SMALLINT
 SET @num = 101
 
 OPEN afiliados
-FETCH FROM afiliados INTO @dni, @ape, @nom, @dir, @tel, @mail, @nac, @cod
+FETCH FROM afiliados INTO @bonos, @dni, @ape, @nom, @dir, @tel, @mail, @nac, @cod
 WHILE @@FETCH_STATUS = 0
 BEGIN
 	/**CREAMOS EL USUARIO DEL AFILIADO**/
@@ -535,14 +539,6 @@ BEGIN
 	
 	/**ASIGNAMOS EL ROL DE AFILIADO**/
 	INSERT INTO "WASD".RolPorUsuario VALUES (@usid, 2)
-
-	/**CONTAMOS BONOS
-	SET @bonos = (
-		SELECT COUNT(*)
-		FROM gd_esquema.Maestra
-		WHERE Consulta_Sintomas IS NOT NULL
-		AND Paciente_Dni = @dni)**/
-	SET @bonos = 0
 	
 	/**CREAMOS EL REGISTRO DE AFILIADO**/
 	INSERT INTO "WASD".Afiliado(usuario_id, afiliado_numero, afiliado_nombre, afiliado_apellido, afiliado_direccion,
@@ -552,7 +548,7 @@ BEGIN
 	(@usid, @num, @nom, @ape, @dir, @tel, @mail, (SELECT CAST(@nac AS DATE)), 'X', 'DNI', @dni, 6, @cod, 0, 1, NULL, @bonos, NULL)
 	
 	SET @num += 100
-	FETCH NEXT FROM afiliados INTO @dni, @ape, @nom, @dir, @tel, @mail, @nac, @cod
+	FETCH NEXT FROM afiliados INTO @bonos, @dni, @ape, @nom, @dir, @tel, @mail, @nac, @cod
 END
 CLOSE afiliados
 DEALLOCATE afiliados;
@@ -1558,6 +1554,7 @@ AS BEGIN
 	DECLARE @afiliadoId INT
 	DECLARE @activo BIT 
 	DECLARE @fecha DATETIME
+	DECLARE @cancelacion INT
 	
 	SELECT 
 		@afiliadoId = inserted.afiliado_id, 
@@ -1567,13 +1564,23 @@ AS BEGIN
 		inserted;
 
 	IF (@activo = 0)
+	BEGIN
+		INSERT INTO
+			"WASD".TurnoCancelado(turnocancelado_tipocancelacion_id, turnocancelado_descripcion, turnocancelado_cancelado_por)
+		VALUES
+			(4, 'Afiliado fue dado de baja', 'A')
+		
+		SET @cancelacion = (SELECT SCOPE_IDENTITY())
 	
-		DELETE 
-			"WASD".Turno 
-		WHERE 
+		UPDATE 
+			"WASD".Turno
+		SET
+			turnocancelado_id = @cancelacion
+		WHERE
 			afiliado_id = @afiliadoId AND
-			turno_fecha > @fecha
-    
+			turno_fecha >= @fecha AND
+			turno_llego = 0
+    END;
 END;
 GO
 
