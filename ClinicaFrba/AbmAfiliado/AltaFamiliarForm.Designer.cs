@@ -1,6 +1,6 @@
 ﻿namespace ClinicaFrba.AbmAfiliado
 {
-    partial class AltaAfiliadoForm
+    partial class AltaFamiliarForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,9 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this._tipoDoc = new System.Windows.Forms.ComboBox();
             this._nombre = new System.Windows.Forms.TextBox();
@@ -51,34 +49,17 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this._mail = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this._afiliadosACargo = new System.Windows.Forms.DataGridView();
-            this._nombre_familiar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Relacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Accion = new System.Windows.Forms.DataGridViewButtonColumn();
-            this._cancelarBtn = new System.Windows.Forms.Button();
             this._aceptarBtn = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
+            this._cancelarBtn = new System.Windows.Forms.Button();
             this.groupBox3.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._afiliadosACargo)).BeginInit();
             this.SuspendLayout();
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.groupBox3);
-            this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Controls.Add(this._cancelarBtn);
-            this.groupBox1.Controls.Add(this._aceptarBtn);
-            this.groupBox1.Location = new System.Drawing.Point(8, 5);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(440, 594);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this._tipoDoc);
             this.groupBox3.Controls.Add(this._nombre);
@@ -99,21 +80,11 @@
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this._mail);
-            this.groupBox3.Location = new System.Drawing.Point(8, 8);
+            this.groupBox3.Location = new System.Drawing.Point(22, 15);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(423, 267);
-            this.groupBox3.TabIndex = 31;
+            this.groupBox3.Size = new System.Drawing.Size(423, 230);
+            this.groupBox3.TabIndex = 32;
             this.groupBox3.TabStop = false;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(10, 229);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(404, 23);
-            this.button1.TabIndex = 31;
-            this.button1.Text = "Validar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.ValidarAfiliadoClick);
             // 
             // label1
             // 
@@ -301,123 +272,89 @@
             this._mail.Size = new System.Drawing.Size(151, 20);
             this._mail.TabIndex = 19;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.groupBox2);
+            this.panel1.Controls.Add(this.groupBox3);
+            this.panel1.Location = new System.Drawing.Point(13, 13);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(462, 309);
+            this.panel1.TabIndex = 33;
+            // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this._afiliadosACargo);
-            this.groupBox2.Location = new System.Drawing.Point(8, 280);
+            this.groupBox2.Controls.Add(this._aceptarBtn);
+            this.groupBox2.Controls.Add(this._cancelarBtn);
+            this.groupBox2.Location = new System.Drawing.Point(22, 250);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(423, 266);
-            this.groupBox2.TabIndex = 27;
+            this.groupBox2.Size = new System.Drawing.Size(423, 52);
+            this.groupBox2.TabIndex = 37;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Grupo Familiar";
-            // 
-            // _afiliadosACargo
-            // 
-            this._afiliadosACargo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this._afiliadosACargo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this._nombre_familiar,
-            this.Relacion,
-            this.Accion});
-            this._afiliadosACargo.Location = new System.Drawing.Point(10, 17);
-            this._afiliadosACargo.Margin = new System.Windows.Forms.Padding(2);
-            this._afiliadosACargo.Name = "_afiliadosACargo";
-            this._afiliadosACargo.RowHeadersVisible = false;
-            this._afiliadosACargo.RowTemplate.Height = 24;
-            this._afiliadosACargo.Size = new System.Drawing.Size(404, 237);
-            this._afiliadosACargo.TabIndex = 0;
-            this._afiliadosACargo.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellContentClick);
-            // 
-            // _nombre_familiar
-            // 
-            this._nombre_familiar.HeaderText = "Familiar";
-            this._nombre_familiar.Name = "_nombre_familiar";
-            this._nombre_familiar.Width = 200;
-            // 
-            // Relacion
-            // 
-            this.Relacion.HeaderText = "Relacion";
-            this.Relacion.Name = "Relacion";
-            this.Relacion.ReadOnly = true;
-            // 
-            // Accion
-            // 
-            this.Accion.HeaderText = "Accion";
-            this.Accion.Name = "Accion";
-            // 
-            // _cancelarBtn
-            // 
-            this._cancelarBtn.Location = new System.Drawing.Point(220, 553);
-            this._cancelarBtn.Name = "_cancelarBtn";
-            this._cancelarBtn.Size = new System.Drawing.Size(211, 32);
-            this._cancelarBtn.TabIndex = 13;
-            this._cancelarBtn.Text = "Cancelar";
-            this._cancelarBtn.UseVisualStyleBackColor = true;
-            this._cancelarBtn.Click += new System.EventHandler(this.CancelarClick);
             // 
             // _aceptarBtn
             // 
-            this._aceptarBtn.Enabled = false;
-            this._aceptarBtn.Location = new System.Drawing.Point(8, 553);
+            this._aceptarBtn.Location = new System.Drawing.Point(7, 13);
             this._aceptarBtn.Name = "_aceptarBtn";
-            this._aceptarBtn.Size = new System.Drawing.Size(206, 32);
-            this._aceptarBtn.TabIndex = 12;
+            this._aceptarBtn.Size = new System.Drawing.Size(201, 32);
+            this._aceptarBtn.TabIndex = 35;
             this._aceptarBtn.Text = "Aceptar";
             this._aceptarBtn.UseVisualStyleBackColor = true;
             this._aceptarBtn.Click += new System.EventHandler(this.AceptarClick);
             // 
-            // AltaAfiliadoForm
+            // _cancelarBtn
+            // 
+            this._cancelarBtn.Location = new System.Drawing.Point(214, 13);
+            this._cancelarBtn.Name = "_cancelarBtn";
+            this._cancelarBtn.Size = new System.Drawing.Size(200, 32);
+            this._cancelarBtn.TabIndex = 36;
+            this._cancelarBtn.Text = "Cancelar";
+            this._cancelarBtn.UseVisualStyleBackColor = true;
+            // 
+            // AltaFamiliarForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(455, 611);
-            this.Controls.Add(this.groupBox1);
-            this.Name = "AltaAfiliadoForm";
+            this.ClientSize = new System.Drawing.Size(488, 329);
+            this.Controls.Add(this.panel1);
+            this.Name = "AltaFamiliarForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AltaAfiliado";
-            this.groupBox1.ResumeLayout(false);
+            this.Text = "AltaFamiliarForm";
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this._afiliadosACargo)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button _cancelarBtn;
-        private System.Windows.Forms.Button _aceptarBtn;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox _numeroDocumento;
-        private System.Windows.Forms.TextBox _apellido;
+        private System.Windows.Forms.ComboBox _tipoDoc;
         private System.Windows.Forms.TextBox _nombre;
+        private System.Windows.Forms.TextBox _apellido;
+        private System.Windows.Forms.TextBox _numeroDocumento;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox _sexo;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox _estadoCivil;
         private System.Windows.Forms.TextBox _direccion;
+        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DateTimePicker _fechaNacimiento;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox _mail;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox _telefono;
-        private System.Windows.Forms.ComboBox _estadoCivil;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ComboBox _sexo;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox _mail;
+        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView _afiliadosACargo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn _nombreFamiliar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn _apellidoFamiliar;
-        private System.Windows.Forms.ComboBox _tipoDoc;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn _nombre_familiar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Relacion;
-        private System.Windows.Forms.DataGridViewButtonColumn Accion;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button _aceptarBtn;
+        private System.Windows.Forms.Button _cancelarBtn;
     }
 }

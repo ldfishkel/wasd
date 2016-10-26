@@ -49,6 +49,7 @@ namespace ClinicaFrba.DataAccess
         public virtual DbSet<Usuario> Usuarios { get; set; }
         public virtual DbSet<ListaAfiliado> ListaAfiliados { get; set; }
         public virtual DbSet<ListaEspecialidade> ListaEspecialidades { get; set; }
+        public virtual DbSet<ListaEstadoCivil> ListaEstadoCivils { get; set; }
         public virtual DbSet<ListaFuncionalidade> ListaFuncionalidades { get; set; }
         public virtual DbSet<ListaHorasSabado> ListaHorasSabadoes { get; set; }
         public virtual DbSet<ListaHorasSemana> ListaHorasSemanas { get; set; }
@@ -252,6 +253,19 @@ namespace ClinicaFrba.DataAccess
         public virtual int AltaAgendaProfesional()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AltaAgendaProfesional");
+        }
+    
+        public virtual int BajaAfiliado(Nullable<int> afiliadoId, Nullable<System.DateTime> fecha)
+        {
+            var afiliadoIdParameter = afiliadoId.HasValue ?
+                new ObjectParameter("afiliadoId", afiliadoId) :
+                new ObjectParameter("afiliadoId", typeof(int));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BajaAfiliado", afiliadoIdParameter, fechaParameter);
         }
     
         public virtual int BajaRol(Nullable<int> rolId)

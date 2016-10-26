@@ -36,6 +36,15 @@
             }).ToList();
         }
 
+        public object[] GetEstadosCiviles()
+        {
+            return _ds.ListaEstadoCivils.ToList().Select(x => new EstadoCivil()
+            {
+                estadocivil_id = x.estadocivil_id,
+                estadocivil_nombre = x.estadocivil_nombre
+            }).ToArray();
+        }
+
         public string[] GetTipoDeDocumentos()
         {
             return _ds.ListaTipoDocumentoes.ToList().Select(x => x.tipoDocumento).ToArray();
@@ -89,6 +98,11 @@
                 {
                     bono_id = x.bono_id
                 }).ToList();
+        }
+
+        public void AltaAfiliado(Afiliado _afiliado)
+        {
+            throw new NotImplementedException();
         }
 
         public void CompraDeBonos(int cant, int afiliado_id, int plan_id)

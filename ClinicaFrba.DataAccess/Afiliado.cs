@@ -42,6 +42,7 @@ namespace ClinicaFrba.DataAccess
         public bool afiliado_activo { get; set; }
         public Nullable<int> afiliado_grupo_familiar { get; set; }
         public short afiliado_cantidad_bonos_usados { get; set; }
+        public Nullable<System.DateTime> afiliado_fecha_baja { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Afiliado> Afiliado1 { get; set; }
@@ -58,7 +59,6 @@ namespace ClinicaFrba.DataAccess
         public virtual HistorialPlan HistorialPlan { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Turno> Turnoes { get; set; }
-
         public override string ToString()
         {
             return afiliado_nombre.Trim() + " " + afiliado_apellido.Trim();

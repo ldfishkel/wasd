@@ -159,7 +159,8 @@ CREATE TABLE "WASD".Afiliado (
 	afiliado_familiares_dependientes TINYINT NOT NULL,
 	afiliado_activo BIT NOT NULL,
 	afiliado_grupo_familiar INT REFERENCES "WASD".Afiliado(afiliado_id),
-	afiliado_cantidad_bonos_usados SMALLINT NOT NULL DEFAULT 0
+	afiliado_cantidad_bonos_usados SMALLINT NOT NULL DEFAULT 0,
+	afiliado_fecha_baja DATETIME
 );
 
 CREATE TABLE "WASD".TipoCancelacion (
@@ -408,8 +409,8 @@ SET IDENTITY_INSERT "WASD".PlanMedico OFF;
 
 /*Afiliado de pruebas puesto aca por la necesidad de tener planes medicos creados previamente*/
 SET IDENTITY_INSERT "WASD".Afiliado ON;
-INSERT INTO "WASD".Afiliado(afiliado_id,  usuario_id, estadocivil_id, afiliado_tipodocumento, planmedico_id, afiliado_sexo, afiliado_numero, afiliado_nombre, afiliado_apellido, afiliado_numero_documento, afiliado_direccion, afiliado_telefono, afiliado_mail, afiliado_fecha_nacimiento, afiliado_familiares_dependientes, afiliado_activo, afiliado_grupo_familiar, afiliado_cantidad_bonos_usados) VALUES
-(1, 1, 1, 'DNI', 555555, 'M', 999999900, 'Leonel', 'Dan', 36157488, 'Humboldt', 1168567706, 'asd@asd.asd', '9-1-1992', 0, 1, NULL, 0);
+INSERT INTO "WASD".Afiliado(afiliado_id,  usuario_id, estadocivil_id, afiliado_tipodocumento, planmedico_id, afiliado_sexo, afiliado_numero, afiliado_nombre, afiliado_apellido, afiliado_numero_documento, afiliado_direccion, afiliado_telefono, afiliado_mail, afiliado_fecha_nacimiento, afiliado_familiares_dependientes, afiliado_activo, afiliado_grupo_familiar, afiliado_cantidad_bonos_usados, afiliado_fecha_baja) VALUES
+(1, 1, 1, 'DNI', 555555, 'M', 999999900, 'Leonel', 'Dan', 36157488, 'Humboldt', 1168567706, 'asd@asd.asd', '9-1-1992', 0, 1, NULL, 0, NULL);
 SET IDENTITY_INSERT "WASD".Afiliado OFF;
 
 /**TIPOS DE ESPECIALIDADES**/
@@ -519,7 +520,7 @@ DECLARE @num INT
 DECLARE @usid INT
 DECLARE @bonos SMALLINT
 
-SET @num = 100
+SET @num = 101
 
 OPEN afiliados
 FETCH FROM afiliados INTO @dni, @ape, @nom, @dir, @tel, @mail, @nac, @cod
@@ -547,8 +548,8 @@ BEGIN
 	INSERT INTO "WASD".Afiliado(usuario_id, afiliado_numero, afiliado_nombre, afiliado_apellido, afiliado_direccion,
 	afiliado_telefono, afiliado_mail, afiliado_fecha_nacimiento, afiliado_sexo, afiliado_tipodocumento,
 	afiliado_numero_documento, estadocivil_id, planmedico_id, afiliado_familiares_dependientes, afiliado_activo,
-	afiliado_grupo_familiar, afiliado_cantidad_bonos_usados) VALUES
-	(@usid, @num, @nom, @ape, @dir, @tel, @mail, (SELECT CAST(@nac AS DATE)), 'X', 'DNI', @dni, 6, @cod, 0, 1, NULL, @bonos)
+	afiliado_grupo_familiar, afiliado_cantidad_bonos_usados, afiliado_fecha_baja) VALUES
+	(@usid, @num, @nom, @ape, @dir, @tel, @mail, (SELECT CAST(@nac AS DATE)), 'X', 'DNI', @dni, 6, @cod, 0, 1, NULL, @bonos, NULL)
 	
 	SET @num += 100
 	FETCH NEXT FROM afiliados INTO @dni, @ape, @nom, @dir, @tel, @mail, @nac, @cod
@@ -738,6 +739,19 @@ AS
 		*
 	FROM 
 		"WASD".Afiliado;
+GO
+
+/**LISTADO DE ESTADOS CIVILES**/
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE name = 'ListaEstadoCivil' AND xtype = 'V')
+	DROP VIEW WASD.ListaEstadoCivil;
+GO
+
+CREATE VIEW "WASD".ListaEstadoCivil
+AS
+	SELECT 
+		*
+	FROM 
+		"WASD".EstadoCivil;
 GO
 
 /**LISTADO DE TIPO DE DOCUMENTO**/
@@ -1314,7 +1328,7 @@ BEGIN
 END;
 GO
 
-/**BAJA LOGICA DE UN ROL**/
+/**OCURRIO CONSULTA MEDICA**/
 IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'ConsultaMedicaOcurrio' AND type = 'P')
 DROP PROCEDURE WASD.ConsultaMedicaOcurrio;
 GO
@@ -1346,6 +1360,24 @@ BEGIN
 		rol_activo = 0
 	WHERE
 		rol_id = @rolId;
+END;
+GO
+
+/**BAJA LOGICA DE UN AFILIADO**/
+IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'BajaAfiliado' AND type = 'P')
+DROP PROCEDURE WASD.BajaAfiliado;
+GO
+
+CREATE PROCEDURE "WASD".BajaAfiliado @afiliadoId INT, @fecha DATETIME
+AS
+BEGIN
+	UPDATE 
+		WASD.Afiliado
+	SET
+		afiliado_activo = 0,
+		afiliado_fecha_baja = @fecha
+	WHERE
+		afiliado_id = @afiliadoId;
 END;
 GO
 
@@ -1516,6 +1548,34 @@ AS BEGIN
 END;
 GO
 
+/**TRIGGER DEL BORRADO LOGICO DE UN AFILIADO**/
+IF EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[WASD].[AfiliadoDeleted]'))
+DROP TRIGGER [WASD].[AfiliadoDeleted];
+GO
+
+CREATE TRIGGER "WASD".AfiliadoDeleted ON "WASD".Afiliado FOR UPDATE
+AS BEGIN
+	DECLARE @afiliadoId INT
+	DECLARE @activo BIT 
+	DECLARE @fecha DATETIME
+	
+	SELECT 
+		@afiliadoId = inserted.afiliado_id, 
+		@activo = inserted.afiliado_activo,
+		@fecha = inserted.afiliado_fecha_baja 
+	FROM 
+		inserted;
+
+	IF (@activo = 0)
+	
+		DELETE 
+			"WASD".Turno 
+		WHERE 
+			afiliado_id = @afiliadoId AND
+			turno_fecha > @fecha
+    
+END;
+GO
 
 /****************************************************************************************************************/
 /**SEED FINAL**/

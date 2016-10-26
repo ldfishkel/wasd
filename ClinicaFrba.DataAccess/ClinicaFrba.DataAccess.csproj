@@ -152,6 +152,9 @@
     <Compile Include="ListaEspecialidade.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
+    <Compile Include="ListaEstadoCivil.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
     <Compile Include="ListaFuncionalidade.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
