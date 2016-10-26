@@ -36,6 +36,8 @@
 
             _estadoCivil.Items.AddRange(_afiliadoDao.GetEstadosCiviles());
 
+            _planMedico.Items.AddRange(_afiliadoDao.PlanesMedicos().ToArray());
+
             _sexo.Items.AddRange(new string[] { "M", "F", "X" });
         }
 

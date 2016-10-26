@@ -32,5 +32,6 @@ namespace ClinicaFrba.DataAccess
         public Nullable<int> afiliado_grupo_familiar { get; set; }
         public short afiliado_cantidad_bonos_usados { get; set; }
         public Nullable<System.DateTime> afiliado_fecha_baja { get; set; }
+        public string estadocivil_nombre { get; set; }
     }
 }

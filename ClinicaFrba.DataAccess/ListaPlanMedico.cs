@@ -12,11 +12,11 @@ namespace ClinicaFrba.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class ListaAfiliado
+    public partial class ListaPlanMedico
     {
-        public int usuario_id { get; set; }
-        public int afiliado_numero { get; set; }
-        public string afiliado_nombre { get; set; }
-        public string afiliado_apellido { get; set; }
+        public int planmedico_id { get; set; }
+        public string planmedico_nombre { get; set; }
+        public decimal planmedico_cuota { get; set; }
+        public decimal planmedico_precio_bono { get; set; }
     }
 }

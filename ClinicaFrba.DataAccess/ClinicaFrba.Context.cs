@@ -57,6 +57,7 @@ namespace ClinicaFrba.DataAccess
         public virtual DbSet<ListaTipoCancelacione> ListaTipoCancelaciones { get; set; }
         public virtual DbSet<ListaTipoDocumento> ListaTipoDocumentoes { get; set; }
         public virtual DbSet<ListaTipoEspecialidade> ListaTipoEspecialidades { get; set; }
+        public virtual DbSet<ListaPlanMedico> ListaPlanMedicos { get; set; }
     
         [DbFunction("Entities", "AfiliadoBy")]
         public virtual IQueryable<AfiliadoBy_Result> AfiliadoBy(string tipoDocumento, Nullable<int> nroDocumento)

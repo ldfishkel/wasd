@@ -33,7 +33,6 @@
             this._afiliadosGrid = new System.Windows.Forms.DataGridView();
             this.NroAfiliado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Plan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ver = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Baja = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Modificar = new System.Windows.Forms.DataGridViewButtonColumn();
@@ -66,7 +65,6 @@
             this._afiliadosGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.NroAfiliado,
             this.Nombre,
-            this.Plan,
             this.Ver,
             this.Baja,
             this.Modificar});
@@ -77,6 +75,7 @@
             this._afiliadosGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this._afiliadosGrid.Size = new System.Drawing.Size(606, 345);
             this._afiliadosGrid.TabIndex = 0;
+            this._afiliadosGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellContentClick);
             // 
             // NroAfiliado
             // 
@@ -86,15 +85,11 @@
             // 
             // Nombre
             // 
+            this.Nombre.FillWeight = 200F;
             this.Nombre.HeaderText = "Nombre y Apellido";
             this.Nombre.Name = "Nombre";
             this.Nombre.ReadOnly = true;
-            // 
-            // Plan
-            // 
-            this.Plan.HeaderText = "Plan";
-            this.Plan.Name = "Plan";
-            this.Plan.ReadOnly = true;
+            this.Nombre.Width = 200;
             // 
             // Ver
             // 
@@ -129,12 +124,11 @@
 
         private System.Windows.Forms.Panel _panel;
         private System.Windows.Forms.DataGridView _afiliadosGrid;
+        private System.Windows.Forms.Button _altaBtn;
         private System.Windows.Forms.DataGridViewTextBoxColumn NroAfiliado;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Plan;
         private System.Windows.Forms.DataGridViewButtonColumn Ver;
         private System.Windows.Forms.DataGridViewButtonColumn Baja;
         private System.Windows.Forms.DataGridViewButtonColumn Modificar;
-        private System.Windows.Forms.Button _altaBtn;
     }
 }

@@ -710,6 +710,19 @@ AS
 		"WASD".Rol;
 GO
 
+/**LISTADO DE PLANES**/
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE name = 'ListaPlanMedicos' AND xtype = 'V')
+	DROP VIEW WASD.ListaPlanMedicos;
+GO
+
+CREATE VIEW "WASD".ListaPlanMedicos
+AS
+	SELECT 
+		*
+	FROM 
+		"WASD".PlanMedico;
+GO
+
 /**LISTADO DE FUNCIONALIDADES**/
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE name = 'ListaFuncionalidades' AND xtype = 'V')
 	DROP VIEW WASD.ListaFuncionalidades;
@@ -732,9 +745,12 @@ GO
 CREATE VIEW "WASD".ListaAfiliados
 AS
 	SELECT 
-		*
+		usuario_id,
+		afiliado_numero,
+		afiliado_nombre,
+		afiliado_apellido
 	FROM 
-		"WASD".Afiliado;
+		"WASD".Afiliado
 GO
 
 /**LISTADO DE ESTADOS CIVILES**/
@@ -887,11 +903,14 @@ GO
 CREATE FUNCTION "WASD".AfiliadoDeUsuario(@usuarioId INT) RETURNS TABLE
 AS RETURN (
 	SELECT 
-		a.*
+		a.*,
+		e.estadocivil_nombre
 	FROM 
-		WASD.Afiliado a
+		WASD.Afiliado a,
+		WASD.EstadoCivil e
 	WHERE 
-		a.usuario_id = @usuarioId 
+		a.usuario_id = @usuarioId AND
+		a.estadocivil_id = e.estadocivil_id
 );
 GO
 

@@ -30,7 +30,6 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this._tipoDoc = new System.Windows.Forms.ComboBox();
             this._nombre = new System.Windows.Forms.TextBox();
@@ -56,8 +55,10 @@
             this._nombre_familiar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Relacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Accion = new System.Windows.Forms.DataGridViewButtonColumn();
-            this._cancelarBtn = new System.Windows.Forms.Button();
             this._aceptarBtn = new System.Windows.Forms.Button();
+            this._planMedico = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -68,17 +69,17 @@
             // 
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Controls.Add(this._cancelarBtn);
             this.groupBox1.Controls.Add(this._aceptarBtn);
             this.groupBox1.Location = new System.Drawing.Point(8, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(440, 594);
+            this.groupBox1.Size = new System.Drawing.Size(941, 280);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.button1);
+            this.groupBox3.Controls.Add(this._planMedico);
+            this.groupBox3.Controls.Add(this.label11);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this._tipoDoc);
             this.groupBox3.Controls.Add(this._nombre);
@@ -101,19 +102,9 @@
             this.groupBox3.Controls.Add(this._mail);
             this.groupBox3.Location = new System.Drawing.Point(8, 8);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(423, 267);
+            this.groupBox3.Size = new System.Drawing.Size(500, 229);
             this.groupBox3.TabIndex = 31;
             this.groupBox3.TabStop = false;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(10, 229);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(404, 23);
-            this.button1.TabIndex = 31;
-            this.button1.Text = "Validar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.ValidarAfiliadoClick);
             // 
             // label1
             // 
@@ -129,7 +120,7 @@
             this._tipoDoc.FormattingEnabled = true;
             this._tipoDoc.Location = new System.Drawing.Point(79, 92);
             this._tipoDoc.Name = "_tipoDoc";
-            this._tipoDoc.Size = new System.Drawing.Size(99, 21);
+            this._tipoDoc.Size = new System.Drawing.Size(169, 21);
             this._tipoDoc.TabIndex = 30;
             this._tipoDoc.Text = "Tipo Documento";
             // 
@@ -137,19 +128,19 @@
             // 
             this._nombre.Location = new System.Drawing.Point(79, 24);
             this._nombre.Name = "_nombre";
-            this._nombre.Size = new System.Drawing.Size(335, 20);
+            this._nombre.Size = new System.Drawing.Size(415, 20);
             this._nombre.TabIndex = 0;
             // 
             // _apellido
             // 
             this._apellido.Location = new System.Drawing.Point(79, 58);
             this._apellido.Name = "_apellido";
-            this._apellido.Size = new System.Drawing.Size(335, 20);
+            this._apellido.Size = new System.Drawing.Size(311, 20);
             this._apellido.TabIndex = 1;
             // 
             // _numeroDocumento
             // 
-            this._numeroDocumento.Location = new System.Drawing.Point(263, 92);
+            this._numeroDocumento.Location = new System.Drawing.Point(343, 92);
             this._numeroDocumento.Name = "_numeroDocumento";
             this._numeroDocumento.Size = new System.Drawing.Size(151, 20);
             this._numeroDocumento.TabIndex = 3;
@@ -166,10 +157,7 @@
             // _sexo
             // 
             this._sexo.FormattingEnabled = true;
-            this._sexo.Items.AddRange(new object[] {
-            "F",
-            "M"});
-            this._sexo.Location = new System.Drawing.Point(367, 193);
+            this._sexo.Location = new System.Drawing.Point(447, 57);
             this._sexo.Margin = new System.Windows.Forms.Padding(2);
             this._sexo.Name = "_sexo";
             this._sexo.Size = new System.Drawing.Size(47, 21);
@@ -187,7 +175,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(184, 95);
+            this.label4.Location = new System.Drawing.Point(264, 95);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(73, 13);
             this.label4.TabIndex = 11;
@@ -216,16 +204,10 @@
             // _estadoCivil
             // 
             this._estadoCivil.FormattingEnabled = true;
-            this._estadoCivil.Items.AddRange(new object[] {
-            "Soltero/a",
-            "Casado/a",
-            "Viudo/a",
-            "Concubinato",
-            "Divorciado/a"});
             this._estadoCivil.Location = new System.Drawing.Point(80, 160);
             this._estadoCivil.Margin = new System.Windows.Forms.Padding(2);
             this._estadoCivil.Name = "_estadoCivil";
-            this._estadoCivil.Size = new System.Drawing.Size(136, 21);
+            this._estadoCivil.Size = new System.Drawing.Size(168, 21);
             this._estadoCivil.TabIndex = 23;
             this._estadoCivil.Text = "Estado Civil";
             // 
@@ -234,13 +216,13 @@
             this._direccion.Location = new System.Drawing.Point(79, 125);
             this._direccion.Margin = new System.Windows.Forms.Padding(2);
             this._direccion.Name = "_direccion";
-            this._direccion.Size = new System.Drawing.Size(137, 20);
+            this._direccion.Size = new System.Drawing.Size(169, 20);
             this._direccion.TabIndex = 15;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(323, 196);
+            this.label9.Location = new System.Drawing.Point(403, 60);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(31, 13);
@@ -250,7 +232,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(241, 128);
+            this.label6.Location = new System.Drawing.Point(264, 127);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(49, 13);
@@ -259,18 +241,18 @@
             // 
             // _fechaNacimiento
             // 
-            this._fechaNacimiento.Location = new System.Drawing.Point(115, 193);
+            this._fechaNacimiento.Location = new System.Drawing.Point(103, 193);
             this._fechaNacimiento.Margin = new System.Windows.Forms.Padding(2);
             this._fechaNacimiento.Name = "_fechaNacimiento";
-            this._fechaNacimiento.Size = new System.Drawing.Size(204, 20);
+            this._fechaNacimiento.Size = new System.Drawing.Size(193, 20);
             this._fechaNacimiento.TabIndex = 21;
             // 
             // _telefono
             // 
-            this._telefono.Location = new System.Drawing.Point(314, 125);
+            this._telefono.Location = new System.Drawing.Point(343, 125);
             this._telefono.Margin = new System.Windows.Forms.Padding(2);
             this._telefono.Name = "_telefono";
-            this._telefono.Size = new System.Drawing.Size(100, 20);
+            this._telefono.Size = new System.Drawing.Size(151, 20);
             this._telefono.TabIndex = 17;
             // 
             // label8
@@ -279,14 +261,14 @@
             this.label8.Location = new System.Drawing.Point(6, 196);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(108, 13);
+            this.label8.Size = new System.Drawing.Size(93, 13);
             this.label8.TabIndex = 20;
-            this.label8.Text = "Fecha de Nacimiento";
+            this.label8.Text = "Fecha Nacimiento";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(225, 163);
+            this.label7.Location = new System.Drawing.Point(264, 163);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(32, 13);
@@ -295,7 +277,7 @@
             // 
             // _mail
             // 
-            this._mail.Location = new System.Drawing.Point(263, 160);
+            this._mail.Location = new System.Drawing.Point(343, 160);
             this._mail.Margin = new System.Windows.Forms.Padding(2);
             this._mail.Name = "_mail";
             this._mail.Size = new System.Drawing.Size(151, 20);
@@ -303,12 +285,13 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this._afiliadosACargo);
-            this.groupBox2.Location = new System.Drawing.Point(8, 280);
+            this.groupBox2.Location = new System.Drawing.Point(513, 8);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(423, 266);
+            this.groupBox2.Size = new System.Drawing.Size(423, 229);
             this.groupBox2.TabIndex = 27;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Grupo Familiar";
@@ -320,12 +303,12 @@
             this._nombre_familiar,
             this.Relacion,
             this.Accion});
-            this._afiliadosACargo.Location = new System.Drawing.Point(10, 17);
+            this._afiliadosACargo.Location = new System.Drawing.Point(10, 24);
             this._afiliadosACargo.Margin = new System.Windows.Forms.Padding(2);
             this._afiliadosACargo.Name = "_afiliadosACargo";
             this._afiliadosACargo.RowHeadersVisible = false;
             this._afiliadosACargo.RowTemplate.Height = 24;
-            this._afiliadosACargo.Size = new System.Drawing.Size(404, 237);
+            this._afiliadosACargo.Size = new System.Drawing.Size(404, 156);
             this._afiliadosACargo.TabIndex = 0;
             this._afiliadosACargo.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellContentClick);
             // 
@@ -346,32 +329,49 @@
             this.Accion.HeaderText = "Accion";
             this.Accion.Name = "Accion";
             // 
-            // _cancelarBtn
-            // 
-            this._cancelarBtn.Location = new System.Drawing.Point(220, 553);
-            this._cancelarBtn.Name = "_cancelarBtn";
-            this._cancelarBtn.Size = new System.Drawing.Size(211, 32);
-            this._cancelarBtn.TabIndex = 13;
-            this._cancelarBtn.Text = "Cancelar";
-            this._cancelarBtn.UseVisualStyleBackColor = true;
-            this._cancelarBtn.Click += new System.EventHandler(this.CancelarClick);
-            // 
             // _aceptarBtn
             // 
             this._aceptarBtn.Enabled = false;
-            this._aceptarBtn.Location = new System.Drawing.Point(8, 553);
+            this._aceptarBtn.Location = new System.Drawing.Point(8, 243);
             this._aceptarBtn.Name = "_aceptarBtn";
-            this._aceptarBtn.Size = new System.Drawing.Size(206, 32);
+            this._aceptarBtn.Size = new System.Drawing.Size(928, 25);
             this._aceptarBtn.TabIndex = 12;
             this._aceptarBtn.Text = "Aceptar";
             this._aceptarBtn.UseVisualStyleBackColor = true;
             this._aceptarBtn.Click += new System.EventHandler(this.AceptarClick);
             // 
+            // _planMedico
+            // 
+            this._planMedico.FormattingEnabled = true;
+            this._planMedico.Location = new System.Drawing.Point(344, 193);
+            this._planMedico.Name = "_planMedico";
+            this._planMedico.Size = new System.Drawing.Size(150, 21);
+            this._planMedico.TabIndex = 33;
+            this._planMedico.Text = "Plan";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(309, 196);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(28, 13);
+            this.label11.TabIndex = 32;
+            this.label11.Text = "Plan";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(10, 193);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(404, 23);
+            this.button2.TabIndex = 34;
+            this.button2.Text = "Agregar Persona a cargo";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // AltaAfiliadoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(455, 611);
+            this.ClientSize = new System.Drawing.Size(961, 295);
             this.Controls.Add(this.groupBox1);
             this.Name = "AltaAfiliadoForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -388,7 +388,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button _cancelarBtn;
         private System.Windows.Forms.Button _aceptarBtn;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
@@ -418,6 +417,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn _nombre_familiar;
         private System.Windows.Forms.DataGridViewTextBoxColumn Relacion;
         private System.Windows.Forms.DataGridViewButtonColumn Accion;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox _planMedico;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button button2;
     }
 }

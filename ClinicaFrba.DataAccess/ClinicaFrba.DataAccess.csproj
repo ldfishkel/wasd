@@ -164,6 +164,9 @@
     <Compile Include="ListaHorasSemana.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
+    <Compile Include="ListaPlanMedico.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
     <Compile Include="ListaRole.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
@@ -231,6 +234,7 @@
     <Compile Include="Usuario.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
