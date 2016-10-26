@@ -1,9 +1,9 @@
 ﻿namespace ClinicaFrba.DataAccess.DAO
 {
     using Configuration;
-    using System.Collections.Generic;
     using System;
     using System.Linq;
+    using System.Collections.Generic;
 
     public class TurnoDao : DaoBase
     {
@@ -13,7 +13,49 @@
 
         public List<Turno> GetTurnosAfiliado(int afiliadoId)
         {
-            return new List<Turno>(); //TODO 07 CREAR FUNCTION TurnosDeAfiliado @afiliadoId, @fecha
+            List<Turno> turnos = new List<Turno>();
+
+            foreach (TurnosAfiliado_Result x in _ds.TurnosAfiliado(afiliadoId, GetFecha()))
+            {
+                Turno turno = new Turno()
+                {
+                    turno_id = x.turno_id,
+                    turno_hora = x.turno_hora,
+                    turno_llego = x.turno_llego,
+                    turno_fecha = x.turno_fecha
+                };
+
+                turno.Afiliado = new Afiliado()
+                {
+                    afiliado_nombre = x.afiliado_nombre,
+                    afiliado_apellido = x.afiliado_apellido,
+                    afiliado_numero = x.afiliado_numero,
+                };
+
+                turno.Especialidad = new Especialidad()
+                {
+                    especialidad_nombre = x.especialidad_nombre
+                };
+
+                turno.Profesional = new Profesional()
+                {
+                    profesional_nombre = x.profesional_nombre,
+                    profesional_apellido = x.profesional_apellido
+                };
+
+                turnos.Add(turno);
+            }
+
+            return turnos;
+        }
+
+        public List<TipoCancelacion> GetTipoCancelaciones()
+        {
+            return _ds.ListaTipoCancelaciones.ToList().Select(x => new TipoCancelacion()
+            {
+                tipocancelacion_id = x.tipocancelacion_id,
+                tipocancelacion_nombre = x.tipocancelacion_nombre
+            }).ToList();
         }
 
         public List<Turno> GetTurnosProfesional(int idProfesional, int idEspecialidad)
@@ -26,7 +68,7 @@
                 {
                     turno_id = x.turno_id,
                     turno_hora = x.turno_hora,
-                    turno_cancelado = x.turno_cancelado,
+                    turnocancelado_id = x.turnocancelado_id,
                     turno_llego = x.turno_llego
                 };
 
@@ -44,7 +86,8 @@
 
                 turno.Profesional = new Profesional()
                 {
-                    profesional_nombre = x.profesional_nombre
+                    profesional_nombre = x.profesional_nombre,
+                    profesional_apellido = x.profesional_apellido
                 };
 
                 turnos.Add(turno);
@@ -55,19 +98,88 @@
 
         public List<Turno> GetTurnosProfesional(string nombreProfesional)
         {
-            // TODO 02 CREATE FUNCTION TurnosProfesionalNombre @nombreProfesional @fechaSistema
-            return new List<Turno>(); ;
+            List<Turno> turnos = new List<Turno>();
+            
+            foreach (TurnosProfesionalNombre_Result x in _ds.TurnosProfesionalNombre(nombreProfesional, GetFecha()))
+            {
+                Turno turno = new Turno()
+                {
+                    turno_id = x.turno_id,
+                    turno_hora = x.turno_hora,
+                    turnocancelado_id = x.turnocancelado_id,
+                    turno_llego = x.turno_llego
+                };
+
+                turno.Afiliado = new Afiliado()
+                {
+                    afiliado_nombre = x.afiliado_nombre,
+                    afiliado_apellido = x.afiliado_apellido,
+                    afiliado_numero = x.afiliado_numero,
+                };
+
+                turno.Especialidad = new Especialidad()
+                {
+                    especialidad_nombre = x.especialidad_nombre
+                };
+
+                turno.Profesional = new Profesional()
+                {
+                    profesional_nombre = x.profesional_nombre,
+                    profesional_apellido = x.profesional_apellido
+                };
+
+                turnos.Add(turno);
+            }
+            
+            return turnos;
         }
 
         public List<Turno> GetTurnosProfesional(int profesionalId)
         {
-            // TODO 09 CREATE FUNCTION TurnosProfesionalParaCancelar @profesionalId @fechaSistema
-            return new List<Turno>();
+            List<Turno> turnos = new List<Turno>();
+
+            foreach (TurnosProfesionalParaCancelar_Result x in _ds.TurnosProfesionalParaCancelar(profesionalId, GetFecha()))
+            {
+                Turno turno = new Turno()
+                {
+                    turno_id = x.turno_id,
+                    turno_hora = x.turno_hora,
+                    turno_llego = x.turno_llego,
+                    turno_fecha = x.turno_fecha
+                };
+
+                turno.Afiliado = new Afiliado()
+                {
+                    afiliado_nombre = x.afiliado_nombre,
+                    afiliado_apellido = x.afiliado_apellido,
+                    afiliado_numero = x.afiliado_numero,
+                };
+
+                turno.Especialidad = new Especialidad()
+                {
+                    especialidad_nombre = x.especialidad_nombre
+                };
+
+                turno.Profesional = new Profesional()
+                {
+                    profesional_nombre = x.profesional_nombre,
+                    profesional_apellido = x.profesional_apellido
+                };
+
+                turnos.Add(turno);
+            }
+
+            return turnos;
         }
 
-        public void CancelarTurnos(DateTime fechaDesde, DateTime fechaHasta, int profesionalId)
+        public void CancelarTurno(string canceladoPor, int turnoId, int tipoCancelacionId, string descripcion)
         {
-            //TODO 04 CREATE PROCEDURE CancelarTurnos @fechaDesde, @fechaHasta, @profesionalId
+            _ds.CancelarTurno(canceladoPor, turnoId, tipoCancelacionId, descripcion);
+        }
+
+        public void CancelarTurnos(DateTime fechaDesde, DateTime fechaHasta, int profesionalId, int tipoCancelacionId, string descripcion)
+        {
+            _ds.CancelarTurnoRango(profesionalId, fechaDesde, fechaHasta, tipoCancelacionId, descripcion);
         }
 
         public void PedirTurno(Turno turno)
@@ -78,10 +190,7 @@
 
         public void RegistroLlegada(int bonoId, int turnoId)
         {
-            DateTime now = Config.SystemDate();
-
-            now.AddHours(DateTime.Now.Hour);
-            now.AddMinutes(DateTime.Now.Minute);
+            DateTime now = Config.SystemDate().AddHours(DateTime.Now.Hour).AddMinutes(DateTime.Now.Minute);
 
             _ds.RegistroLlegada(turnoId, bonoId, now);
         }

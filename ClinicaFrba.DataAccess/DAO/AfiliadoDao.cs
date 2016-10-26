@@ -73,8 +73,13 @@
 
         public PlanMedico GetPlanMedico(int planmedico_id)
         {
-            //TODO 06 CREATE FUNCTION PlanMedicoBy @planmedico_id RETURNS TABLE
-            return _ds.PlanMedicoes.SingleOrDefault(x => x.planmedico_id == planmedico_id);
+            return _ds.PlanMedicoBy(planmedico_id).ToList().Select(x => new PlanMedico()
+            {
+                planmedico_id = x.planmedico_id,
+                planmedico_nombre = x.planmedico_nombre,
+                planmedico_cuota = x.planmedico_cuota,
+                planmedico_precio_bono = x.planmedico_precio_bono
+            }).SingleOrDefault();
         }
 
         public List<Bono> GetBonos(int nroAfiliado)

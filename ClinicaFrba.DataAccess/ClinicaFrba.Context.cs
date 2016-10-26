@@ -42,8 +42,10 @@ namespace ClinicaFrba.DataAccess
         public virtual DbSet<Profesional> Profesionals { get; set; }
         public virtual DbSet<Rol> Rols { get; set; }
         public virtual DbSet<Sintoma> Sintomas { get; set; }
+        public virtual DbSet<TipoCancelacion> TipoCancelacions { get; set; }
         public virtual DbSet<TipoEspecialidad> TipoEspecialidads { get; set; }
         public virtual DbSet<Turno> Turnoes { get; set; }
+        public virtual DbSet<TurnoCancelado> TurnoCanceladoes { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
         public virtual DbSet<ListaAfiliado> ListaAfiliados { get; set; }
         public virtual DbSet<ListaEspecialidade> ListaEspecialidades { get; set; }
@@ -51,6 +53,7 @@ namespace ClinicaFrba.DataAccess
         public virtual DbSet<ListaHorasSabado> ListaHorasSabadoes { get; set; }
         public virtual DbSet<ListaHorasSemana> ListaHorasSemanas { get; set; }
         public virtual DbSet<ListaRole> ListaRoles { get; set; }
+        public virtual DbSet<ListaTipoCancelacione> ListaTipoCancelaciones { get; set; }
         public virtual DbSet<ListaTipoDocumento> ListaTipoDocumentoes { get; set; }
         public virtual DbSet<ListaTipoEspecialidade> ListaTipoEspecialidades { get; set; }
     
@@ -78,6 +81,16 @@ namespace ClinicaFrba.DataAccess
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<AfiliadoDeUsuario_Result>("[Entities].[AfiliadoDeUsuario](@usuarioId)", usuarioIdParameter);
         }
     
+        [DbFunction("Entities", "AgendaProfesional")]
+        public virtual IQueryable<AgendaProfesional_Result> AgendaProfesional(Nullable<int> profesionalId)
+        {
+            var profesionalIdParameter = profesionalId.HasValue ?
+                new ObjectParameter("profesionalId", profesionalId) :
+                new ObjectParameter("profesionalId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<AgendaProfesional_Result>("[Entities].[AgendaProfesional](@profesionalId)", profesionalIdParameter);
+        }
+    
         [DbFunction("Entities", "BonosNroAfiliado")]
         public virtual IQueryable<BonosNroAfiliado_Result> BonosNroAfiliado(Nullable<int> nroAfiliado)
         {
@@ -86,6 +99,20 @@ namespace ClinicaFrba.DataAccess
                 new ObjectParameter("nroAfiliado", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<BonosNroAfiliado_Result>("[Entities].[BonosNroAfiliado](@nroAfiliado)", nroAfiliadoParameter);
+        }
+    
+        [DbFunction("Entities", "ConsultasMedicasProfesional")]
+        public virtual IQueryable<ConsultasMedicasProfesional_Result> ConsultasMedicasProfesional(Nullable<int> profesionalId, string fecha)
+        {
+            var profesionalIdParameter = profesionalId.HasValue ?
+                new ObjectParameter("profesionalId", profesionalId) :
+                new ObjectParameter("profesionalId", typeof(int));
+    
+            var fechaParameter = fecha != null ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<ConsultasMedicasProfesional_Result>("[Entities].[ConsultasMedicasProfesional](@profesionalId, @fecha)", profesionalIdParameter, fechaParameter);
         }
     
         [DbFunction("Entities", "EspecialidadesDeProfesional")]
@@ -122,6 +149,16 @@ namespace ClinicaFrba.DataAccess
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<FechasDisponibles_Result>("[Entities].[FechasDisponibles](@profesionalId, @especialidadId)", profesionalIdParameter, especialidadIdParameter);
         }
     
+        [DbFunction("Entities", "PlanMedicoBy")]
+        public virtual IQueryable<PlanMedicoBy_Result> PlanMedicoBy(Nullable<int> planmedicoId)
+        {
+            var planmedicoIdParameter = planmedicoId.HasValue ?
+                new ObjectParameter("planmedicoId", planmedicoId) :
+                new ObjectParameter("planmedicoId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<PlanMedicoBy_Result>("[Entities].[PlanMedicoBy](@planmedicoId)", planmedicoIdParameter);
+        }
+    
         [DbFunction("Entities", "ProfesionalDeUsuario")]
         public virtual IQueryable<ProfesionalDeUsuario_Result> ProfesionalDeUsuario(Nullable<int> usuarioId)
         {
@@ -152,6 +189,20 @@ namespace ClinicaFrba.DataAccess
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<RolesDeUsuario_Result>("[Entities].[RolesDeUsuario](@usuarioId)", usuarioIdParameter);
         }
     
+        [DbFunction("Entities", "TurnosAfiliado")]
+        public virtual IQueryable<TurnosAfiliado_Result> TurnosAfiliado(Nullable<int> afiliadoId, string fecha)
+        {
+            var afiliadoIdParameter = afiliadoId.HasValue ?
+                new ObjectParameter("afiliadoId", afiliadoId) :
+                new ObjectParameter("afiliadoId", typeof(int));
+    
+            var fechaParameter = fecha != null ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<TurnosAfiliado_Result>("[Entities].[TurnosAfiliado](@afiliadoId, @fecha)", afiliadoIdParameter, fechaParameter);
+        }
+    
         [DbFunction("Entities", "TurnosProfesionalEspecialidad")]
         public virtual IQueryable<TurnosProfesionalEspecialidad_Result> TurnosProfesionalEspecialidad(Nullable<int> profesionalId, Nullable<int> especialidadId, string fecha)
         {
@@ -170,9 +221,92 @@ namespace ClinicaFrba.DataAccess
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<TurnosProfesionalEspecialidad_Result>("[Entities].[TurnosProfesionalEspecialidad](@profesionalId, @especialidadId, @fecha)", profesionalIdParameter, especialidadIdParameter, fechaParameter);
         }
     
+        [DbFunction("Entities", "TurnosProfesionalNombre")]
+        public virtual IQueryable<TurnosProfesionalNombre_Result> TurnosProfesionalNombre(string nombreProfesional, string fecha)
+        {
+            var nombreProfesionalParameter = nombreProfesional != null ?
+                new ObjectParameter("nombreProfesional", nombreProfesional) :
+                new ObjectParameter("nombreProfesional", typeof(string));
+    
+            var fechaParameter = fecha != null ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<TurnosProfesionalNombre_Result>("[Entities].[TurnosProfesionalNombre](@nombreProfesional, @fecha)", nombreProfesionalParameter, fechaParameter);
+        }
+    
+        [DbFunction("Entities", "TurnosProfesionalParaCancelar")]
+        public virtual IQueryable<TurnosProfesionalParaCancelar_Result> TurnosProfesionalParaCancelar(Nullable<int> profesionalId, string fecha)
+        {
+            var profesionalIdParameter = profesionalId.HasValue ?
+                new ObjectParameter("profesionalId", profesionalId) :
+                new ObjectParameter("profesionalId", typeof(int));
+    
+            var fechaParameter = fecha != null ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<TurnosProfesionalParaCancelar_Result>("[Entities].[TurnosProfesionalParaCancelar](@profesionalId, @fecha)", profesionalIdParameter, fechaParameter);
+        }
+    
         public virtual int AltaAgendaProfesional()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AltaAgendaProfesional");
+        }
+    
+        public virtual int BajaRol(Nullable<int> rolId)
+        {
+            var rolIdParameter = rolId.HasValue ?
+                new ObjectParameter("rolId", rolId) :
+                new ObjectParameter("rolId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BajaRol", rolIdParameter);
+        }
+    
+        public virtual int CancelarTurno(string canceladoPor, Nullable<int> turnoId, Nullable<int> tipoCancelacionId, string descripcion)
+        {
+            var canceladoPorParameter = canceladoPor != null ?
+                new ObjectParameter("canceladoPor", canceladoPor) :
+                new ObjectParameter("canceladoPor", typeof(string));
+    
+            var turnoIdParameter = turnoId.HasValue ?
+                new ObjectParameter("turnoId", turnoId) :
+                new ObjectParameter("turnoId", typeof(int));
+    
+            var tipoCancelacionIdParameter = tipoCancelacionId.HasValue ?
+                new ObjectParameter("tipoCancelacionId", tipoCancelacionId) :
+                new ObjectParameter("tipoCancelacionId", typeof(int));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("descripcion", descripcion) :
+                new ObjectParameter("descripcion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CancelarTurno", canceladoPorParameter, turnoIdParameter, tipoCancelacionIdParameter, descripcionParameter);
+        }
+    
+        public virtual int CancelarTurnoRango(Nullable<int> profesionalId, Nullable<System.DateTime> fechaDesde, Nullable<System.DateTime> fechaHasta, Nullable<int> tipoCancelacionId, string descripcion)
+        {
+            var profesionalIdParameter = profesionalId.HasValue ?
+                new ObjectParameter("profesionalId", profesionalId) :
+                new ObjectParameter("profesionalId", typeof(int));
+    
+            var fechaDesdeParameter = fechaDesde.HasValue ?
+                new ObjectParameter("fechaDesde", fechaDesde) :
+                new ObjectParameter("fechaDesde", typeof(System.DateTime));
+    
+            var fechaHastaParameter = fechaHasta.HasValue ?
+                new ObjectParameter("fechaHasta", fechaHasta) :
+                new ObjectParameter("fechaHasta", typeof(System.DateTime));
+    
+            var tipoCancelacionIdParameter = tipoCancelacionId.HasValue ?
+                new ObjectParameter("tipoCancelacionId", tipoCancelacionId) :
+                new ObjectParameter("tipoCancelacionId", typeof(int));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("descripcion", descripcion) :
+                new ObjectParameter("descripcion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CancelarTurnoRango", profesionalIdParameter, fechaDesdeParameter, fechaHastaParameter, tipoCancelacionIdParameter, descripcionParameter);
         }
     
         public virtual int CompraBono(Nullable<int> afiliadoId, Nullable<int> cant, Nullable<int> planMedicoId)
@@ -190,6 +324,19 @@ namespace ClinicaFrba.DataAccess
                 new ObjectParameter("planMedicoId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CompraBono", afiliadoIdParameter, cantParameter, planMedicoIdParameter);
+        }
+    
+        public virtual int ConsultaMedicaOcurrio(Nullable<int> consultaMedicaId, Nullable<System.DateTime> fechaYHora)
+        {
+            var consultaMedicaIdParameter = consultaMedicaId.HasValue ?
+                new ObjectParameter("consultaMedicaId", consultaMedicaId) :
+                new ObjectParameter("consultaMedicaId", typeof(int));
+    
+            var fechaYHoraParameter = fechaYHora.HasValue ?
+                new ObjectParameter("fechaYHora", fechaYHora) :
+                new ObjectParameter("fechaYHora", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ConsultaMedicaOcurrio", consultaMedicaIdParameter, fechaYHoraParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> HorasDisponibles(Nullable<int> profesionalId, Nullable<int> especialidadId, string fechaStr)

@@ -83,8 +83,6 @@
 
         private void BuscarClick(object sender, EventArgs e)
         {
-            var especialidad = (Especialidad)_especialidad.SelectedItem;
-
             _turnos = _turnoDao.GetTurnosProfesional(_nombreProfesional.Text);
 
             LoadDataGridView(_turnos);
@@ -106,7 +104,7 @@
                     turno.Especialidad.especialidad_nombre,
                     turno.Afiliado.ToString(),
                     turno.Afiliado.afiliado_numero,
-                    turno.turno_cancelado == null ? "No" : turno.turno_cancelado,
+                    turno.turnocancelado_id == null ? "No" : "Si",
                     turno.turno_llego ? "Si" : "No",
                     turno.turno_llego ? null : "Llego");
 
@@ -139,10 +137,24 @@
 
                 _turnoDao.RegistroLlegada(form.Bono().bono_id, turnoId);
 
-                ProfesionalChanged(null, null);
+                ReloadDataGridView();
+                
             }
         }
 
+        private void ReloadDataGridView()
+        {
+            if (_profesionalCombo.SelectedItem != null && _especialidad.SelectedItem != null)
+                ProfesionalChanged(null, null);
+            else if (!String.IsNullOrEmpty(_nombreProfesional.Text))
+                BuscarClick(null, null);
+            else
+            {
+                InitializeCombo();
+                LoadDataGridView(new List<Turno>());
+            }
+        }
+        
         #endregion
     }
 }

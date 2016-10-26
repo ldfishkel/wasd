@@ -102,9 +102,9 @@
         private void ShowAgenda(CheckBox check, ComboBox desde, ComboBox hasta, ComboBox especialidad, Agendum agenda)
         {
             check.Checked = true;
-            desde.Text = agenda.Hora.ToString();
-            hasta.Text = agenda.Hora1.ToString();
-            especialidad.Text = agenda.Especialidad.ToString();
+            desde.Text = _horasSemena.SingleOrDefault(x => x.hora_id == agenda.agenda_hora_desde).ToString();
+            hasta.Text = _horasSemena.SingleOrDefault(x => x.hora_id == agenda.agenda_hora_hasta).ToString();
+            especialidad.Text = _profesionalDao.GetEspecialidades().SingleOrDefault(x => x.especialidad_id == agenda.especialidad_id).ToString();
         }
 
         #endregion

@@ -18,13 +18,14 @@ namespace ClinicaFrba.DataAccess
         public int afiliado_id { get; set; }
         public int profesional_id { get; set; }
         public int especialidad_id { get; set; }
+        public Nullable<int> turnocancelado_id { get; set; }
         public System.DateTime turno_fecha { get; set; }
         public System.TimeSpan turno_hora { get; set; }
-        public string turno_cancelado { get; set; }
         public bool turno_llego { get; set; }
     
         public virtual Afiliado Afiliado { get; set; }
         public virtual Especialidad Especialidad { get; set; }
         public virtual Profesional Profesional { get; set; }
+        public virtual TurnoCancelado TurnoCancelado { get; set; }
     }
 }

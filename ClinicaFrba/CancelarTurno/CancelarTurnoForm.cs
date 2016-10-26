@@ -87,7 +87,13 @@
 
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
-                CancelarTurnoDetalleForm cancelarTurnoDetalle = new CancelarTurnoDetalleForm(e.RowIndex);
+                CancelarTurnoDetalleForm cancelarTurnoDetalle = null;
+
+                if (_afiliado != null)
+                    cancelarTurnoDetalle = new CancelarTurnoDetalleForm(e.RowIndex, _afiliado, _turnoDao);
+                else
+                    cancelarTurnoDetalle = new CancelarTurnoDetalleForm(e.RowIndex, _profesional, _turnoDao);
+
 
                 cancelarTurnoDetalle.FormClosed += CanecelarTurnoDetalleClosed;
 
@@ -108,15 +114,11 @@
         {
             if (ValidateFields())
             {
-                CancelarTurnoDetalleForm cancelarTurnoDetalle = new CancelarTurnoDetalleForm(_fechaDesde.Value, _fechaHasta.Value, _profesional.profesional_id);
+                CancelarTurnoDetalleForm cancelarTurnoDetalle = new CancelarTurnoDetalleForm(_fechaDesde.Value, _fechaHasta.Value, _profesional.profesional_id, _turnoDao);
 
                 cancelarTurnoDetalle.FormClosed += CanecelarTurnoDetalleClosed;
 
                 cancelarTurnoDetalle.Show();
-
-                _turnoDao.CancelarTurnos(_fechaDesde.Value, _fechaHasta.Value, _profesional.profesional_id);
-
-                LoadTurnos();
             }
         }
 

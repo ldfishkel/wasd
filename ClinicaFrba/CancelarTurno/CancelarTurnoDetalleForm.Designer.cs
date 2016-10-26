@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this._descripcion = new System.Windows.Forms.RichTextBox();
+            this._tipoCancelacion = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -48,16 +48,6 @@
             this.panel1.Size = new System.Drawing.Size(284, 226);
             this.panel1.TabIndex = 0;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.richTextBox1);
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Location = new System.Drawing.Point(14, 11);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(258, 139);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.button1);
@@ -66,23 +56,6 @@
             this.groupBox2.Size = new System.Drawing.Size(258, 54);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(16, 20);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(227, 21);
-            this.comboBox1.TabIndex = 0;
-            this.comboBox1.Text = "Tipo";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(16, 51);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(227, 74);
-            this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "Descripcion";
             // 
             // button1
             // 
@@ -94,6 +67,33 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.CancelarClick);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this._descripcion);
+            this.groupBox1.Controls.Add(this._tipoCancelacion);
+            this.groupBox1.Location = new System.Drawing.Point(14, 11);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(258, 139);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            // 
+            // _descripcion
+            // 
+            this._descripcion.Location = new System.Drawing.Point(16, 51);
+            this._descripcion.Name = "_descripcion";
+            this._descripcion.Size = new System.Drawing.Size(227, 74);
+            this._descripcion.TabIndex = 1;
+            this._descripcion.Text = "Descripcion";
+            // 
+            // _tipoCancelacion
+            // 
+            this._tipoCancelacion.FormattingEnabled = true;
+            this._tipoCancelacion.Location = new System.Drawing.Point(16, 20);
+            this._tipoCancelacion.Name = "_tipoCancelacion";
+            this._tipoCancelacion.Size = new System.Drawing.Size(227, 21);
+            this._tipoCancelacion.TabIndex = 0;
+            this._tipoCancelacion.Text = "Tipo";
+            // 
             // CancelarTurnoDetalleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -104,8 +104,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cancelar Turno";
             this.panel1.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -116,7 +116,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.RichTextBox _descripcion;
+        private System.Windows.Forms.ComboBox _tipoCancelacion;
     }
 }

@@ -100,12 +100,11 @@
 
         private bool ValidateSearch()
         {
-            Regex regex = new Regex("[0-9]{8}");
             StringBuilder sb = new StringBuilder();
 
             if (String.IsNullOrEmpty(_nroDocumento.Text))
                 sb.AppendLine("Debe completar el nro de Documento");
-            else if (!regex.Match(_nroDocumento.Text).Success)
+            else if (!new Regex("[0-9]{7,9}").Match(_nroDocumento.Text).Success)
                 sb.AppendLine("Nro de Documento invalido");
 
             if (_tipoDeDoc.SelectedItem == null)

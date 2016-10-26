@@ -12,24 +12,21 @@ namespace ClinicaFrba.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class ConsultaMedica
+    public partial class TurnoCancelado
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ConsultaMedica()
+        public TurnoCancelado()
         {
-            this.Diagnosticoes = new HashSet<Diagnostico>();
-            this.Sintomas = new HashSet<Sintoma>();
+            this.Turnoes = new HashSet<Turno>();
         }
     
-        public int consultamedica_id { get; set; }
-        public int bono_id { get; set; }
-        public Nullable<System.DateTime> consultamedica_fecha_hora { get; set; }
-        public Nullable<bool> consultamedica_ocurrio { get; set; }
+        public int turnocancelado_id { get; set; }
+        public int turnocancelado_tipocancelacion_id { get; set; }
+        public string turnocancelado_descripcion { get; set; }
+        public string turnocancelado_cancelado_por { get; set; }
     
-        public virtual Bono Bono { get; set; }
+        public virtual TipoCancelacion TipoCancelacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Diagnostico> Diagnosticoes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Sintoma> Sintomas { get; set; }
+        public virtual ICollection<Turno> Turnoes { get; set; }
     }
 }

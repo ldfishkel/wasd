@@ -31,6 +31,13 @@
             this._panel = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this._turnosView = new System.Windows.Forms.DataGridView();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this._tipoEspecialidad = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this._profesionalCombo = new System.Windows.Forms.ComboBox();
+            this._especialidad = new System.Windows.Forms.ComboBox();
+            this._nombreProfesional = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.turno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Hora = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Profesional = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,13 +47,6 @@
             this.Cancelado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Llego = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Accion = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this._tipoEspecialidad = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this._profesionalCombo = new System.Windows.Forms.ComboBox();
-            this._especialidad = new System.Windows.Forms.ComboBox();
-            this._nombreProfesional = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this._panel.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._turnosView)).BeginInit();
@@ -95,59 +95,6 @@
             this._turnosView.Size = new System.Drawing.Size(919, 194);
             this._turnosView.TabIndex = 0;
             this._turnosView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellContentClick);
-            // 
-            // turno
-            // 
-            this.turno.HeaderText = "turno";
-            this.turno.Name = "turno";
-            this.turno.ReadOnly = true;
-            // 
-            // Hora
-            // 
-            this.Hora.HeaderText = "Hora";
-            this.Hora.Name = "Hora";
-            this.Hora.ReadOnly = true;
-            // 
-            // Profesional
-            // 
-            this.Profesional.HeaderText = "Profesional";
-            this.Profesional.Name = "Profesional";
-            this.Profesional.ReadOnly = true;
-            // 
-            // Especialidad
-            // 
-            this.Especialidad.HeaderText = "Especiaidad";
-            this.Especialidad.Name = "Especialidad";
-            this.Especialidad.ReadOnly = true;
-            // 
-            // NombreAfiliado
-            // 
-            this.NombreAfiliado.HeaderText = "NombreAfiliado";
-            this.NombreAfiliado.Name = "NombreAfiliado";
-            this.NombreAfiliado.ReadOnly = true;
-            // 
-            // NroAfiliado
-            // 
-            this.NroAfiliado.HeaderText = "NroAfiliado";
-            this.NroAfiliado.Name = "NroAfiliado";
-            this.NroAfiliado.ReadOnly = true;
-            // 
-            // Cancelado
-            // 
-            this.Cancelado.HeaderText = "Cancelado";
-            this.Cancelado.Name = "Cancelado";
-            this.Cancelado.ReadOnly = true;
-            // 
-            // Llego
-            // 
-            this.Llego.HeaderText = "LLego";
-            this.Llego.Name = "Llego";
-            this.Llego.ReadOnly = true;
-            // 
-            // Accion
-            // 
-            this.Accion.HeaderText = "Accion";
-            this.Accion.Name = "Accion";
             // 
             // groupBox1
             // 
@@ -219,6 +166,59 @@
             this.label1.Size = new System.Drawing.Size(99, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre Profesional";
+            // 
+            // turno
+            // 
+            this.turno.HeaderText = "turno";
+            this.turno.Name = "turno";
+            this.turno.ReadOnly = true;
+            // 
+            // Hora
+            // 
+            this.Hora.HeaderText = "Hora";
+            this.Hora.Name = "Hora";
+            this.Hora.ReadOnly = true;
+            // 
+            // Profesional
+            // 
+            this.Profesional.HeaderText = "Profesional";
+            this.Profesional.Name = "Profesional";
+            this.Profesional.ReadOnly = true;
+            // 
+            // Especialidad
+            // 
+            this.Especialidad.HeaderText = "Especiaidad";
+            this.Especialidad.Name = "Especialidad";
+            this.Especialidad.ReadOnly = true;
+            // 
+            // NombreAfiliado
+            // 
+            this.NombreAfiliado.HeaderText = "Afiliado";
+            this.NombreAfiliado.Name = "NombreAfiliado";
+            this.NombreAfiliado.ReadOnly = true;
+            // 
+            // NroAfiliado
+            // 
+            this.NroAfiliado.HeaderText = "NroAfiliado";
+            this.NroAfiliado.Name = "NroAfiliado";
+            this.NroAfiliado.ReadOnly = true;
+            // 
+            // Cancelado
+            // 
+            this.Cancelado.HeaderText = "Cancelado";
+            this.Cancelado.Name = "Cancelado";
+            this.Cancelado.ReadOnly = true;
+            // 
+            // Llego
+            // 
+            this.Llego.HeaderText = "LLego";
+            this.Llego.Name = "Llego";
+            this.Llego.ReadOnly = true;
+            // 
+            // Accion
+            // 
+            this.Accion.HeaderText = "Accion";
+            this.Accion.Name = "Accion";
             // 
             // RegistrarLlegadaForm
             // 

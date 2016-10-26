@@ -68,6 +68,9 @@
     <Compile Include="AfiliadoDeUsuario_Result.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
+    <Compile Include="AgendaProfesional_Result.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
     <Compile Include="Agendum.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
@@ -103,6 +106,9 @@
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Configuration\ExternalConfiguration.cs" />
     <Compile Include="ConsultaMedica.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultasMedicasProfesional_Result.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
     <Compile Include="DAO\DaoBase.cs" />
@@ -158,6 +164,9 @@
     <Compile Include="ListaRole.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
+    <Compile Include="ListaTipoCancelacione.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
     <Compile Include="ListaTipoDocumento.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
@@ -168,6 +177,9 @@
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
     <Compile Include="PlanMedico.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PlanMedicoBy_Result.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
     <Compile Include="Profesional.cs">
@@ -189,13 +201,28 @@
     <Compile Include="Sintoma.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
+    <Compile Include="TipoCancelacion.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
     <Compile Include="TipoEspecialidad.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
     <Compile Include="Turno.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
+    <Compile Include="TurnoCancelado.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TurnosAfiliado_Result.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
     <Compile Include="TurnosProfesionalEspecialidad_Result.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TurnosProfesionalNombre_Result.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TurnosProfesionalParaCancelar_Result.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
     <Compile Include="Usuario.cs">

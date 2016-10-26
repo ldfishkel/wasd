@@ -37,12 +37,7 @@ namespace ClinicaFrba.DataAccess.DAO
 
         public void Delete(int id)
         {
-            //TODO 01 CREATE PROCEDURE BajaRol @rolId
-            Rol rol = _ds.Rols.SingleOrDefault(x => x.rol_id == id);
-            rol.rol_activo = false;
-
-            _ds.Entry(rol).State = System.Data.Entity.EntityState.Modified;
-            _ds.SaveChanges();
+            _ds.BajaRol(id);
         }
 
         public bool Modify(Rol rol)

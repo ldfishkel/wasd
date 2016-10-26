@@ -11,7 +11,7 @@ namespace ClinicaFrba.DataAccess
 {
     using System;
     
-    public partial class TurnosProfesionalEspecialidad_Result
+    public partial class TurnosProfesionalNombre_Result
     {
         public int turno_id { get; set; }
         public Nullable<int> turnocancelado_id { get; set; }

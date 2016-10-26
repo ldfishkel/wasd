@@ -108,6 +108,14 @@ IF OBJECT_ID('WASD.Usuario', 'U') IS NOT NULL
   DROP TABLE "WASD".Usuario
 GO
 
+IF OBJECT_ID('WASD.TurnoCancelado', 'U') IS NOT NULL
+  DROP TABLE "WASD".TurnoCancelado
+GO
+
+IF OBJECT_ID('WASD.TipoCancelacion', 'U') IS NOT NULL
+  DROP TABLE "WASD".TipoCancelacion
+GO
+
 /****************************************************************************************************************/
 /**CREAR TABLAS**/
 /****************************************************************************************************************/
@@ -152,6 +160,18 @@ CREATE TABLE "WASD".Afiliado (
 	afiliado_activo BIT NOT NULL,
 	afiliado_grupo_familiar INT REFERENCES "WASD".Afiliado(afiliado_id),
 	afiliado_cantidad_bonos_usados SMALLINT NOT NULL DEFAULT 0
+);
+
+CREATE TABLE "WASD".TipoCancelacion (
+	tipocancelacion_id INT PRIMARY KEY IDENTITY(1,1),
+	tipocancelacion_nombre VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE "WASD".TurnoCancelado (
+	turnocancelado_id INT PRIMARY KEY IDENTITY(1,1),
+	turnocancelado_tipocancelacion_id INT NOT NULL REFERENCES "WASD".TipoCancelacion(tipocancelacion_id),
+	turnocancelado_descripcion VARCHAR(50) NOT NULL,
+	turnocancelado_cancelado_por CHAR(1) CHECK (turnocancelado_cancelado_por IN ('A', 'P'))
 );
 
 CREATE TABLE "WASD".TipoEspecialidad (
@@ -253,17 +273,17 @@ CREATE TABLE "WASD".Turno (
 	afiliado_id INT NOT NULL REFERENCES "WASD".Afiliado(afiliado_id),
 	profesional_id INT NOT NULL REFERENCES "WASD".Profesional(profesional_id),
 	especialidad_id INT NOT NULL REFERENCES "WASD".Especialidad(especialidad_id),
+	turnocancelado_id INT REFERENCES "WASD".TurnoCancelado(turnocancelado_id),
 	turno_fecha DATE NOT NULL,
 	turno_hora TIME NOT NULL,
-	turno_cancelado VARCHAR(255),
 	turno_llego BIT NOT NULL
 );
 
 CREATE TABLE "WASD".ConsultaMedica (
 	consultamedica_id INT PRIMARY KEY,
 	bono_id INT NOT NULL REFERENCES "WASD".Bono(bono_id),
-	consultamedica_fecha_hora DATETIME NOT NULL,
-	consultamedica_ocurrio BIT DEFAULT 0
+	consultamedica_fecha_hora DATETIME,
+	consultamedica_ocurrio BIT
 );
 
 CREATE TABLE "WASD".Sintoma (
@@ -366,6 +386,12 @@ INSERT INTO "WASD".Hora VALUES
 (24, '18:30'),
 (25, '19:00'),
 (26, '19:30');
+
+INSERT INTO "WASD".TipoCancelacion(tipocancelacion_nombre)VALUES
+ ('Emergencia'),
+ ('Falta de tiempo');
+
+GO
 
 /****************************************************************************************************************/
 /**MIGRACION**/
@@ -565,9 +591,9 @@ GO
 
 /**TURNOS**/
 SET IDENTITY_INSERT "WASD".Turno ON
-INSERT INTO "WASD".Turno(turno_id, afiliado_id, profesional_id, especialidad_id, turno_fecha, turno_hora, turno_cancelado, turno_llego)
-SELECT m.Turno_Numero, a.afiliado_id, p.profesional_id, m.Especialidad_Codigo, (SELECT CAST(m.Turno_Fecha AS DATE)),
-(SELECT CAST(m.Turno_Fecha AS TIME)), NULL, 1
+INSERT INTO "WASD".Turno(turno_id, afiliado_id, profesional_id, especialidad_id, turnocancelado_id, turno_fecha, turno_hora, turno_llego)
+SELECT m.Turno_Numero, a.afiliado_id, p.profesional_id, m.Especialidad_Codigo, NULL, (SELECT CAST(m.Turno_Fecha AS DATE)),
+(SELECT CAST(m.Turno_Fecha AS TIME)), 1
 FROM gd_esquema.Maestra m, "WASD".Afiliado a, "WASD".Profesional p
 WHERE m.Turno_Numero IS NOT NULL
 AND m.Consulta_Sintomas IS NOT NULL
@@ -631,6 +657,19 @@ AS
 		*
 	FROM 
 		"WASD".TipoEspecialidad;
+GO
+
+/**LISTADO DE TIPO DE CANCELACIONES**/
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE name = 'ListaTipoCancelaciones' AND xtype = 'V')
+	DROP VIEW WASD.ListaTipoCancelaciones;
+GO
+
+CREATE VIEW "WASD".ListaTipoCancelaciones
+AS
+	SELECT 
+		*
+	FROM 
+		"WASD".TipoCancelacion;
 GO
 
 /**LISTADO DE HORAS DE ATENCION DURANTE LA SEMANA**/
@@ -936,14 +975,15 @@ CREATE FUNCTION "WASD".TurnosProfesionalEspecialidad (@profesionalId INT, @espec
 AS RETURN 
 	SELECT
 		t.turno_id,
-		t.turno_cancelado, 
+		t.turnocancelado_id, 
 		t.turno_hora, 
 		t.turno_llego, 
 		a.afiliado_nombre, 
 		a.afiliado_apellido, 
 		a.afiliado_numero, 
 		e.especialidad_nombre,
-		p.profesional_nombre
+		p.profesional_nombre,
+		p.profesional_apellido
 	FROM
 		"WASD".Turno t, 
 		"WASD".Afiliado a, 
@@ -958,6 +998,153 @@ AS RETURN
 		t.turno_fecha = CONVERT(DATE, @fecha, 103);
 GO
 
+/**LISTA DE TURNOS DEL DIA DE UN PROFESIONAL FILTRADO POR NOMBRE**/
+IF EXISTS (SELECT type_desc, type FROM sys.all_objects WITH(NOLOCK) WHERE NAME = 'TurnosProfesionalNombre' AND type = 'IF')
+	DROP FUNCTION WASD.TurnosProfesionalNombre;
+GO
+
+CREATE FUNCTION "WASD".TurnosProfesionalNombre (@nombreProfesional VARCHAR(51), @fecha VARCHAR(10)) RETURNS TABLE 
+AS RETURN 
+	SELECT
+		t.turno_id,
+		t.turnocancelado_id, 
+		t.turno_hora, 
+		t.turno_llego, 
+		a.afiliado_nombre, 
+		a.afiliado_apellido, 
+		a.afiliado_numero, 
+		e.especialidad_nombre,
+		p.profesional_nombre,
+		p.profesional_apellido
+	FROM
+		"WASD".Turno t, 
+		"WASD".Afiliado a, 
+		"WASD".Especialidad e,
+		"WASD".Profesional p
+	WHERE
+		t.especialidad_id = e.especialidad_id AND
+		p.profesional_id = t.profesional_id AND
+		t.afiliado_id = a.afiliado_id AND
+		p.profesional_nombre + ' ' + p.profesional_apellido LIKE '%' + @nombreProfesional + '%' AND
+		t.turno_fecha = CONVERT(DATE, @fecha, 103);
+GO
+
+/**LISTA DE TURNOS DE UN AFILIADO PARA PODER CANCELARLAS**/
+IF EXISTS (SELECT type_desc, type FROM sys.all_objects WITH(NOLOCK) WHERE NAME = 'TurnosAfiliado' AND type = 'IF')
+	DROP FUNCTION WASD.TurnosAfiliado;
+GO
+
+CREATE FUNCTION "WASD".TurnosAfiliado (@afiliadoId INT, @fecha VARCHAR(10)) RETURNS TABLE 
+AS RETURN 
+	SELECT
+		t.turno_id, 
+		t.turno_hora, 
+		t.turno_llego, 
+		t.turno_fecha,
+		a.afiliado_nombre, 
+		a.afiliado_apellido, 
+		a.afiliado_numero, 
+		e.especialidad_nombre,
+		p.profesional_nombre,
+		p.profesional_apellido
+	FROM
+		"WASD".Turno t, 
+		"WASD".Afiliado a, 
+		"WASD".Especialidad e,
+		"WASD".Profesional p
+	WHERE
+		t.especialidad_id = e.especialidad_id AND
+		p.profesional_id = t.profesional_id AND
+		t.afiliado_id = a.afiliado_id AND
+		t.afiliado_id = @afiliadoId AND
+		t.turnocancelado_id IS NULL AND
+		t.turno_fecha > CONVERT(DATE, @fecha, 103);
+GO
+
+/**LISTA DE TURNOS DE UN PROFESIONAL PARA PODER CANCELARLAS**/
+IF EXISTS (SELECT type_desc, type FROM sys.all_objects WITH(NOLOCK) WHERE NAME = 'TurnosProfesionalParaCancelar' AND type = 'IF')
+	DROP FUNCTION WASD.TurnosProfesionalParaCancelar;
+GO
+
+CREATE FUNCTION "WASD".TurnosProfesionalParaCancelar (@profesionalId INT, @fecha VARCHAR(10)) RETURNS TABLE 
+AS RETURN 
+	SELECT
+		t.turno_id, 
+		t.turno_hora, 
+		t.turno_llego,
+		t.turno_fecha, 
+		a.afiliado_nombre, 
+		a.afiliado_apellido, 
+		a.afiliado_numero, 
+		e.especialidad_nombre,
+		p.profesional_nombre,
+		p.profesional_apellido
+	FROM
+		"WASD".Turno t, 
+		"WASD".Afiliado a, 
+		"WASD".Especialidad e,
+		"WASD".Profesional p
+	WHERE
+		t.especialidad_id = e.especialidad_id AND
+		p.profesional_id = t.profesional_id AND
+		t.afiliado_id = a.afiliado_id AND
+		t.profesional_id = @profesionalId AND
+		t.turnocancelado_id IS NULL AND
+		t.turno_fecha > CONVERT(DATE, @fecha, 103);
+GO
+
+/**AGENDA DE UN PROFESIONAL**/
+IF EXISTS (SELECT type_desc, type FROM sys.all_objects WITH(NOLOCK) WHERE NAME = 'AgendaProfesional' AND type = 'IF')
+	DROP FUNCTION WASD.AgendaProfesional;
+GO
+
+CREATE FUNCTION "WASD".AgendaProfesional (@profesionalId INT) RETURNS TABLE 
+AS RETURN 
+	SELECT
+		*
+	FROM
+		"WASD".Agenda 
+	WHERE
+		profesional_id = @profesionalId;
+GO
+
+/**CONSULTAS MEDICAS DE UN PROFESIONAL PARA EL DIA DE HOY**/
+IF EXISTS (SELECT type_desc, type FROM sys.all_objects WITH(NOLOCK) WHERE NAME = 'ConsultasMedicasProfesional' AND type = 'IF')
+	DROP FUNCTION WASD.ConsultasMedicasProfesional;
+GO
+
+CREATE FUNCTION "WASD".ConsultasMedicasProfesional (@profesionalId INT, @fecha VARCHAR(10)) RETURNS TABLE 
+AS RETURN 
+	SELECT
+		c.consultamedica_id,
+		a.afiliado_nombre,
+		a.afiliado_apellido
+	FROM
+		"WASD".ConsultaMedica c, 
+		"WASD".Turno t, 
+		"WASD".Afiliado a
+	WHERE
+		t.turno_id = c.consultamedica_id AND
+		t.profesional_id = @profesionalId AND
+		t.afiliado_id = a.afiliado_id AND
+		c.consultamedica_ocurrio IS NULL AND
+		t.turno_fecha = CONVERT(DATE, @fecha, 103);
+GO
+
+/**PLAN MEDICO POR ID**/
+IF EXISTS (SELECT type_desc, type FROM sys.all_objects WITH(NOLOCK) WHERE NAME = 'PlanMedicoBy' AND type = 'IF')
+	DROP FUNCTION WASD.PlanMedicoBy;
+GO
+
+CREATE FUNCTION "WASD".PlanMedicoBy (@planmedicoId INT) RETURNS TABLE 
+AS RETURN 
+	SELECT
+		*
+	FROM
+		"WASD".PlanMedico 
+	WHERE
+		planmedico_id = @planmedicoId;
+GO
 
 /****************************************************************************************************************/
 /**PROCEDURES**/
@@ -1108,7 +1295,8 @@ BEGIN
 	UPDATE 
 		WASD.Turno
 	SET
-		turno_llego = 1
+		turno_llego = 1,
+		turno_fecha = @fechaActual --aca estoy pisando la fecha que tenia el turno (que era solo la parte de Date) con el mismo Date (por logica) y la hora actual para indicar la llegada)
 	WHERE
 		turno_id = @turnoId;
 
@@ -1122,10 +1310,111 @@ BEGIN
 	INSERT INTO 
 		WASD.ConsultaMedica (consultamedica_id,	bono_id, consultamedica_fecha_hora, consultamedica_ocurrio)
 	VALUES
-		(@turnoId, @bonoId, @fechaActual, 0);
+		(@turnoId, @bonoId, NULL, NULL);
 END;
 GO
 
+/**BAJA LOGICA DE UN ROL**/
+IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'ConsultaMedicaOcurrio' AND type = 'P')
+DROP PROCEDURE WASD.ConsultaMedicaOcurrio;
+GO
+
+CREATE PROCEDURE "WASD".ConsultaMedicaOcurrio @consultaMedicaId INT, @fechaYHora DATETIME
+AS
+BEGIN
+	UPDATE 
+		WASD.ConsultaMedica
+	SET
+		consultamedica_ocurrio = 1,
+		consultamedica_fecha_hora = @fechaYHora
+	WHERE
+		consultamedica_id = @consultaMedicaId;
+END;
+GO
+
+/**BAJA LOGICA DE UN ROL**/
+IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'BajaRol' AND type = 'P')
+DROP PROCEDURE WASD.BajaRol;
+GO
+
+CREATE PROCEDURE "WASD".BajaRol @rolId INT
+AS
+BEGIN
+	UPDATE 
+		WASD.Rol
+	SET
+		rol_activo = 0
+	WHERE
+		rol_id = @rolId;
+END;
+GO
+
+/**CANCELAR TURNO**/
+IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'CancelarTurno' AND type = 'P')
+DROP PROCEDURE WASD.CancelarTurno;
+GO
+
+CREATE PROCEDURE "WASD".CancelarTurno @canceladoPor CHAR(1), @turnoId INT, @tipoCancelacionId INT, @descripcion VARCHAR(50)
+AS
+BEGIN
+	DECLARE @lastInsertedId INT;
+
+	INSERT INTO
+		WASD.TurnoCancelado (
+			turnocancelado_tipocancelacion_id,
+			turnocancelado_descripcion,
+			turnocancelado_cancelado_por
+		)
+	VALUES (
+		@tipoCancelacionId,
+		@descripcion,
+		@canceladoPor	
+	);
+
+	SELECT @lastInsertedId = SCOPE_IDENTITY();
+	
+	UPDATE 
+		WASD.Turno
+	SET
+		turnocancelado_id = @lastInsertedId
+	WHERE
+		turno_id = @turnoId;
+END;
+GO
+
+/**CANCELAR TURNO POR RANGO DE FECHAS**/
+IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'CancelarTurnoRango' AND type = 'P')
+DROP PROCEDURE WASD.CancelarTurnoRango;
+GO
+
+CREATE PROCEDURE "WASD".CancelarTurnoRango @profesionalId INT, @fechaDesde DATE, @fechaHasta DATE, @tipoCancelacionId INT, @descripcion VARCHAR(50)
+AS
+BEGIN
+	DECLARE @lastInsertedId INT;
+
+	INSERT INTO
+		WASD.TurnoCancelado (
+			turnocancelado_tipocancelacion_id,
+			turnocancelado_descripcion,
+			turnocancelado_cancelado_por
+		)
+	VALUES (
+		@tipoCancelacionId,
+		@descripcion,
+		'P'	
+	);
+
+	SELECT @lastInsertedId = SCOPE_IDENTITY();
+	
+	UPDATE 
+		WASD.Turno
+	SET
+		turnocancelado_id = @lastInsertedId
+	WHERE
+		profesional_id = @profesionalId AND
+		turno_fecha BETWEEN @fechaDesde AND @fechaHasta;
+END;
+GO
 
 /**HORAS DISPONIBLES DADA UNA FECHA DISPONIBLE **/
 IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'HorasDisponibles' AND type = 'P')

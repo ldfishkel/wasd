@@ -13,7 +13,7 @@
 
         public Profesional GetProfesional(int userId)
         {
-            return _ds.ProfesionalDeUsuario(userId).ToList().Select(x =>  new Profesional()
+            return _ds.ProfesionalDeUsuario(userId).ToList().Select(x => new Profesional()
             {
                 profesional_id = x.profesional_id,
                 usuario_id = x.usuario_id,
@@ -24,7 +24,7 @@
                 profesional_apellido = x.profesional_apellido,
                 profesional_direccion = x.profesional_direccion,
                 profesional_telefono = x.profesional_telefono,
-                profesional_mail= x.profesional_mail,
+                profesional_mail = x.profesional_mail,
                 profesional_fecha_nacimiento = x.profesional_fecha_nacimiento,
                 profesional_matricula = x.profesional_matricula
             }).SingleOrDefault();
@@ -32,28 +32,56 @@
 
         public List<ConsultaMedica> GetConsultasMedicas(int profesional_id)
         {
-            //TODO 05 CREATE FUNCTION ConsultasMedicasDeProfesional @profesionalId
-            return new List<ConsultaMedica>()
+            var ret = new List<ConsultaMedica>();
+
+            foreach (var x in _ds.ConsultasMedicasProfesional(profesional_id, GetFecha()))
             {
-                new ConsultaMedica()
+                ret.Add(new ConsultaMedica()
                 {
-                    consultamedica_id = 12345,
+                    consultamedica_id = x.consultamedica_id,
                     Bono = new Bono()
                     {
                         Afiliado = new Afiliado()
                         {
-                            afiliado_nombre = "Juan",
-                            afiliado_apellido = "Perez"
+                            afiliado_nombre = x.afiliado_nombre,
+                            afiliado_apellido = x.afiliado_apellido
                         }
                     }
-                }
-            };
+                });
+            }
+
+            return ret;
         }
 
-        public void SaveResultadoConsulta(int _consultaId, List<string> _diagnosticos, List<string> _sintomas)
+        public void SaveResultadoConsulta(int consultaId, List<string> diagnosticos, List<string> sintomas)
         {
-            //TODO 08 Agregar tablas Diagnostico y Sintoma con consultamedica_id
+            foreach(string sintoma in sintomas)
+            {
+                var s = new Sintoma()
+                {
+                    consultamedica_id = consultaId,
+                    sintoma_descripcion = sintoma
+                };
+                _ds.Sintomas.Add(s);
+            }
+
+            foreach (string diagnostico in diagnosticos)
+            {
+                var d = new Diagnostico()
+                {
+                    consultamedica_id = consultaId,
+                    diagnostico_descripcion = diagnostico
+                };
+                _ds.Diagnosticoes.Add(d);
+            }
+
+            _ds.SaveChanges();
+
+            DateTime fechaYHoraActual = Config.SystemDate().AddHours(DateTime.Now.Hour).AddMinutes(DateTime.Now.Minute);
+
+            _ds.ConsultaMedicaOcurrio(consultaId, fechaYHoraActual);
         }
+    
 
         public List<Hora> GetHorasSemana()
         {
@@ -66,8 +94,17 @@
 
         public List<Agendum> GetAgenda(int profesional_id)
         {
-            //TODO 03 CREATE FUNCTION AgendaDeProfesional @profesionalId
-            return _ds.Agenda.Where(x => x.profesional_id == profesional_id).ToList(); 
+            return _ds.AgendaProfesional(profesional_id).ToList().Select(x => new Agendum()
+            {
+                agenda_id = x.agenda_id,
+                profesional_id = x.profesional_id,
+                especialidad_id = x.especialidad_id,
+                agenda_dia = x.agenda_dia,
+                agenda_hora_desde = x.agenda_hora_desde,
+                agenda_hora_hasta = x.agenda_hora_hasta,
+                agenda_fecha_desde = x.agenda_fecha_desde,
+                agenda_fecha_hasta = x.agenda_fecha_hasta
+            }).ToList();
         }
 
         public List<Hora> GetHorasSabado()

@@ -11,12 +11,12 @@ namespace ClinicaFrba.DataAccess
 {
     using System;
     
-    public partial class TurnosProfesionalEspecialidad_Result
+    public partial class TurnosProfesionalParaCancelar_Result
     {
         public int turno_id { get; set; }
-        public Nullable<int> turnocancelado_id { get; set; }
         public System.TimeSpan turno_hora { get; set; }
         public bool turno_llego { get; set; }
+        public System.DateTime turno_fecha { get; set; }
         public string afiliado_nombre { get; set; }
         public string afiliado_apellido { get; set; }
         public int afiliado_numero { get; set; }
