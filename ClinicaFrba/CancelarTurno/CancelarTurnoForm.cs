@@ -78,7 +78,14 @@
             _turnosView.Rows.Clear();
 
             foreach (Turno turno in turnos)
-                _turnosView.Rows.Add(turno.turno_id, turno.turno_fecha, turno.turno_hora, turno.Profesional.ToString(), turno.Especialidad.ToString(), turno.Afiliado.ToString(), "Cancelar");
+                _turnosView.Rows.Add(
+                    turno.turno_id, 
+                    String.Format("{0}/{1}/{2}", turno.turno_fecha.Day, turno.turno_fecha.Month, turno.turno_fecha.Year), 
+                    turno.turno_hora, 
+                    turno.Profesional.ToString(), 
+                    turno.Especialidad.ToString(), 
+                    turno.Afiliado.ToString(), 
+                    "Cancelar");
         }
 
         private void CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -89,11 +96,12 @@
             {
                 CancelarTurnoDetalleForm cancelarTurnoDetalle = null;
 
-                if (_afiliado != null)
-                    cancelarTurnoDetalle = new CancelarTurnoDetalleForm(e.RowIndex, _afiliado, _turnoDao);
-                else
-                    cancelarTurnoDetalle = new CancelarTurnoDetalleForm(e.RowIndex, _profesional, _turnoDao);
+                int turnoId = (int)senderGrid.Rows[e.RowIndex].Cells[0].Value;
 
+                if (_afiliado != null)
+                    cancelarTurnoDetalle = new CancelarTurnoDetalleForm(turnoId, _afiliado, _turnoDao);
+                else
+                    cancelarTurnoDetalle = new CancelarTurnoDetalleForm(turnoId, _profesional, _turnoDao);
 
                 cancelarTurnoDetalle.FormClosed += CanecelarTurnoDetalleClosed;
 
