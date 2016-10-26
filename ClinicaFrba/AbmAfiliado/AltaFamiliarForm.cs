@@ -27,11 +27,20 @@
             {
                 afiliado_nombre = _nombre.Text,
                 afiliado_apellido = _apellido.Text,
-                afiliado_numero =  _tipoFamiliar == TipoDeFamiliar.Conyugue ? 2 : _parent.AfiliadoAlta.Afiliado1.Max(x => x.afiliado_numero) + 1
-                
+                afiliado_numero =  GetNueroFamiliar()
             });
 
             Close();
+        }
+
+        private int GetNueroFamiliar()
+        {
+            if (_tipoFamiliar == TipoDeFamiliar.Conyugue)
+                return 2;
+            else if (_parent.AfiliadoAlta.Afiliado1.Count > 0)
+                return _parent.AfiliadoAlta.Afiliado1.Max(x => x.afiliado_numero) + 1;
+            else
+                return 3;
         }
 
         private bool ValidateFields()

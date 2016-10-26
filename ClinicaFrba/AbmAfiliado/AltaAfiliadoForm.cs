@@ -99,6 +99,12 @@
         {
             StringBuilder sb = new StringBuilder();
 
+            if (String.IsNullOrWhiteSpace(_nombre.Text))
+                sb.AppendLine("Debe completar el nombre");
+
+            if (String.IsNullOrWhiteSpace(_apellido.Text))
+                sb.AppendLine("Debe completar el apellido");
+
             // TODO Validar los campos AltaAfiliado
             // Ver validacion con regex en CompraBonoForm (usar regex para numeros y mail, google it)
             // Validar que los campos de texto no esten vacios ni sean WhiteSpace clase statica String. tiene esos metodos
@@ -115,11 +121,13 @@
 
         private void BuildAfiliado()
         {
-            _afiliado = new Afiliado();
-
-            _afiliado.Afiliado1 = new List<Afiliado>();
-
-            // TODO Llenar _afiliado con los datos de los campos
+            _afiliado = new Afiliado()
+            {
+                Afiliado1 = new List<Afiliado>(),
+                afiliado_nombre = _nombre.Text,
+                afiliado_apellido = _apellido.Text
+                // TODO Llenar _afiliado con los datos de los campos
+            };
         }
 
         private void CellContentClick(object sender, DataGridViewCellEventArgs e)

@@ -34,7 +34,7 @@
 
         private void AltaClick(object sender, System.EventArgs e)
         {
-            var altaAfiliadoForm = new AltaAfiliadoForm();
+            var altaAfiliadoForm = new AltaAfiliadoForm(_afiliadoDao);
             altaAfiliadoForm.Show();
         }
     }
