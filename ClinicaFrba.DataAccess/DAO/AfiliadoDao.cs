@@ -160,7 +160,9 @@
 
         public void CompraDeBonos(int cant, int afiliado_id, int plan_id)
         {
-            _ds.CompraBono(afiliado_id, cant, plan_id);
+            DateTime date = Config.SystemDate().AddHours(DateTime.Now.Hour).AddMinutes(DateTime.Now.Minute);
+
+            _ds.CompraBono(afiliado_id, cant, plan_id, date);
         }
 
         public Afiliado GetAfiliado(string tipoDoc, int nroDoc)

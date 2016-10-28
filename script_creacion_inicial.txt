@@ -1284,10 +1284,9 @@ IF EXISTS (SELECT type_desc, type FROM sys.all_objects WITH(NOLOCK) WHERE NAME =
 	DROP PROCEDURE WASD.CompraBono;
 GO
 
-CREATE PROCEDURE "WASD".CompraBono @afiliadoId INT, @cant INT, @planMedicoId INT
+CREATE PROCEDURE "WASD".CompraBono @afiliadoId INT, @cant INT, @planMedicoId INT, @fecha DATETIME
 AS
 BEGIN
-	DECLARE @fecha DATETIME = GETDATE(); --parametrizar este campo
 	DECLARE @monto MONEY;
 	DECLARE @compra_id INT
 	DECLARE @intFlag INT = 1;

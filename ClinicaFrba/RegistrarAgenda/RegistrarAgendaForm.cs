@@ -141,6 +141,8 @@
                 BuildAgenda((Especialidad)_sabadoEspecialidad.SelectedItem, _sabadoDesde.SelectedItem, _sabadoHasta.SelectedItem, "SABADO");
 
             _profesionalDao.SaveAgendum(_profesional);
+
+            MessageBox.Show("Agenda Guardada");
         }
 
         private void BuildAgenda(Especialidad especialidad, object horaDesde, object horaHasta, string dia)

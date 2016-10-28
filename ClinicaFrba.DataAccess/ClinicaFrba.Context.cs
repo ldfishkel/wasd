@@ -395,7 +395,7 @@ namespace ClinicaFrba.DataAccess
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CancelarTurnoRango", profesionalIdParameter, fechaDesdeParameter, fechaHastaParameter, tipoCancelacionIdParameter, descripcionParameter);
         }
     
-        public virtual int CompraBono(Nullable<int> afiliadoId, Nullable<int> cant, Nullable<int> planMedicoId)
+        public virtual int CompraBono(Nullable<int> afiliadoId, Nullable<int> cant, Nullable<int> planMedicoId, Nullable<System.DateTime> fecha)
         {
             var afiliadoIdParameter = afiliadoId.HasValue ?
                 new ObjectParameter("afiliadoId", afiliadoId) :
@@ -409,7 +409,11 @@ namespace ClinicaFrba.DataAccess
                 new ObjectParameter("planMedicoId", planMedicoId) :
                 new ObjectParameter("planMedicoId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CompraBono", afiliadoIdParameter, cantParameter, planMedicoIdParameter);
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CompraBono", afiliadoIdParameter, cantParameter, planMedicoIdParameter, fechaParameter);
         }
     
         public virtual int ConsultaMedicaOcurrio(Nullable<int> consultaMedicaId, Nullable<System.DateTime> fechaYHora)
