@@ -15,6 +15,7 @@
             builder.RegisterType<ProfesionalDao>().AsSelf().SingleInstance();
             builder.RegisterType<RolDao>().AsSelf().SingleInstance();
             builder.RegisterType<TurnoDao>().AsSelf().SingleInstance();
+            builder.RegisterType<EstadisticasDao>().AsSelf().SingleInstance();
         }
     }
 }
