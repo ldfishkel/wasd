@@ -95,11 +95,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ClinicaFrba.edmx</DependentUpon>
     </Compile>
-    <Compile Include="ClinicaFrbaResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ClinicaFrbaResources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Compra.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
@@ -261,12 +256,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ClinicaFrbaResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ClinicaFrbaResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClinicaFrba.Context.tt">

@@ -2,7 +2,6 @@
 {
     using Newtonsoft.Json;
     using System;
-    using System.Diagnostics;
     using System.IO;
     using System.Text;
 
@@ -12,18 +11,17 @@
         {
             try
             {
-                if (File.Exists(ClinicaFrbaResources.ConfigFilePath))
+                if (File.Exists("/ExternalConfig.txt"))
                 {
-                    var configJson = File.ReadAllText(ClinicaFrbaResources.ConfigFilePath, Encoding.UTF8);
+                    var configJson = File.ReadAllText("/ExternalConfig.txt", Encoding.UTF8);
 
                     return GetExternalConfiguration(configJson);
                 }
 
-                throw new Exception(String.Format("Cannot find the configuration file in {0}", ClinicaFrbaResources.ConfigFilePath));
+                throw new Exception("Cannot find the configuration file ");
             }
             catch (Exception ex)
             {
-                Debug.Print("Error al deserializar la config \n{0}", ex.ToString());
                 throw ex;
             }
         }

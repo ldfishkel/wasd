@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicaFrba", "ClinicaFrba\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicaFrba.DataAccess", "ClinicaFrba.DataAccess\ClinicaFrba.DataAccess.csproj", "{B2417AB9-AF24-4E85-8A83-B92D43AD0371}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8C87C4B8-1435-40FD-AE2D-3E3A2F29E7A3}"
+	ProjectSection(SolutionItems) = preProject
+		ExternalConfig.txt = ExternalConfig.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
