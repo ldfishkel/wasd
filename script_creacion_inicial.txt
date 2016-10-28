@@ -784,6 +784,19 @@ GO
 /**FUNCIONES**/
 /****************************************************************************************************************/
 
+/**HISTORIA DE PLAN DE UN AFILIADO**/
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE name = 'HistorialDeAfiliado' AND xtype = 'IF')
+	DROP FUNCTION WASD.HistorialDeAfiliado;
+GO
+
+CREATE FUNCTION "WASD".HistorialDeAfiliado (@afiliado INT) RETURNS TABLE
+AS RETURN (
+	SELECT *
+	FROM WASD.HistorialPlan
+	WHERE afiliado_id = @afiliado
+);
+GO
+
 /**LISTADO DE PROFESIONALES POR ESPECIALIDAD**/
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE name = 'ProfesionalesDeEspecialidad' AND xtype = 'IF')
 	DROP FUNCTION WASD.ProfesionalesDeEspecialidad;
@@ -1610,3 +1623,96 @@ GO
 INSERT INTO "WASD".EspecialidadPorProfesional VALUES
 (1, 10016),
 (1, 10017);
+
+
+/****************************************************************************************************************/
+/**LISTADOS ESTADISTICOS**/
+/****************************************************************************************************************/
+/*Top 5 de las especialidades que más se registraron cancelaciones, tanto de afiliados como de profesionales.*/
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE name = 'SP_ListadoEstadistico1' AND xtype = 'P')
+	DROP PROCEDURE WASD.SP_ListadoEstadistico1;
+GO
+
+CREATE PROCEDURE "WASD".SP_ListadoEstadistico1(@fecha_desde DATE, @fecha_hasta DATE)
+AS
+	WITH grupo AS (
+		SELECT MONTH(t.turno_fecha) mes, e.especialidad_nombre especialidad, COUNT(*) cancelaciones
+		FROM WASD.Especialidad e, WASD.Turno t, WASD.TurnoCancelado c
+		WHERE t.turnocancelado_id = c.turnocancelado_id
+		AND e.especialidad_id = t.especialidad_id
+		AND @fecha_desde <= t.turno_fecha
+		AND @fecha_hasta >= t.turno_fecha
+		GROUP BY MONTH(t.turno_fecha), e.especialidad_id, e.especialidad_nombre
+	)
+
+	SELECT TOP(5) mes, especialidad, cancelaciones
+	FROM (
+		SELECT *, ROW_NUMBER() OVER (PARTITION BY mes ORDER BY cancelaciones DESC) posicion
+		FROM grupo
+	) tabla
+	WHERE posicion <= 5
+	ORDER BY mes, posicion;
+GO
+
+
+/*Top 5 de los afiliados con mayor cantidad de bonos comprados, detallando si pertenece a un grupo familiar.*/
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE name = 'SP_ListadoEstadistico4' AND xtype = 'P')
+	DROP PROCEDURE WASD.SP_ListadoEstadistico4;
+GO
+
+CREATE PROCEDURE "WASD".SP_ListadoEstadistico4(@fecha_desde DATE, @fecha_hasta DATE)
+AS
+	WITH grupo AS (
+		SELECT MONTH(c.compra_fecha_hora) mes, a.afiliado_numero, a.afiliado_apellido, a.afiliado_nombre,
+		(SELECT CASE
+			WHEN a.afiliado_grupo_familiar IS NULL THEN 'NO'
+			ELSE 'SI'
+			END
+		) AS pertenece_a_grupo,
+		SUM(c.compra_cantidad) cantidad
+		FROM WASD.Compra c, WASD.Afiliado a
+		WHERE a.afiliado_id = c.afiliado_id
+		AND @fecha_desde <= c.compra_fecha_hora
+		AND @fecha_hasta >= c.compra_fecha_hora
+		GROUP BY MONTH(c.compra_fecha_hora), a.afiliado_numero, a.afiliado_apellido, a.afiliado_nombre,
+		a.afiliado_grupo_familiar
+	)
+
+	SELECT mes, afiliado_numero, afiliado_apellido, afiliado_nombre, pertenece_a_grupo, cantidad
+	FROM (
+		SELECT *, ROW_NUMBER() OVER (partition BY mes ORDER BY cantidad DESC) posicion
+		FROM grupo
+	) tabla
+	WHERE posicion <= 5
+	ORDER BY mes, posicion;
+GO
+
+/*Top 5 de las especialidades de médicos con más bonos de consultas utilizados.*/
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE name = 'SP_ListadoEstadistico5' AND xtype = 'P')
+	DROP PROCEDURE WASD.SP_ListadoEstadistico5;
+GO
+
+CREATE PROCEDURE "WASD".SP_ListadoEstadistico5(@fecha_desde DATE, @fecha_hasta DATE)
+AS
+	WITH grupo AS (
+		SELECT MONTH(t.turno_fecha) mes, e.especialidad_nombre,
+		COUNT(*) cantidad
+		FROM WASD.Turno t, WASD.Especialidad e
+		WHERE t.especialidad_id = e.especialidad_id
+		AND EXISTS(
+			SELECT 1 FROM WASD.ConsultaMedica c
+			WHERE c.consultamedica_id = t.turno_id
+		)
+		AND @fecha_desde <= t.turno_fecha
+		AND @fecha_hasta >= t.turno_fecha
+		GROUP BY MONTH(t.turno_fecha), e.especialidad_nombre
+	)
+
+	SELECT mes, especialidad_nombre, cantidad
+	FROM (
+		SELECT *, ROW_NUMBER() OVER (partition BY mes ORDER BY cantidad DESC) posicion
+		FROM grupo
+	) tabla
+	WHERE posicion <= 5
+	ORDER BY mes, posicion;
+GO
