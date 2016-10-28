@@ -22,12 +22,12 @@
             menuForm.Text = "ABM Afiliados";
             menuForm.FixBounds(_panel);
 
-            InitializeAfiliadosGrid();
+            InitializeAfiliadosGrid(null, null);
 
             return _panel;
         }
 
-        private void InitializeAfiliadosGrid()
+        private void InitializeAfiliadosGrid(object sender, FormClosingEventArgs e)
         {
             _afiliadosGrid.Rows.Clear();
 
@@ -38,6 +38,9 @@
         private void AltaClick(object sender, System.EventArgs e)
         {
             var altaAfiliadoForm = new AltaAfiliadoForm(_afiliadoDao);
+
+            altaAfiliadoForm.FormClosing += InitializeAfiliadosGrid;
+
             altaAfiliadoForm.Show();
         }
 
@@ -70,7 +73,7 @@
                 {
                     _afiliadoDao.DeleteAfiliado(afiliado.afiliado_numero);
 
-                    InitializeAfiliadosGrid();
+                    InitializeAfiliadosGrid(null, null);
                 }
             }
         }

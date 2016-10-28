@@ -132,6 +132,7 @@
 
             _afiliadoDao.AltaAfiliado(_afiliado);
 
+            Close();
         }
 
         private void AgregarFamiliarClick(object sender, EventArgs e)
