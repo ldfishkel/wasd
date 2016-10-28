@@ -22,20 +22,25 @@
             menuForm.Text = "ABM Afiliados";
             menuForm.FixBounds(_panel);
 
-            InitializeAfiliadosGrid();
+            InitializeAfiliadosGrid(null, null);
 
             return _panel;
         }
 
-        private void InitializeAfiliadosGrid()
+        private void InitializeAfiliadosGrid(object sender, FormClosingEventArgs e)
         {
+            _afiliadosGrid.Rows.Clear();
+
             foreach (Afiliado afiliado in _afiliadoDao.GetAfiliados())
-                _afiliadosGrid.Rows.Add(afiliado.afiliado_numero, afiliado, "Ver", "Baja", "Modificar");
+                _afiliadosGrid.Rows.Add(afiliado.afiliado_numero, afiliado, "Ver", "Modificar", "Baja");
         }
 
         private void AltaClick(object sender, System.EventArgs e)
         {
             var altaAfiliadoForm = new AltaAfiliadoForm(_afiliadoDao);
+
+            altaAfiliadoForm.FormClosing += InitializeAfiliadosGrid;
+
             altaAfiliadoForm.Show();
         }
 
@@ -50,6 +55,26 @@
                 PlanMedico planMedico = _afiliadoDao.GetPlanMedico(afiliado.planmedico_id);
 
                 new DetalleAfiliadoForm(afiliado, planMedico, historialPlan).Show();
+            }
+
+            if (e.ColumnIndex == 3)
+            {
+                afiliado = _afiliadoDao.GetAfiliado(afiliado.usuario_id);
+                afiliado.PlanMedico = _afiliadoDao.GetPlanMedico(afiliado.planmedico_id);
+
+                new ModificarAfiliadoForm(afiliado, _afiliadoDao).Show();
+            }
+
+            if (e.ColumnIndex == 4)
+            {
+                var result = MessageBox.Show("Posta?", "Eliminar?", MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
+                {
+                    _afiliadoDao.DeleteAfiliado(afiliado.afiliado_numero);
+
+                    InitializeAfiliadosGrid(null, null);
+                }
             }
         }
     }

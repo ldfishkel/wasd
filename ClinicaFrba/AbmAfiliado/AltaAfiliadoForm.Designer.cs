@@ -30,6 +30,8 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this._planMedico = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this._tipoDoc = new System.Windows.Forms.ComboBox();
             this._nombre = new System.Windows.Forms.TextBox();
@@ -51,14 +53,13 @@
             this.label7 = new System.Windows.Forms.Label();
             this._mail = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this._agregarConyugueBtn = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this._afiliadosACargo = new System.Windows.Forms.DataGridView();
             this._nombre_familiar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Relacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Accion = new System.Windows.Forms.DataGridViewButtonColumn();
             this._aceptarBtn = new System.Windows.Forms.Button();
-            this._planMedico = new System.Windows.Forms.ComboBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -105,6 +106,24 @@
             this.groupBox3.Size = new System.Drawing.Size(500, 229);
             this.groupBox3.TabIndex = 31;
             this.groupBox3.TabStop = false;
+            // 
+            // _planMedico
+            // 
+            this._planMedico.FormattingEnabled = true;
+            this._planMedico.Location = new System.Drawing.Point(344, 193);
+            this._planMedico.Name = "_planMedico";
+            this._planMedico.Size = new System.Drawing.Size(150, 21);
+            this._planMedico.TabIndex = 33;
+            this._planMedico.Text = "Plan";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(309, 196);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(28, 13);
+            this.label11.TabIndex = 32;
+            this.label11.Text = "Plan";
             // 
             // label1
             // 
@@ -210,6 +229,7 @@
             this._estadoCivil.Size = new System.Drawing.Size(168, 21);
             this._estadoCivil.TabIndex = 23;
             this._estadoCivil.Text = "Estado Civil";
+            this._estadoCivil.SelectedIndexChanged += new System.EventHandler(this.EstadoCivilChanged);
             // 
             // _direccion
             // 
@@ -285,6 +305,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this._agregarConyugueBtn);
             this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this._afiliadosACargo);
             this.groupBox2.Location = new System.Drawing.Point(513, 8);
@@ -295,6 +316,27 @@
             this.groupBox2.TabIndex = 27;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Grupo Familiar";
+            // 
+            // _agregarConyugueBtn
+            // 
+            this._agregarConyugueBtn.Enabled = false;
+            this._agregarConyugueBtn.Location = new System.Drawing.Point(10, 194);
+            this._agregarConyugueBtn.Name = "_agregarConyugueBtn";
+            this._agregarConyugueBtn.Size = new System.Drawing.Size(210, 23);
+            this._agregarConyugueBtn.TabIndex = 35;
+            this._agregarConyugueBtn.Text = "Agregar Conyugue";
+            this._agregarConyugueBtn.UseVisualStyleBackColor = true;
+            this._agregarConyugueBtn.Click += new System.EventHandler(this.AgregarConyugueClick);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(226, 193);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(188, 23);
+            this.button2.TabIndex = 34;
+            this.button2.Text = "Agregar Persona a cargo";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.AgregarFamiliarClick);
             // 
             // _afiliadosACargo
             // 
@@ -331,7 +373,6 @@
             // 
             // _aceptarBtn
             // 
-            this._aceptarBtn.Enabled = false;
             this._aceptarBtn.Location = new System.Drawing.Point(8, 243);
             this._aceptarBtn.Name = "_aceptarBtn";
             this._aceptarBtn.Size = new System.Drawing.Size(928, 25);
@@ -339,33 +380,6 @@
             this._aceptarBtn.Text = "Aceptar";
             this._aceptarBtn.UseVisualStyleBackColor = true;
             this._aceptarBtn.Click += new System.EventHandler(this.AceptarClick);
-            // 
-            // _planMedico
-            // 
-            this._planMedico.FormattingEnabled = true;
-            this._planMedico.Location = new System.Drawing.Point(344, 193);
-            this._planMedico.Name = "_planMedico";
-            this._planMedico.Size = new System.Drawing.Size(150, 21);
-            this._planMedico.TabIndex = 33;
-            this._planMedico.Text = "Plan";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(309, 196);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(28, 13);
-            this.label11.TabIndex = 32;
-            this.label11.Text = "Plan";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(10, 193);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(404, 23);
-            this.button2.TabIndex = 34;
-            this.button2.Text = "Agregar Persona a cargo";
-            this.button2.UseVisualStyleBackColor = true;
             // 
             // AltaAfiliadoForm
             // 
@@ -420,5 +434,6 @@
         private System.Windows.Forms.ComboBox _planMedico;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button _agregarConyugueBtn;
     }
 }

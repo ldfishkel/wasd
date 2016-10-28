@@ -53,11 +53,11 @@ namespace ClinicaFrba.DataAccess
         public virtual DbSet<ListaFuncionalidade> ListaFuncionalidades { get; set; }
         public virtual DbSet<ListaHorasSabado> ListaHorasSabadoes { get; set; }
         public virtual DbSet<ListaHorasSemana> ListaHorasSemanas { get; set; }
+        public virtual DbSet<ListaPlanMedico> ListaPlanMedicos { get; set; }
         public virtual DbSet<ListaRole> ListaRoles { get; set; }
         public virtual DbSet<ListaTipoCancelacione> ListaTipoCancelaciones { get; set; }
         public virtual DbSet<ListaTipoDocumento> ListaTipoDocumentoes { get; set; }
         public virtual DbSet<ListaTipoEspecialidade> ListaTipoEspecialidades { get; set; }
-        public virtual DbSet<ListaPlanMedico> ListaPlanMedicos { get; set; }
     
         [DbFunction("Entities", "AfiliadoBy")]
         public virtual IQueryable<AfiliadoBy_Result> AfiliadoBy(string tipoDocumento, Nullable<int> nroDocumento)
@@ -149,6 +149,16 @@ namespace ClinicaFrba.DataAccess
                 new ObjectParameter("especialidadId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<FechasDisponibles_Result>("[Entities].[FechasDisponibles](@profesionalId, @especialidadId)", profesionalIdParameter, especialidadIdParameter);
+        }
+    
+        [DbFunction("Entities", "HistorialDeAfiliado")]
+        public virtual IQueryable<HistorialDeAfiliado_Result> HistorialDeAfiliado(Nullable<int> afiliado)
+        {
+            var afiliadoParameter = afiliado.HasValue ?
+                new ObjectParameter("afiliado", afiliado) :
+                new ObjectParameter("afiliado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<HistorialDeAfiliado_Result>("[Entities].[HistorialDeAfiliado](@afiliado)", afiliadoParameter);
         }
     
         [DbFunction("Entities", "PlanMedicoBy")]
@@ -251,6 +261,67 @@ namespace ClinicaFrba.DataAccess
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<TurnosProfesionalParaCancelar_Result>("[Entities].[TurnosProfesionalParaCancelar](@profesionalId, @fecha)", profesionalIdParameter, fechaParameter);
         }
     
+        public virtual ObjectResult<Nullable<decimal>> AltaAfiliado(Nullable<int> estadocivil_id, string afiliado_tipodocumento, Nullable<int> planmedico_id, string afiliado_sexo, Nullable<int> afiliado_numero, string afiliado_nombre, string afiliado_apellido, Nullable<int> afiliado_numero_documento, string afiliado_direccion, Nullable<int> afiliado_telefono, string afiliado_mail, Nullable<System.DateTime> afiliado_fecha_nacimiento, Nullable<byte> afiliado_familiares_dependientes, Nullable<int> afiliado_grupo_familiar)
+        {
+            var estadocivil_idParameter = estadocivil_id.HasValue ?
+                new ObjectParameter("estadocivil_id", estadocivil_id) :
+                new ObjectParameter("estadocivil_id", typeof(int));
+    
+            var afiliado_tipodocumentoParameter = afiliado_tipodocumento != null ?
+                new ObjectParameter("afiliado_tipodocumento", afiliado_tipodocumento) :
+                new ObjectParameter("afiliado_tipodocumento", typeof(string));
+    
+            var planmedico_idParameter = planmedico_id.HasValue ?
+                new ObjectParameter("planmedico_id", planmedico_id) :
+                new ObjectParameter("planmedico_id", typeof(int));
+    
+            var afiliado_sexoParameter = afiliado_sexo != null ?
+                new ObjectParameter("afiliado_sexo", afiliado_sexo) :
+                new ObjectParameter("afiliado_sexo", typeof(string));
+    
+            var afiliado_numeroParameter = afiliado_numero.HasValue ?
+                new ObjectParameter("afiliado_numero", afiliado_numero) :
+                new ObjectParameter("afiliado_numero", typeof(int));
+    
+            var afiliado_nombreParameter = afiliado_nombre != null ?
+                new ObjectParameter("afiliado_nombre", afiliado_nombre) :
+                new ObjectParameter("afiliado_nombre", typeof(string));
+    
+            var afiliado_apellidoParameter = afiliado_apellido != null ?
+                new ObjectParameter("afiliado_apellido", afiliado_apellido) :
+                new ObjectParameter("afiliado_apellido", typeof(string));
+    
+            var afiliado_numero_documentoParameter = afiliado_numero_documento.HasValue ?
+                new ObjectParameter("afiliado_numero_documento", afiliado_numero_documento) :
+                new ObjectParameter("afiliado_numero_documento", typeof(int));
+    
+            var afiliado_direccionParameter = afiliado_direccion != null ?
+                new ObjectParameter("afiliado_direccion", afiliado_direccion) :
+                new ObjectParameter("afiliado_direccion", typeof(string));
+    
+            var afiliado_telefonoParameter = afiliado_telefono.HasValue ?
+                new ObjectParameter("afiliado_telefono", afiliado_telefono) :
+                new ObjectParameter("afiliado_telefono", typeof(int));
+    
+            var afiliado_mailParameter = afiliado_mail != null ?
+                new ObjectParameter("afiliado_mail", afiliado_mail) :
+                new ObjectParameter("afiliado_mail", typeof(string));
+    
+            var afiliado_fecha_nacimientoParameter = afiliado_fecha_nacimiento.HasValue ?
+                new ObjectParameter("afiliado_fecha_nacimiento", afiliado_fecha_nacimiento) :
+                new ObjectParameter("afiliado_fecha_nacimiento", typeof(System.DateTime));
+    
+            var afiliado_familiares_dependientesParameter = afiliado_familiares_dependientes.HasValue ?
+                new ObjectParameter("afiliado_familiares_dependientes", afiliado_familiares_dependientes) :
+                new ObjectParameter("afiliado_familiares_dependientes", typeof(byte));
+    
+            var afiliado_grupo_familiarParameter = afiliado_grupo_familiar.HasValue ?
+                new ObjectParameter("afiliado_grupo_familiar", afiliado_grupo_familiar) :
+                new ObjectParameter("afiliado_grupo_familiar", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("AltaAfiliado", estadocivil_idParameter, afiliado_tipodocumentoParameter, planmedico_idParameter, afiliado_sexoParameter, afiliado_numeroParameter, afiliado_nombreParameter, afiliado_apellidoParameter, afiliado_numero_documentoParameter, afiliado_direccionParameter, afiliado_telefonoParameter, afiliado_mailParameter, afiliado_fecha_nacimientoParameter, afiliado_familiares_dependientesParameter, afiliado_grupo_familiarParameter);
+        }
+    
         public virtual int AltaAgendaProfesional()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AltaAgendaProfesional");
@@ -324,7 +395,7 @@ namespace ClinicaFrba.DataAccess
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CancelarTurnoRango", profesionalIdParameter, fechaDesdeParameter, fechaHastaParameter, tipoCancelacionIdParameter, descripcionParameter);
         }
     
-        public virtual int CompraBono(Nullable<int> afiliadoId, Nullable<int> cant, Nullable<int> planMedicoId)
+        public virtual int CompraBono(Nullable<int> afiliadoId, Nullable<int> cant, Nullable<int> planMedicoId, Nullable<System.DateTime> fecha)
         {
             var afiliadoIdParameter = afiliadoId.HasValue ?
                 new ObjectParameter("afiliadoId", afiliadoId) :
@@ -338,7 +409,11 @@ namespace ClinicaFrba.DataAccess
                 new ObjectParameter("planMedicoId", planMedicoId) :
                 new ObjectParameter("planMedicoId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CompraBono", afiliadoIdParameter, cantParameter, planMedicoIdParameter);
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CompraBono", afiliadoIdParameter, cantParameter, planMedicoIdParameter, fechaParameter);
         }
     
         public virtual int ConsultaMedicaOcurrio(Nullable<int> consultaMedicaId, Nullable<System.DateTime> fechaYHora)
@@ -352,6 +427,19 @@ namespace ClinicaFrba.DataAccess
                 new ObjectParameter("fechaYHora", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ConsultaMedicaOcurrio", consultaMedicaIdParameter, fechaYHoraParameter);
+        }
+    
+        public virtual int DeleteAfiliado(Nullable<int> afiliadoId, Nullable<System.DateTime> fecha)
+        {
+            var afiliadoIdParameter = afiliadoId.HasValue ?
+                new ObjectParameter("afiliadoId", afiliadoId) :
+                new ObjectParameter("afiliadoId", typeof(int));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteAfiliado", afiliadoIdParameter, fechaParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> HorasDisponibles(Nullable<int> profesionalId, Nullable<int> especialidadId, string fechaStr)
@@ -399,6 +487,82 @@ namespace ClinicaFrba.DataAccess
                 new ObjectParameter("fechaActual", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegistroLlegada", turnoIdParameter, bonoIdParameter, fechaActualParameter);
+        }
+    
+        public virtual ObjectResult<SP_ListadoEstadistico1_Result> SP_ListadoEstadistico1(Nullable<System.DateTime> fecha_desde, Nullable<System.DateTime> fecha_hasta)
+        {
+            var fecha_desdeParameter = fecha_desde.HasValue ?
+                new ObjectParameter("fecha_desde", fecha_desde) :
+                new ObjectParameter("fecha_desde", typeof(System.DateTime));
+    
+            var fecha_hastaParameter = fecha_hasta.HasValue ?
+                new ObjectParameter("fecha_hasta", fecha_hasta) :
+                new ObjectParameter("fecha_hasta", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ListadoEstadistico1_Result>("SP_ListadoEstadistico1", fecha_desdeParameter, fecha_hastaParameter);
+        }
+    
+        public virtual ObjectResult<SP_ListadoEstadistico4_Result> SP_ListadoEstadistico4(Nullable<System.DateTime> fecha_desde, Nullable<System.DateTime> fecha_hasta)
+        {
+            var fecha_desdeParameter = fecha_desde.HasValue ?
+                new ObjectParameter("fecha_desde", fecha_desde) :
+                new ObjectParameter("fecha_desde", typeof(System.DateTime));
+    
+            var fecha_hastaParameter = fecha_hasta.HasValue ?
+                new ObjectParameter("fecha_hasta", fecha_hasta) :
+                new ObjectParameter("fecha_hasta", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ListadoEstadistico4_Result>("SP_ListadoEstadistico4", fecha_desdeParameter, fecha_hastaParameter);
+        }
+    
+        public virtual ObjectResult<SP_ListadoEstadistico5_Result> SP_ListadoEstadistico5(Nullable<System.DateTime> fecha_desde, Nullable<System.DateTime> fecha_hasta)
+        {
+            var fecha_desdeParameter = fecha_desde.HasValue ?
+                new ObjectParameter("fecha_desde", fecha_desde) :
+                new ObjectParameter("fecha_desde", typeof(System.DateTime));
+    
+            var fecha_hastaParameter = fecha_hasta.HasValue ?
+                new ObjectParameter("fecha_hasta", fecha_hasta) :
+                new ObjectParameter("fecha_hasta", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ListadoEstadistico5_Result>("SP_ListadoEstadistico5", fecha_desdeParameter, fecha_hastaParameter);
+        }
+    
+        public virtual int UpdateAfiliado(Nullable<int> afiliadoId, string direccion, Nullable<int> telefono, string mail, Nullable<int> estadoCivil, Nullable<int> planMedico, string motivo, Nullable<System.DateTime> fecha)
+        {
+            var afiliadoIdParameter = afiliadoId.HasValue ?
+                new ObjectParameter("afiliadoId", afiliadoId) :
+                new ObjectParameter("afiliadoId", typeof(int));
+    
+            var direccionParameter = direccion != null ?
+                new ObjectParameter("direccion", direccion) :
+                new ObjectParameter("direccion", typeof(string));
+    
+            var telefonoParameter = telefono.HasValue ?
+                new ObjectParameter("telefono", telefono) :
+                new ObjectParameter("telefono", typeof(int));
+    
+            var mailParameter = mail != null ?
+                new ObjectParameter("mail", mail) :
+                new ObjectParameter("mail", typeof(string));
+    
+            var estadoCivilParameter = estadoCivil.HasValue ?
+                new ObjectParameter("estadoCivil", estadoCivil) :
+                new ObjectParameter("estadoCivil", typeof(int));
+    
+            var planMedicoParameter = planMedico.HasValue ?
+                new ObjectParameter("planMedico", planMedico) :
+                new ObjectParameter("planMedico", typeof(int));
+    
+            var motivoParameter = motivo != null ?
+                new ObjectParameter("motivo", motivo) :
+                new ObjectParameter("motivo", typeof(string));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateAfiliado", afiliadoIdParameter, direccionParameter, telefonoParameter, mailParameter, estadoCivilParameter, planMedicoParameter, motivoParameter, fechaParameter);
         }
     }
 }

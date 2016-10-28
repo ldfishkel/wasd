@@ -411,7 +411,7 @@ SET IDENTITY_INSERT "WASD".PlanMedico OFF;
 /*Afiliado de pruebas puesto aca por la necesidad de tener planes medicos creados previamente*/
 SET IDENTITY_INSERT "WASD".Afiliado ON;
 INSERT INTO "WASD".Afiliado(afiliado_id,  usuario_id, estadocivil_id, afiliado_tipodocumento, planmedico_id, afiliado_sexo, afiliado_numero, afiliado_nombre, afiliado_apellido, afiliado_numero_documento, afiliado_direccion, afiliado_telefono, afiliado_mail, afiliado_fecha_nacimiento, afiliado_familiares_dependientes, afiliado_activo, afiliado_grupo_familiar, afiliado_cantidad_bonos_usados, afiliado_fecha_baja) VALUES
-(1, 1, 1, 'DNI', 555555, 'M', 999999900, 'Leonel', 'Dan', 36157488, 'Humboldt', 1168567706, 'asd@asd.asd', '9-1-1992', 0, 1, NULL, 0, NULL);
+(1, 1, 1, 'DNI', 555555, 'M', 1, 'Leonel', 'Dan', 36157488, 'Humboldt', 1168567706, 'asd@asd.asd', '9-1-1992', 0, 1, NULL, 0, NULL);
 SET IDENTITY_INSERT "WASD".Afiliado OFF;
 
 /**TIPOS DE ESPECIALIDADES**/
@@ -751,6 +751,8 @@ AS
 		afiliado_apellido
 	FROM 
 		"WASD".Afiliado
+	WHERE
+		afiliado_activo = 1;
 GO
 
 /**LISTADO DE ESTADOS CIVILES**/
@@ -1282,10 +1284,9 @@ IF EXISTS (SELECT type_desc, type FROM sys.all_objects WITH(NOLOCK) WHERE NAME =
 	DROP PROCEDURE WASD.CompraBono;
 GO
 
-CREATE PROCEDURE "WASD".CompraBono @afiliadoId INT, @cant INT, @planMedicoId INT
+CREATE PROCEDURE "WASD".CompraBono @afiliadoId INT, @cant INT, @planMedicoId INT, @fecha DATETIME
 AS
 BEGIN
-	DECLARE @fecha DATETIME = GETDATE(); --parametrizar este campo
 	DECLARE @monto MONEY;
 	DECLARE @compra_id INT
 	DECLARE @intFlag INT = 1;
@@ -1476,6 +1477,137 @@ BEGIN
 END;
 GO
 
+/**MODIFICAR AFILIADO**/
+IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'UpdateAfiliado' AND type = 'P')
+DROP PROCEDURE WASD.UpdateAfiliado;
+GO
+
+CREATE PROCEDURE "WASD".UpdateAfiliado @afiliadoId INT, @direccion VARCHAR(100), @telefono INT, @mail VARCHAR(50), @estadoCivil INT, @planMedico INT, @motivo VARCHAR(144), @fecha DATETIME
+AS
+BEGIN
+	IF (@motivo IS NOT NULL)
+		INSERT INTO 
+			WASD.HistorialPlan(afiliado_id, historial_fecha, historial_motivo)
+	    VALUES
+	       (@afiliadoId
+	       ,@fecha
+	       ,@motivo);
+
+	UPDATE 
+		WASD.Afiliado
+	SET
+		afiliado_direccion = @direccion,
+		afiliado_telefono = @telefono,
+		afiliado_mail = @mail,
+		estadocivil_id = @estadoCivil,
+		planmedico_id = @planMedico
+	WHERE
+		afiliado_id = @afiliadoId;
+END;
+GO
+
+/**ALTA AFILIADO**/
+IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'AltaAfiliado' AND type = 'P')
+DROP PROCEDURE WASD.AltaAfiliado;
+GO
+
+CREATE PROCEDURE "WASD".AltaAfiliado 
+	@estadocivil_id INT, 
+	@afiliado_tipodocumento CHAR(3),
+	@planmedico_id INT ,
+	@afiliado_sexo CHAR(1),
+	@afiliado_numero INT,
+	@afiliado_nombre VARCHAR(50),
+	@afiliado_apellido VARCHAR(50),
+	@afiliado_numero_documento INT,
+	@afiliado_direccion VARCHAR(100),
+	@afiliado_telefono INT,
+	@afiliado_mail VARCHAR(50),
+	@afiliado_fecha_nacimiento DATE,
+	@afiliado_familiares_dependientes TINYINT,
+	@afiliado_grupo_familiar INT
+AS
+BEGIN
+	DECLARE @userId INT, @ultimoNumero INT;
+
+	SELECT TOP 1
+		@ultimoNumero = (FLOOR(afiliado_numero / 100) + 1) * 100
+	FROM
+		WASD.Afiliado
+	ORDER BY
+		afiliado_numero DESC;
+
+	INSERT INTO 
+		"WASD".Usuario(usuario_nombre, usuario_password, usuario_intentos, usuario_activo) 
+	VALUES
+		(@afiliado_numero_documento, 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7', 0, 1);
+
+	SET @userId = (SELECT SCOPE_IDENTITY())
+
+	INSERT INTO "WASD".RolPorUsuario VALUES
+	(@userId, 2);
+	
+	INSERT INTO 
+		"WASD".Afiliado(usuario_id, 
+						estadocivil_id, 
+						afiliado_tipodocumento, 
+						planmedico_id, 
+						afiliado_sexo, 
+						afiliado_numero, 
+						afiliado_nombre, 
+						afiliado_apellido, 
+						afiliado_numero_documento, 
+						afiliado_direccion, 
+						afiliado_telefono, 
+						afiliado_mail, 
+						afiliado_fecha_nacimiento, 
+						afiliado_familiares_dependientes, 
+						afiliado_activo, 
+						afiliado_grupo_familiar, 
+						afiliado_cantidad_bonos_usados, 
+						afiliado_fecha_baja)
+    VALUES
+    	(@userId,
+    	@estadocivil_id,
+		@afiliado_tipodocumento,
+		@planmedico_id,
+		@afiliado_sexo,
+		@ultimoNumero + @afiliado_numero,
+		@afiliado_nombre,
+		@afiliado_apellido,
+		@afiliado_numero_documento,
+		@afiliado_direccion,
+		@afiliado_telefono,
+		@afiliado_mail,
+		@afiliado_fecha_nacimiento,
+		@afiliado_familiares_dependientes,
+		1,
+		@afiliado_grupo_familiar,
+		0,
+		NULL);
+
+	SELECT SCOPE_IDENTITY();
+END;
+GO
+
+/**BAJA LOGICA AFILIADO**/
+IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'DeleteAfiliado' AND type = 'P')
+DROP PROCEDURE WASD.DeleteAfiliado;
+GO
+
+CREATE PROCEDURE "WASD".DeleteAfiliado @afiliadoId INT, @fecha DATETIME
+AS
+BEGIN
+	UPDATE 
+		WASD.Afiliado
+	SET
+		afiliado_activo = 0,
+		afiliado_fecha_baja = @fecha
+	WHERE
+		afiliado_numero = @afiliadoId;
+END;
+GO
+
 /**HORAS DISPONIBLES DADA UNA FECHA DISPONIBLE **/
 IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'HorasDisponibles' AND type = 'P')
      DROP PROCEDURE WASD.HorasDisponibles;
@@ -1541,7 +1673,8 @@ AS BEGIN
 												turno_hora BETWEEN @horaDesde AND @horaHasta AND
 												profesional_id = @profesionalId AND
 												especialidad_id = @especialidadId AND
-												turno_fecha = @fecha)
+												turno_fecha = @fecha AND
+												turnocancelado_id IS NULL)
 					);
 END;
 GO

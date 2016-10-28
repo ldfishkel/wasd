@@ -52,7 +52,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this._aceptarBtn = new System.Windows.Forms.Button();
-            this._cancelarBtn = new System.Windows.Forms.Button();
             this.groupBox3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -137,9 +136,7 @@
             // _sexo
             // 
             this._sexo.FormattingEnabled = true;
-            this._sexo.Items.AddRange(new object[] {
-            "F",
-            "M"});
+            
             this._sexo.Location = new System.Drawing.Point(367, 193);
             this._sexo.Margin = new System.Windows.Forms.Padding(2);
             this._sexo.Name = "_sexo";
@@ -187,12 +184,7 @@
             // _estadoCivil
             // 
             this._estadoCivil.FormattingEnabled = true;
-            this._estadoCivil.Items.AddRange(new object[] {
-            "Soltero/a",
-            "Casado/a",
-            "Viudo/a",
-            "Concubinato",
-            "Divorciado/a"});
+            
             this._estadoCivil.Location = new System.Drawing.Point(80, 160);
             this._estadoCivil.Margin = new System.Windows.Forms.Padding(2);
             this._estadoCivil.Name = "_estadoCivil";
@@ -278,18 +270,17 @@
             this.panel1.Controls.Add(this.groupBox3);
             this.panel1.Location = new System.Drawing.Point(13, 13);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(462, 309);
+            this.panel1.Size = new System.Drawing.Size(462, 304);
             this.panel1.TabIndex = 33;
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this._aceptarBtn);
-            this.groupBox2.Controls.Add(this._cancelarBtn);
             this.groupBox2.Location = new System.Drawing.Point(22, 250);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(423, 52);
+            this.groupBox2.Size = new System.Drawing.Size(423, 44);
             this.groupBox2.TabIndex = 37;
             this.groupBox2.TabStop = false;
             // 
@@ -297,26 +288,17 @@
             // 
             this._aceptarBtn.Location = new System.Drawing.Point(7, 13);
             this._aceptarBtn.Name = "_aceptarBtn";
-            this._aceptarBtn.Size = new System.Drawing.Size(201, 32);
+            this._aceptarBtn.Size = new System.Drawing.Size(411, 23);
             this._aceptarBtn.TabIndex = 35;
             this._aceptarBtn.Text = "Aceptar";
             this._aceptarBtn.UseVisualStyleBackColor = true;
             this._aceptarBtn.Click += new System.EventHandler(this.AceptarClick);
             // 
-            // _cancelarBtn
-            // 
-            this._cancelarBtn.Location = new System.Drawing.Point(214, 13);
-            this._cancelarBtn.Name = "_cancelarBtn";
-            this._cancelarBtn.Size = new System.Drawing.Size(200, 32);
-            this._cancelarBtn.TabIndex = 36;
-            this._cancelarBtn.Text = "Cancelar";
-            this._cancelarBtn.UseVisualStyleBackColor = true;
-            // 
             // AltaFamiliarForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(488, 329);
+            this.ClientSize = new System.Drawing.Size(488, 326);
             this.Controls.Add(this.panel1);
             this.Name = "AltaFamiliarForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -355,6 +337,5 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button _aceptarBtn;
-        private System.Windows.Forms.Button _cancelarBtn;
     }
 }

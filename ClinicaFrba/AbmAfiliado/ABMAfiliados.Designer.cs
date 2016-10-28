@@ -34,8 +34,8 @@
             this.NroAfiliado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ver = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Baja = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Modificar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Baja = new System.Windows.Forms.DataGridViewButtonColumn();
             this._panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._afiliadosGrid)).BeginInit();
             this.SuspendLayout();
@@ -46,14 +46,14 @@
             this._panel.Controls.Add(this._afiliadosGrid);
             this._panel.Location = new System.Drawing.Point(12, 12);
             this._panel.Name = "_panel";
-            this._panel.Size = new System.Drawing.Size(613, 369);
+            this._panel.Size = new System.Drawing.Size(641, 369);
             this._panel.TabIndex = 0;
             // 
             // _altaBtn
             // 
-            this._altaBtn.Location = new System.Drawing.Point(3, 3);
+            this._altaBtn.Location = new System.Drawing.Point(8, 3);
             this._altaBtn.Name = "_altaBtn";
-            this._altaBtn.Size = new System.Drawing.Size(606, 23);
+            this._altaBtn.Size = new System.Drawing.Size(625, 23);
             this._altaBtn.TabIndex = 1;
             this._altaBtn.Text = "Alta";
             this._altaBtn.UseVisualStyleBackColor = true;
@@ -66,14 +66,14 @@
             this.NroAfiliado,
             this.Nombre,
             this.Ver,
-            this.Baja,
-            this.Modificar});
-            this._afiliadosGrid.Location = new System.Drawing.Point(3, 32);
+            this.Modificar,
+            this.Baja});
+            this._afiliadosGrid.Location = new System.Drawing.Point(8, 32);
             this._afiliadosGrid.MultiSelect = false;
             this._afiliadosGrid.Name = "_afiliadosGrid";
             this._afiliadosGrid.RowHeadersVisible = false;
             this._afiliadosGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this._afiliadosGrid.Size = new System.Drawing.Size(606, 345);
+            this._afiliadosGrid.Size = new System.Drawing.Size(625, 325);
             this._afiliadosGrid.TabIndex = 0;
             this._afiliadosGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellContentClick);
             // 
@@ -96,21 +96,21 @@
             this.Ver.HeaderText = "Ver";
             this.Ver.Name = "Ver";
             // 
-            // Baja
-            // 
-            this.Baja.HeaderText = "Baja";
-            this.Baja.Name = "Baja";
-            // 
             // Modificar
             // 
             this.Modificar.HeaderText = "Modificar";
             this.Modificar.Name = "Modificar";
             // 
+            // Baja
+            // 
+            this.Baja.HeaderText = "Baja";
+            this.Baja.Name = "Baja";
+            // 
             // ABMAfiliadosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(637, 393);
+            this.ClientSize = new System.Drawing.Size(667, 390);
             this.Controls.Add(this._panel);
             this.Name = "ABMAfiliadosForm";
             this.Text = "ABMAfiliados";
@@ -128,7 +128,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn NroAfiliado;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewButtonColumn Ver;
-        private System.Windows.Forms.DataGridViewButtonColumn Baja;
         private System.Windows.Forms.DataGridViewButtonColumn Modificar;
+        private System.Windows.Forms.DataGridViewButtonColumn Baja;
     }
 }

@@ -22,7 +22,7 @@
             }).ToList();
         }
 
-        public object[] GetEstadosCiviles()
+        public EstadoCivil[] GetEstadosCiviles()
         {
             return _ds.ListaEstadoCivils.ToList().Select(x => new EstadoCivil()
             {
@@ -45,6 +45,12 @@
                 planmedico_precio_bono = x.planmedico_precio_bono,
                 planmedico_cuota = x.planmedico_cuota
             }).ToList();
+        }
+
+        public void UpdateAfiliado(Afiliado afiliado, string motivo)
+        {
+            DateTime date = Config.SystemDate().AddHours(DateTime.Now.Hour).AddMinutes(DateTime.Now.Minute);
+            _ds.UpdateAfiliado(afiliado.afiliado_id, afiliado.afiliado_direccion, afiliado.afiliado_telefono, afiliado.afiliado_mail, afiliado.estadocivil_id, afiliado.planmedico_id, motivo, date);
         }
 
         public Afiliado GetAfiliado(int userId)
@@ -82,6 +88,13 @@
             };
         }
 
+        public void DeleteAfiliado(int afiliadoId)
+        {
+            DateTime date = Config.SystemDate().AddHours(DateTime.Now.Hour).AddMinutes(DateTime.Now.Minute);
+
+            _ds.DeleteAfiliado(afiliadoId, date);
+        }
+
         public List<HistorialPlan> HistorialPlan(int afiliadoId)
         {
             return _ds.HistorialPlans.Where(x => x.afiliado_id == afiliadoId).ToList();
@@ -109,12 +122,47 @@
 
         public void AltaAfiliado(Afiliado _afiliado)
         {
-            throw new NotImplementedException();
+            int id = (int)_ds.AltaAfiliado(
+                _afiliado.estadocivil_id,
+                _afiliado.afiliado_tipodocumento,
+                _afiliado.planmedico_id,
+                _afiliado.afiliado_sexo,
+                _afiliado.afiliado_numero,
+                _afiliado.afiliado_nombre,
+                _afiliado.afiliado_apellido,
+                _afiliado.afiliado_numero_documento,
+                _afiliado.afiliado_direccion,
+                _afiliado.afiliado_telefono,
+                _afiliado.afiliado_mail,
+                _afiliado.afiliado_fecha_nacimiento,
+                (byte)_afiliado.Afiliado1.Count,
+                null).Single();
+
+            foreach (Afiliado afiliado in _afiliado.Afiliado1)
+            {
+                _ds.AltaAfiliado(
+                afiliado.estadocivil_id,
+                afiliado.afiliado_tipodocumento,
+                _afiliado.planmedico_id,
+                afiliado.afiliado_sexo,
+                afiliado.afiliado_numero,
+                afiliado.afiliado_nombre,
+                afiliado.afiliado_apellido,
+                afiliado.afiliado_numero_documento,
+                afiliado.afiliado_direccion,
+                afiliado.afiliado_telefono,
+                afiliado.afiliado_mail,
+                afiliado.afiliado_fecha_nacimiento,
+                afiliado.afiliado_familiares_dependientes,
+                id);
+            }
         }
 
         public void CompraDeBonos(int cant, int afiliado_id, int plan_id)
         {
-            _ds.CompraBono(afiliado_id, cant, plan_id);
+            DateTime date = Config.SystemDate().AddHours(DateTime.Now.Hour).AddMinutes(DateTime.Now.Minute);
+
+            _ds.CompraBono(afiliado_id, cant, plan_id, date);
         }
 
         public Afiliado GetAfiliado(string tipoDoc, int nroDoc)
