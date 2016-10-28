@@ -29,6 +29,8 @@
 
         private void InitializeAfiliadosGrid()
         {
+            _afiliadosGrid.Rows.Clear();
+
             foreach (Afiliado afiliado in _afiliadoDao.GetAfiliados())
                 _afiliadosGrid.Rows.Add(afiliado.afiliado_numero, afiliado, "Ver", "Modificar", "Baja");
         }
@@ -58,6 +60,18 @@
                 afiliado.PlanMedico = _afiliadoDao.GetPlanMedico(afiliado.planmedico_id);
 
                 new ModificarAfiliadoForm(afiliado, _afiliadoDao).Show();
+            }
+
+            if (e.ColumnIndex == 4)
+            {
+                var result = MessageBox.Show("Posta?", "Eliminar?", MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
+                {
+                    _afiliadoDao.DeleteAfiliado(afiliado.afiliado_numero);
+
+                    InitializeAfiliadosGrid();
+                }
             }
         }
     }

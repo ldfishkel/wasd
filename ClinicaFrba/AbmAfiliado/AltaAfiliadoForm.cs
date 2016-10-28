@@ -6,6 +6,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Text.RegularExpressions;
     using System.Windows.Forms;
 
     public partial class AltaAfiliadoForm : Form
@@ -57,10 +58,27 @@
             if (String.IsNullOrWhiteSpace(_apellido.Text))
                 sb.AppendLine("Debe completar el apellido");
 
-            // TODO Validar los campos AltaAfiliado
-            // Ver validacion con regex en CompraBonoForm (usar regex para numeros y mail, google it)
-            // Validar que los campos de texto no esten vacios ni sean WhiteSpace clase statica String. tiene esos metodos
-            // Validar que los combo.SelectedItem no sean null 
+            if (String.IsNullOrWhiteSpace(_tipoDoc.Text))
+                sb.AppendLine("Debe completar el Tipo de documento");
+
+            if (String.IsNullOrWhiteSpace(_direccion.Text))
+                sb.AppendLine("Debe completar el campo direccion");
+
+            if (!(new Regex(@"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?").IsMatch(_mail.Text)))
+                sb.AppendLine("Campo e-mail incorrecto");
+
+            if (String.IsNullOrWhiteSpace(_telefono.Text))
+                sb.AppendLine("Debe completar el campo telefono");
+
+            if (String.IsNullOrWhiteSpace(_sexo.Text))
+                sb.AppendLine("Debe completar el campo sexo");
+
+            int result;
+            if (!Int32.TryParse(_telefono.Text, out result))
+                sb.AppendLine("Telefono incorrecto");
+
+            if (_planMedico.SelectedItem == null)
+                sb.AppendLine("Debe seleccionar un plan medico");
 
             if (sb.Length != 0)
             {
@@ -73,9 +91,18 @@
 
         private void BuildAfiliado()
         {
+            _afiliado.afiliado_numero = 1;
             _afiliado.afiliado_nombre = _nombre.Text;
             _afiliado.afiliado_apellido = _apellido.Text;
-            // TODO Llenar _afiliado con los datos de los campos
+            _afiliado.afiliado_sexo = _sexo.Text;
+            _afiliado.afiliado_tipodocumento = _tipoDoc.Text;
+            _afiliado.afiliado_numero_documento = Int32.Parse(_numeroDocumento.Text);
+            _afiliado.afiliado_direccion = _direccion.Text;
+            _afiliado.afiliado_telefono = Int32.Parse(_telefono.Text);
+            _afiliado.estadocivil_id = ((EstadoCivil)_estadoCivil.SelectedItem).estadocivil_id;
+            _afiliado.afiliado_mail = _mail.Text;
+            _afiliado.afiliado_fecha_nacimiento = _fechaNacimiento.Value;
+            _afiliado.planmedico_id = ((PlanMedico)_planMedico.SelectedItem).planmedico_id;
         }
 
         private void CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -103,6 +130,8 @@
 
             BuildAfiliado();
 
+            _afiliadoDao.AltaAfiliado(_afiliado);
+
         }
 
         private void AgregarFamiliarClick(object sender, EventArgs e)
@@ -117,7 +146,7 @@
 
         private void ShowAgregarFamiliarForm(TipoDeFamiliar tipo)
         {
-            AltaFamiliarForm altaConyugueForm = new AltaFamiliarForm(this, tipo);
+            AltaFamiliarForm altaConyugueForm = new AltaFamiliarForm(_afiliadoDao, this, tipo);
 
             altaConyugueForm.FormClosing += RefreshFamiliares;
 

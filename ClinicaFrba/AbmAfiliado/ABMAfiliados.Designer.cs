@@ -34,8 +34,8 @@
             this.NroAfiliado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ver = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Baja = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Modificar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Baja = new System.Windows.Forms.DataGridViewButtonColumn();
             this._panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._afiliadosGrid)).BeginInit();
             this.SuspendLayout();
@@ -66,8 +66,8 @@
             this.NroAfiliado,
             this.Nombre,
             this.Ver,
-            this.Baja,
-            this.Modificar});
+            this.Modificar,
+            this.Baja});
             this._afiliadosGrid.Location = new System.Drawing.Point(8, 32);
             this._afiliadosGrid.MultiSelect = false;
             this._afiliadosGrid.Name = "_afiliadosGrid";
@@ -96,15 +96,15 @@
             this.Ver.HeaderText = "Ver";
             this.Ver.Name = "Ver";
             // 
-            // Baja
-            // 
-            this.Baja.HeaderText = "Baja";
-            this.Baja.Name = "Baja";
-            // 
             // Modificar
             // 
             this.Modificar.HeaderText = "Modificar";
             this.Modificar.Name = "Modificar";
+            // 
+            // Baja
+            // 
+            this.Baja.HeaderText = "Baja";
+            this.Baja.Name = "Baja";
             // 
             // ABMAfiliadosForm
             // 
@@ -128,7 +128,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn NroAfiliado;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewButtonColumn Ver;
-        private System.Windows.Forms.DataGridViewButtonColumn Baja;
         private System.Windows.Forms.DataGridViewButtonColumn Modificar;
+        private System.Windows.Forms.DataGridViewButtonColumn Baja;
     }
 }

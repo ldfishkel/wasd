@@ -138,6 +138,9 @@
     <Compile Include="Funcionalidad.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
+    <Compile Include="HistorialDeAfiliado_Result.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
     <Compile Include="HistorialPlan.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
@@ -205,6 +208,15 @@
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
     <Compile Include="Sintoma.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_ListadoEstadistico1_Result.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_ListadoEstadistico4_Result.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_ListadoEstadistico5_Result.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
     <Compile Include="TipoCancelacion.cs">
