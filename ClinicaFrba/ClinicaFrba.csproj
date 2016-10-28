@@ -81,6 +81,12 @@
     <Compile Include="AbmAfiliado\DetalleAfiliadoForm.Designer.cs">
       <DependentUpon>DetalleAfiliadoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmAfiliado\ModificarAfiliadoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmAfiliado\ModificarAfiliadoForm.Designer.cs">
+      <DependentUpon>ModificarAfiliadoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmAfiliado\TipoDeFamiliar.cs" />
     <Compile Include="AbmRol\ABMRolForm.cs">
       <SubType>Form</SubType>
@@ -181,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmAfiliado\DetalleAfiliadoForm.resx">
       <DependentUpon>DetalleAfiliadoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmAfiliado\ModificarAfiliadoForm.resx">
+      <DependentUpon>ModificarAfiliadoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\ABMRolForm.resx">
       <DependentUpon>ABMRolForm.cs</DependentUpon>

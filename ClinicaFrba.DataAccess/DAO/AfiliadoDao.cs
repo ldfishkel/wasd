@@ -22,7 +22,7 @@
             }).ToList();
         }
 
-        public object[] GetEstadosCiviles()
+        public EstadoCivil[] GetEstadosCiviles()
         {
             return _ds.ListaEstadoCivils.ToList().Select(x => new EstadoCivil()
             {
@@ -45,6 +45,12 @@
                 planmedico_precio_bono = x.planmedico_precio_bono,
                 planmedico_cuota = x.planmedico_cuota
             }).ToList();
+        }
+
+        public void UpdateAfiliado(Afiliado afiliado, string motivo)
+        {
+            DateTime date = Config.SystemDate().AddHours(DateTime.Now.Hour).AddMinutes(DateTime.Now.Minute);
+            _ds.UpdateAfiliado(afiliado.afiliado_id, afiliado.afiliado_direccion, afiliado.afiliado_telefono, afiliado.afiliado_mail, afiliado.estadocivil_id, afiliado.planmedico_id, motivo, date);
         }
 
         public Afiliado GetAfiliado(int userId)

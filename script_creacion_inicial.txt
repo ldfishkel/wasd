@@ -1476,6 +1476,35 @@ BEGIN
 END;
 GO
 
+/**MODIFICAR AFILIADO**/
+IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'UpdateAfiliado' AND type = 'P')
+DROP PROCEDURE WASD.UpdateAfiliado;
+GO
+
+CREATE PROCEDURE "WASD".UpdateAfiliado @afiliadoId INT, @direccion VARCHAR(100), @telefono INT, @mail VARCHAR(50), @estadoCivil INT, @planMedico INT, @motivo VARCHAR(144), @fecha DATETIME
+AS
+BEGIN
+	IF (@motivo IS NOT NULL)
+		INSERT INTO 
+			WAD.HistorialPlan(afiliado_id, historial_fecha, historial_motivo)
+	    VALUES
+	       (@afiliadoId
+	       ,@fecha
+	       ,@motivo);
+
+	UPDATE 
+		WASD.Afiliado
+	SET
+		afiliado_direccion = @direccion,
+		afiliado_telefono = @telefono,
+		afiliado_mail = @mail,
+		estadocivil_id = @estadoCivil,
+		planmedico_id = @planMedico
+	WHERE
+		afiliado_id = @afiliadoId;
+END;
+GO
+
 /**HORAS DISPONIBLES DADA UNA FECHA DISPONIBLE **/
 IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'HorasDisponibles' AND type = 'P')
      DROP PROCEDURE WASD.HorasDisponibles;

@@ -30,7 +30,7 @@
         private void InitializeAfiliadosGrid()
         {
             foreach (Afiliado afiliado in _afiliadoDao.GetAfiliados())
-                _afiliadosGrid.Rows.Add(afiliado.afiliado_numero, afiliado, "Ver", "Baja", "Modificar");
+                _afiliadosGrid.Rows.Add(afiliado.afiliado_numero, afiliado, "Ver", "Modificar", "Baja");
         }
 
         private void AltaClick(object sender, System.EventArgs e)
@@ -50,6 +50,14 @@
                 PlanMedico planMedico = _afiliadoDao.GetPlanMedico(afiliado.planmedico_id);
 
                 new DetalleAfiliadoForm(afiliado, planMedico, historialPlan).Show();
+            }
+
+            if (e.ColumnIndex == 3)
+            {
+                afiliado = _afiliadoDao.GetAfiliado(afiliado.usuario_id);
+                afiliado.PlanMedico = _afiliadoDao.GetPlanMedico(afiliado.planmedico_id);
+
+                new ModificarAfiliadoForm(afiliado, _afiliadoDao).Show();
             }
         }
     }

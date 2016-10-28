@@ -25,5 +25,9 @@ namespace ClinicaFrba.DataAccess
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Afiliado> Afiliadoes { get; set; }
+        public override string ToString()
+        {
+            return estadocivil_nombre.Trim();
+        }
     }
 }

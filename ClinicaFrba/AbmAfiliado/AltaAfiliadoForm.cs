@@ -14,7 +14,8 @@
 
         private Afiliado _afiliado;
 
-        public Afiliado AfiliadoAlta {
+        public Afiliado AfiliadoAlta
+        {
             get
             {
                 return _afiliado;
@@ -26,6 +27,11 @@
             InitializeComponent();
 
             _afiliadoDao = afiliadoDao;
+
+            _afiliado = new Afiliado()
+            {
+                Afiliado1 = new List<Afiliado>()
+            };
 
             InitializeCombos();
         }
@@ -39,62 +45,6 @@
             _planMedico.Items.AddRange(_afiliadoDao.PlanesMedicos().ToArray());
 
             _sexo.Items.AddRange(new string[] { "M", "F", "X" });
-        }
-
-        private void ValidarAfiliadoClick(object sender, EventArgs e)
-        {
-            if (!ValidateFields())
-                return;
-
-            BuildAfiliado();
-
-            var result = DialogResult.No;
-
-            TipoDeFamiliar tipo = TipoDeFamiliar.ACargo;
-
-            if (_afiliado.estadocivil_id == 1)
-            {
-                result = MessageBox.Show("Desea agregar a su conyugue?", "Casado o en concubinato", MessageBoxButtons.YesNo);
-
-                tipo = TipoDeFamiliar.Conyugue;
-            }
-            else
-                result = MessageBox.Show("Desea agregar persona a cargo?", "Persona a cargo", MessageBoxButtons.YesNo);
-
-            ShowAgregarFamiliarForm(result, tipo);
-
-            _aceptarBtn.Enabled = true;
-        }
-
-        private void RefreshFamiliares(object sender, FormClosingEventArgs e)
-        {
-            _afiliadosACargo.Rows.Clear();
-
-            foreach (Afiliado afiliado in _afiliado.Afiliado1)
-                _afiliadosACargo.Rows.Add(
-                        afiliado,
-                        (afiliado.afiliado_numero == 2 ? "Conyugue" : "Familiar a cargo"),
-                        "Quitar"
-                    );
-
-            if (sender != null)
-            {
-                DialogResult result = MessageBox.Show("Desea agregar mas personas a cargo?", "Personas a cargo", MessageBoxButtons.YesNo);
-
-                ShowAgregarFamiliarForm(result, TipoDeFamiliar.ACargo);
-            }
-        }
-
-        private void ShowAgregarFamiliarForm(DialogResult result, TipoDeFamiliar tipo)
-        {
-            if (result == DialogResult.Yes)
-            {
-                AltaFamiliarForm altaConyugueForm = new AltaFamiliarForm(this, tipo);
-
-                altaConyugueForm.FormClosing += RefreshFamiliares;
-
-                altaConyugueForm.Show();
-            }
         }
 
         private bool ValidateFields()
@@ -123,13 +73,9 @@
 
         private void BuildAfiliado()
         {
-            _afiliado = new Afiliado()
-            {
-                Afiliado1 = new List<Afiliado>(),
-                afiliado_nombre = _nombre.Text,
-                afiliado_apellido = _apellido.Text
-                // TODO Llenar _afiliado con los datos de los campos
-            };
+            _afiliado.afiliado_nombre = _nombre.Text;
+            _afiliado.afiliado_apellido = _apellido.Text;
+            // TODO Llenar _afiliado con los datos de los campos
         }
 
         private void CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -138,6 +84,12 @@
 
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
+                if (senderGrid.Rows[e.RowIndex].Cells[1].Value.ToString() == "Conyugue")
+                {
+                    _agregarConyugueBtn.Enabled = true;
+                    _estadoCivil.Enabled = true;
+                }
+
                 _afiliado.Afiliado1.Remove(_afiliado.Afiliado1.SingleOrDefault(x => x.ToString() == senderGrid.Rows[e.RowIndex].Cells[0].Value.ToString()));
 
                 RefreshFamiliares(null, null);
@@ -146,12 +98,58 @@
 
         private void AceptarClick(object sender, EventArgs e)
         {
-            _afiliadoDao.AltaAfiliado(_afiliado);
+            if (!ValidateFields())
+                return;
+
+            BuildAfiliado();
+
         }
 
-        private void CancelarClick(object sender, EventArgs e)
+        private void AgregarFamiliarClick(object sender, EventArgs e)
         {
-            Close();
+            ShowAgregarFamiliarForm(TipoDeFamiliar.ACargo);
+        }
+
+        private void AgregarConyugueClick(object sender, EventArgs e)
+        {
+            ShowAgregarFamiliarForm(TipoDeFamiliar.Conyugue);
+        }
+
+        private void ShowAgregarFamiliarForm(TipoDeFamiliar tipo)
+        {
+            AltaFamiliarForm altaConyugueForm = new AltaFamiliarForm(this, tipo);
+
+            altaConyugueForm.FormClosing += RefreshFamiliares;
+
+            altaConyugueForm.Show();
+        }
+
+        private void RefreshFamiliares(object sender, FormClosingEventArgs e)
+        {
+            _afiliadosACargo.Rows.Clear();
+
+            if (_afiliado.Afiliado1.Any(x => x.afiliado_numero == 2))
+            {
+                _agregarConyugueBtn.Enabled = false;
+                _estadoCivil.Enabled = false;
+            }
+
+            foreach (Afiliado afiliado in _afiliado.Afiliado1)
+                _afiliadosACargo.Rows.Add(
+                        afiliado,
+                        (afiliado.afiliado_numero == 2 ? "Conyugue" : "Familiar a cargo"),
+                        "Quitar"
+                    );
+        }
+
+        private void EstadoCivilChanged(object sender, EventArgs e)
+        {
+            string[] conyugueOptions = { "Casado/a", "Concubinato" };
+
+            if (conyugueOptions.Contains(_estadoCivil.SelectedItem.ToString()))
+                _agregarConyugueBtn.Enabled = true;
+            else
+                _agregarConyugueBtn.Enabled = false;
         }
     }
 }
