@@ -76,7 +76,7 @@
 
                 form.FormClosed += AltaRolClosed;
 
-                form.Show();
+                form.ShowDialog();
             }
         }
 

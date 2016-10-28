@@ -136,7 +136,6 @@
             // _sexo
             // 
             this._sexo.FormattingEnabled = true;
-            
             this._sexo.Location = new System.Drawing.Point(367, 193);
             this._sexo.Margin = new System.Windows.Forms.Padding(2);
             this._sexo.Name = "_sexo";
@@ -184,7 +183,6 @@
             // _estadoCivil
             // 
             this._estadoCivil.FormattingEnabled = true;
-            
             this._estadoCivil.Location = new System.Drawing.Point(80, 160);
             this._estadoCivil.Margin = new System.Windows.Forms.Padding(2);
             this._estadoCivil.Name = "_estadoCivil";
@@ -300,6 +298,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(488, 326);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AltaFamiliarForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AltaFamiliarForm";
