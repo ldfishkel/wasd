@@ -1679,6 +1679,52 @@ AS BEGIN
 END;
 GO
 
+/**AGREGAR DIAGNOSTICO POST-CONSULTA**/
+IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'SP_AgregarDiagnostico' AND type = 'P')
+DROP PROCEDURE WASD.SP_AgregarDiagnostico;
+GO
+
+CREATE PROCEDURE "WASD".SP_AgregarDiagnostico @consultamedica INT, @descripcion VARCHAR
+AS BEGIN
+	INSERT INTO "WASD".Diagnostico(consultamedica_id, diagnostico_descripcion) VALUES (@consultamedica, @descripcion)
+END;
+GO
+
+/**AGREGAR SINTOMAS POST-CONSULTA**/
+IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'SP_AgregarSintoma' AND type = 'P')
+DROP PROCEDURE WASD.SP_AgregarSintoma;
+GO
+
+CREATE PROCEDURE "WASD".SP_AgregarSintoma @consultamedica INT, @descripcion VARCHAR
+AS BEGIN
+	INSERT INTO "WASD".Sintoma(consultamedica_id, sintoma_descripcion) VALUES (@consultamedica, @descripcion)
+END;
+GO
+
+/**ALTA DE FUNCIONALIDAD POR ROL**/
+IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'SP_AgregarFuncionalidadPorRol' AND type = 'P')
+DROP PROCEDURE WASD.SP_AgregarFuncionalidadPorRol;
+GO
+
+CREATE PROCEDURE "WASD".SP_AgregarFuncionalidadPorRol @rol INT, @funcionalidad INT
+AS BEGIN
+	INSERT INTO "WASD".FuncionalidadPorRol(rol_id, funcionalidad_id) VALUES (@rol, @funcionalidad)
+END;
+GO
+
+/**ALTA DE ROL**/
+IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'SP_AgregarRol' AND type = 'P')
+DROP PROCEDURE WASD.SP_AgregarRol;
+GO
+
+CREATE PROCEDURE "WASD".SP_AgregarRol @nombre CHAR(15), @rolid INT OUTPUT
+AS BEGIN
+	INSERT INTO "WASD".Rol(rol_nombre, rol_activo) VALUES (@nombre, 1)
+	SET @rolid = (SELECT SCOPE_IDENTITY())
+	RETURN
+END;
+GO
+
 /****************************************************************************************************************/
 /**TRIGGERS**/
 /****************************************************************************************************************/
