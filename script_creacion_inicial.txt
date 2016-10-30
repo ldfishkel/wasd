@@ -1580,56 +1580,78 @@ BEGIN
 	ORDER BY
 		afiliado_numero DESC;
 
-	INSERT INTO 
-		"WASD".Usuario(usuario_nombre, usuario_password, usuario_intentos, usuario_activo) 
-	VALUES
-		(@afiliado_numero_documento, 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7', 0, 1);
+	BEGIN TRY
 
-	SET @userId = (SELECT SCOPE_IDENTITY())
+	    BEGIN TRANSACTION ALTAAFILIADO
 
-	INSERT INTO "WASD".RolPorUsuario VALUES
-	(@userId, 2);
-	
-	INSERT INTO 
-		"WASD".Afiliado(usuario_id, 
-						estadocivil_id, 
-						afiliado_tipodocumento, 
-						planmedico_id, 
-						afiliado_sexo, 
-						afiliado_numero, 
-						afiliado_nombre, 
-						afiliado_apellido, 
-						afiliado_numero_documento, 
-						afiliado_direccion, 
-						afiliado_telefono, 
-						afiliado_mail, 
-						afiliado_fecha_nacimiento, 
-						afiliado_familiares_dependientes, 
-						afiliado_activo, 
-						afiliado_grupo_familiar, 
-						afiliado_cantidad_bonos_usados, 
-						afiliado_fecha_baja)
-    VALUES
-    	(@userId,
-    	@estadocivil_id,
-		@afiliado_tipodocumento,
-		@planmedico_id,
-		@afiliado_sexo,
-		@ultimoNumero + @afiliado_numero,
-		@afiliado_nombre,
-		@afiliado_apellido,
-		@afiliado_numero_documento,
-		@afiliado_direccion,
-		@afiliado_telefono,
-		@afiliado_mail,
-		@afiliado_fecha_nacimiento,
-		@afiliado_familiares_dependientes,
-		1,
-		@afiliado_grupo_familiar,
-		0,
-		NULL);
+			INSERT INTO 
+				"WASD".Usuario(usuario_nombre, usuario_password, usuario_intentos, usuario_activo) 
+			VALUES
+				(@afiliado_numero_documento, 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7', 0, 1);
 
-	SELECT SCOPE_IDENTITY();
+			SET @userId = (SELECT SCOPE_IDENTITY())
+
+			INSERT INTO "WASD".RolPorUsuario VALUES
+			(@userId, 2);
+			
+			INSERT INTO 
+				"WASD".Afiliado(usuario_id, 
+								estadocivil_id, 
+								afiliado_tipodocumento, 
+								planmedico_id, 
+								afiliado_sexo, 
+								afiliado_numero, 
+								afiliado_nombre, 
+								afiliado_apellido, 
+								afiliado_numero_documento, 
+								afiliado_direccion, 
+								afiliado_telefono, 
+								afiliado_mail, 
+								afiliado_fecha_nacimiento, 
+								afiliado_familiares_dependientes, 
+								afiliado_activo, 
+								afiliado_grupo_familiar, 
+								afiliado_cantidad_bonos_usados, 
+								afiliado_fecha_baja)
+		    VALUES
+		    	(@userId,
+		    	@estadocivil_id,
+				@afiliado_tipodocumento,
+				@planmedico_id,
+				@afiliado_sexo,
+				@ultimoNumero + @afiliado_numero,
+				@afiliado_nombre,
+				@afiliado_apellido,
+				@afiliado_numero_documento,
+				@afiliado_direccion,
+				@afiliado_telefono,
+				@afiliado_mail,
+				@afiliado_fecha_nacimiento,
+				@afiliado_familiares_dependientes,
+				1,
+				@afiliado_grupo_familiar,
+				0,
+				NULL);
+
+			SELECT 
+				0 AS status,
+				'' AS errorMessage,
+				SCOPE_IDENTITY() AS scopeIdentity;
+
+    	COMMIT TRANSACTION ALTAAFILIADO
+	END TRY
+
+
+	BEGIN CATCH 
+	  	IF (@@TRANCOUNT > 0)
+	      ROLLBACK TRANSACTION ALTAAFILIADO
+
+	    SELECT
+	        1 AS status,
+	        0 AS scopeIdentity,
+	        ERROR_MESSAGE() AS errorMessage
+
+	END CATCH
 END;
 GO
 

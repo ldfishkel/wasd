@@ -33,14 +33,25 @@
             return JsonConvert.DeserializeObject<ExternalConfiguration>(configJson);
         }
 
-        public static string ConnectionString()
+        public static string ConnectionString(ConnectionStringType connection)
         {
-            return GetConfig().ConnectionString;
+            if (connection == ConnectionStringType.Remota)
+                return GetConfig().ConnectionStringRemota;
+            else if (connection == ConnectionStringType.Local)
+                return GetConfig().ConnectionStringLocal;
+            else
+                return null;
         }
 
         public static DateTime SystemDate()
         {
             return GetConfig().BeginDate;
         }
+    }
+
+    public enum ConnectionStringType
+    {
+        Remota,
+        Local
     }
 }

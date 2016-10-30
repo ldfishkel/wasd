@@ -67,28 +67,28 @@
                     break;
             }
 
+            string msgErrorFecha = "La fecha desde y la fecha hasta deben conformar un semestre desde 1/1 hasta 30/6 o desde 1/7 hasta 31/12 del mismo año";
+
             if (_fechaDesde.Value.Year != _fechaHasta.Value.Year)
-                sb.AppendLine("Las fechas deben ser del mismo año");
+                sb.AppendLine(msgErrorFecha);
 
-            if (_fechaDesde.Value.Day != 1 && !(_fechaDesde.Value.Month == 1 || _fechaDesde.Value.Month == 7))
-                sb.AppendLine("La fecha desde debe ser comienzo del semestre 1/1 o 1/7");
+            else if (_fechaDesde.Value.Day != 1 && !(_fechaDesde.Value.Month == 1 || _fechaDesde.Value.Month == 7))
+                sb.AppendLine(msgErrorFecha);
 
-            if ((_fechaHasta.Value.Day == 30 || _fechaHasta.Value.Day == 31) && !(_fechaHasta.Value.Month == 6 || _fechaDesde.Value.Month == 12))
-                sb.AppendLine("La fecha hasta debe ser fin del semestre 30/6 o 31/12");
+            else if ((_fechaHasta.Value.Day == 30 || _fechaHasta.Value.Day == 31) && !(_fechaHasta.Value.Month == 6 || _fechaDesde.Value.Month == 12))
+                sb.AppendLine(msgErrorFecha);
 
-            if (_fechaDesde.Value.Month == 1 && _fechaHasta.Value.Month != 6)
-                sb.AppendLine("La fecha desde y la fecha hasta deben conformar un semestre desde 1/1 hasta 30/6 o desde 1/7 hasta 31/12");
+            else if (_fechaDesde.Value.Month == 1 && _fechaHasta.Value.Month != 6)
+                sb.AppendLine(msgErrorFecha);
 
-            if (_fechaDesde.Value.Month == 7 && _fechaHasta.Value.Month != 12)
-                sb.AppendLine("La fecha desde y la fecha hasta deben conformar un semestre desde 1/1 hasta 30/6 o desde 1/7 hasta 31/12");
+            else if (_fechaDesde.Value.Month == 7 && _fechaHasta.Value.Month != 12)
+                sb.AppendLine(msgErrorFecha);
 
-            if (sb.Length > 0)
-            {
-                MessageBox.Show(sb.ToString());
-                return false;
-            }
+            if (sb.Length >= 0)
+                return true;
 
-            return true;
+            MessageBox.Show(sb.ToString());
+            return false;
         }
 
         private void VerEstadisticas(ConsultasOption option)
