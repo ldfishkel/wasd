@@ -67,8 +67,20 @@
                     break;
             }
 
-            if (_fechaDesde.Value.CompareTo(_fechaHasta.Value) >= 0)
-                sb.AppendLine("Fecha hasta debe ser posterior a fecha desde");
+            if (_fechaDesde.Value.Year != _fechaHasta.Value.Year)
+                sb.AppendLine("Las fechas deben ser del mismo año");
+
+            if (_fechaDesde.Value.Day != 1 && !(_fechaDesde.Value.Month == 1 || _fechaDesde.Value.Month == 7))
+                sb.AppendLine("La fecha desde debe ser comienzo del semestre 1/1 o 1/7");
+
+            if ((_fechaHasta.Value.Day == 30 || _fechaHasta.Value.Day == 31) && !(_fechaHasta.Value.Month == 6 || _fechaDesde.Value.Month == 12))
+                sb.AppendLine("La fecha hasta debe ser fin del semestre 30/6 o 31/12");
+
+            if (_fechaDesde.Value.Month == 1 && _fechaHasta.Value.Month != 6)
+                sb.AppendLine("La fecha desde y la fecha hasta deben conformar un semestre desde 1/1 hasta 30/6 o desde 1/7 hasta 31/12");
+
+            if (_fechaDesde.Value.Month == 7 && _fechaHasta.Value.Month != 12)
+                sb.AppendLine("La fecha desde y la fecha hasta deben conformar un semestre desde 1/1 hasta 30/6 o desde 1/7 hasta 31/12");
 
             if (sb.Length > 0)
             {
@@ -77,22 +89,6 @@
             }
 
             return true;
-        }
-
-        private void OnTabSelected(object sender, TabControlEventArgs e)
-        {
-            ConsultasOption option = ConsultasOption.Consulta1;
-
-            switch (e.TabPageIndex)
-            {
-                case 0: option = ConsultasOption.Consulta1; break;
-                case 1: option = ConsultasOption.Consulta2; break;
-                case 2: option = ConsultasOption.Consulta3; break;
-                case 3: option = ConsultasOption.Consulta4; break;
-                case 4: option = ConsultasOption.Consulta5; break;
-            }
-
-            this.VerEstadisticas(option);
         }
 
         private void VerEstadisticas(ConsultasOption option)
@@ -117,7 +113,7 @@
 
                     foreach (var result in _estadisticasDao.Consulta2(_fechaDesde.Value, _fechaHasta.Value, ((PlanMedico)_planMedico.SelectedItem).planmedico_id))
                         _grid2.Rows.Add(result.profesional_apellido,
-                                               result.planmedico_nombre,
+                                               result.profesional_nombre,
                                                result.especialidad_nombre,
                                                result.consultas,
                                                result.mes);
@@ -161,15 +157,24 @@
             this.VerEstadisticas(ConsultasOption.Consulta1);
         }
 
+        private void VerConsulta2(object sender, EventArgs e)
+        {
+            this.VerEstadisticas(ConsultasOption.Consulta2);
+        }
+
         private void VerConsulta3(object sender, EventArgs e)
         {
             this.VerEstadisticas(ConsultasOption.Consulta3);
         }
 
-        private void VerConsulta2(object sender, EventArgs e)
+        private void VerConsulta4(object sender, EventArgs e)
         {
-            this.VerEstadisticas(ConsultasOption.Consulta2);
+            this.VerEstadisticas(ConsultasOption.Consulta4);
+        }
 
+        private void VerConsulta5(object sender, EventArgs e)
+        {
+            this.VerEstadisticas(ConsultasOption.Consulta5);
         }
     }
 

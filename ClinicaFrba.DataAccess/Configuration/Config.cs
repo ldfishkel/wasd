@@ -11,9 +11,11 @@
         {
             try
             {
-                if (File.Exists("/ExternalConfig.txt"))
+                string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName, "ExternalConfig.txt");
+                
+                if (File.Exists(path))
                 {
-                    var configJson = File.ReadAllText("/ExternalConfig.txt", Encoding.UTF8);
+                    var configJson = File.ReadAllText(path, Encoding.UTF8);
 
                     return GetExternalConfiguration(configJson);
                 }

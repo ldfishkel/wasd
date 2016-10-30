@@ -36,11 +36,10 @@
 
             Login_Result result = _usuarioDao.Login(_username.Text, _password.Text);
 
+            MessageBox.Show(result.message);
+
             if (result.usuario_id == null)
-            {
-                MessageBox.Show(result.message);
                 return;
-            }
 
             _userId = result.usuario_id.Value;
 

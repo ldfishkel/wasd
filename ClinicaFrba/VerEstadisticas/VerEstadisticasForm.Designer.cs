@@ -37,6 +37,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this._canceladoPor = new System.Windows.Forms.ComboBox();
             this._grid1 = new System.Windows.Forms.DataGridView();
@@ -47,9 +48,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this._planMedico = new System.Windows.Forms.ComboBox();
             this._grid2 = new System.Windows.Forms.DataGridView();
+            this.Apellido2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Especialidad2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Consultas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Mes2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -60,10 +67,15 @@
             this.label11 = new System.Windows.Forms.Label();
             this._planMedico3 = new System.Windows.Forms.ComboBox();
             this._grid3 = new System.Windows.Forms.DataGridView();
+            this.Apellido3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Horas3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Mes3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.button5 = new System.Windows.Forms.Button();
             this._grid4 = new System.Windows.Forms.DataGridView();
             this.NumeroAfiliado_4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Apellido_Afiliado_4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,21 +87,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.button4 = new System.Windows.Forms.Button();
             this._grid5 = new System.Windows.Forms.DataGridView();
             this.Especialidad_5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad_5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Mes_5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.Apellido2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Especialidad2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Consultas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Mes2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Apellido3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Horas3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Mes3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._panel.SuspendLayout();
             this.groupBox11.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -180,7 +184,6 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(746, 381);
             this.tabControl1.TabIndex = 0;
-            this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.OnTabSelected);
             // 
             // tabPage1
             // 
@@ -196,6 +199,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button3);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this._canceladoPor);
             this.groupBox2.Controls.Add(this._grid1);
@@ -204,6 +208,16 @@
             this.groupBox2.Size = new System.Drawing.Size(725, 292);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(10, 47);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(170, 23);
+            this.button3.TabIndex = 12;
+            this.button3.Text = "Ver Estadistica";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.VerConsulta1);
             // 
             // label8
             // 
@@ -224,7 +238,6 @@
             this._canceladoPor.Name = "_canceladoPor";
             this._canceladoPor.Size = new System.Drawing.Size(57, 21);
             this._canceladoPor.TabIndex = 1;
-            this._canceladoPor.SelectedIndexChanged += new System.EventHandler(this.VerConsulta1);
             // 
             // _grid1
             // 
@@ -289,6 +302,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.button2);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this._planMedico);
             this.groupBox3.Controls.Add(this._grid2);
@@ -297,6 +311,16 @@
             this.groupBox3.Size = new System.Drawing.Size(725, 292);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(228, 16);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(200, 23);
+            this.button2.TabIndex = 12;
+            this.button2.Text = "Ver Estadistica";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.VerConsulta2);
             // 
             // label9
             // 
@@ -310,14 +334,10 @@
             // _planMedico
             // 
             this._planMedico.FormattingEnabled = true;
-            this._planMedico.Items.AddRange(new object[] {
-            "A",
-            "P"});
             this._planMedico.Location = new System.Drawing.Point(92, 16);
             this._planMedico.Name = "_planMedico";
             this._planMedico.Size = new System.Drawing.Size(116, 21);
             this._planMedico.TabIndex = 3;
-            this._planMedico.SelectedIndexChanged += new System.EventHandler(this.VerConsulta2);
             // 
             // _grid2
             // 
@@ -332,6 +352,36 @@
             this._grid2.Name = "_grid2";
             this._grid2.Size = new System.Drawing.Size(545, 243);
             this._grid2.TabIndex = 0;
+            // 
+            // Apellido2
+            // 
+            this.Apellido2.HeaderText = "Apellido";
+            this.Apellido2.Name = "Apellido2";
+            this.Apellido2.ReadOnly = true;
+            // 
+            // Nombre2
+            // 
+            this.Nombre2.HeaderText = "Nombre";
+            this.Nombre2.Name = "Nombre2";
+            this.Nombre2.ReadOnly = true;
+            // 
+            // Especialidad2
+            // 
+            this.Especialidad2.HeaderText = "Especialidad";
+            this.Especialidad2.Name = "Especialidad2";
+            this.Especialidad2.ReadOnly = true;
+            // 
+            // Consultas
+            // 
+            this.Consultas.HeaderText = "Consultas";
+            this.Consultas.Name = "Consultas";
+            this.Consultas.ReadOnly = true;
+            // 
+            // Mes2
+            // 
+            this.Mes2.HeaderText = "Mes";
+            this.Mes2.Name = "Mes2";
+            this.Mes2.ReadOnly = true;
             // 
             // groupBox4
             // 
@@ -400,9 +450,6 @@
             // _especialidad
             // 
             this._especialidad.FormattingEnabled = true;
-            this._especialidad.Items.AddRange(new object[] {
-            "A",
-            "P"});
             this._especialidad.Location = new System.Drawing.Point(103, 55);
             this._especialidad.Name = "_especialidad";
             this._especialidad.Size = new System.Drawing.Size(116, 21);
@@ -441,6 +488,30 @@
             this._grid3.Size = new System.Drawing.Size(444, 266);
             this._grid3.TabIndex = 0;
             // 
+            // Apellido3
+            // 
+            this.Apellido3.HeaderText = "Apellido";
+            this.Apellido3.Name = "Apellido3";
+            this.Apellido3.ReadOnly = true;
+            // 
+            // Nombre3
+            // 
+            this.Nombre3.HeaderText = "Nombre";
+            this.Nombre3.Name = "Nombre3";
+            this.Nombre3.ReadOnly = true;
+            // 
+            // Horas3
+            // 
+            this.Horas3.HeaderText = "Horas";
+            this.Horas3.Name = "Horas3";
+            this.Horas3.ReadOnly = true;
+            // 
+            // Mes3
+            // 
+            this.Mes3.HeaderText = "Mes";
+            this.Mes3.Name = "Mes3";
+            this.Mes3.ReadOnly = true;
+            // 
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.label3);
@@ -474,12 +545,23 @@
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.button5);
             this.groupBox7.Controls.Add(this._grid4);
-            this.groupBox7.Location = new System.Drawing.Point(7, 56);
+            this.groupBox7.Location = new System.Drawing.Point(7, 51);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(725, 292);
+            this.groupBox7.Size = new System.Drawing.Size(725, 294);
             this.groupBox7.TabIndex = 3;
             this.groupBox7.TabStop = false;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(38, 19);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(200, 25);
+            this.button5.TabIndex = 12;
+            this.button5.Text = "Ver Estadistica";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.VerConsulta4);
             // 
             // _grid4
             // 
@@ -491,9 +573,9 @@
             this.Cantidad_4,
             this.Pertenece_A_Grupo_4,
             this.Mes_4});
-            this._grid4.Location = new System.Drawing.Point(40, 20);
+            this._grid4.Location = new System.Drawing.Point(38, 56);
             this._grid4.Name = "_grid4";
-            this._grid4.Size = new System.Drawing.Size(646, 266);
+            this._grid4.Size = new System.Drawing.Size(646, 231);
             this._grid4.TabIndex = 0;
             // 
             // NumeroAfiliado_4
@@ -565,12 +647,23 @@
             // 
             // groupBox9
             // 
+            this.groupBox9.Controls.Add(this.button4);
             this.groupBox9.Controls.Add(this._grid5);
             this.groupBox9.Location = new System.Drawing.Point(7, 56);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(725, 292);
             this.groupBox9.TabIndex = 3;
             this.groupBox9.TabStop = false;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(6, 20);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(168, 23);
+            this.button4.TabIndex = 12;
+            this.button4.Text = "Ver Estadistica";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.VerConsulta5);
             // 
             // _grid5
             // 
@@ -619,60 +712,6 @@
             this.label5.Size = new System.Drawing.Size(380, 13);
             this.label5.TabIndex = 0;
             this.label5.Text = "Top 5 de las especialidades de médicos con más bonos de consultas utilizados";
-            // 
-            // Apellido2
-            // 
-            this.Apellido2.HeaderText = "Apellido";
-            this.Apellido2.Name = "Apellido2";
-            this.Apellido2.ReadOnly = true;
-            // 
-            // Nombre2
-            // 
-            this.Nombre2.HeaderText = "Nombre";
-            this.Nombre2.Name = "Nombre2";
-            this.Nombre2.ReadOnly = true;
-            // 
-            // Especialidad2
-            // 
-            this.Especialidad2.HeaderText = "Especialidad";
-            this.Especialidad2.Name = "Especialidad2";
-            this.Especialidad2.ReadOnly = true;
-            // 
-            // Consultas
-            // 
-            this.Consultas.HeaderText = "Consultas";
-            this.Consultas.Name = "Consultas";
-            this.Consultas.ReadOnly = true;
-            // 
-            // Mes2
-            // 
-            this.Mes2.HeaderText = "Mes";
-            this.Mes2.Name = "Mes2";
-            this.Mes2.ReadOnly = true;
-            // 
-            // Apellido3
-            // 
-            this.Apellido3.HeaderText = "Apellido";
-            this.Apellido3.Name = "Apellido3";
-            this.Apellido3.ReadOnly = true;
-            // 
-            // Nombre3
-            // 
-            this.Nombre3.HeaderText = "Nombre";
-            this.Nombre3.Name = "Nombre3";
-            this.Nombre3.ReadOnly = true;
-            // 
-            // Horas3
-            // 
-            this.Horas3.HeaderText = "Horas";
-            this.Horas3.Name = "Horas3";
-            this.Horas3.ReadOnly = true;
-            // 
-            // Mes3
-            // 
-            this.Mes3.HeaderText = "Mes";
-            this.Mes3.Name = "Mes3";
-            this.Mes3.ReadOnly = true;
             // 
             // VerEstadisticasForm
             // 
@@ -748,8 +787,6 @@
         private System.Windows.Forms.GroupBox groupBox11;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.DateTimePicker _fechaHasta;
-        private System.Windows.Forms.DateTimePicker _fechaDesde;
         private System.Windows.Forms.DataGridViewTextBoxColumn Especialidad_1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cancelaciones_1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Mes_1;
@@ -782,5 +819,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Horas3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Mes3;
+        private System.Windows.Forms.DateTimePicker _fechaHasta;
+        private System.Windows.Forms.DateTimePicker _fechaDesde;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button4;
     }
 }
