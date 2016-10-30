@@ -50,6 +50,7 @@
         public void UpdateAfiliado(Afiliado afiliado, string motivo)
         {
             DateTime date = Config.SystemDate().AddHours(DateTime.Now.Hour).AddMinutes(DateTime.Now.Minute);
+
             _ds.UpdateAfiliado(afiliado.afiliado_id, afiliado.afiliado_direccion, afiliado.afiliado_telefono, afiliado.afiliado_mail, afiliado.estadocivil_id, afiliado.planmedico_id, motivo, date);
         }
 
@@ -97,7 +98,12 @@
 
         public List<HistorialPlan> HistorialPlan(int afiliadoId)
         {
-            return _ds.HistorialPlans.Where(x => x.afiliado_id == afiliadoId).ToList();
+            return _ds.HistorialDeAfiliado(afiliadoId).ToList().Select(x => new HistorialPlan()
+            {
+                historial_fecha = x.historial_fecha,
+                historial_motivo = x.historial_motivo,
+                afiliado_id = x.afiliado_id
+            }).ToList();
         }
 
         public PlanMedico GetPlanMedico(int planmedico_id)

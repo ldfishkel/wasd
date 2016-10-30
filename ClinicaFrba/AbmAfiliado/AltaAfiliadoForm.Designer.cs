@@ -427,8 +427,6 @@
         private System.Windows.Forms.ComboBox _sexo;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView _afiliadosACargo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn _nombreFamiliar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn _apellidoFamiliar;
         private System.Windows.Forms.ComboBox _tipoDoc;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.DataGridViewTextBoxColumn _nombre_familiar;

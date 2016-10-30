@@ -489,7 +489,7 @@ namespace ClinicaFrba.DataAccess
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegistroLlegada", turnoIdParameter, bonoIdParameter, fechaActualParameter);
         }
     
-        public virtual ObjectResult<SP_ListadoEstadistico1_Result> SP_ListadoEstadistico1(Nullable<System.DateTime> fecha_desde, Nullable<System.DateTime> fecha_hasta)
+        public virtual ObjectResult<SP_ListadoEstadistico1_Result> SP_ListadoEstadistico1(Nullable<System.DateTime> fecha_desde, Nullable<System.DateTime> fecha_hasta, string tipo_cancelacion)
         {
             var fecha_desdeParameter = fecha_desde.HasValue ?
                 new ObjectParameter("fecha_desde", fecha_desde) :
@@ -499,7 +499,49 @@ namespace ClinicaFrba.DataAccess
                 new ObjectParameter("fecha_hasta", fecha_hasta) :
                 new ObjectParameter("fecha_hasta", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ListadoEstadistico1_Result>("SP_ListadoEstadistico1", fecha_desdeParameter, fecha_hastaParameter);
+            var tipo_cancelacionParameter = tipo_cancelacion != null ?
+                new ObjectParameter("tipo_cancelacion", tipo_cancelacion) :
+                new ObjectParameter("tipo_cancelacion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ListadoEstadistico1_Result>("SP_ListadoEstadistico1", fecha_desdeParameter, fecha_hastaParameter, tipo_cancelacionParameter);
+        }
+    
+        public virtual ObjectResult<SP_ListadoEstadistico2_Result> SP_ListadoEstadistico2(Nullable<System.DateTime> fecha_desde, Nullable<System.DateTime> fecha_hasta, Nullable<int> plan)
+        {
+            var fecha_desdeParameter = fecha_desde.HasValue ?
+                new ObjectParameter("fecha_desde", fecha_desde) :
+                new ObjectParameter("fecha_desde", typeof(System.DateTime));
+    
+            var fecha_hastaParameter = fecha_hasta.HasValue ?
+                new ObjectParameter("fecha_hasta", fecha_hasta) :
+                new ObjectParameter("fecha_hasta", typeof(System.DateTime));
+    
+            var planParameter = plan.HasValue ?
+                new ObjectParameter("plan", plan) :
+                new ObjectParameter("plan", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ListadoEstadistico2_Result>("SP_ListadoEstadistico2", fecha_desdeParameter, fecha_hastaParameter, planParameter);
+        }
+    
+        public virtual ObjectResult<SP_ListadoEstadistico3_Result> SP_ListadoEstadistico3(Nullable<System.DateTime> fecha_desde, Nullable<System.DateTime> fecha_hasta, Nullable<int> plan, Nullable<int> especialidad)
+        {
+            var fecha_desdeParameter = fecha_desde.HasValue ?
+                new ObjectParameter("fecha_desde", fecha_desde) :
+                new ObjectParameter("fecha_desde", typeof(System.DateTime));
+    
+            var fecha_hastaParameter = fecha_hasta.HasValue ?
+                new ObjectParameter("fecha_hasta", fecha_hasta) :
+                new ObjectParameter("fecha_hasta", typeof(System.DateTime));
+    
+            var planParameter = plan.HasValue ?
+                new ObjectParameter("plan", plan) :
+                new ObjectParameter("plan", typeof(int));
+    
+            var especialidadParameter = especialidad.HasValue ?
+                new ObjectParameter("especialidad", especialidad) :
+                new ObjectParameter("especialidad", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ListadoEstadistico3_Result>("SP_ListadoEstadistico3", fecha_desdeParameter, fecha_hastaParameter, planParameter, especialidadParameter);
         }
     
         public virtual ObjectResult<SP_ListadoEstadistico4_Result> SP_ListadoEstadistico4(Nullable<System.DateTime> fecha_desde, Nullable<System.DateTime> fecha_hasta)

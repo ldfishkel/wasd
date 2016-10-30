@@ -46,6 +46,9 @@
 
         private void CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (!(_afiliadosGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn) || e.RowIndex < 0)
+                return;
+
             Afiliado afiliado = (Afiliado)_afiliadosGrid.Rows[e.RowIndex].Cells[1].Value;
 
             if (e.ColumnIndex == 2)

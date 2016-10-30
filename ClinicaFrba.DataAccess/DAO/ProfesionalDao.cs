@@ -30,11 +30,11 @@
             }).SingleOrDefault();
         }
 
-        public List<ConsultaMedica> GetConsultasMedicas(int profesional_id)
+        public List<ConsultaMedica> GetConsultasMedicas(int profesionalId)
         {
             var ret = new List<ConsultaMedica>();
 
-            foreach (var x in _ds.ConsultasMedicasProfesional(profesional_id, GetFecha()))
+            foreach (var x in _ds.ConsultasMedicasProfesional(profesionalId, GetFecha()))
             {
                 ret.Add(new ConsultaMedica()
                 {
@@ -63,6 +63,7 @@
                     sintoma_descripcion = sintoma
                 };
                 _ds.Sintomas.Add(s);
+                //TODO CREATE PROCEDURE AgregarSintoma @consultamedicaId INT, @dscripcion VARCHAR
             }
 
             foreach (string diagnostico in diagnosticos)
@@ -73,6 +74,7 @@
                     diagnostico_descripcion = diagnostico
                 };
                 _ds.Diagnosticoes.Add(d);
+                //TODO CREATE PROCEDURE AgregarDiagnostico @consultamedicaId INT, @descripcion VARCHAR
             }
 
             _ds.SaveChanges();
@@ -118,6 +120,11 @@
 
         public void SaveAgendum(Profesional profesional)
         {
+            /*
+            foreach (var agenda in profesional.Agenda)
+                _ds.AgrearAgenda(agenda.agenda_dia, agenda.especialidad_id, agenda.agenda_fecha_desde, agenda.agenda_fecha_hasta, agenda.agenda_hora_desde, agenda.agenda_hora_hasta);
+            */
+            //TODO CREATE PROCEDURE AgregarAgenda @dia VARCHAR, @especialidadId INT, @fechaDesde DATE, @fechaHasta DATE, @horaDesde TIME, @horaHasta TIME 
             _ds.Agenda.AddRange(profesional.Agenda);
             _ds.SaveChanges();
         }

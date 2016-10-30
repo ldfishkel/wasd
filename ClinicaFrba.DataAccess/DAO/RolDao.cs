@@ -12,6 +12,9 @@ namespace ClinicaFrba.DataAccess.DAO
 
         public void Guardar(Rol rol)
         {
+            //TODO CREATE PROCEDURE AltaRol @nombre VARCHAR (devuelve el id insertado)
+
+            //TODO CREATE PROCEDurE AltaFuncionalidadPorRol @rolId INT, @funcioalidadId
             _ds.Rols.Add(rol);
             _ds.SaveChanges();
         }

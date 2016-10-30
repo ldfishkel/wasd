@@ -209,6 +209,12 @@
     <Compile Include="SP_ListadoEstadistico1_Result.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
+    <Compile Include="SP_ListadoEstadistico2_Result.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_ListadoEstadistico3_Result.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
     <Compile Include="SP_ListadoEstadistico4_Result.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
