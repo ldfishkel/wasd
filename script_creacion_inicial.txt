@@ -122,21 +122,22 @@ GO
 
 CREATE TABLE "WASD".Usuario (
 	usuario_id INT PRIMARY KEY IDENTITY(1,1),
-	usuario_nombre CHAR(10) NOT NULL,
+	usuario_nombre CHAR(10) NOT NULL UNIQUE,
 	usuario_password CHAR(64) NOT NULL,
 	usuario_intentos TINYINT NOT NULL,
-	usuario_activo BIT NOT NULL
+	usuario_activo BIT NOT NULL,
+	usuario_nombre_a_mostrar VARCHAR(101) NOT NULL
 );
 
 CREATE TABLE "WASD".EstadoCivil (
 	estadocivil_id INT PRIMARY KEY IDENTITY(1,1),
-	estadocivil_nombre CHAR(12) NOT NULL
+	estadocivil_nombre CHAR(12) NOT NULL UNIQUE
 );
 
 
 CREATE TABLE "WASD".PlanMedico (
 	planmedico_id INT PRIMARY KEY IDENTITY(1,1),
-	planmedico_nombre CHAR(15) NOT NULL,
+	planmedico_nombre CHAR(15) NOT NULL UNIQUE,
 	planmedico_cuota MONEY NOT NULL,
 	planmedico_precio_bono MONEY NOT NULL
 );
@@ -148,10 +149,10 @@ CREATE TABLE "WASD".Afiliado (
 	afiliado_tipodocumento CHAR(3) CHECK (afiliado_tipodocumento IN ('DNI', 'CI', 'LC', 'LE')),
 	planmedico_id INT NOT NULL REFERENCES "WASD".PlanMedico(planmedico_id),
 	afiliado_sexo CHAR(1) CHECK (afiliado_sexo IN ('M', 'F', 'X')),
-	afiliado_numero INT NOT NULL,
+	afiliado_numero INT NOT NULL UNIQUE,
 	afiliado_nombre VARCHAR(50) NOT NULL,
 	afiliado_apellido VARCHAR(50) NOT NULL,
-	afiliado_numero_documento INT NOT NULL,
+	afiliado_numero_documento INT NOT NULL UNIQUE,
 	afiliado_direccion VARCHAR(100) NOT NULL,
 	afiliado_telefono INT NOT NULL,
 	afiliado_mail VARCHAR(50) NOT NULL,
@@ -165,7 +166,7 @@ CREATE TABLE "WASD".Afiliado (
 
 CREATE TABLE "WASD".TipoCancelacion (
 	tipocancelacion_id INT PRIMARY KEY IDENTITY(1,1),
-	tipocancelacion_nombre VARCHAR(50) NOT NULL
+	tipocancelacion_nombre VARCHAR(50) NOT NULL UNIQUE
 );
 
 CREATE TABLE "WASD".TurnoCancelado (
@@ -177,13 +178,13 @@ CREATE TABLE "WASD".TurnoCancelado (
 
 CREATE TABLE "WASD".TipoEspecialidad (
 	tipoespecialidad_id INT PRIMARY KEY IDENTITY(1,1),
-	tipoespecialidad_nombre VARCHAR(50) NOT NULL
+	tipoespecialidad_nombre VARCHAR(50) NOT NULL UNIQUE
 );
 
 CREATE TABLE "WASD".Especialidad (
 	especialidad_id INT PRIMARY KEY IDENTITY(1,1),
 	tipoespecialidad_id INT NOT NULL REFERENCES "WASD".TipoEspecialidad(tipoespecialidad_id),
-	especialidad_nombre VARCHAR(50) NOT NULL
+	especialidad_nombre VARCHAR(50) NOT NULL UNIQUE
 );
 
 CREATE TABLE "WASD".Profesional (
@@ -191,19 +192,19 @@ CREATE TABLE "WASD".Profesional (
 	usuario_id INT NOT NULL REFERENCES "WASD".Usuario(usuario_id),
 	profesional_sexo CHAR(1) CHECK (profesional_sexo IN ('M', 'F', 'X')),
 	profesional_tipodocumento CHAR(3) CHECK (profesional_tipodocumento IN ('DNI', 'CI', 'LC', 'LE')),
-	profesional_numero_documento INT NOT NULL,
+	profesional_numero_documento INT NOT NULL UNIQUE,
 	profesional_nombre VARCHAR(25) NOT NULL,
 	profesional_apellido VARCHAR(25) NOT NULL,
 	profesional_direccion VARCHAR(100) NOT NULL,
 	profesional_telefono INT NOT NULL,
 	profesional_mail VARCHAR(50) NOT NULL,
 	profesional_fecha_nacimiento DATE NOT NULL,
-	profesional_matricula INT NOT NULL
+	profesional_matricula INT NOT NULL UNIQUE
 );
 
 CREATE TABLE "WASD".Hora (
 	hora_id INT PRIMARY KEY,
-	hora_comienzo TIME NOT NULL
+	hora_comienzo TIME NOT NULL UNIQUE
 );
 
 CREATE TABLE "WASD".Agenda (
@@ -241,12 +242,12 @@ CREATE TABLE "WASD".EspecialidadPorProfesional (
 
 CREATE TABLE "WASD".Funcionalidad (
 	funcionalidad_id INT PRIMARY KEY IDENTITY(1,1),
-	funcionalidad_nombre VARCHAR(25) NOT NULL
+	funcionalidad_nombre VARCHAR(25) NOT NULL UNIQUE
 );
 
 CREATE TABLE "WASD".Rol (
 	rol_id INT PRIMARY KEY IDENTITY(1,1),
-	rol_nombre CHAR(15) NOT NULL,
+	rol_nombre CHAR(15) NOT NULL UNIQUE,
 	rol_activo BIT NOT NULL
 );
 
@@ -346,8 +347,9 @@ INSERT INTO "WASD".FuncionalidadPorRol VALUES
 (3, 8);
 
 SET IDENTITY_INSERT "WASD".Usuario ON
-INSERT INTO "WASD".Usuario(usuario_id, usuario_nombre, usuario_password, usuario_intentos, usuario_activo) VALUES
-(1, 'admin', 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7', 0, 1)
+INSERT INTO "WASD".Usuario(usuario_id, usuario_nombre, usuario_password, usuario_intentos, usuario_activo,
+usuario_nombre_a_mostrar) VALUES
+(1, 'admin', 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7', 0, 1, 'Administrador General')
 SET IDENTITY_INSERT "WASD".Usuario OFF;
 
 INSERT INTO GD2C2016. WASD. Profesional( usuario_id, profesional_sexo, profesional_tipodocumento, profesional_numero_documento, profesional_nombre, profesional_apellido, profesional_direccion, profesional_telefono, profesional_mail, profesional_fecha_nacimiento, profesional_matricula) VALUES
@@ -453,8 +455,10 @@ FETCH FROM profesionales INTO @dni, @ape, @nom, @dir, @tel, @mail, @nac
 WHILE @@FETCH_STATUS = 0
 BEGIN
 	/**CREAMOS EL USUARIO DEL PROFESIONAL**/
-	INSERT INTO "WASD".Usuario(usuario_nombre, usuario_password, usuario_intentos, usuario_activo) VALUES
-	(@dni, '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 0, 1)
+	/**USUARIO: el numero de DNI**/
+	/**PASSWORD: 123456**/
+	INSERT INTO "WASD".Usuario(usuario_nombre, usuario_password, usuario_intentos, usuario_activo, usuario_nombre_a_mostrar)
+	VALUES (@dni, '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 0, 1, @ape+','+@nom)
 	SET @usid = (SELECT SCOPE_IDENTITY())
 	
 	/**ASIGNAMOS EL ROL DE PROFESIONAL**/
@@ -533,8 +537,8 @@ BEGIN
 	/**CREAMOS EL USUARIO DEL AFILIADO**/
 	/**USUARIO: el numero de DNI**/
 	/**PASSWORD: 123456**/
-	INSERT INTO "WASD".Usuario(usuario_nombre, usuario_password, usuario_intentos, usuario_activo) VALUES
-	(@dni, '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 0, 1)
+	INSERT INTO "WASD".Usuario(usuario_nombre, usuario_password, usuario_intentos, usuario_activo, usuario_nombre_a_mostrar)
+	VALUES (@dni, '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 0, 1, @ape+','+@nom)
 	SET @usid = (SELECT SCOPE_IDENTITY())
 	
 	/**ASIGNAMOS EL ROL DE AFILIADO**/
@@ -624,7 +628,6 @@ FROM gd_esquema.Maestra
 WHERE Consulta_Enfermedades IS NOT NULL
 ORDER BY Turno_Numero ASC;
 GO
-
 
 /****************************************************************************************************************/
 /**VISTAS**/
@@ -1846,7 +1849,6 @@ AS
 			pm.planmedico_nombre, COUNT(*) consultas
 		FROM WASD.ConsultaMedica c, WASD.Turno t, WASD.Bono b, WASD.Profesional p, WASD.PlanMedico pm, WASD.Especialidad e
 		WHERE c.consultamedica_id = t.turno_id
-		AND c.consultamedica_ocurrio = 1
 		AND c.bono_id = b.bono_id
 		AND t.profesional_id = p.profesional_id
 		AND b.planmedico_id = pm.planmedico_id
@@ -1876,7 +1878,7 @@ CREATE PROCEDURE "WASD".SP_ListadoEstadistico3(@fecha_desde DATE, @fecha_hasta D
 AS
 WITH grupo AS (
 		SELECT MONTH(c.consultamedica_fecha_hora) mes, p.profesional_apellido, p.profesional_nombre, e.especialidad_nombre,
-			pm.planmedico_nombre, COUNT(*) / 2 horas
+			pm.planmedico_nombre, COUNT(*) / 2.0 horas
 		FROM WASD.ConsultaMedica c, WASD.Turno t, WASD.Bono b, WASD.Profesional p, WASD.PlanMedico pm, WASD.Especialidad e
 		WHERE c.consultamedica_id = t.turno_id
 		AND c.consultamedica_ocurrio = 1
