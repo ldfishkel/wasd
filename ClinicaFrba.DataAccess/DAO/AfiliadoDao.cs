@@ -5,6 +5,7 @@
     using System.Collections.Generic;
     using System.Linq;
 
+    //Todos estos metodos llaman a Stores Procedures, Functions y Views mapeados por entity framework
     public class AfiliadoDao : DaoBase
     {
         public AfiliadoDao() : base()
@@ -126,9 +127,9 @@
                 }).ToList();
         }
 
-        public void AltaAfiliado(Afiliado _afiliado)
+        public AltaAfiliado_Result AltaAfiliado(Afiliado _afiliado)
         {
-            int id = (int)_ds.AltaAfiliado(
+            return _ds.AltaAfiliado(
                 _afiliado.estadocivil_id,
                 _afiliado.afiliado_tipodocumento,
                 _afiliado.planmedico_id,
@@ -142,26 +143,7 @@
                 _afiliado.afiliado_mail,
                 _afiliado.afiliado_fecha_nacimiento,
                 (byte)_afiliado.Afiliado1.Count,
-                null).Single();
-
-            foreach (Afiliado afiliado in _afiliado.Afiliado1)
-            {
-                _ds.AltaAfiliado(
-                afiliado.estadocivil_id,
-                afiliado.afiliado_tipodocumento,
-                _afiliado.planmedico_id,
-                afiliado.afiliado_sexo,
-                afiliado.afiliado_numero,
-                afiliado.afiliado_nombre,
-                afiliado.afiliado_apellido,
-                afiliado.afiliado_numero_documento,
-                afiliado.afiliado_direccion,
-                afiliado.afiliado_telefono,
-                afiliado.afiliado_mail,
-                afiliado.afiliado_fecha_nacimiento,
-                afiliado.afiliado_familiares_dependientes,
-                id);
-            }
+                _afiliado.afiliado_grupo_familiar).Single();
         }
 
         public void CompraDeBonos(int cant, int afiliado_id, int plan_id)

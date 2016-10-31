@@ -11,13 +11,10 @@ namespace ClinicaFrba.DataAccess
 {
     using System;
     
-    public partial class SP_ListadoEstadistico3_Result
+    public partial class AltaAfiliado_Result
     {
-        public Nullable<int> mes { get; set; }
-        public string profesional_apellido { get; set; }
-        public string profesional_nombre { get; set; }
-        public string especialidad_nombre { get; set; }
-        public string planmedico_nombre { get; set; }
-        public Nullable<decimal> horas { get; set; }
+        public int status { get; set; }
+        public string errorMessage { get; set; }
+        public Nullable<int> scopeIdentity { get; set; }
     }
 }

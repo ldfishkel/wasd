@@ -5,6 +5,7 @@ namespace ClinicaFrba.DataAccess.DAO
     using System.Collections.Generic;
     using System.Linq;
 
+    //Todos estos metodos llaman a Stores Procedures, Functions y Views mapeados por entity framework
     public class EstadisticasDao : DaoBase
     {
         public EstadisticasDao() : base()

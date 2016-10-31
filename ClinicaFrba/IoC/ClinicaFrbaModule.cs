@@ -29,7 +29,6 @@
             builder.RegisterType<RegistrarLlegadaForm>().AsSelf();
             builder.RegisterType<VerEstadisticasForm>().AsSelf();
             builder.RegisterType<MenuForm>().AsSelf();
-
         }
     }
 }

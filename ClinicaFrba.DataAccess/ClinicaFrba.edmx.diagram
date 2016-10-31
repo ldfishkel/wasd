@@ -4,27 +4,27 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="98fece2b9cab45f6839ba3b7e8f02e5f" Name="Diagram1">
+      <Diagram DiagramId="87d0a1318667473db05bfb5b6f9a7868" Name="Diagram1">
         <EntityTypeShape EntityType="GD2C2016Model.Afiliado" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="GD2C2016Model.Agendum" Width="1.5" PointX="8" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GD2C2016Model.Agendum" Width="1.5" PointX="8" PointY="11.875" IsExpanded="true" />
         <EntityTypeShape EntityType="GD2C2016Model.Bono" Width="1.5" PointX="7.5" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="GD2C2016Model.Compra" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
         <EntityTypeShape EntityType="GD2C2016Model.ConsultaMedica" Width="1.5" PointX="9.75" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="GD2C2016Model.Diagnostico" Width="1.5" PointX="12" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="GD2C2016Model.Especialidad" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="GD2C2016Model.EstadoCivil" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GD2C2016Model.Funcionalidad" Width="1.5" PointX="1.5" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GD2C2016Model.EstadoCivil" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GD2C2016Model.Funcionalidad" Width="1.5" PointX="1.5" PointY="18.875" IsExpanded="true" />
         <EntityTypeShape EntityType="GD2C2016Model.HistorialPlan" Width="1.5" PointX="5.25" PointY="14.25" IsExpanded="true" />
         <EntityTypeShape EntityType="GD2C2016Model.Hora" Width="1.5" PointX="5.75" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GD2C2016Model.PlanMedico" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="GD2C2016Model.Profesional" Width="1.5" PointX="3" PointY="20.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="GD2C2016Model.Rol" Width="1.5" PointX="1.5" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GD2C2016Model.Profesional" Width="1.5" PointX="3" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GD2C2016Model.Rol" Width="1.5" PointX="1.5" PointY="15.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GD2C2016Model.Sintoma" Width="1.5" PointX="12" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GD2C2016Model.TipoCancelacion" Width="1.5" PointX="0.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GD2C2016Model.TipoCancelacion" Width="1.5" PointX="0.75" PointY="26.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GD2C2016Model.TipoEspecialidad" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="GD2C2016Model.Turno" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GD2C2016Model.TurnoCancelado" Width="1.5" PointX="3" PointY="25.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="GD2C2016Model.Usuario" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GD2C2016Model.TurnoCancelado" Width="1.5" PointX="3" PointY="26.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GD2C2016Model.Usuario" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
         <EntityTypeShape EntityType="GD2C2016Model.ListaAfiliado" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GD2C2016Model.ListaEspecialidade" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GD2C2016Model.ListaEstadoCivil" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
@@ -36,30 +36,30 @@
         <EntityTypeShape EntityType="GD2C2016Model.ListaTipoCancelacione" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GD2C2016Model.ListaTipoDocumento" Width="1.5" PointX="13.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GD2C2016Model.ListaTipoEspecialidade" Width="1.5" PointX="14.75" PointY="5.75" IsExpanded="true" />
-        <AssociationConnector Association="GD2C2016Model.FK__Afiliado__afilia__63512095" ManuallyRouted="false" />
-        <AssociationConnector Association="GD2C2016Model.FK__Afiliado__estado__5F808FB1" ManuallyRouted="false" />
-        <AssociationConnector Association="GD2C2016Model.FK__Afiliado__planme__6168D823" ManuallyRouted="false" />
-        <AssociationConnector Association="GD2C2016Model.FK__Afiliado__usuari__5E8C6B78" ManuallyRouted="false" />
-        <AssociationConnector Association="GD2C2016Model.FK__Bono__afiliado_i__02C9CBEE" ManuallyRouted="false" />
-        <AssociationConnector Association="GD2C2016Model.FK__Bono__bono_afili__04B21460" ManuallyRouted="false" />
-        <AssociationConnector Association="GD2C2016Model.FK__Compra__afiliado__7EF93B0A" ManuallyRouted="false" />
-        <AssociationConnector Association="GD2C2016Model.FK__Historial__afili__130033B7" ManuallyRouted="false" />
-        <AssociationConnector Association="GD2C2016Model.FK__Turno__afiliado___19AD3146" ManuallyRouted="false" />
-        <AssociationConnector Association="GD2C2016Model.FK__Agenda__agenda_h__7B28AA26" ManuallyRouted="false" />
-        <AssociationConnector Association="GD2C2016Model.FK__Agenda__agenda_h__7C1CCE5F" ManuallyRouted="false" />
-        <AssociationConnector Association="GD2C2016Model.FK__Agenda__especial__794061B4" ManuallyRouted="false" />
-        <AssociationConnector Association="GD2C2016Model.FK__Agenda__profesio__784C3D7B" ManuallyRouted="false" />
-        <AssociationConnector Association="GD2C2016Model.FK__Bono__compra_id__03BDF027" ManuallyRouted="false" />
-        <AssociationConnector Association="GD2C2016Model.FK__Bono__planmedico__01D5A7B5" ManuallyRouted="false" />
-        <AssociationConnector Association="GD2C2016Model.FK__ConsultaM__bono___1F660A9C" ManuallyRouted="false" />
-        <AssociationConnector Association="GD2C2016Model.FK__Diagnosti__consu__251EE3F2" ManuallyRouted="false" />
-        <AssociationConnector Association="GD2C2016Model.FK__Sintoma__consult__22427747" ManuallyRouted="false" />
-        <AssociationConnector Association="GD2C2016Model.FK__Especiali__tipoe__6EC2D341" ManuallyRouted="false" />
-        <AssociationConnector Association="GD2C2016Model.FK__Turno__especiali__1B9579B8" ManuallyRouted="false" />
-        <AssociationConnector Association="GD2C2016Model.FK__Profesion__usuar__719F3FEC" ManuallyRouted="false" />
-        <AssociationConnector Association="GD2C2016Model.FK__Turno__profesion__1AA1557F" ManuallyRouted="false" />
-        <AssociationConnector Association="GD2C2016Model.FK__TurnoCanc__turno__6909F9EB" ManuallyRouted="false" />
-        <AssociationConnector Association="GD2C2016Model.FK__Turno__turnocanc__1C899DF1" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK__Afiliado__afilia__4B8483FC" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK__Afiliado__estado__47B3F318" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK__Afiliado__planme__499C3B8A" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK__Afiliado__usuari__46BFCEDF" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK__Bono__afiliado_i__70B608AB" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK__Bono__bono_afili__729E511D" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK__Compra__afiliado__6CE577C7" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK__Historial__afili__02D4B8E6" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK__Turno__afiliado___0981B675" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK__Agenda__agenda_h__6914E6E3" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK__Agenda__agenda_h__6A090B1C" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK__Agenda__especial__672C9E71" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK__Agenda__profesio__66387A38" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK__Bono__compra_id__71AA2CE4" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK__Bono__planmedico__6FC1E472" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK__ConsultaM__bono___0F3A8FCB" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK__Diagnosti__consu__14F36921" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK__Sintoma__consult__1216FC76" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK__Especiali__tipoe__59D2A353" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK__Turno__especiali__0B69FEE7" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK__Profesion__usuar__5E975870" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK__Turno__profesion__0A75DAAE" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK__TurnoCanc__turno__5231818B" ManuallyRouted="false" />
+        <AssociationConnector Association="GD2C2016Model.FK__Turno__turnocanc__0C5E2320" ManuallyRouted="false" />
         <AssociationConnector Association="GD2C2016Model.EspecialidadPorProfesional" ManuallyRouted="false" />
         <AssociationConnector Association="GD2C2016Model.FuncionalidadPorRol" ManuallyRouted="false" />
         <AssociationConnector Association="GD2C2016Model.RolPorUsuario" ManuallyRouted="false" />

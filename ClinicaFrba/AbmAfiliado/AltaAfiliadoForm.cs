@@ -130,9 +130,21 @@
 
             BuildAfiliado();
 
-            _afiliadoDao.AltaAfiliado(_afiliado);
+            var response = _afiliadoDao.AltaAfiliado(_afiliado);
 
-            Close();
+            if (response.status == 0)
+                foreach (Afiliado a in _afiliado.Afiliado1)
+                {
+                    response = _afiliadoDao.AltaAfiliado(a);
+                    if (response.status == 1)
+                        break;
+                }
+
+            if (response.status == 1)
+                if (response.errorMessage.Contains("UNIQUE"))
+                    MessageBox.Show(String.Format("Ya existe un afiliado con el numero de documento {0}", response.errorMessage.Substring(response.errorMessage.IndexOf("("))));
+            else
+                Close();
         }
 
         private void AgregarFamiliarClick(object sender, EventArgs e)

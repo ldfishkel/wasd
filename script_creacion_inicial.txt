@@ -428,8 +428,8 @@ GO
 --Borrado de datos de seed sin migracion
 DELETE WASD.Afiliado WHERE afiliado_id = 1;
 DELETE WASD.PlanMedico WHERE planmedico_id = 1;
-DELETE WASD.TipoEspecialidad WHERE tipoespecialidad_id = 1;
 DELETE WASD.Especialidad WHERE especialidad_id = 1;
+DELETE WASD.TipoEspecialidad WHERE tipoespecialidad_id = 1;
 
 /**PLANES**/
 SET IDENTITY_INSERT "WASD".PlanMedico ON
@@ -1245,14 +1245,15 @@ GO
 CREATE PROCEDURE "WASD".Login @username VARCHAR(10), @password VARCHAR(64)
 AS
 BEGIN
-	DECLARE @hashedPassword VARCHAR(64), @usuarioId INT, @intentos TINYINT, @usuarioActivo BIT, @retMessage VARCHAR(30);
+	DECLARE @hashedPassword VARCHAR(64), @usuarioId INT, @intentos TINYINT, @usuarioActivo BIT, @retMessage VARCHAR(30), @nombreAMostrar VARCHAR(101);
 	
 	SELECT @hashedPassword = SUBSTRING(master.dbo.fn_varbintohexstr(HASHBYTES('SHA2_256', @password)), 3, 64);
 	
 	SELECT 
 		@usuarioId = usuario_id,
 		@intentos = usuario_intentos, 
-		@usuarioActivo = usuario_activo
+		@usuarioActivo = usuario_activo,
+		@nombreAMostrar = usuario_nombre_a_mostrar
 	FROM 
 		WASD.Usuario
 	WHERE 
@@ -1275,7 +1276,7 @@ BEGIN
 			SET @retMessage = 'USUARIO INACTIVO';
 
 		ELSE BEGIN
-			SET @retMessage = 'BIENVENIDO';
+			SET @retMessage = 'BIENVENIDO' + @nombreAMostrar;
 
 			UPDATE 
 				WASD.Usuario
@@ -1585,9 +1586,13 @@ BEGIN
 	    BEGIN TRANSACTION ALTAAFILIADO
 
 			INSERT INTO 
-				"WASD".Usuario(usuario_nombre, usuario_password, usuario_intentos, usuario_activo) 
+				"WASD".Usuario(usuario_nombre, usuario_password, usuario_intentos, usuario_activo, usuario_nombre_a_mostrar) 
 			VALUES
-				(@afiliado_numero_documento, 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7', 0, 1);
+				(@afiliado_numero_documento, 
+				'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7', 
+				0, 
+				1,
+				@afiliado_apellido + ', ' + @afiliado_nombre);
 
 			SET @userId = (SELECT SCOPE_IDENTITY())
 
@@ -1633,10 +1638,11 @@ BEGIN
 				0,
 				NULL);
 
+		    SET @userId = SCOPE_IDENTITY();
 			SELECT 
 				0 AS status,
 				'' AS errorMessage,
-				SCOPE_IDENTITY() AS scopeIdentity;
+				@userId AS scopeIdentity;
 
     	COMMIT TRANSACTION ALTAAFILIADO
 	END TRY
@@ -1646,10 +1652,16 @@ BEGIN
 	  	IF (@@TRANCOUNT > 0)
 	      ROLLBACK TRANSACTION ALTAAFILIADO
 
+	    IF (@afiliado_grupo_familiar IS NOT NULL)
+	    	DELETE 
+	    		WASD.Afiliado
+	    	WHERE
+	    		afiliado_grupo_familiar = @afiliado_grupo_familiar AND
+	    		afiliado_id = @afiliado_grupo_familiar; 
 	    SELECT
 	        1 AS status,
 	        0 AS scopeIdentity,
-	        ERROR_MESSAGE() AS errorMessage
+	        ERROR_MESSAGE() AS errorMessage;
 
 	END CATCH
 END;

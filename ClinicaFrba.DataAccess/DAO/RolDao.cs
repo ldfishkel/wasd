@@ -4,6 +4,7 @@ namespace ClinicaFrba.DataAccess.DAO
     using System.Collections.Generic;
     using System.Linq;
 
+    //Todos estos metodos llaman a Stores Procedures, Functions y Views mapeados por entity framework
     public class RolDao : DaoBase
     {
         public RolDao() : base()
@@ -11,10 +12,8 @@ namespace ClinicaFrba.DataAccess.DAO
         }
 
         public void Guardar(Rol rol)
-        {
-            //TODO CREATE PROCEDURE AltaRol @nombre VARCHAR (devuelve el id insertado)
-
-            //TODO CREATE PROCEDurE AltaFuncionalidadPorRol @rolId INT, @funcioalidadId
+        { 
+            //TODO CREATE PROCEDURE AltaRol @nombre VARCHAR -- Con try catch para UNIQUE contraint (ver AltaAfiliado)
             _ds.Rols.Add(rol);
             _ds.SaveChanges();
         }
@@ -45,6 +44,8 @@ namespace ClinicaFrba.DataAccess.DAO
 
         public bool Modify(Rol rol)
         {
+            //TODO CREATE PROCEDURE ModificarRol @rolId INT, @rolNombre VARCHAR  -- borrar las relaciones de funcionalidades y updetea el nombre del rol try catch para UNIQUE
+            //TODO CREATE PROCEDURE AltaFuncionalidadPorRol @rolId INT, @funcionalidadId INT-- Insert de funcionalidad por rol
             _ds.Entry(rol).State = System.Data.Entity.EntityState.Modified;
             _ds.SaveChanges();
             return true;

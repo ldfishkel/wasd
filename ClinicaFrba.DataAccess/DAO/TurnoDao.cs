@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Collections.Generic;
 
+    //Todos estos metodos llaman a Stores Procedures, Functions y Views mapeados por entity framework
     public class TurnoDao : DaoBase
     {
         public TurnoDao() : base()

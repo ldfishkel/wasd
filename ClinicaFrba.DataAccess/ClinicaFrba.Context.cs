@@ -261,7 +261,7 @@ namespace ClinicaFrba.DataAccess
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<TurnosProfesionalParaCancelar_Result>("[Entities].[TurnosProfesionalParaCancelar](@profesionalId, @fecha)", profesionalIdParameter, fechaParameter);
         }
     
-        public virtual ObjectResult<Nullable<decimal>> AltaAfiliado(Nullable<int> estadocivil_id, string afiliado_tipodocumento, Nullable<int> planmedico_id, string afiliado_sexo, Nullable<int> afiliado_numero, string afiliado_nombre, string afiliado_apellido, Nullable<int> afiliado_numero_documento, string afiliado_direccion, Nullable<int> afiliado_telefono, string afiliado_mail, Nullable<System.DateTime> afiliado_fecha_nacimiento, Nullable<byte> afiliado_familiares_dependientes, Nullable<int> afiliado_grupo_familiar)
+        public virtual ObjectResult<AltaAfiliado_Result> AltaAfiliado(Nullable<int> estadocivil_id, string afiliado_tipodocumento, Nullable<int> planmedico_id, string afiliado_sexo, Nullable<int> afiliado_numero, string afiliado_nombre, string afiliado_apellido, Nullable<int> afiliado_numero_documento, string afiliado_direccion, Nullable<int> afiliado_telefono, string afiliado_mail, Nullable<System.DateTime> afiliado_fecha_nacimiento, Nullable<byte> afiliado_familiares_dependientes, Nullable<int> afiliado_grupo_familiar)
         {
             var estadocivil_idParameter = estadocivil_id.HasValue ?
                 new ObjectParameter("estadocivil_id", estadocivil_id) :
@@ -319,7 +319,7 @@ namespace ClinicaFrba.DataAccess
                 new ObjectParameter("afiliado_grupo_familiar", afiliado_grupo_familiar) :
                 new ObjectParameter("afiliado_grupo_familiar", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("AltaAfiliado", estadocivil_idParameter, afiliado_tipodocumentoParameter, planmedico_idParameter, afiliado_sexoParameter, afiliado_numeroParameter, afiliado_nombreParameter, afiliado_apellidoParameter, afiliado_numero_documentoParameter, afiliado_direccionParameter, afiliado_telefonoParameter, afiliado_mailParameter, afiliado_fecha_nacimientoParameter, afiliado_familiares_dependientesParameter, afiliado_grupo_familiarParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AltaAfiliado_Result>("AltaAfiliado", estadocivil_idParameter, afiliado_tipodocumentoParameter, planmedico_idParameter, afiliado_sexoParameter, afiliado_numeroParameter, afiliado_nombreParameter, afiliado_apellidoParameter, afiliado_numero_documentoParameter, afiliado_direccionParameter, afiliado_telefonoParameter, afiliado_mailParameter, afiliado_fecha_nacimientoParameter, afiliado_familiares_dependientesParameter, afiliado_grupo_familiarParameter);
         }
     
         public virtual int AltaAgendaProfesional()
@@ -487,6 +487,54 @@ namespace ClinicaFrba.DataAccess
                 new ObjectParameter("fechaActual", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegistroLlegada", turnoIdParameter, bonoIdParameter, fechaActualParameter);
+        }
+    
+        public virtual int SP_AgregarDiagnostico(Nullable<int> consultamedica, string descripcion)
+        {
+            var consultamedicaParameter = consultamedica.HasValue ?
+                new ObjectParameter("consultamedica", consultamedica) :
+                new ObjectParameter("consultamedica", typeof(int));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("descripcion", descripcion) :
+                new ObjectParameter("descripcion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_AgregarDiagnostico", consultamedicaParameter, descripcionParameter);
+        }
+    
+        public virtual int SP_AgregarFuncionalidadPorRol(Nullable<int> rol, Nullable<int> funcionalidad)
+        {
+            var rolParameter = rol.HasValue ?
+                new ObjectParameter("rol", rol) :
+                new ObjectParameter("rol", typeof(int));
+    
+            var funcionalidadParameter = funcionalidad.HasValue ?
+                new ObjectParameter("funcionalidad", funcionalidad) :
+                new ObjectParameter("funcionalidad", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_AgregarFuncionalidadPorRol", rolParameter, funcionalidadParameter);
+        }
+    
+        public virtual int SP_AgregarRol(string nombre, ObjectParameter rolid)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_AgregarRol", nombreParameter, rolid);
+        }
+    
+        public virtual int SP_AgregarSintoma(Nullable<int> consultamedica, string descripcion)
+        {
+            var consultamedicaParameter = consultamedica.HasValue ?
+                new ObjectParameter("consultamedica", consultamedica) :
+                new ObjectParameter("consultamedica", typeof(int));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("descripcion", descripcion) :
+                new ObjectParameter("descripcion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_AgregarSintoma", consultamedicaParameter, descripcionParameter);
         }
     
         public virtual ObjectResult<SP_ListadoEstadistico1_Result> SP_ListadoEstadistico1(Nullable<System.DateTime> fecha_desde, Nullable<System.DateTime> fecha_hasta, string tipo_cancelacion)

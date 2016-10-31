@@ -5,6 +5,7 @@
     using System.Collections.Generic;
     using System.Linq;
 
+    //Todos estos metodos llaman a Stores Procedures, Functions y Views mapeados por entity framework
     public class ProfesionalDao : DaoBase
     {
         public ProfesionalDao() : base()
@@ -57,24 +58,12 @@
         {
             foreach(string sintoma in sintomas)
             {
-                var s = new Sintoma()
-                {
-                    consultamedica_id = consultaId,
-                    sintoma_descripcion = sintoma
-                };
-                _ds.Sintomas.Add(s);
-                //TODO CREATE PROCEDURE AgregarSintoma @consultamedicaId INT, @dscripcion VARCHAR
+                _ds.SP_AgregarSintoma(consultaId, sintoma);
             }
 
             foreach (string diagnostico in diagnosticos)
             {
-                var d = new Diagnostico()
-                {
-                    consultamedica_id = consultaId,
-                    diagnostico_descripcion = diagnostico
-                };
-                _ds.Diagnosticoes.Add(d);
-                //TODO CREATE PROCEDURE AgregarDiagnostico @consultamedicaId INT, @descripcion VARCHAR
+                _ds.SP_AgregarDiagnostico(consultaId, diagnostico);
             }
 
             _ds.SaveChanges();
