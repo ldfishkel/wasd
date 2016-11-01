@@ -1802,6 +1802,70 @@ AS BEGIN
 END;
 GO
 
+/**CARGAR AGENDA DE UN PROFESIONAL**/
+IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'SP_CargarAgenda' AND type = 'P')
+DROP PROCEDURE WASD.SP_CargarAgenda;
+GO
+
+CREATE PROCEDURE "WASD".SP_CargarAgenda @dia VARCHAR, @espid INT, @fdesde DATE, @fhasta DATE,
+@hdesde INT, @hhasta INT, @profid INT
+AS BEGIN
+	INSERT INTO "WASD".Agenda(profesional_id, especialidad_id, agenda_dia, agenda_hora_desde, agenda_hora_hasta,
+	agenda_fecha_desde, agenda_fecha_hasta)
+	VALUES (@profid, @espid, @dia, @hdesde, @hhasta, @fdesde, @fhasta)
+END;
+GO
+
+/**CARGA DE FUNCIONALIDAD POR ROL**/
+IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'SP_CargarFuncPorRol' AND type = 'P')
+DROP PROCEDURE WASD.SP_CargarFuncPorRol;
+GO
+
+CREATE PROCEDURE "WASD".SP_CargarFuncPorRol @rolid INT, @funcid INT
+AS BEGIN
+	INSERT INTO "WASD".FuncionalidadPorRol
+	VALUES (@rolid, @funcid)
+END;
+GO
+
+/**MODIFICACION DE UN ROL EXISTENTE**/
+IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'SP_ModificarRol' AND type = 'P')
+DROP PROCEDURE WASD.SP_ModificarRol;
+GO
+
+CREATE PROCEDURE "WASD".SP_ModificarRol @rolid INT, @nombre VARCHAR
+AS BEGIN
+	UPDATE "WASD".Rol
+	SET rol_nombre = @nombre
+	WHERE rol_id = @rolid
+END;
+GO
+
+/**ALTA DE UN NUEVO ROL**/
+IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'SP_AgregarRol' AND type = 'P')
+DROP PROCEDURE WASD.SP_AgregarRol;
+GO
+
+CREATE PROCEDURE "WASD".SP_AgregarRol @nombre VARCHAR
+AS BEGIN
+	BEGIN TRY
+		BEGIN TRANSACTION ALTAROL
+			INSERT INTO "WASD".Rol(rol_nombre, rol_activo)
+			VALUES (@nombre, 1)
+		COMMIT TRANSACTION ALTAROL
+	END TRY
+	
+	BEGIN CATCH
+		IF (@@TRANCOUNT > 0) ROLLBACK TRANSACTION ALTAROL
+		
+		SELECT
+	        1 AS status,
+	        0 AS scopeIdentity,
+	        ERROR_MESSAGE() AS errorMessage;
+	END CATCH
+END;
+GO
+
 /****************************************************************************************************************/
 /**TRIGGERS**/
 /****************************************************************************************************************/
