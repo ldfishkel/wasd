@@ -472,6 +472,15 @@ namespace ClinicaFrba.DataAccess
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Login_Result>("Login", usernameParameter, passwordParameter);
         }
     
+        public virtual int QuitarFuncionalidades(Nullable<int> rolId)
+        {
+            var rolIdParameter = rolId.HasValue ?
+                new ObjectParameter("rolId", rolId) :
+                new ObjectParameter("rolId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("QuitarFuncionalidades", rolIdParameter);
+        }
+    
         public virtual int RegistroLlegada(Nullable<int> turnoId, Nullable<int> bonoId, Nullable<System.DateTime> fechaActual)
         {
             var turnoIdParameter = turnoId.HasValue ?
@@ -515,13 +524,13 @@ namespace ClinicaFrba.DataAccess
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_AgregarFuncionalidadPorRol", rolParameter, funcionalidadParameter);
         }
     
-        public virtual int SP_AgregarRol(string nombre, ObjectParameter rolid)
+        public virtual ObjectResult<SP_AgregarRol_Result> SP_AgregarRol(string nombre)
         {
             var nombreParameter = nombre != null ?
                 new ObjectParameter("nombre", nombre) :
                 new ObjectParameter("nombre", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_AgregarRol", nombreParameter, rolid);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_AgregarRol_Result>("SP_AgregarRol", nombreParameter);
         }
     
         public virtual int SP_AgregarSintoma(Nullable<int> consultamedica, string descripcion)
@@ -535,6 +544,52 @@ namespace ClinicaFrba.DataAccess
                 new ObjectParameter("descripcion", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_AgregarSintoma", consultamedicaParameter, descripcionParameter);
+        }
+    
+        public virtual int SP_CargarAgenda(string dia, Nullable<int> espid, Nullable<System.DateTime> fdesde, Nullable<System.DateTime> fhasta, Nullable<int> hdesde, Nullable<int> hhasta, Nullable<int> profid)
+        {
+            var diaParameter = dia != null ?
+                new ObjectParameter("dia", dia) :
+                new ObjectParameter("dia", typeof(string));
+    
+            var espidParameter = espid.HasValue ?
+                new ObjectParameter("espid", espid) :
+                new ObjectParameter("espid", typeof(int));
+    
+            var fdesdeParameter = fdesde.HasValue ?
+                new ObjectParameter("fdesde", fdesde) :
+                new ObjectParameter("fdesde", typeof(System.DateTime));
+    
+            var fhastaParameter = fhasta.HasValue ?
+                new ObjectParameter("fhasta", fhasta) :
+                new ObjectParameter("fhasta", typeof(System.DateTime));
+    
+            var hdesdeParameter = hdesde.HasValue ?
+                new ObjectParameter("hdesde", hdesde) :
+                new ObjectParameter("hdesde", typeof(int));
+    
+            var hhastaParameter = hhasta.HasValue ?
+                new ObjectParameter("hhasta", hhasta) :
+                new ObjectParameter("hhasta", typeof(int));
+    
+            var profidParameter = profid.HasValue ?
+                new ObjectParameter("profid", profid) :
+                new ObjectParameter("profid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_CargarAgenda", diaParameter, espidParameter, fdesdeParameter, fhastaParameter, hdesdeParameter, hhastaParameter, profidParameter);
+        }
+    
+        public virtual int SP_CargarFuncPorRol(Nullable<int> rolid, Nullable<int> funcid)
+        {
+            var rolidParameter = rolid.HasValue ?
+                new ObjectParameter("rolid", rolid) :
+                new ObjectParameter("rolid", typeof(int));
+    
+            var funcidParameter = funcid.HasValue ?
+                new ObjectParameter("funcid", funcid) :
+                new ObjectParameter("funcid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_CargarFuncPorRol", rolidParameter, funcidParameter);
         }
     
         public virtual ObjectResult<SP_ListadoEstadistico1_Result> SP_ListadoEstadistico1(Nullable<System.DateTime> fecha_desde, Nullable<System.DateTime> fecha_hasta, string tipo_cancelacion)
@@ -616,6 +671,19 @@ namespace ClinicaFrba.DataAccess
                 new ObjectParameter("fecha_hasta", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ListadoEstadistico5_Result>("SP_ListadoEstadistico5", fecha_desdeParameter, fecha_hastaParameter);
+        }
+    
+        public virtual ObjectResult<SP_ModificarRol_Result> SP_ModificarRol(Nullable<int> rolid, string nombre)
+        {
+            var rolidParameter = rolid.HasValue ?
+                new ObjectParameter("rolid", rolid) :
+                new ObjectParameter("rolid", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ModificarRol_Result>("SP_ModificarRol", rolidParameter, nombreParameter);
         }
     
         public virtual int UpdateAfiliado(Nullable<int> afiliadoId, string direccion, Nullable<int> telefono, string mail, Nullable<int> estadoCivil, Nullable<int> planMedico, string motivo, Nullable<System.DateTime> fecha)

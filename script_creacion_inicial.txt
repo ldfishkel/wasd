@@ -1276,7 +1276,7 @@ BEGIN
 			SET @retMessage = 'USUARIO INACTIVO';
 
 		ELSE BEGIN
-			SET @retMessage = 'BIENVENIDO' + @nombreAMostrar;
+			SET @retMessage = 'BIENVENIDO ' + @nombreAMostrar;
 
 			UPDATE 
 				WASD.Usuario
@@ -1761,7 +1761,7 @@ IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 
 DROP PROCEDURE WASD.SP_AgregarDiagnostico;
 GO
 
-CREATE PROCEDURE "WASD".SP_AgregarDiagnostico @consultamedica INT, @descripcion VARCHAR
+CREATE PROCEDURE "WASD".SP_AgregarDiagnostico @consultamedica INT, @descripcion VARCHAR(255)
 AS BEGIN
 	INSERT INTO "WASD".Diagnostico(consultamedica_id, diagnostico_descripcion) VALUES (@consultamedica, @descripcion)
 END;
@@ -1772,7 +1772,7 @@ IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 
 DROP PROCEDURE WASD.SP_AgregarSintoma;
 GO
 
-CREATE PROCEDURE "WASD".SP_AgregarSintoma @consultamedica INT, @descripcion VARCHAR
+CREATE PROCEDURE "WASD".SP_AgregarSintoma @consultamedica INT, @descripcion VARCHAR(255)
 AS BEGIN
 	INSERT INTO "WASD".Sintoma(consultamedica_id, sintoma_descripcion) VALUES (@consultamedica, @descripcion)
 END;
@@ -1807,7 +1807,7 @@ IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 
 DROP PROCEDURE WASD.SP_CargarAgenda;
 GO
 
-CREATE PROCEDURE "WASD".SP_CargarAgenda @dia VARCHAR, @espid INT, @fdesde DATE, @fhasta DATE,
+CREATE PROCEDURE "WASD".SP_CargarAgenda @dia CHAR(9), @espid INT, @fdesde DATE, @fhasta DATE,
 @hdesde INT, @hhasta INT, @profid INT
 AS BEGIN
 	INSERT INTO "WASD".Agenda(profesional_id, especialidad_id, agenda_dia, agenda_hora_desde, agenda_hora_hasta,
@@ -1833,11 +1833,30 @@ IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 
 DROP PROCEDURE WASD.SP_ModificarRol;
 GO
 
-CREATE PROCEDURE "WASD".SP_ModificarRol @rolid INT, @nombre VARCHAR
+CREATE PROCEDURE "WASD".SP_ModificarRol @rolid INT, @nombre CHAR(15)
 AS BEGIN
-	UPDATE "WASD".Rol
-	SET rol_nombre = @nombre
-	WHERE rol_id = @rolid
+	
+	BEGIN TRY
+
+		BEGIN TRANSACTION MODIFICARROL
+			UPDATE "WASD".Rol
+			SET rol_nombre = @nombre
+			WHERE rol_id = @rolid;
+		COMMIT TRANSACTION MODIFICARROL
+
+		SELECT
+	        0 AS status,
+	        ERROR_MESSAGE() AS errorMessage;
+
+	END TRY
+	
+	BEGIN CATCH
+		IF (@@TRANCOUNT > 0) ROLLBACK TRANSACTION MODIFICARROL
+		
+		SELECT
+	        1 AS status,
+	        ERROR_MESSAGE() AS errorMessage;
+	END CATCH
 END;
 GO
 
@@ -1846,13 +1865,20 @@ IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 
 DROP PROCEDURE WASD.SP_AgregarRol;
 GO
 
-CREATE PROCEDURE "WASD".SP_AgregarRol @nombre VARCHAR
+CREATE PROCEDURE "WASD".SP_AgregarRol @nombre CHAR(15)
 AS BEGIN
 	BEGIN TRY
+
 		BEGIN TRANSACTION ALTAROL
 			INSERT INTO "WASD".Rol(rol_nombre, rol_activo)
 			VALUES (@nombre, 1)
 		COMMIT TRANSACTION ALTAROL
+
+		SELECT
+	        0 AS status,
+	        CAST(SCOPE_IDENTITY() AS INT) AS scopeIdentity,
+	        ERROR_MESSAGE() AS errorMessage;
+
 	END TRY
 	
 	BEGIN CATCH
@@ -1863,6 +1889,20 @@ AS BEGIN
 	        0 AS scopeIdentity,
 	        ERROR_MESSAGE() AS errorMessage;
 	END CATCH
+END;
+GO
+
+/**ALTA DE UN NUEVO ROL**/
+IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'QuitarFuncionalidades' AND type = 'P')
+DROP PROCEDURE WASD.QuitarFuncionalidades;
+GO
+
+CREATE PROCEDURE "WASD".QuitarFuncionalidades @rolId INT
+AS BEGIN
+	DELETE FROM 
+		WASD.FuncionalidadPorRol 
+	WHERE 
+		rol_id = @rolId
 END;
 GO
 

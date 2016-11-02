@@ -94,12 +94,20 @@
                 _rol.rol_nombre = _nombre.Text;
                 _rol.rol_activo = true;
 
-                if (_modify)
-                    _rolDao.Modify(_rol);
-                else
-                    _rolDao.Guardar(_rol);
+                SP_AgregarRol_Result result = null;
+                SP_ModificarRol_Result result2 = null;
 
-                Close();
+                if (_modify)
+                    result2 = _rolDao.Modify(_rol);
+                else
+                    result = _rolDao.Guardar(_rol);
+
+                if (result != null && result.status == 1)
+                    MessageBox.Show(result.errorMessage);
+                else if (result2 != null && result2.status == 1)
+                    MessageBox.Show(result2.errorMessage);
+                else
+                    Close();
             }
         }
 

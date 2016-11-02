@@ -11,11 +11,15 @@ namespace ClinicaFrba.DataAccess.DAO
         {
         }
 
-        public void Guardar(Rol rol)
-        { 
-            //TODO CREATE PROCEDURE AltaRol @nombre VARCHAR -- Con try catch para UNIQUE contraint (ver AltaAfiliado)
-            _ds.Rols.Add(rol);
-            _ds.SaveChanges();
+        public SP_AgregarRol_Result Guardar(Rol rol)
+        {
+            var result = _ds.SP_AgregarRol(rol.rol_nombre).SingleOrDefault();
+
+            if (result.status == 0)
+                foreach (var f in rol.Funcionalidads)
+                    _ds.SP_AgregarFuncionalidadPorRol(result.scopeIdentity, f.funcionalidad_id);
+
+            return result;
         }
 
         public List<Rol> GetAll()
@@ -42,13 +46,19 @@ namespace ClinicaFrba.DataAccess.DAO
             _ds.BajaRol(id);
         }
 
-        public bool Modify(Rol rol)
+        public SP_ModificarRol_Result Modify(Rol rol)
         {
-            //TODO CREATE PROCEDURE ModificarRol @rolId INT, @rolNombre VARCHAR  -- borrar las relaciones de funcionalidades y updetea el nombre del rol try catch para UNIQUE
-            //TODO CREATE PROCEDURE AltaFuncionalidadPorRol @rolId INT, @funcionalidadId INT-- Insert de funcionalidad por rol
-            _ds.Entry(rol).State = System.Data.Entity.EntityState.Modified;
-            _ds.SaveChanges();
-            return true;
+            var result = _ds.SP_ModificarRol(rol.rol_id, rol.rol_nombre).SingleOrDefault();
+
+            if (result.status == 0)
+            {
+                _ds.QuitarFuncionalidades(rol.rol_id);
+
+                foreach (var f in rol.Funcionalidads)
+                    _ds.SP_AgregarFuncionalidadPorRol(rol.rol_id, f.funcionalidad_id);
+            }
+                
+            return result;
         }
     }
 }

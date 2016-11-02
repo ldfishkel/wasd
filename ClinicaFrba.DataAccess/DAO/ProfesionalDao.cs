@@ -109,13 +109,9 @@
 
         public void SaveAgendum(Profesional profesional)
         {
-            /*
+            
             foreach (var agenda in profesional.Agenda)
-                _ds.AgrearAgenda(agenda.agenda_dia, agenda.especialidad_id, agenda.agenda_fecha_desde, agenda.agenda_fecha_hasta, agenda.agenda_hora_desde, agenda.agenda_hora_hasta);
-            */
-            //TODO CREATE PROCEDURE AgregarAgenda @dia VARCHAR, @especialidadId INT, @fechaDesde DATE, @fechaHasta DATE, @horaDesde TIME, @horaHasta TIME 
-            _ds.Agenda.AddRange(profesional.Agenda);
-            _ds.SaveChanges();
+                _ds.SP_CargarAgenda(agenda.agenda_dia, agenda.especialidad_id, agenda.agenda_fecha_desde, agenda.agenda_fecha_hasta, agenda.agenda_hora_desde, agenda.agenda_hora_hasta, profesional.profesional_id);
         }
 
         public List<Especialidad> GetEspecialidadesDeProfesional(int profesionalId)
