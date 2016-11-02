@@ -352,7 +352,7 @@ usuario_nombre_a_mostrar) VALUES
 (1, 'admin', 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7', 0, 1, 'Administrador General')
 SET IDENTITY_INSERT "WASD".Usuario OFF;
 
-INSERT INTO GD2C2016. WASD. Profesional( usuario_id, profesional_sexo, profesional_tipodocumento, profesional_numero_documento, profesional_nombre, profesional_apellido, profesional_direccion, profesional_telefono, profesional_mail, profesional_fecha_nacimiento, profesional_matricula) VALUES
+INSERT INTO WASD.Profesional( usuario_id, profesional_sexo, profesional_tipodocumento, profesional_numero_documento, profesional_nombre, profesional_apellido, profesional_direccion, profesional_telefono, profesional_mail, profesional_fecha_nacimiento, profesional_matricula) VALUES
 (1, 'M', 'DNI', 36157488, 'Dr Leonel', 'Dan', 'Uriburu', 12345, 'asd@asd.asd', '1-9-1992', 321561);
 
 INSERT INTO "WASD".RolPorUsuario VALUES

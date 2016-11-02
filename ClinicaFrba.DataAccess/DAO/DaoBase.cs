@@ -8,7 +8,7 @@
 
         public DaoBase()
         {
-            _ds = new Entities(Config.ConnectionString(ConnectionStringType.Local));
+            _ds = new Entities(Config.ConnectionString(ConnectionStringType.Remota));
         }
     }
 }
