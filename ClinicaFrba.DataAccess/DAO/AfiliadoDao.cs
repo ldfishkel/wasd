@@ -127,23 +127,27 @@
                 }).ToList();
         }
 
-        public AltaAfiliado_Result AltaAfiliado(Afiliado _afiliado)
+        public AltaAfiliado_Result AltaAfiliado(Afiliado _a)
         {
-            return _ds.AltaAfiliado(
-                _afiliado.estadocivil_id,
-                _afiliado.afiliado_tipodocumento,
-                _afiliado.planmedico_id,
-                _afiliado.afiliado_sexo,
-                _afiliado.afiliado_numero,
-                _afiliado.afiliado_nombre,
-                _afiliado.afiliado_apellido,
-                _afiliado.afiliado_numero_documento,
-                _afiliado.afiliado_direccion,
-                _afiliado.afiliado_telefono,
-                _afiliado.afiliado_mail,
-                _afiliado.afiliado_fecha_nacimiento,
-                (byte)_afiliado.Afiliado1.Count,
-                _afiliado.afiliado_grupo_familiar).Single();
+            var result = _ds.AltaAfiliado(_a.estadocivil_id, _a.afiliado_tipodocumento, _a.planmedico_id, _a.afiliado_sexo, _a.afiliado_numero, _a.afiliado_nombre, _a.afiliado_apellido, 
+                _a.afiliado_numero_documento, _a.afiliado_direccion, _a.afiliado_telefono, _a.afiliado_mail, _a.afiliado_fecha_nacimiento,
+                (byte)_a.Afiliado1.Count, null).SingleOrDefault();
+
+            if (result.status == 1)
+                return result;
+
+            int grupoFamiliarId = result.scopeIdentity.Value;
+
+            foreach (var a in _a.Afiliado1)
+            {
+                result = _ds.AltaAfiliado(a.estadocivil_id, a.afiliado_tipodocumento, _a.planmedico_id, a.afiliado_sexo, a.afiliado_numero, a.afiliado_nombre, a.afiliado_apellido,
+                a.afiliado_numero_documento, a.afiliado_direccion, a.afiliado_telefono, a.afiliado_mail, a.afiliado_fecha_nacimiento, 0, grupoFamiliarId).SingleOrDefault();
+
+                if (result.status == 1)
+                    return result;
+            }
+
+            return result;
         }
 
         public void CompraDeBonos(int cant, int afiliado_id, int plan_id)

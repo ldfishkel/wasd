@@ -128,17 +128,17 @@
         {
             Turno turno = new Turno();
 
+            var splitted = ((string)_fecha.SelectedItem).Split('/').Select(x => Int32.Parse(x)).ToArray();
+
             turno.afiliado_id = _afiliado.afiliado_id;
             turno.profesional_id = ((Profesional)_profesionalCombo.SelectedItem).profesional_id;
             turno.especialidad_id = ((Especialidad)_especialidad.SelectedItem).especialidad_id;
-            var splitted = ((string)_fecha.SelectedItem).Split('/').Select(x => Int32.Parse(x)).ToArray();
             turno.turno_fecha = new DateTime(splitted[2], splitted[1], splitted[0]);
             turno.turno_hora = ((Hora)_hora.SelectedItem).hora_comienzo;
-            turno.turno_llego = false;
 
-            _turnoDao.PedirTurno(turno);
+            var result = _turnoDao.PedirTurno(turno);
 
-            MessageBox.Show("Turno Solicitado");
+            MessageBox.Show(result.errorMessage);
 
             InitializeCombo();
         }

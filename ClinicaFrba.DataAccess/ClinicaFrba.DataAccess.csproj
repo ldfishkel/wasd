@@ -84,6 +84,9 @@
     <Compile Include="BonosNroAfiliado_Result.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
+    <Compile Include="CancelarTurno_Result.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
     <Compile Include="ClinicaFrba.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -138,6 +141,9 @@
     <Compile Include="Funcionalidad.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
+    <Compile Include="FuncionalidadesDeRol_Result.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
     <Compile Include="HistorialDeAfiliado_Result.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
@@ -183,6 +189,9 @@
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
     <Compile Include="Login_Result.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PedirTurno_Result.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
     <Compile Include="PlanMedico.cs">

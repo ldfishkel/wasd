@@ -1,6 +1,7 @@
 ﻿
 namespace ClinicaFrba.DataAccess.DAO
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -29,6 +30,15 @@ namespace ClinicaFrba.DataAccess.DAO
                 rol_id = x.rol_id,
                 rol_activo = x.rol_activo,
                 rol_nombre = x.rol_nombre
+            }).ToList();
+        }
+
+        public List<Funcionalidad> GetFuncionalidades(int rol_id)
+        {
+            return _ds.FuncionalidadesDeRol(rol_id).ToList().Select(x => new Funcionalidad()
+            {
+                funcionalidad_id = x.funcionalidad_id,
+                funcionalidad_nombre = x.funcionalidad_nombre
             }).ToList();
         }
 

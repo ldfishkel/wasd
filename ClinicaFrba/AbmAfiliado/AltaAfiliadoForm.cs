@@ -45,12 +45,15 @@
 
             _planMedico.Items.AddRange(_afiliadoDao.PlanesMedicos().ToArray());
 
-            _sexo.Items.AddRange(new string[] { "M", "F", "X" });
+            _sexo.Items.AddRange(new string[] { "M", "F" });
         }
 
         private bool ValidateFields()
         {
             StringBuilder sb = new StringBuilder();
+
+            if (((EstadoCivil)_estadoCivil.SelectedItem) == null)
+                sb.AppendLine("Debe completar el estado civil");
 
             if (String.IsNullOrWhiteSpace(_nombre.Text))
                 sb.AppendLine("Debe completar el nombre");
@@ -64,7 +67,7 @@
             if (String.IsNullOrWhiteSpace(_direccion.Text))
                 sb.AppendLine("Debe completar el campo direccion");
 
-            if (!(new Regex(@"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?").IsMatch(_mail.Text)))
+            if (!(new Regex(@"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?").IsMatch(_mail.Text ?? "")))
                 sb.AppendLine("Campo e-mail incorrecto");
 
             if (String.IsNullOrWhiteSpace(_telefono.Text))
@@ -77,16 +80,17 @@
             if (!Int32.TryParse(_telefono.Text, out result))
                 sb.AppendLine("Telefono incorrecto");
 
+            if (!Int32.TryParse(_numeroDocumento.Text, out result))
+                sb.AppendLine("Numnero de documento incorrecto");
+
             if (_planMedico.SelectedItem == null)
                 sb.AppendLine("Debe seleccionar un plan medico");
 
-            if (sb.Length != 0)
-            {
-                MessageBox.Show(sb.ToString());
-                return false;
-            }
+            if (sb.Length == 0)
+                return true;
 
-            return true;
+            MessageBox.Show(sb.ToString());
+            return false;
         }
 
         private void BuildAfiliado()
@@ -132,17 +136,11 @@
 
             var response = _afiliadoDao.AltaAfiliado(_afiliado);
 
-            if (response.status == 0)
-                foreach (Afiliado a in _afiliado.Afiliado1)
-                {
-                    response = _afiliadoDao.AltaAfiliado(a);
-                    if (response.status == 1)
-                        break;
-                }
-
             if (response.status == 1)
+            {
                 if (response.errorMessage.Contains("UNIQUE"))
                     MessageBox.Show(String.Format("Ya existe un afiliado con el numero de documento {0}", response.errorMessage.Substring(response.errorMessage.IndexOf("("))));
+            }
             else
                 Close();
         }

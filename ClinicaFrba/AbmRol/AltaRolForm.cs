@@ -38,6 +38,8 @@
 
             _rolDao = rolDao;
             _rol = rol;
+            _rol.Funcionalidads = _rolDao.GetFuncionalidades(_rol.rol_id);
+
             _modify = true;
             _nombre.Text = rol.rol_nombre;
 
@@ -58,7 +60,8 @@
 
         private void AgregarClick(object sender, EventArgs e)
         {
-            if ((Funcionalidad)_funcionalidadCombo.SelectedItem != null)
+            Funcionalidad fun = (Funcionalidad)_funcionalidadCombo.SelectedItem;
+            if (fun != null && !_rol.Funcionalidads.Any(x => x.funcionalidad_id == fun.funcionalidad_id))
                 _rol.Funcionalidads.Add((Funcionalidad)_funcionalidadCombo.SelectedItem);
 
             _funcionalidadesView.Rows.Clear();

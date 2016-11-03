@@ -22,6 +22,11 @@ BEGIN
 END
 
 /****************************************************************************************************************/
+/**PROPIEDADES DE TRANSACCIONES**/
+/****************************************************************************************************************/
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+
+/****************************************************************************************************************/
 /**BORRAR TABLAS**/
 /****************************************************************************************************************/
 IF OBJECT_ID('WASD.Agenda', 'U') IS NOT NULL
@@ -419,7 +424,8 @@ INSERT INTO "WASD".Afiliado(afiliado_id,  usuario_id, estadocivil_id, afiliado_t
 (1, 1, 1, 'DNI', 1, 'M', 1, 'Leonel', 'Dan', 36157488, 'Humboldt', 1168567706, 'asd@asd.asd', '9-1-1992', 0, 1, NULL, 0, NULL);
 SET IDENTITY_INSERT "WASD".Afiliado OFF;
 
-
+INSERT INTO "WASD".EspecialidadPorProfesional VALUES
+(1, 1);
 GO
 
 /****************************************************************************************************************/
@@ -428,6 +434,7 @@ GO
 --Borrado de datos de seed sin migracion
 DELETE WASD.Afiliado WHERE afiliado_id = 1;
 DELETE WASD.PlanMedico WHERE planmedico_id = 1;
+DELETE WASD.EspecialidadPorProfesional WHERE profesional_id = 1;
 DELETE WASD.Especialidad WHERE especialidad_id = 1;
 DELETE WASD.TipoEspecialidad WHERE tipoespecialidad_id = 1;
 
@@ -1233,6 +1240,23 @@ AS RETURN
 		planmedico_id = @planmedicoId;
 GO
 
+/**LISTA DE FUNCIONALIDADES POR ROL**/
+IF EXISTS (SELECT type_desc, type FROM sys.all_objects WITH(NOLOCK) WHERE NAME = 'FuncionalidadesDeRol' AND type = 'IF')
+	DROP FUNCTION WASD.FuncionalidadesDeRol;
+GO
+
+CREATE FUNCTION "WASD".FuncionalidadesDeRol (@rolId INT) RETURNS TABLE 
+AS RETURN 
+	SELECT
+		f.*
+	FROM
+		WASD.Funcionalidad f,
+		WASD.FuncionalidadPorRol r
+	WHERE
+		r.funcionalidad_id = f.funcionalidad_id AND
+		r.rol_id = @rolId;
+GO
+
 /****************************************************************************************************************/
 /**PROCEDURES**/
 /****************************************************************************************************************/
@@ -1334,31 +1358,55 @@ BEGIN
 	DECLARE @monto MONEY;
 	DECLARE @compra_id INT
 	DECLARE @intFlag INT = 1;
+	DECLARE @planActual INT;
+	DECLARE @msg VARCHAR(50);
+	DECLARE @status INT;
 
-	SELECT 
-		@monto = planmedico_precio_bono * @cant
-    FROM 
-    	"WASD".PlanMedico
-    WHERE 
-    	planmedico_id = @planMedicoId; 
+	SELECT
+		@planActual = planmedico_id
+	FROM 
+		WASD.Afiliado
+	WHERE 
+		afiliado_id = @afiliadoId;
 
-	INSERT INTO 
-		"WASD".Compra (afiliado_id, compra_fecha_hora, compra_cantidad, compra_monto)
-    VALUES 
-    	(@afiliadoId, @fecha, @cant, @monto);
+	IF (@planActual = @planmedicoId) BEGIN
 
-    SET @compra_id = (SELECT SCOPE_IDENTITY())
-	
-	WHILE (@intFlag <= @cant)
-	BEGIN
-	
+		SELECT 
+			@monto = planmedico_precio_bono * @cant
+	    FROM 
+	    	"WASD".PlanMedico
+	    WHERE 
+	    	planmedico_id = @planMedicoId; 
+
 		INSERT INTO 
-			"WASD".Bono(planmedico_id, afiliado_id, compra_id, bono_afiliado_usado)
-		VALUES
-			(@planMedicoId, @afiliadoId, @compra_id, NULL);
+			"WASD".Compra (afiliado_id, compra_fecha_hora, compra_cantidad, compra_monto)
+	    VALUES 
+	    	(@afiliadoId, @fecha, @cant, @monto);
+
+	    SET @compra_id = (SELECT SCOPE_IDENTITY())
 		
-		SET @intFlag = @intFlag + 1
+		WHILE (@intFlag <= @cant)
+		BEGIN
+		
+			INSERT INTO 
+				"WASD".Bono(planmedico_id, afiliado_id, compra_id, bono_afiliado_usado)
+			VALUES
+				(@planMedicoId, @afiliadoId, @compra_id, NULL);
+			
+			SET @intFlag = @intFlag + 1
+		END
+
+		SET @msg = 'Se ha comprado ' + @cant + ' bonos a ' + @monto + ' cada uno'; 
+		SET @status = 0;
+		
 	END
+	ELSE BEGIN
+		SET @msg = 'El plan ha cambiado, intente nuevamente'; 
+		SET @status = 1;
+	END
+	SELECT 
+		@msg as errorMessage,
+		@status as status;
 END;
 GO
 
@@ -1462,28 +1510,55 @@ GO
 CREATE PROCEDURE "WASD".CancelarTurno @canceladoPor CHAR(1), @turnoId INT, @tipoCancelacionId INT, @descripcion VARCHAR(50)
 AS
 BEGIN
-	DECLARE @lastInsertedId INT;
+	DECLARE @lastInsertedId INT, @turnoCanceladoId INT, @msg VARCHAR(50), @status INT;
 
-	INSERT INTO
-		WASD.TurnoCancelado (
-			turnocancelado_tipocancelacion_id,
-			turnocancelado_descripcion,
-			turnocancelado_cancelado_por
-		)
-	VALUES (
-		@tipoCancelacionId,
-		@descripcion,
-		@canceladoPor	
-	);
-
-	SELECT @lastInsertedId = SCOPE_IDENTITY();
-	
-	UPDATE 
+	SELECT
+		@turnoCanceladoId = turnocancelado_id
+	FROM
 		WASD.Turno
-	SET
-		turnocancelado_id = @lastInsertedId
 	WHERE
 		turno_id = @turnoId;
+
+	IF (@turnoCanceladoId IS NULL) BEGIN
+
+		INSERT INTO
+			WASD.TurnoCancelado (
+				turnocancelado_tipocancelacion_id,
+				turnocancelado_descripcion,
+				turnocancelado_cancelado_por
+			)
+		VALUES (
+			@tipoCancelacionId,
+			@descripcion,
+			@canceladoPor	
+		);
+
+		SELECT @lastInsertedId = SCOPE_IDENTITY();
+
+		UPDATE 
+			WASD.Turno
+		SET
+			turnocancelado_id = @lastInsertedId
+		WHERE
+			turno_id = @turnoId;
+
+		SET @msg = 'El turno se cancelo exitosamente';
+		SET @status = 0;
+
+	END
+	ELSE BEGIN
+		
+		SET @status = 1;
+		SET @msg = 'El turno ya se habia cancelado';
+		SET @lastInsertedId = 0;
+
+	END
+
+	SELECT
+        @status AS status,
+        @lastInsertedId AS scopeIdentity,
+        @msg AS errorMessage;
+
 END;
 GO
 
@@ -1575,11 +1650,14 @@ BEGIN
 	DECLARE @userId INT, @ultimoNumero INT;
 
 	SELECT TOP 1
-		@ultimoNumero = (FLOOR(afiliado_numero / 100) + 1) * 100
+		@ultimoNumero = (FLOOR(afiliado_numero / 100)) * 100
 	FROM
 		WASD.Afiliado
 	ORDER BY
 		afiliado_numero DESC;
+
+		IF (@afiliado_grupo_familiar IS NULL)
+			SET @ultimoNumero = @ultimoNumero + 100;
 
 	BEGIN TRY
 
@@ -1647,23 +1725,91 @@ BEGIN
     	COMMIT TRANSACTION ALTAAFILIADO
 	END TRY
 
-
 	BEGIN CATCH 
-	  	IF (@@TRANCOUNT > 0)
-	      ROLLBACK TRANSACTION ALTAAFILIADO
 
 	    IF (@afiliado_grupo_familiar IS NOT NULL)
-	    	DELETE 
-	    		WASD.Afiliado
-	    	WHERE
-	    		afiliado_grupo_familiar = @afiliado_grupo_familiar AND
-	    		afiliado_id = @afiliado_grupo_familiar; 
+	    BEGIN
+	    	DELETE FROM
+				WASD.Afiliado
+			WHERE 
+				afiliado_grupo_familiar = @afiliado_grupo_familiar;
+
+			DELETE FROM
+				WASD.Afiliado
+			WHERE
+				afiliado_id = @afiliado_grupo_familiar;
+
+			DELETE FROM 
+				WASD.RolPorUsuario 
+			WHERE
+				usuario_id NOT IN (SELECT usuario_id FROM WASD.Afiliado);
+
+			DELETE FROM 
+				WASD.Usuario 
+			WHERE
+				usuario_id NOT IN (SELECT usuario_id FROM WASD.Afiliado);
+
+	    	COMMIT TRANSACTION ALTAAFILIADO
+
+		END
+		ELSE 
+			ROLLBACK TRANSACTION ALTAAFILIADO	
+
 	    SELECT
 	        1 AS status,
 	        0 AS scopeIdentity,
 	        ERROR_MESSAGE() AS errorMessage;
 
 	END CATCH
+END;
+GO
+
+/**PEDIR TURNO**/
+IF EXISTS (SELECT type_desc, type FROM sys.procedures WITH(NOLOCK) WHERE NAME = 'PedirTurno' AND type = 'P')
+DROP PROCEDURE WASD.PedirTurno;
+GO
+
+CREATE PROCEDURE "WASD".PedirTurno 
+	@afiliadoId INT,
+	@especialidadId INT,
+	@profesionalId INT,
+	@fecha DATE,
+	@hora TIME
+AS
+BEGIN
+	DECLARE @turnoId INT, @status INT, @msg VARCHAR(50);
+	
+	SELECT
+		@turnoId = turno_id
+	FROM
+		WASD.Turno
+	WHERE
+		turnocancelado_id IS NULL AND
+		especialidad_id = @especialidadId AND
+		profesional_id = @profesionalId AND
+		CAST(turno_fecha AS DATE) = CAST(@fecha AS DATE) AND
+		CAST(turno_hora AS TIME) = CAST(@hora AS TIME);
+
+	IF (@turnoId IS NULL) BEGIN
+		INSERT INTO
+			WASD.Turno (afiliado_id, profesional_id, especialidad_id, turnocancelado_id, turno_fecha, turno_hora, turno_llego) 
+		VALUES
+			(@afiliadoId, @profesionalId, @especialidadId, NULL, @fecha, @hora, 0);
+
+		SET @msg = 'Se reservo el turno exitosamente';
+		SET @status = 0;
+		SET @turnoId = SCOPE_IDENTITY();
+	END
+	ELSE BEGIN
+		SET @msg = 'No se puede reservar turno para esa hora, seleccione otra';
+		SET @status = 1;
+		SET @turnoId = 0;
+	END
+
+	SELECT
+        @status AS status,
+        @turnoId AS scopeIdentity,
+        @msg AS errorMessage;
 END;
 GO
 

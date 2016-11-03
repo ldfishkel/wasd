@@ -173,9 +173,9 @@
             return turnos;
         }
 
-        public void CancelarTurno(string canceladoPor, int turnoId, int tipoCancelacionId, string descripcion)
+        public CancelarTurno_Result CancelarTurno(string canceladoPor, int turnoId, int tipoCancelacionId, string descripcion)
         {
-            _ds.CancelarTurno(canceladoPor, turnoId, tipoCancelacionId, descripcion);
+            return _ds.CancelarTurno(canceladoPor, turnoId, tipoCancelacionId, descripcion).SingleOrDefault();
         }
 
         public void CancelarTurnos(DateTime fechaDesde, DateTime fechaHasta, int profesionalId, int tipoCancelacionId, string descripcion)
@@ -183,10 +183,9 @@
             _ds.CancelarTurnoRango(profesionalId, fechaDesde, fechaHasta, tipoCancelacionId, descripcion);
         }
 
-        public void PedirTurno(Turno turno)
+        public PedirTurno_Result PedirTurno(Turno turno)
         {
-            _ds.Turnoes.Add(turno);
-            _ds.SaveChanges();
+            return _ds.PedirTurno(turno.afiliado_id, turno.especialidad_id, turno.profesional_id, turno.turno_fecha, turno.turno_hora).SingleOrDefault();
         }
 
         public void RegistroLlegada(int bonoId, int turnoId)

@@ -151,6 +151,16 @@ namespace ClinicaFrba.DataAccess
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<FechasDisponibles_Result>("[Entities].[FechasDisponibles](@profesionalId, @especialidadId)", profesionalIdParameter, especialidadIdParameter);
         }
     
+        [DbFunction("Entities", "FuncionalidadesDeRol")]
+        public virtual IQueryable<FuncionalidadesDeRol_Result> FuncionalidadesDeRol(Nullable<int> rolId)
+        {
+            var rolIdParameter = rolId.HasValue ?
+                new ObjectParameter("rolId", rolId) :
+                new ObjectParameter("rolId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<FuncionalidadesDeRol_Result>("[Entities].[FuncionalidadesDeRol](@rolId)", rolIdParameter);
+        }
+    
         [DbFunction("Entities", "HistorialDeAfiliado")]
         public virtual IQueryable<HistorialDeAfiliado_Result> HistorialDeAfiliado(Nullable<int> afiliado)
         {
@@ -349,7 +359,7 @@ namespace ClinicaFrba.DataAccess
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BajaRol", rolIdParameter);
         }
     
-        public virtual int CancelarTurno(string canceladoPor, Nullable<int> turnoId, Nullable<int> tipoCancelacionId, string descripcion)
+        public virtual ObjectResult<CancelarTurno_Result> CancelarTurno(string canceladoPor, Nullable<int> turnoId, Nullable<int> tipoCancelacionId, string descripcion)
         {
             var canceladoPorParameter = canceladoPor != null ?
                 new ObjectParameter("canceladoPor", canceladoPor) :
@@ -367,7 +377,7 @@ namespace ClinicaFrba.DataAccess
                 new ObjectParameter("descripcion", descripcion) :
                 new ObjectParameter("descripcion", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CancelarTurno", canceladoPorParameter, turnoIdParameter, tipoCancelacionIdParameter, descripcionParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CancelarTurno_Result>("CancelarTurno", canceladoPorParameter, turnoIdParameter, tipoCancelacionIdParameter, descripcionParameter);
         }
     
         public virtual int CancelarTurnoRango(Nullable<int> profesionalId, Nullable<System.DateTime> fechaDesde, Nullable<System.DateTime> fechaHasta, Nullable<int> tipoCancelacionId, string descripcion)
@@ -472,6 +482,31 @@ namespace ClinicaFrba.DataAccess
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Login_Result>("Login", usernameParameter, passwordParameter);
         }
     
+        public virtual ObjectResult<PedirTurno_Result> PedirTurno(Nullable<int> afiliadoId, Nullable<int> especialidadId, Nullable<int> profesionalId, Nullable<System.DateTime> fecha, Nullable<System.TimeSpan> hora)
+        {
+            var afiliadoIdParameter = afiliadoId.HasValue ?
+                new ObjectParameter("afiliadoId", afiliadoId) :
+                new ObjectParameter("afiliadoId", typeof(int));
+    
+            var especialidadIdParameter = especialidadId.HasValue ?
+                new ObjectParameter("especialidadId", especialidadId) :
+                new ObjectParameter("especialidadId", typeof(int));
+    
+            var profesionalIdParameter = profesionalId.HasValue ?
+                new ObjectParameter("profesionalId", profesionalId) :
+                new ObjectParameter("profesionalId", typeof(int));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(System.DateTime));
+    
+            var horaParameter = hora.HasValue ?
+                new ObjectParameter("hora", hora) :
+                new ObjectParameter("hora", typeof(System.TimeSpan));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PedirTurno_Result>("PedirTurno", afiliadoIdParameter, especialidadIdParameter, profesionalIdParameter, fechaParameter, horaParameter);
+        }
+    
         public virtual int QuitarFuncionalidades(Nullable<int> rolId)
         {
             var rolIdParameter = rolId.HasValue ?
@@ -496,6 +531,15 @@ namespace ClinicaFrba.DataAccess
                 new ObjectParameter("fechaActual", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegistroLlegada", turnoIdParameter, bonoIdParameter, fechaActualParameter);
+        }
+    
+        public virtual int RollBackAfiliados(Nullable<int> afiliadoId)
+        {
+            var afiliadoIdParameter = afiliadoId.HasValue ?
+                new ObjectParameter("afiliadoId", afiliadoId) :
+                new ObjectParameter("afiliadoId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RollBackAfiliados", afiliadoIdParameter);
         }
     
         public virtual int SP_AgregarDiagnostico(Nullable<int> consultamedica, string descripcion)

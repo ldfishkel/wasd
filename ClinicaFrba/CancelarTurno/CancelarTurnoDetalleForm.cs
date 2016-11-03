@@ -83,12 +83,19 @@
             TipoCancelacion tipoCancelacion = (TipoCancelacion)_tipoCancelacion.SelectedItem;
             string descripcion = _descripcion.Text;
 
+            CancelarTurno_Result result = null;
+
             if (_turnoId == 0)
                 _turnoDao.CancelarTurnos(_fechaDesde, _fechaHasta, _profesionalId, tipoCancelacion.tipocancelacion_id, descripcion);
             else if (_afiliado != null)
-                _turnoDao.CancelarTurno("A", _turnoId, tipoCancelacion.tipocancelacion_id, descripcion);
+                result = _turnoDao.CancelarTurno("A", _turnoId, tipoCancelacion.tipocancelacion_id, descripcion);
             else if (_profesional != null)
-                _turnoDao.CancelarTurno("P", _turnoId, tipoCancelacion.tipocancelacion_id, descripcion);
+                result = _turnoDao.CancelarTurno("P", _turnoId, tipoCancelacion.tipocancelacion_id, descripcion);
+
+            if (result != null)
+                MessageBox.Show(result.errorMessage);
+            else
+                MessageBox.Show("Turnos cancelados para el rango");
         }
 
         private bool ValidateFields()

@@ -31,7 +31,7 @@
 
             _estadoCivil.Items.AddRange(_afiliadoDao.GetEstadosCiviles());
 
-            _sexo.Items.AddRange(new string[] { "M", "F", "X" });
+            _sexo.Items.AddRange(new string[] { "M", "F" });
         }
 
         private void AceptarClick(object sender, EventArgs e)
@@ -71,6 +71,9 @@
         {
             StringBuilder sb = new StringBuilder();
 
+            if (((EstadoCivil)_estadoCivil.SelectedItem) == null)
+                sb.AppendLine("Debe completar el estado civil");
+
             if (String.IsNullOrWhiteSpace(_nombre.Text))
                 sb.AppendLine("Debe completar el nombre");
 
@@ -96,13 +99,14 @@
             if (!Int32.TryParse(_telefono.Text, out result))
                 sb.AppendLine("Telefono incorrecto");
 
-            if (sb.Length != 0)
-            {
-                MessageBox.Show(sb.ToString());
-                return false;
-            }
+            if (!Int32.TryParse(_numeroDocumento.Text, out result))
+                sb.AppendLine("Numnero de documento incorrecto");
 
-            return true;
+            if (sb.Length == 0)
+                return true;
+
+            MessageBox.Show(sb.ToString());
+            return false;
         }
     }
 }

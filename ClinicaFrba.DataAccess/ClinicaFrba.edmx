@@ -349,7 +349,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
           <Property Name="tipoespecialidad_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tipoespecialidad_nombre" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Afiliado__afilia__28B0490B">
+        <Association Name="FK__Afiliado__afilia__051CF40B">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="0..1" />
           <End Role="Afiliado1" Type="Self.Afiliado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -361,7 +361,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Afiliado__estado__24DFB827">
+        <Association Name="FK__Afiliado__estado__014C6327">
           <End Role="EstadoCivil" Type="Self.EstadoCivil" Multiplicity="1" />
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -373,7 +373,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Afiliado__planme__26C80099">
+        <Association Name="FK__Afiliado__planme__0334AB99">
           <End Role="PlanMedico" Type="Self.PlanMedico" Multiplicity="1" />
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -385,7 +385,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Afiliado__usuari__23EB93EE">
+        <Association Name="FK__Afiliado__usuari__00583EEE">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -397,7 +397,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Agenda__agenda_h__4640ABF2">
+        <Association Name="FK__Agenda__agenda_h__22AD56F2">
           <End Role="Hora" Type="Self.Hora" Multiplicity="1" />
           <End Role="Agenda" Type="Self.Agenda" Multiplicity="*" />
           <ReferentialConstraint>
@@ -409,7 +409,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Agenda__agenda_h__4734D02B">
+        <Association Name="FK__Agenda__agenda_h__23A17B2B">
           <End Role="Hora" Type="Self.Hora" Multiplicity="1" />
           <End Role="Agenda" Type="Self.Agenda" Multiplicity="*" />
           <ReferentialConstraint>
@@ -421,7 +421,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Agenda__especial__44586380">
+        <Association Name="FK__Agenda__especial__20C50E80">
           <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
           <End Role="Agenda" Type="Self.Agenda" Multiplicity="*" />
           <ReferentialConstraint>
@@ -433,7 +433,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Agenda__profesio__43643F47">
+        <Association Name="FK__Agenda__profesio__1FD0EA47">
           <End Role="Profesional" Type="Self.Profesional" Multiplicity="1" />
           <End Role="Agenda" Type="Self.Agenda" Multiplicity="*" />
           <ReferentialConstraint>
@@ -445,7 +445,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bono__afiliado_i__4DE1CDBA">
+        <Association Name="FK__Bono__afiliado_i__2A4E78BA">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
           <End Role="Bono" Type="Self.Bono" Multiplicity="*" />
           <ReferentialConstraint>
@@ -457,7 +457,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bono__bono_afili__4FCA162C">
+        <Association Name="FK__Bono__bono_afili__2C36C12C">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="0..1" />
           <End Role="Bono" Type="Self.Bono" Multiplicity="*" />
           <ReferentialConstraint>
@@ -469,7 +469,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bono__compra_id__4ED5F1F3">
+        <Association Name="FK__Bono__compra_id__2B429CF3">
           <End Role="Compra" Type="Self.Compra" Multiplicity="1" />
           <End Role="Bono" Type="Self.Bono" Multiplicity="*" />
           <ReferentialConstraint>
@@ -481,7 +481,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bono__planmedico__4CEDA981">
+        <Association Name="FK__Bono__planmedico__295A5481">
           <End Role="PlanMedico" Type="Self.PlanMedico" Multiplicity="1" />
           <End Role="Bono" Type="Self.Bono" Multiplicity="*" />
           <ReferentialConstraint>
@@ -493,7 +493,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Compra__afiliado__4A113CD6">
+        <Association Name="FK__Compra__afiliado__267DE7D6">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
           <End Role="Compra" Type="Self.Compra" Multiplicity="*" />
           <ReferentialConstraint>
@@ -505,7 +505,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ConsultaM__bono___6C6654DA">
+        <Association Name="FK__ConsultaM__bono___48D2FFDA">
           <End Role="Bono" Type="Self.Bono" Multiplicity="1" />
           <End Role="ConsultaMedica" Type="Self.ConsultaMedica" Multiplicity="*" />
           <ReferentialConstraint>
@@ -517,7 +517,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Diagnosti__consu__721F2E30">
+        <Association Name="FK__Diagnosti__consu__4E8BD930">
           <End Role="ConsultaMedica" Type="Self.ConsultaMedica" Multiplicity="1" />
           <End Role="Diagnostico" Type="Self.Diagnostico" Multiplicity="*" />
           <ReferentialConstraint>
@@ -529,7 +529,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Especiali__espec__539AA710">
+        <Association Name="FK__Especiali__espec__30075210">
           <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
           <End Role="EspecialidadPorProfesional" Type="Self.EspecialidadPorProfesional" Multiplicity="*" />
           <ReferentialConstraint>
@@ -541,7 +541,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Especiali__profe__52A682D7">
+        <Association Name="FK__Especiali__profe__2F132DD7">
           <End Role="Profesional" Type="Self.Profesional" Multiplicity="1" />
           <End Role="EspecialidadPorProfesional" Type="Self.EspecialidadPorProfesional" Multiplicity="*" />
           <ReferentialConstraint>
@@ -553,7 +553,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Especiali__tipoe__36FE6862">
+        <Association Name="FK__Especiali__tipoe__136B1362">
           <End Role="TipoEspecialidad" Type="Self.TipoEspecialidad" Multiplicity="1" />
           <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="*" />
           <ReferentialConstraint>
@@ -565,7 +565,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Funcional__funci__5D24114A">
+        <Association Name="FK__Funcional__funci__3990BC4A">
           <End Role="Funcionalidad" Type="Self.Funcionalidad" Multiplicity="1" />
           <End Role="FuncionalidadPorRol" Type="Self.FuncionalidadPorRol" Multiplicity="*" />
           <ReferentialConstraint>
@@ -577,7 +577,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Funcional__rol_i__5C2FED11">
+        <Association Name="FK__Funcional__rol_i__389C9811">
           <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
           <End Role="FuncionalidadPorRol" Type="Self.FuncionalidadPorRol" Multiplicity="*" />
           <ReferentialConstraint>
@@ -589,7 +589,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Historial__afili__60007DF5">
+        <Association Name="FK__Historial__afili__3C6D28F5">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
           <End Role="HistorialPlan" Type="Self.HistorialPlan" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -601,7 +601,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Profesion__usuar__3BC31D7F">
+        <Association Name="FK__Profesion__usuar__182FC87F">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="Profesional" Type="Self.Profesional" Multiplicity="*" />
           <ReferentialConstraint>
@@ -613,7 +613,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RolPorUsu__rol_i__63D10ED9">
+        <Association Name="FK__RolPorUsu__rol_i__403DB9D9">
           <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
           <End Role="RolPorUsuario" Type="Self.RolPorUsuario" Multiplicity="*" />
           <ReferentialConstraint>
@@ -625,7 +625,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RolPorUsu__usuar__62DCEAA0">
+        <Association Name="FK__RolPorUsu__usuar__3F4995A0">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="RolPorUsuario" Type="Self.RolPorUsuario" Multiplicity="*" />
           <ReferentialConstraint>
@@ -637,7 +637,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Sintoma__consult__6F42C185">
+        <Association Name="FK__Sintoma__consult__4BAF6C85">
           <End Role="ConsultaMedica" Type="Self.ConsultaMedica" Multiplicity="1" />
           <End Role="Sintoma" Type="Self.Sintoma" Multiplicity="*" />
           <ReferentialConstraint>
@@ -649,7 +649,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Turno__afiliado___66AD7B84">
+        <Association Name="FK__Turno__afiliado___431A2684">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
           <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
           <ReferentialConstraint>
@@ -661,7 +661,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Turno__especiali__6895C3F6">
+        <Association Name="FK__Turno__especiali__45026EF6">
           <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
           <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
           <ReferentialConstraint>
@@ -673,7 +673,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Turno__profesion__67A19FBD">
+        <Association Name="FK__Turno__profesion__440E4ABD">
           <End Role="Profesional" Type="Self.Profesional" Multiplicity="1" />
           <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
           <ReferentialConstraint>
@@ -685,7 +685,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Turno__turnocanc__6989E82F">
+        <Association Name="FK__Turno__turnocanc__45F6932F">
           <End Role="TurnoCancelado" Type="Self.TurnoCancelado" Multiplicity="0..1" />
           <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
           <ReferentialConstraint>
@@ -697,7 +697,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TurnoCanc__turno__2F5D469A">
+        <Association Name="FK__TurnoCanc__turno__0BC9F19A">
           <End Role="TipoCancelacion" Type="Self.TipoCancelacion" Multiplicity="1" />
           <End Role="TurnoCancelado" Type="Self.TurnoCancelado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -893,6 +893,17 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </CollectionType>
           </ReturnType>
         </Function>
+        <Function Name="FuncionalidadesDeRol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="WASD">
+          <Parameter Name="rolId" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="funcionalidad_id" Type="int" Nullable="false" />
+                <Property Name="funcionalidad_nombre" Type="varchar" MaxLength="25" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <Function Name="HistorialDeAfiliado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="WASD">
           <Parameter Name="afiliado" Type="int" Mode="In" />
           <ReturnType>
@@ -913,6 +924,13 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
         <Function Name="Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="WASD">
           <Parameter Name="username" Type="varchar" Mode="In" />
           <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="PedirTurno" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="WASD">
+          <Parameter Name="afiliadoId" Type="int" Mode="In" />
+          <Parameter Name="especialidadId" Type="int" Mode="In" />
+          <Parameter Name="profesionalId" Type="int" Mode="In" />
+          <Parameter Name="fecha" Type="date" Mode="In" />
+          <Parameter Name="hora" Type="time" Mode="In" />
         </Function>
         <Function Name="PlanMedicoBy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="WASD">
           <Parameter Name="planmedicoId" Type="int" Mode="In" />
@@ -981,6 +999,9 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
               </RowType>
             </CollectionType>
           </ReturnType>
+        </Function>
+        <Function Name="RollBackAfiliados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="WASD">
+          <Parameter Name="afiliadoId" Type="int" Mode="In" />
         </Function>
         <Function Name="SP_AgregarDiagnostico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="WASD">
           <Parameter Name="consultamedica" Type="int" Mode="In" />
@@ -1224,123 +1245,123 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
     [ListaTipoEspecialidades].[tipoespecialidad_nombre] AS [tipoespecialidad_nombre]
     FROM [WASD].[ListaTipoEspecialidades] AS [ListaTipoEspecialidades]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__Afiliado__afilia__28B0490B" Association="Self.FK__Afiliado__afilia__28B0490B">
+          <AssociationSet Name="FK__Afiliado__afilia__051CF40B" Association="Self.FK__Afiliado__afilia__051CF40B">
             <End Role="Afiliado" EntitySet="Afiliado" />
             <End Role="Afiliado1" EntitySet="Afiliado" />
           </AssociationSet>
-          <AssociationSet Name="FK__Afiliado__estado__24DFB827" Association="Self.FK__Afiliado__estado__24DFB827">
+          <AssociationSet Name="FK__Afiliado__estado__014C6327" Association="Self.FK__Afiliado__estado__014C6327">
             <End Role="EstadoCivil" EntitySet="EstadoCivil" />
             <End Role="Afiliado" EntitySet="Afiliado" />
           </AssociationSet>
-          <AssociationSet Name="FK__Afiliado__planme__26C80099" Association="Self.FK__Afiliado__planme__26C80099">
+          <AssociationSet Name="FK__Afiliado__planme__0334AB99" Association="Self.FK__Afiliado__planme__0334AB99">
             <End Role="PlanMedico" EntitySet="PlanMedico" />
             <End Role="Afiliado" EntitySet="Afiliado" />
           </AssociationSet>
-          <AssociationSet Name="FK__Afiliado__usuari__23EB93EE" Association="Self.FK__Afiliado__usuari__23EB93EE">
+          <AssociationSet Name="FK__Afiliado__usuari__00583EEE" Association="Self.FK__Afiliado__usuari__00583EEE">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Afiliado" EntitySet="Afiliado" />
           </AssociationSet>
-          <AssociationSet Name="FK__Agenda__agenda_h__4640ABF2" Association="Self.FK__Agenda__agenda_h__4640ABF2">
+          <AssociationSet Name="FK__Agenda__agenda_h__22AD56F2" Association="Self.FK__Agenda__agenda_h__22AD56F2">
             <End Role="Hora" EntitySet="Hora" />
             <End Role="Agenda" EntitySet="Agenda" />
           </AssociationSet>
-          <AssociationSet Name="FK__Agenda__agenda_h__4734D02B" Association="Self.FK__Agenda__agenda_h__4734D02B">
+          <AssociationSet Name="FK__Agenda__agenda_h__23A17B2B" Association="Self.FK__Agenda__agenda_h__23A17B2B">
             <End Role="Hora" EntitySet="Hora" />
             <End Role="Agenda" EntitySet="Agenda" />
           </AssociationSet>
-          <AssociationSet Name="FK__Agenda__especial__44586380" Association="Self.FK__Agenda__especial__44586380">
+          <AssociationSet Name="FK__Agenda__especial__20C50E80" Association="Self.FK__Agenda__especial__20C50E80">
             <End Role="Especialidad" EntitySet="Especialidad" />
             <End Role="Agenda" EntitySet="Agenda" />
           </AssociationSet>
-          <AssociationSet Name="FK__Agenda__profesio__43643F47" Association="Self.FK__Agenda__profesio__43643F47">
+          <AssociationSet Name="FK__Agenda__profesio__1FD0EA47" Association="Self.FK__Agenda__profesio__1FD0EA47">
             <End Role="Profesional" EntitySet="Profesional" />
             <End Role="Agenda" EntitySet="Agenda" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bono__afiliado_i__4DE1CDBA" Association="Self.FK__Bono__afiliado_i__4DE1CDBA">
+          <AssociationSet Name="FK__Bono__afiliado_i__2A4E78BA" Association="Self.FK__Bono__afiliado_i__2A4E78BA">
             <End Role="Afiliado" EntitySet="Afiliado" />
             <End Role="Bono" EntitySet="Bono" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bono__bono_afili__4FCA162C" Association="Self.FK__Bono__bono_afili__4FCA162C">
+          <AssociationSet Name="FK__Bono__bono_afili__2C36C12C" Association="Self.FK__Bono__bono_afili__2C36C12C">
             <End Role="Afiliado" EntitySet="Afiliado" />
             <End Role="Bono" EntitySet="Bono" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bono__compra_id__4ED5F1F3" Association="Self.FK__Bono__compra_id__4ED5F1F3">
+          <AssociationSet Name="FK__Bono__compra_id__2B429CF3" Association="Self.FK__Bono__compra_id__2B429CF3">
             <End Role="Compra" EntitySet="Compra" />
             <End Role="Bono" EntitySet="Bono" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bono__planmedico__4CEDA981" Association="Self.FK__Bono__planmedico__4CEDA981">
+          <AssociationSet Name="FK__Bono__planmedico__295A5481" Association="Self.FK__Bono__planmedico__295A5481">
             <End Role="PlanMedico" EntitySet="PlanMedico" />
             <End Role="Bono" EntitySet="Bono" />
           </AssociationSet>
-          <AssociationSet Name="FK__Compra__afiliado__4A113CD6" Association="Self.FK__Compra__afiliado__4A113CD6">
+          <AssociationSet Name="FK__Compra__afiliado__267DE7D6" Association="Self.FK__Compra__afiliado__267DE7D6">
             <End Role="Afiliado" EntitySet="Afiliado" />
             <End Role="Compra" EntitySet="Compra" />
           </AssociationSet>
-          <AssociationSet Name="FK__ConsultaM__bono___6C6654DA" Association="Self.FK__ConsultaM__bono___6C6654DA">
+          <AssociationSet Name="FK__ConsultaM__bono___48D2FFDA" Association="Self.FK__ConsultaM__bono___48D2FFDA">
             <End Role="Bono" EntitySet="Bono" />
             <End Role="ConsultaMedica" EntitySet="ConsultaMedica" />
           </AssociationSet>
-          <AssociationSet Name="FK__Diagnosti__consu__721F2E30" Association="Self.FK__Diagnosti__consu__721F2E30">
+          <AssociationSet Name="FK__Diagnosti__consu__4E8BD930" Association="Self.FK__Diagnosti__consu__4E8BD930">
             <End Role="ConsultaMedica" EntitySet="ConsultaMedica" />
             <End Role="Diagnostico" EntitySet="Diagnostico" />
           </AssociationSet>
-          <AssociationSet Name="FK__Especiali__espec__539AA710" Association="Self.FK__Especiali__espec__539AA710">
+          <AssociationSet Name="FK__Especiali__espec__30075210" Association="Self.FK__Especiali__espec__30075210">
             <End Role="Especialidad" EntitySet="Especialidad" />
             <End Role="EspecialidadPorProfesional" EntitySet="EspecialidadPorProfesional" />
           </AssociationSet>
-          <AssociationSet Name="FK__Especiali__profe__52A682D7" Association="Self.FK__Especiali__profe__52A682D7">
+          <AssociationSet Name="FK__Especiali__profe__2F132DD7" Association="Self.FK__Especiali__profe__2F132DD7">
             <End Role="Profesional" EntitySet="Profesional" />
             <End Role="EspecialidadPorProfesional" EntitySet="EspecialidadPorProfesional" />
           </AssociationSet>
-          <AssociationSet Name="FK__Especiali__tipoe__36FE6862" Association="Self.FK__Especiali__tipoe__36FE6862">
+          <AssociationSet Name="FK__Especiali__tipoe__136B1362" Association="Self.FK__Especiali__tipoe__136B1362">
             <End Role="TipoEspecialidad" EntitySet="TipoEspecialidad" />
             <End Role="Especialidad" EntitySet="Especialidad" />
           </AssociationSet>
-          <AssociationSet Name="FK__Funcional__funci__5D24114A" Association="Self.FK__Funcional__funci__5D24114A">
+          <AssociationSet Name="FK__Funcional__funci__3990BC4A" Association="Self.FK__Funcional__funci__3990BC4A">
             <End Role="Funcionalidad" EntitySet="Funcionalidad" />
             <End Role="FuncionalidadPorRol" EntitySet="FuncionalidadPorRol" />
           </AssociationSet>
-          <AssociationSet Name="FK__Funcional__rol_i__5C2FED11" Association="Self.FK__Funcional__rol_i__5C2FED11">
+          <AssociationSet Name="FK__Funcional__rol_i__389C9811" Association="Self.FK__Funcional__rol_i__389C9811">
             <End Role="Rol" EntitySet="Rol" />
             <End Role="FuncionalidadPorRol" EntitySet="FuncionalidadPorRol" />
           </AssociationSet>
-          <AssociationSet Name="FK__Historial__afili__60007DF5" Association="Self.FK__Historial__afili__60007DF5">
+          <AssociationSet Name="FK__Historial__afili__3C6D28F5" Association="Self.FK__Historial__afili__3C6D28F5">
             <End Role="Afiliado" EntitySet="Afiliado" />
             <End Role="HistorialPlan" EntitySet="HistorialPlan" />
           </AssociationSet>
-          <AssociationSet Name="FK__Profesion__usuar__3BC31D7F" Association="Self.FK__Profesion__usuar__3BC31D7F">
+          <AssociationSet Name="FK__Profesion__usuar__182FC87F" Association="Self.FK__Profesion__usuar__182FC87F">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Profesional" EntitySet="Profesional" />
           </AssociationSet>
-          <AssociationSet Name="FK__RolPorUsu__rol_i__63D10ED9" Association="Self.FK__RolPorUsu__rol_i__63D10ED9">
+          <AssociationSet Name="FK__RolPorUsu__rol_i__403DB9D9" Association="Self.FK__RolPorUsu__rol_i__403DB9D9">
             <End Role="Rol" EntitySet="Rol" />
             <End Role="RolPorUsuario" EntitySet="RolPorUsuario" />
           </AssociationSet>
-          <AssociationSet Name="FK__RolPorUsu__usuar__62DCEAA0" Association="Self.FK__RolPorUsu__usuar__62DCEAA0">
+          <AssociationSet Name="FK__RolPorUsu__usuar__3F4995A0" Association="Self.FK__RolPorUsu__usuar__3F4995A0">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="RolPorUsuario" EntitySet="RolPorUsuario" />
           </AssociationSet>
-          <AssociationSet Name="FK__Sintoma__consult__6F42C185" Association="Self.FK__Sintoma__consult__6F42C185">
+          <AssociationSet Name="FK__Sintoma__consult__4BAF6C85" Association="Self.FK__Sintoma__consult__4BAF6C85">
             <End Role="ConsultaMedica" EntitySet="ConsultaMedica" />
             <End Role="Sintoma" EntitySet="Sintoma" />
           </AssociationSet>
-          <AssociationSet Name="FK__Turno__afiliado___66AD7B84" Association="Self.FK__Turno__afiliado___66AD7B84">
+          <AssociationSet Name="FK__Turno__afiliado___431A2684" Association="Self.FK__Turno__afiliado___431A2684">
             <End Role="Afiliado" EntitySet="Afiliado" />
             <End Role="Turno" EntitySet="Turno" />
           </AssociationSet>
-          <AssociationSet Name="FK__Turno__especiali__6895C3F6" Association="Self.FK__Turno__especiali__6895C3F6">
+          <AssociationSet Name="FK__Turno__especiali__45026EF6" Association="Self.FK__Turno__especiali__45026EF6">
             <End Role="Especialidad" EntitySet="Especialidad" />
             <End Role="Turno" EntitySet="Turno" />
           </AssociationSet>
-          <AssociationSet Name="FK__Turno__profesion__67A19FBD" Association="Self.FK__Turno__profesion__67A19FBD">
+          <AssociationSet Name="FK__Turno__profesion__440E4ABD" Association="Self.FK__Turno__profesion__440E4ABD">
             <End Role="Profesional" EntitySet="Profesional" />
             <End Role="Turno" EntitySet="Turno" />
           </AssociationSet>
-          <AssociationSet Name="FK__Turno__turnocanc__6989E82F" Association="Self.FK__Turno__turnocanc__6989E82F">
+          <AssociationSet Name="FK__Turno__turnocanc__45F6932F" Association="Self.FK__Turno__turnocanc__45F6932F">
             <End Role="TurnoCancelado" EntitySet="TurnoCancelado" />
             <End Role="Turno" EntitySet="Turno" />
           </AssociationSet>
-          <AssociationSet Name="FK__TurnoCanc__turno__2F5D469A" Association="Self.FK__TurnoCanc__turno__2F5D469A">
+          <AssociationSet Name="FK__TurnoCanc__turno__0BC9F19A" Association="Self.FK__TurnoCanc__turno__0BC9F19A">
             <End Role="TipoCancelacion" EntitySet="TipoCancelacion" />
             <End Role="TurnoCancelado" EntitySet="TurnoCancelado" />
           </AssociationSet>
@@ -1423,6 +1444,10 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
         </ComplexType>
         <ComplexType Name="FechasDisponibles_Result">
           <Property Name="Fecha" Type="DateTime" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="FuncionalidadesDeRol_Result">
+          <Property Name="funcionalidad_id" Type="Int32" Nullable="false" />
+          <Property Name="funcionalidad_nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
         </ComplexType>
         <ComplexType Name="HistorialDeAfiliado_Result">
           <Property Name="afiliado_id" Type="Int32" Nullable="false" />
@@ -1532,16 +1557,16 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
           <Property Name="afiliado_grupo_familiar" Type="Int32" />
           <Property Name="afiliado_cantidad_bonos_usados" Type="Int16" Nullable="false" />
           <Property Name="afiliado_fecha_baja" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Afiliado1" Relationship="Self.FK__Afiliado__afilia__28B0490B" FromRole="Afiliado" ToRole="Afiliado1" />
-          <NavigationProperty Name="Afiliado2" Relationship="Self.FK__Afiliado__afilia__28B0490B" FromRole="Afiliado1" ToRole="Afiliado" />
-          <NavigationProperty Name="EstadoCivil" Relationship="Self.FK__Afiliado__estado__24DFB827" FromRole="Afiliado" ToRole="EstadoCivil" />
-          <NavigationProperty Name="PlanMedico" Relationship="Self.FK__Afiliado__planme__26C80099" FromRole="Afiliado" ToRole="PlanMedico" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK__Afiliado__usuari__23EB93EE" FromRole="Afiliado" ToRole="Usuario" />
-          <NavigationProperty Name="Bonoes" Relationship="Self.FK__Bono__afiliado_i__4DE1CDBA" FromRole="Afiliado" ToRole="Bono" />
-          <NavigationProperty Name="Bonoes1" Relationship="Self.FK__Bono__bono_afili__4FCA162C" FromRole="Afiliado" ToRole="Bono" />
-          <NavigationProperty Name="Compras" Relationship="Self.FK__Compra__afiliado__4A113CD6" FromRole="Afiliado" ToRole="Compra" />
-          <NavigationProperty Name="HistorialPlan" Relationship="Self.FK__Historial__afili__60007DF5" FromRole="Afiliado" ToRole="HistorialPlan" />
-          <NavigationProperty Name="Turnoes" Relationship="Self.FK__Turno__afiliado___66AD7B84" FromRole="Afiliado" ToRole="Turno" />
+          <NavigationProperty Name="Afiliado1" Relationship="Self.FK__Afiliado__afilia__051CF40B" FromRole="Afiliado" ToRole="Afiliado1" />
+          <NavigationProperty Name="Afiliado2" Relationship="Self.FK__Afiliado__afilia__051CF40B" FromRole="Afiliado1" ToRole="Afiliado" />
+          <NavigationProperty Name="EstadoCivil" Relationship="Self.FK__Afiliado__estado__014C6327" FromRole="Afiliado" ToRole="EstadoCivil" />
+          <NavigationProperty Name="PlanMedico" Relationship="Self.FK__Afiliado__planme__0334AB99" FromRole="Afiliado" ToRole="PlanMedico" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Afiliado__usuari__00583EEE" FromRole="Afiliado" ToRole="Usuario" />
+          <NavigationProperty Name="Bonoes" Relationship="Self.FK__Bono__afiliado_i__2A4E78BA" FromRole="Afiliado" ToRole="Bono" />
+          <NavigationProperty Name="Bonoes1" Relationship="Self.FK__Bono__bono_afili__2C36C12C" FromRole="Afiliado" ToRole="Bono" />
+          <NavigationProperty Name="Compras" Relationship="Self.FK__Compra__afiliado__267DE7D6" FromRole="Afiliado" ToRole="Compra" />
+          <NavigationProperty Name="HistorialPlan" Relationship="Self.FK__Historial__afili__3C6D28F5" FromRole="Afiliado" ToRole="HistorialPlan" />
+          <NavigationProperty Name="Turnoes" Relationship="Self.FK__Turno__afiliado___431A2684" FromRole="Afiliado" ToRole="Turno" />
         </EntityType>
         <EntityType Name="Agendum">
           <Key>
@@ -1555,10 +1580,10 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
           <Property Name="agenda_hora_hasta" Type="Int32" Nullable="false" />
           <Property Name="agenda_fecha_desde" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="agenda_fecha_hasta" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Hora" Relationship="Self.FK__Agenda__agenda_h__4640ABF2" FromRole="Agenda" ToRole="Hora" />
-          <NavigationProperty Name="Hora1" Relationship="Self.FK__Agenda__agenda_h__4734D02B" FromRole="Agenda" ToRole="Hora" />
-          <NavigationProperty Name="Especialidad" Relationship="Self.FK__Agenda__especial__44586380" FromRole="Agenda" ToRole="Especialidad" />
-          <NavigationProperty Name="Profesional" Relationship="Self.FK__Agenda__profesio__43643F47" FromRole="Agenda" ToRole="Profesional" />
+          <NavigationProperty Name="Hora" Relationship="Self.FK__Agenda__agenda_h__22AD56F2" FromRole="Agenda" ToRole="Hora" />
+          <NavigationProperty Name="Hora1" Relationship="Self.FK__Agenda__agenda_h__23A17B2B" FromRole="Agenda" ToRole="Hora" />
+          <NavigationProperty Name="Especialidad" Relationship="Self.FK__Agenda__especial__20C50E80" FromRole="Agenda" ToRole="Especialidad" />
+          <NavigationProperty Name="Profesional" Relationship="Self.FK__Agenda__profesio__1FD0EA47" FromRole="Agenda" ToRole="Profesional" />
         </EntityType>
         <EntityType Name="Bono">
           <Key>
@@ -1569,11 +1594,11 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
           <Property Name="afiliado_id" Type="Int32" Nullable="false" />
           <Property Name="compra_id" Type="Int32" Nullable="false" />
           <Property Name="bono_afiliado_usado" Type="Int32" />
-          <NavigationProperty Name="Afiliado" Relationship="Self.FK__Bono__afiliado_i__4DE1CDBA" FromRole="Bono" ToRole="Afiliado" />
-          <NavigationProperty Name="Afiliado1" Relationship="Self.FK__Bono__bono_afili__4FCA162C" FromRole="Bono" ToRole="Afiliado" />
-          <NavigationProperty Name="Compra" Relationship="Self.FK__Bono__compra_id__4ED5F1F3" FromRole="Bono" ToRole="Compra" />
-          <NavigationProperty Name="PlanMedico" Relationship="Self.FK__Bono__planmedico__4CEDA981" FromRole="Bono" ToRole="PlanMedico" />
-          <NavigationProperty Name="ConsultaMedicas" Relationship="Self.FK__ConsultaM__bono___6C6654DA" FromRole="Bono" ToRole="ConsultaMedica" />
+          <NavigationProperty Name="Afiliado" Relationship="Self.FK__Bono__afiliado_i__2A4E78BA" FromRole="Bono" ToRole="Afiliado" />
+          <NavigationProperty Name="Afiliado1" Relationship="Self.FK__Bono__bono_afili__2C36C12C" FromRole="Bono" ToRole="Afiliado" />
+          <NavigationProperty Name="Compra" Relationship="Self.FK__Bono__compra_id__2B429CF3" FromRole="Bono" ToRole="Compra" />
+          <NavigationProperty Name="PlanMedico" Relationship="Self.FK__Bono__planmedico__295A5481" FromRole="Bono" ToRole="PlanMedico" />
+          <NavigationProperty Name="ConsultaMedicas" Relationship="Self.FK__ConsultaM__bono___48D2FFDA" FromRole="Bono" ToRole="ConsultaMedica" />
         </EntityType>
         <EntityType Name="Compra">
           <Key>
@@ -1584,8 +1609,8 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
           <Property Name="compra_fecha_hora" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="compra_cantidad" Type="Int16" Nullable="false" />
           <Property Name="compra_monto" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <NavigationProperty Name="Afiliado" Relationship="Self.FK__Compra__afiliado__4A113CD6" FromRole="Compra" ToRole="Afiliado" />
-          <NavigationProperty Name="Bonoes" Relationship="Self.FK__Bono__compra_id__4ED5F1F3" FromRole="Compra" ToRole="Bono" />
+          <NavigationProperty Name="Afiliado" Relationship="Self.FK__Compra__afiliado__267DE7D6" FromRole="Compra" ToRole="Afiliado" />
+          <NavigationProperty Name="Bonoes" Relationship="Self.FK__Bono__compra_id__2B429CF3" FromRole="Compra" ToRole="Bono" />
         </EntityType>
         <EntityType Name="ConsultaMedica">
           <Key>
@@ -1595,9 +1620,9 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
           <Property Name="bono_id" Type="Int32" Nullable="false" />
           <Property Name="consultamedica_fecha_hora" Type="DateTime" Precision="3" />
           <Property Name="consultamedica_ocurrio" Type="Boolean" />
-          <NavigationProperty Name="Bono" Relationship="Self.FK__ConsultaM__bono___6C6654DA" FromRole="ConsultaMedica" ToRole="Bono" />
-          <NavigationProperty Name="Diagnosticoes" Relationship="Self.FK__Diagnosti__consu__721F2E30" FromRole="ConsultaMedica" ToRole="Diagnostico" />
-          <NavigationProperty Name="Sintomas" Relationship="Self.FK__Sintoma__consult__6F42C185" FromRole="ConsultaMedica" ToRole="Sintoma" />
+          <NavigationProperty Name="Bono" Relationship="Self.FK__ConsultaM__bono___48D2FFDA" FromRole="ConsultaMedica" ToRole="Bono" />
+          <NavigationProperty Name="Diagnosticoes" Relationship="Self.FK__Diagnosti__consu__4E8BD930" FromRole="ConsultaMedica" ToRole="Diagnostico" />
+          <NavigationProperty Name="Sintomas" Relationship="Self.FK__Sintoma__consult__4BAF6C85" FromRole="ConsultaMedica" ToRole="Sintoma" />
         </EntityType>
         <EntityType Name="Diagnostico">
           <Key>
@@ -1606,7 +1631,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
           <Property Name="diagnostico_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="consultamedica_id" Type="Int32" Nullable="false" />
           <Property Name="diagnostico_descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="ConsultaMedica" Relationship="Self.FK__Diagnosti__consu__721F2E30" FromRole="Diagnostico" ToRole="ConsultaMedica" />
+          <NavigationProperty Name="ConsultaMedica" Relationship="Self.FK__Diagnosti__consu__4E8BD930" FromRole="Diagnostico" ToRole="ConsultaMedica" />
         </EntityType>
         <EntityType Name="Especialidad">
           <Key>
@@ -1615,9 +1640,9 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
           <Property Name="especialidad_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tipoespecialidad_id" Type="Int32" Nullable="false" />
           <Property Name="especialidad_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Agenda" Relationship="Self.FK__Agenda__especial__44586380" FromRole="Especialidad" ToRole="Agenda" />
-          <NavigationProperty Name="TipoEspecialidad" Relationship="Self.FK__Especiali__tipoe__36FE6862" FromRole="Especialidad" ToRole="TipoEspecialidad" />
-          <NavigationProperty Name="Turnoes" Relationship="Self.FK__Turno__especiali__6895C3F6" FromRole="Especialidad" ToRole="Turno" />
+          <NavigationProperty Name="Agenda" Relationship="Self.FK__Agenda__especial__20C50E80" FromRole="Especialidad" ToRole="Agenda" />
+          <NavigationProperty Name="TipoEspecialidad" Relationship="Self.FK__Especiali__tipoe__136B1362" FromRole="Especialidad" ToRole="TipoEspecialidad" />
+          <NavigationProperty Name="Turnoes" Relationship="Self.FK__Turno__especiali__45026EF6" FromRole="Especialidad" ToRole="Turno" />
           <NavigationProperty Name="Profesionals" Relationship="Self.EspecialidadPorProfesional" FromRole="Especialidad" ToRole="Profesional" />
         </EntityType>
         <EntityType Name="EstadoCivil">
@@ -1626,7 +1651,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
           </Key>
           <Property Name="estadocivil_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="estadocivil_nombre" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Afiliadoes" Relationship="Self.FK__Afiliado__estado__24DFB827" FromRole="EstadoCivil" ToRole="Afiliado" />
+          <NavigationProperty Name="Afiliadoes" Relationship="Self.FK__Afiliado__estado__014C6327" FromRole="EstadoCivil" ToRole="Afiliado" />
         </EntityType>
         <EntityType Name="Funcionalidad">
           <Key>
@@ -1643,7 +1668,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
           <Property Name="afiliado_id" Type="Int32" Nullable="false" />
           <Property Name="historial_fecha" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="historial_motivo" Type="String" MaxLength="144" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Afiliado" Relationship="Self.FK__Historial__afili__60007DF5" FromRole="HistorialPlan" ToRole="Afiliado" />
+          <NavigationProperty Name="Afiliado" Relationship="Self.FK__Historial__afili__3C6D28F5" FromRole="HistorialPlan" ToRole="Afiliado" />
         </EntityType>
         <EntityType Name="Hora">
           <Key>
@@ -1651,8 +1676,8 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
           </Key>
           <Property Name="hora_id" Type="Int32" Nullable="false" />
           <Property Name="hora_comienzo" Type="Time" Nullable="false" Precision="7" />
-          <NavigationProperty Name="Agenda" Relationship="Self.FK__Agenda__agenda_h__4640ABF2" FromRole="Hora" ToRole="Agenda" />
-          <NavigationProperty Name="Agenda1" Relationship="Self.FK__Agenda__agenda_h__4734D02B" FromRole="Hora" ToRole="Agenda" />
+          <NavigationProperty Name="Agenda" Relationship="Self.FK__Agenda__agenda_h__22AD56F2" FromRole="Hora" ToRole="Agenda" />
+          <NavigationProperty Name="Agenda1" Relationship="Self.FK__Agenda__agenda_h__23A17B2B" FromRole="Hora" ToRole="Agenda" />
         </EntityType>
         <EntityType Name="PlanMedico">
           <Key>
@@ -1662,8 +1687,8 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
           <Property Name="planmedico_nombre" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="planmedico_cuota" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="planmedico_precio_bono" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <NavigationProperty Name="Afiliadoes" Relationship="Self.FK__Afiliado__planme__26C80099" FromRole="PlanMedico" ToRole="Afiliado" />
-          <NavigationProperty Name="Bonoes" Relationship="Self.FK__Bono__planmedico__4CEDA981" FromRole="PlanMedico" ToRole="Bono" />
+          <NavigationProperty Name="Afiliadoes" Relationship="Self.FK__Afiliado__planme__0334AB99" FromRole="PlanMedico" ToRole="Afiliado" />
+          <NavigationProperty Name="Bonoes" Relationship="Self.FK__Bono__planmedico__295A5481" FromRole="PlanMedico" ToRole="Bono" />
         </EntityType>
         <EntityType Name="Profesional">
           <Key>
@@ -1681,9 +1706,9 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
           <Property Name="profesional_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="profesional_fecha_nacimiento" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="profesional_matricula" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Agenda" Relationship="Self.FK__Agenda__profesio__43643F47" FromRole="Profesional" ToRole="Agenda" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK__Profesion__usuar__3BC31D7F" FromRole="Profesional" ToRole="Usuario" />
-          <NavigationProperty Name="Turnoes" Relationship="Self.FK__Turno__profesion__67A19FBD" FromRole="Profesional" ToRole="Turno" />
+          <NavigationProperty Name="Agenda" Relationship="Self.FK__Agenda__profesio__1FD0EA47" FromRole="Profesional" ToRole="Agenda" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Profesion__usuar__182FC87F" FromRole="Profesional" ToRole="Usuario" />
+          <NavigationProperty Name="Turnoes" Relationship="Self.FK__Turno__profesion__440E4ABD" FromRole="Profesional" ToRole="Turno" />
           <NavigationProperty Name="Especialidads" Relationship="Self.EspecialidadPorProfesional" FromRole="Profesional" ToRole="Especialidad" />
         </EntityType>
         <EntityType Name="Rol">
@@ -1703,7 +1728,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
           <Property Name="sintoma_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="consultamedica_id" Type="Int32" Nullable="false" />
           <Property Name="sintoma_descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="ConsultaMedica" Relationship="Self.FK__Sintoma__consult__6F42C185" FromRole="Sintoma" ToRole="ConsultaMedica" />
+          <NavigationProperty Name="ConsultaMedica" Relationship="Self.FK__Sintoma__consult__4BAF6C85" FromRole="Sintoma" ToRole="ConsultaMedica" />
         </EntityType>
         <EntityType Name="TipoCancelacion">
           <Key>
@@ -1711,7 +1736,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
           </Key>
           <Property Name="tipocancelacion_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tipocancelacion_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="TurnoCanceladoes" Relationship="Self.FK__TurnoCanc__turno__2F5D469A" FromRole="TipoCancelacion" ToRole="TurnoCancelado" />
+          <NavigationProperty Name="TurnoCanceladoes" Relationship="Self.FK__TurnoCanc__turno__0BC9F19A" FromRole="TipoCancelacion" ToRole="TurnoCancelado" />
         </EntityType>
         <EntityType Name="TipoEspecialidad">
           <Key>
@@ -1719,7 +1744,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
           </Key>
           <Property Name="tipoespecialidad_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tipoespecialidad_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Especialidads" Relationship="Self.FK__Especiali__tipoe__36FE6862" FromRole="TipoEspecialidad" ToRole="Especialidad" />
+          <NavigationProperty Name="Especialidads" Relationship="Self.FK__Especiali__tipoe__136B1362" FromRole="TipoEspecialidad" ToRole="Especialidad" />
         </EntityType>
         <EntityType Name="Turno">
           <Key>
@@ -1733,10 +1758,10 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
           <Property Name="turno_fecha" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="turno_hora" Type="Time" Nullable="false" Precision="7" />
           <Property Name="turno_llego" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Afiliado" Relationship="Self.FK__Turno__afiliado___66AD7B84" FromRole="Turno" ToRole="Afiliado" />
-          <NavigationProperty Name="Especialidad" Relationship="Self.FK__Turno__especiali__6895C3F6" FromRole="Turno" ToRole="Especialidad" />
-          <NavigationProperty Name="Profesional" Relationship="Self.FK__Turno__profesion__67A19FBD" FromRole="Turno" ToRole="Profesional" />
-          <NavigationProperty Name="TurnoCancelado" Relationship="Self.FK__Turno__turnocanc__6989E82F" FromRole="Turno" ToRole="TurnoCancelado" />
+          <NavigationProperty Name="Afiliado" Relationship="Self.FK__Turno__afiliado___431A2684" FromRole="Turno" ToRole="Afiliado" />
+          <NavigationProperty Name="Especialidad" Relationship="Self.FK__Turno__especiali__45026EF6" FromRole="Turno" ToRole="Especialidad" />
+          <NavigationProperty Name="Profesional" Relationship="Self.FK__Turno__profesion__440E4ABD" FromRole="Turno" ToRole="Profesional" />
+          <NavigationProperty Name="TurnoCancelado" Relationship="Self.FK__Turno__turnocanc__45F6932F" FromRole="Turno" ToRole="TurnoCancelado" />
         </EntityType>
         <EntityType Name="TurnoCancelado">
           <Key>
@@ -1746,8 +1771,8 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
           <Property Name="turnocancelado_tipocancelacion_id" Type="Int32" Nullable="false" />
           <Property Name="turnocancelado_descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="turnocancelado_cancelado_por" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="TipoCancelacion" Relationship="Self.FK__TurnoCanc__turno__2F5D469A" FromRole="TurnoCancelado" ToRole="TipoCancelacion" />
-          <NavigationProperty Name="Turnoes" Relationship="Self.FK__Turno__turnocanc__6989E82F" FromRole="TurnoCancelado" ToRole="Turno" />
+          <NavigationProperty Name="TipoCancelacion" Relationship="Self.FK__TurnoCanc__turno__0BC9F19A" FromRole="TurnoCancelado" ToRole="TipoCancelacion" />
+          <NavigationProperty Name="Turnoes" Relationship="Self.FK__Turno__turnocanc__45F6932F" FromRole="TurnoCancelado" ToRole="Turno" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -1759,8 +1784,8 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
           <Property Name="usuario_intentos" Type="Byte" Nullable="false" />
           <Property Name="usuario_activo" Type="Boolean" Nullable="false" />
           <Property Name="usuario_nombre_a_mostrar" Type="String" MaxLength="101" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Afiliadoes" Relationship="Self.FK__Afiliado__usuari__23EB93EE" FromRole="Usuario" ToRole="Afiliado" />
-          <NavigationProperty Name="Profesionals" Relationship="Self.FK__Profesion__usuar__3BC31D7F" FromRole="Usuario" ToRole="Profesional" />
+          <NavigationProperty Name="Afiliadoes" Relationship="Self.FK__Afiliado__usuari__00583EEE" FromRole="Usuario" ToRole="Afiliado" />
+          <NavigationProperty Name="Profesionals" Relationship="Self.FK__Profesion__usuar__182FC87F" FromRole="Usuario" ToRole="Profesional" />
           <NavigationProperty Name="Rols" Relationship="Self.RolPorUsuario" FromRole="Usuario" ToRole="Rol" />
         </EntityType>
         <EntityType Name="ListaAfiliado">
@@ -1861,7 +1886,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
           <Property Name="tipoespecialidad_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tipoespecialidad_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Afiliado__afilia__28B0490B">
+        <Association Name="FK__Afiliado__afilia__051CF40B">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="0..1" />
           <End Role="Afiliado1" Type="Self.Afiliado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1873,7 +1898,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Afiliado__estado__24DFB827">
+        <Association Name="FK__Afiliado__estado__014C6327">
           <End Role="EstadoCivil" Type="Self.EstadoCivil" Multiplicity="1" />
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1885,7 +1910,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Afiliado__planme__26C80099">
+        <Association Name="FK__Afiliado__planme__0334AB99">
           <End Role="PlanMedico" Type="Self.PlanMedico" Multiplicity="1" />
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1897,7 +1922,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Afiliado__usuari__23EB93EE">
+        <Association Name="FK__Afiliado__usuari__00583EEE">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1909,7 +1934,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bono__afiliado_i__4DE1CDBA">
+        <Association Name="FK__Bono__afiliado_i__2A4E78BA">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
           <End Role="Bono" Type="Self.Bono" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1921,7 +1946,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bono__bono_afili__4FCA162C">
+        <Association Name="FK__Bono__bono_afili__2C36C12C">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="0..1" />
           <End Role="Bono" Type="Self.Bono" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1933,7 +1958,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Compra__afiliado__4A113CD6">
+        <Association Name="FK__Compra__afiliado__267DE7D6">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
           <End Role="Compra" Type="Self.Compra" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1945,7 +1970,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Historial__afili__60007DF5">
+        <Association Name="FK__Historial__afili__3C6D28F5">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
           <End Role="HistorialPlan" Type="Self.HistorialPlan" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -1957,7 +1982,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Turno__afiliado___66AD7B84">
+        <Association Name="FK__Turno__afiliado___431A2684">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
           <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1969,7 +1994,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Agenda__agenda_h__4640ABF2">
+        <Association Name="FK__Agenda__agenda_h__22AD56F2">
           <End Role="Hora" Type="Self.Hora" Multiplicity="1" />
           <End Role="Agenda" Type="Self.Agendum" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1981,7 +2006,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Agenda__agenda_h__4734D02B">
+        <Association Name="FK__Agenda__agenda_h__23A17B2B">
           <End Role="Hora" Type="Self.Hora" Multiplicity="1" />
           <End Role="Agenda" Type="Self.Agendum" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1993,7 +2018,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Agenda__especial__44586380">
+        <Association Name="FK__Agenda__especial__20C50E80">
           <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
           <End Role="Agenda" Type="Self.Agendum" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2005,7 +2030,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Agenda__profesio__43643F47">
+        <Association Name="FK__Agenda__profesio__1FD0EA47">
           <End Role="Profesional" Type="Self.Profesional" Multiplicity="1" />
           <End Role="Agenda" Type="Self.Agendum" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2017,7 +2042,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bono__compra_id__4ED5F1F3">
+        <Association Name="FK__Bono__compra_id__2B429CF3">
           <End Role="Compra" Type="Self.Compra" Multiplicity="1" />
           <End Role="Bono" Type="Self.Bono" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2029,7 +2054,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bono__planmedico__4CEDA981">
+        <Association Name="FK__Bono__planmedico__295A5481">
           <End Role="PlanMedico" Type="Self.PlanMedico" Multiplicity="1" />
           <End Role="Bono" Type="Self.Bono" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2041,7 +2066,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ConsultaM__bono___6C6654DA">
+        <Association Name="FK__ConsultaM__bono___48D2FFDA">
           <End Role="Bono" Type="Self.Bono" Multiplicity="1" />
           <End Role="ConsultaMedica" Type="Self.ConsultaMedica" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2053,7 +2078,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Diagnosti__consu__721F2E30">
+        <Association Name="FK__Diagnosti__consu__4E8BD930">
           <End Role="ConsultaMedica" Type="Self.ConsultaMedica" Multiplicity="1" />
           <End Role="Diagnostico" Type="Self.Diagnostico" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2065,7 +2090,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Sintoma__consult__6F42C185">
+        <Association Name="FK__Sintoma__consult__4BAF6C85">
           <End Role="ConsultaMedica" Type="Self.ConsultaMedica" Multiplicity="1" />
           <End Role="Sintoma" Type="Self.Sintoma" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2077,7 +2102,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Especiali__tipoe__36FE6862">
+        <Association Name="FK__Especiali__tipoe__136B1362">
           <End Role="TipoEspecialidad" Type="Self.TipoEspecialidad" Multiplicity="1" />
           <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2089,7 +2114,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Turno__especiali__6895C3F6">
+        <Association Name="FK__Turno__especiali__45026EF6">
           <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
           <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2101,7 +2126,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Profesion__usuar__3BC31D7F">
+        <Association Name="FK__Profesion__usuar__182FC87F">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="Profesional" Type="Self.Profesional" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2113,7 +2138,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Turno__profesion__67A19FBD">
+        <Association Name="FK__Turno__profesion__440E4ABD">
           <End Role="Profesional" Type="Self.Profesional" Multiplicity="1" />
           <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2125,7 +2150,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TurnoCanc__turno__2F5D469A">
+        <Association Name="FK__TurnoCanc__turno__0BC9F19A">
           <End Role="TipoCancelacion" Type="Self.TipoCancelacion" Multiplicity="1" />
           <End Role="TurnoCancelado" Type="Self.TurnoCancelado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2137,7 +2162,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Turno__turnocanc__6989E82F">
+        <Association Name="FK__Turno__turnocanc__45F6932F">
           <End Role="TurnoCancelado" Type="Self.TurnoCancelado" Multiplicity="0..1" />
           <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2193,99 +2218,99 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
           <EntitySet Name="ListaTipoCancelaciones" EntityType="Self.ListaTipoCancelacione" />
           <EntitySet Name="ListaTipoDocumentoes" EntityType="Self.ListaTipoDocumento" />
           <EntitySet Name="ListaTipoEspecialidades" EntityType="Self.ListaTipoEspecialidade" />
-          <AssociationSet Name="FK__Afiliado__afilia__28B0490B" Association="Self.FK__Afiliado__afilia__28B0490B">
+          <AssociationSet Name="FK__Afiliado__afilia__051CF40B" Association="Self.FK__Afiliado__afilia__051CF40B">
             <End Role="Afiliado" EntitySet="Afiliadoes" />
             <End Role="Afiliado1" EntitySet="Afiliadoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Afiliado__estado__24DFB827" Association="Self.FK__Afiliado__estado__24DFB827">
+          <AssociationSet Name="FK__Afiliado__estado__014C6327" Association="Self.FK__Afiliado__estado__014C6327">
             <End Role="EstadoCivil" EntitySet="EstadoCivils" />
             <End Role="Afiliado" EntitySet="Afiliadoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Afiliado__planme__26C80099" Association="Self.FK__Afiliado__planme__26C80099">
+          <AssociationSet Name="FK__Afiliado__planme__0334AB99" Association="Self.FK__Afiliado__planme__0334AB99">
             <End Role="PlanMedico" EntitySet="PlanMedicoes" />
             <End Role="Afiliado" EntitySet="Afiliadoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Afiliado__usuari__23EB93EE" Association="Self.FK__Afiliado__usuari__23EB93EE">
+          <AssociationSet Name="FK__Afiliado__usuari__00583EEE" Association="Self.FK__Afiliado__usuari__00583EEE">
             <End Role="Usuario" EntitySet="Usuarios" />
             <End Role="Afiliado" EntitySet="Afiliadoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bono__afiliado_i__4DE1CDBA" Association="Self.FK__Bono__afiliado_i__4DE1CDBA">
+          <AssociationSet Name="FK__Bono__afiliado_i__2A4E78BA" Association="Self.FK__Bono__afiliado_i__2A4E78BA">
             <End Role="Afiliado" EntitySet="Afiliadoes" />
             <End Role="Bono" EntitySet="Bonoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bono__bono_afili__4FCA162C" Association="Self.FK__Bono__bono_afili__4FCA162C">
+          <AssociationSet Name="FK__Bono__bono_afili__2C36C12C" Association="Self.FK__Bono__bono_afili__2C36C12C">
             <End Role="Afiliado" EntitySet="Afiliadoes" />
             <End Role="Bono" EntitySet="Bonoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Compra__afiliado__4A113CD6" Association="Self.FK__Compra__afiliado__4A113CD6">
+          <AssociationSet Name="FK__Compra__afiliado__267DE7D6" Association="Self.FK__Compra__afiliado__267DE7D6">
             <End Role="Afiliado" EntitySet="Afiliadoes" />
             <End Role="Compra" EntitySet="Compras" />
           </AssociationSet>
-          <AssociationSet Name="FK__Historial__afili__60007DF5" Association="Self.FK__Historial__afili__60007DF5">
+          <AssociationSet Name="FK__Historial__afili__3C6D28F5" Association="Self.FK__Historial__afili__3C6D28F5">
             <End Role="Afiliado" EntitySet="Afiliadoes" />
             <End Role="HistorialPlan" EntitySet="HistorialPlans" />
           </AssociationSet>
-          <AssociationSet Name="FK__Turno__afiliado___66AD7B84" Association="Self.FK__Turno__afiliado___66AD7B84">
+          <AssociationSet Name="FK__Turno__afiliado___431A2684" Association="Self.FK__Turno__afiliado___431A2684">
             <End Role="Afiliado" EntitySet="Afiliadoes" />
             <End Role="Turno" EntitySet="Turnoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Agenda__agenda_h__4640ABF2" Association="Self.FK__Agenda__agenda_h__4640ABF2">
+          <AssociationSet Name="FK__Agenda__agenda_h__22AD56F2" Association="Self.FK__Agenda__agenda_h__22AD56F2">
             <End Role="Hora" EntitySet="Horas" />
             <End Role="Agenda" EntitySet="Agenda" />
           </AssociationSet>
-          <AssociationSet Name="FK__Agenda__agenda_h__4734D02B" Association="Self.FK__Agenda__agenda_h__4734D02B">
+          <AssociationSet Name="FK__Agenda__agenda_h__23A17B2B" Association="Self.FK__Agenda__agenda_h__23A17B2B">
             <End Role="Hora" EntitySet="Horas" />
             <End Role="Agenda" EntitySet="Agenda" />
           </AssociationSet>
-          <AssociationSet Name="FK__Agenda__especial__44586380" Association="Self.FK__Agenda__especial__44586380">
+          <AssociationSet Name="FK__Agenda__especial__20C50E80" Association="Self.FK__Agenda__especial__20C50E80">
             <End Role="Especialidad" EntitySet="Especialidads" />
             <End Role="Agenda" EntitySet="Agenda" />
           </AssociationSet>
-          <AssociationSet Name="FK__Agenda__profesio__43643F47" Association="Self.FK__Agenda__profesio__43643F47">
+          <AssociationSet Name="FK__Agenda__profesio__1FD0EA47" Association="Self.FK__Agenda__profesio__1FD0EA47">
             <End Role="Profesional" EntitySet="Profesionals" />
             <End Role="Agenda" EntitySet="Agenda" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bono__compra_id__4ED5F1F3" Association="Self.FK__Bono__compra_id__4ED5F1F3">
+          <AssociationSet Name="FK__Bono__compra_id__2B429CF3" Association="Self.FK__Bono__compra_id__2B429CF3">
             <End Role="Compra" EntitySet="Compras" />
             <End Role="Bono" EntitySet="Bonoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bono__planmedico__4CEDA981" Association="Self.FK__Bono__planmedico__4CEDA981">
+          <AssociationSet Name="FK__Bono__planmedico__295A5481" Association="Self.FK__Bono__planmedico__295A5481">
             <End Role="PlanMedico" EntitySet="PlanMedicoes" />
             <End Role="Bono" EntitySet="Bonoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__ConsultaM__bono___6C6654DA" Association="Self.FK__ConsultaM__bono___6C6654DA">
+          <AssociationSet Name="FK__ConsultaM__bono___48D2FFDA" Association="Self.FK__ConsultaM__bono___48D2FFDA">
             <End Role="Bono" EntitySet="Bonoes" />
             <End Role="ConsultaMedica" EntitySet="ConsultaMedicas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Diagnosti__consu__721F2E30" Association="Self.FK__Diagnosti__consu__721F2E30">
+          <AssociationSet Name="FK__Diagnosti__consu__4E8BD930" Association="Self.FK__Diagnosti__consu__4E8BD930">
             <End Role="ConsultaMedica" EntitySet="ConsultaMedicas" />
             <End Role="Diagnostico" EntitySet="Diagnosticoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Sintoma__consult__6F42C185" Association="Self.FK__Sintoma__consult__6F42C185">
+          <AssociationSet Name="FK__Sintoma__consult__4BAF6C85" Association="Self.FK__Sintoma__consult__4BAF6C85">
             <End Role="ConsultaMedica" EntitySet="ConsultaMedicas" />
             <End Role="Sintoma" EntitySet="Sintomas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Especiali__tipoe__36FE6862" Association="Self.FK__Especiali__tipoe__36FE6862">
+          <AssociationSet Name="FK__Especiali__tipoe__136B1362" Association="Self.FK__Especiali__tipoe__136B1362">
             <End Role="TipoEspecialidad" EntitySet="TipoEspecialidads" />
             <End Role="Especialidad" EntitySet="Especialidads" />
           </AssociationSet>
-          <AssociationSet Name="FK__Turno__especiali__6895C3F6" Association="Self.FK__Turno__especiali__6895C3F6">
+          <AssociationSet Name="FK__Turno__especiali__45026EF6" Association="Self.FK__Turno__especiali__45026EF6">
             <End Role="Especialidad" EntitySet="Especialidads" />
             <End Role="Turno" EntitySet="Turnoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Profesion__usuar__3BC31D7F" Association="Self.FK__Profesion__usuar__3BC31D7F">
+          <AssociationSet Name="FK__Profesion__usuar__182FC87F" Association="Self.FK__Profesion__usuar__182FC87F">
             <End Role="Usuario" EntitySet="Usuarios" />
             <End Role="Profesional" EntitySet="Profesionals" />
           </AssociationSet>
-          <AssociationSet Name="FK__Turno__profesion__67A19FBD" Association="Self.FK__Turno__profesion__67A19FBD">
+          <AssociationSet Name="FK__Turno__profesion__440E4ABD" Association="Self.FK__Turno__profesion__440E4ABD">
             <End Role="Profesional" EntitySet="Profesionals" />
             <End Role="Turno" EntitySet="Turnoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__TurnoCanc__turno__2F5D469A" Association="Self.FK__TurnoCanc__turno__2F5D469A">
+          <AssociationSet Name="FK__TurnoCanc__turno__0BC9F19A" Association="Self.FK__TurnoCanc__turno__0BC9F19A">
             <End Role="TipoCancelacion" EntitySet="TipoCancelacions" />
             <End Role="TurnoCancelado" EntitySet="TurnoCanceladoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Turno__turnocanc__6989E82F" Association="Self.FK__Turno__turnocanc__6989E82F">
+          <AssociationSet Name="FK__Turno__turnocanc__45F6932F" Association="Self.FK__Turno__turnocanc__45F6932F">
             <End Role="TurnoCancelado" EntitySet="TurnoCanceladoes" />
             <End Role="Turno" EntitySet="Turnoes" />
           </AssociationSet>
@@ -2327,6 +2352,9 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
           <FunctionImport Name="FechasDisponibles" IsComposable="true" ReturnType="Collection(GD2C2016Model.FechasDisponibles_Result)">
             <Parameter Name="profesionalId" Mode="In" Type="Int32" />
             <Parameter Name="especialidadId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="FuncionalidadesDeRol" IsComposable="true" ReturnType="Collection(GD2C2016Model.FuncionalidadesDeRol_Result)">
+            <Parameter Name="rolId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="HistorialDeAfiliado" IsComposable="true" ReturnType="Collection(GD2C2016Model.HistorialDeAfiliado_Result)">
             <Parameter Name="afiliado" Mode="In" Type="Int32" />
@@ -2384,7 +2412,7 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
           <FunctionImport Name="BajaRol">
             <Parameter Name="rolId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="CancelarTurno">
+          <FunctionImport Name="CancelarTurno" ReturnType="Collection(GD2C2016Model.CancelarTurno_Result)">
             <Parameter Name="canceladoPor" Mode="In" Type="String" />
             <Parameter Name="turnoId" Mode="In" Type="Int32" />
             <Parameter Name="tipoCancelacionId" Mode="In" Type="Int32" />
@@ -2420,6 +2448,13 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="PedirTurno" ReturnType="Collection(GD2C2016Model.PedirTurno_Result)">
+            <Parameter Name="afiliadoId" Mode="In" Type="Int32" />
+            <Parameter Name="especialidadId" Mode="In" Type="Int32" />
+            <Parameter Name="profesionalId" Mode="In" Type="Int32" />
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="hora" Mode="In" Type="Time" />
+          </FunctionImport>
           <FunctionImport Name="QuitarFuncionalidades">
             <Parameter Name="rolId" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -2427,6 +2462,9 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
             <Parameter Name="turnoId" Mode="In" Type="Int32" />
             <Parameter Name="bonoId" Mode="In" Type="Int32" />
             <Parameter Name="fechaActual" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="RollBackAfiliados">
+            <Parameter Name="afiliadoId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_AgregarDiagnostico">
             <Parameter Name="consultamedica" Mode="In" Type="Int32" />
@@ -2500,9 +2538,19 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
           <Property Type="String" Name="errorMessage" Nullable="false" MaxLength="1" />
           <Property Type="Int32" Name="scopeIdentity" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="CancelarTurno_Result">
+          <Property Type="Int32" Name="status" Nullable="true" />
+          <Property Type="Int32" Name="scopeIdentity" Nullable="true" />
+          <Property Type="String" Name="errorMessage" Nullable="true" MaxLength="50" />
+        </ComplexType>
         <ComplexType Name="Login_Result">
           <Property Type="Int32" Name="usuario_id" Nullable="true" />
           <Property Type="String" Name="message" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="PedirTurno_Result">
+          <Property Type="Int32" Name="status" Nullable="true" />
+          <Property Type="Int32" Name="scopeIdentity" Nullable="true" />
+          <Property Type="String" Name="errorMessage" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="SP_AgregarRol_Result">
           <Property Type="Int32" Name="status" Nullable="false" />
@@ -2996,6 +3044,14 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="GD2C2016Model.Store.FuncionalidadesDeRol" FunctionImportName="FuncionalidadesDeRol">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GD2C2016Model.FuncionalidadesDeRol_Result">
+                <ScalarProperty Name="funcionalidad_id" ColumnName="funcionalidad_id" />
+                <ScalarProperty Name="funcionalidad_nombre" ColumnName="funcionalidad_nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionName="GD2C2016Model.Store.HistorialDeAfiliado" FunctionImportName="HistorialDeAfiliado">
             <ResultMapping>
               <ComplexTypeMapping TypeName="GD2C2016Model.HistorialDeAfiliado_Result">
@@ -3129,7 +3185,15 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
           <FunctionImportMapping FunctionImportName="AltaAgendaProfesional" FunctionName="GD2C2016Model.Store.AltaAgendaProfesional" />
           <FunctionImportMapping FunctionImportName="BajaAfiliado" FunctionName="GD2C2016Model.Store.BajaAfiliado" />
           <FunctionImportMapping FunctionImportName="BajaRol" FunctionName="GD2C2016Model.Store.BajaRol" />
-          <FunctionImportMapping FunctionImportName="CancelarTurno" FunctionName="GD2C2016Model.Store.CancelarTurno" />
+          <FunctionImportMapping FunctionImportName="CancelarTurno" FunctionName="GD2C2016Model.Store.CancelarTurno">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GD2C2016Model.CancelarTurno_Result">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="scopeIdentity" ColumnName="scopeIdentity" />
+                <ScalarProperty Name="errorMessage" ColumnName="errorMessage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CancelarTurnoRango" FunctionName="GD2C2016Model.Store.CancelarTurnoRango" />
           <FunctionImportMapping FunctionImportName="CompraBono" FunctionName="GD2C2016Model.Store.CompraBono" />
           <FunctionImportMapping FunctionImportName="ConsultaMedicaOcurrio" FunctionName="GD2C2016Model.Store.ConsultaMedicaOcurrio" />
@@ -3143,8 +3207,18 @@ warning 6002: The table/view 'GD2C2016.WASD.ListaTipoEspecialidades' does not ha
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PedirTurno" FunctionName="GD2C2016Model.Store.PedirTurno">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GD2C2016Model.PedirTurno_Result">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="scopeIdentity" ColumnName="scopeIdentity" />
+                <ScalarProperty Name="errorMessage" ColumnName="errorMessage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="QuitarFuncionalidades" FunctionName="GD2C2016Model.Store.QuitarFuncionalidades" />
           <FunctionImportMapping FunctionImportName="RegistroLlegada" FunctionName="GD2C2016Model.Store.RegistroLlegada" />
+          <FunctionImportMapping FunctionImportName="RollBackAfiliados" FunctionName="GD2C2016Model.Store.RollBackAfiliados" />
           <FunctionImportMapping FunctionImportName="SP_AgregarDiagnostico" FunctionName="GD2C2016Model.Store.SP_AgregarDiagnostico" />
           <FunctionImportMapping FunctionImportName="SP_AgregarFuncionalidadPorRol" FunctionName="GD2C2016Model.Store.SP_AgregarFuncionalidadPorRol" />
           <FunctionImportMapping FunctionImportName="SP_AgregarRol" FunctionName="GD2C2016Model.Store.SP_AgregarRol">
