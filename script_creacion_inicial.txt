@@ -361,10 +361,8 @@ INSERT INTO WASD.Profesional( usuario_id, profesional_sexo, profesional_tipodocu
 (1, 'M', 'DNI', 36157488, 'Dr Leonel', 'Dan', 'Uriburu', 12345, 'asd@asd.asd', '1-9-1992', 321561);
 
 INSERT INTO "WASD".RolPorUsuario VALUES
-(1, 1);
-INSERT INTO "WASD".RolPorUsuario VALUES
-(1, 2);
-INSERT INTO "WASD".RolPorUsuario VALUES
+(1, 1),
+(1, 2),
 (1, 3);
 
 INSERT INTO "WASD".Hora VALUES
@@ -393,7 +391,8 @@ INSERT INTO "WASD".Hora VALUES
 (23, '18:00'),
 (24, '18:30'),
 (25, '19:00'),
-(26, '19:30');
+(26, '19:30'),
+(27, '20:00');
 
 INSERT INTO "WASD".TipoCancelacion(tipocancelacion_nombre)VALUES
 ('Emergencia'),
@@ -402,41 +401,8 @@ INSERT INTO "WASD".TipoCancelacion(tipocancelacion_nombre)VALUES
 ('Acto de Dios');
 
 /****************************************************************************************************************/
-/**SEED SIN MIGRACION**/
-/****************************************************************************************************************/
-SET IDENTITY_INSERT "WASD".PlanMedico ON
-INSERT INTO "WASD".PlanMedico(planmedico_id, planmedico_nombre, planmedico_cuota, planmedico_precio_bono)
-VALUES (1, 'plan 1', 100, 100);
-SET IDENTITY_INSERT "WASD".PlanMedico OFF;
-
-SET IDENTITY_INSERT "WASD".TipoEspecialidad ON
-INSERT INTO "WASD".TipoEspecialidad(tipoespecialidad_id, tipoespecialidad_nombre)
-VALUES (1, 'tipo especialidad');
-SET IDENTITY_INSERT "WASD".TipoEspecialidad OFF
-
-SET IDENTITY_INSERT "WASD".Especialidad ON
-INSERT INTO "WASD".Especialidad(especialidad_id, tipoespecialidad_id, especialidad_nombre)
-VALUES (1, 1, 'Especialidad');
-SET IDENTITY_INSERT "WASD".Especialidad OFF
-
-SET IDENTITY_INSERT "WASD".Afiliado ON;
-INSERT INTO "WASD".Afiliado(afiliado_id,  usuario_id, estadocivil_id, afiliado_tipodocumento, planmedico_id, afiliado_sexo, afiliado_numero, afiliado_nombre, afiliado_apellido, afiliado_numero_documento, afiliado_direccion, afiliado_telefono, afiliado_mail, afiliado_fecha_nacimiento, afiliado_familiares_dependientes, afiliado_activo, afiliado_grupo_familiar, afiliado_cantidad_bonos_usados, afiliado_fecha_baja) VALUES
-(1, 1, 1, 'DNI', 1, 'M', 1, 'Leonel', 'Dan', 36157488, 'Humboldt', 1168567706, 'asd@asd.asd', '9-1-1992', 0, 1, NULL, 0, NULL);
-SET IDENTITY_INSERT "WASD".Afiliado OFF;
-
-INSERT INTO "WASD".EspecialidadPorProfesional VALUES
-(1, 1);
-GO
-
-/****************************************************************************************************************/
 /**MIGRACION**/
 /****************************************************************************************************************/
---Borrado de datos de seed sin migracion
-DELETE WASD.Afiliado WHERE afiliado_id = 1;
-DELETE WASD.PlanMedico WHERE planmedico_id = 1;
-DELETE WASD.EspecialidadPorProfesional WHERE profesional_id = 1;
-DELETE WASD.Especialidad WHERE especialidad_id = 1;
-DELETE WASD.TipoEspecialidad WHERE tipoespecialidad_id = 1;
 
 /**PLANES**/
 SET IDENTITY_INSERT "WASD".PlanMedico ON
@@ -660,21 +626,6 @@ FROM gd_esquema.Maestra
 WHERE Consulta_Enfermedades IS NOT NULL
 ORDER BY Turno_Numero ASC;
 GO
-
-/****************************************************************************************************************/
-/**SEED POST MIGRACION**/
-/****************************************************************************************************************/
-/*Afiliado de pruebas puesto aca por la necesidad de tener planes medicos creados previamente*/
-SET IDENTITY_INSERT "WASD".Afiliado ON;
-INSERT INTO "WASD".Afiliado(afiliado_id,  usuario_id, estadocivil_id, afiliado_tipodocumento, planmedico_id, afiliado_sexo, afiliado_numero, afiliado_nombre, afiliado_apellido, afiliado_numero_documento, afiliado_direccion, afiliado_telefono, afiliado_mail, afiliado_fecha_nacimiento, afiliado_familiares_dependientes, afiliado_activo, afiliado_grupo_familiar, afiliado_cantidad_bonos_usados, afiliado_fecha_baja) VALUES
-(1, 1, 1, 'DNI', 555555, 'M', 1, 'Leonel', 'Dan', 36157488, 'Humboldt', 1168567706, 'asd@asd.asd', '9-1-1992', 0, 1, NULL, 0, NULL);
-SET IDENTITY_INSERT "WASD".Afiliado OFF;
-
-
-/*Relacion entre Profesional de pruebas y especialidades de la migracion*/
-INSERT INTO "WASD".EspecialidadPorProfesional VALUES
-(1, 10016),
-(1, 10017);
 
 /****************************************************************************************************************/
 /**VISTAS**/
