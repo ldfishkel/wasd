@@ -216,7 +216,7 @@ CREATE TABLE "WASD".Agenda (
 	agenda_id INT PRIMARY KEY IDENTITY(1,1),
 	profesional_id INT NOT NULL REFERENCES "WASD".Profesional(profesional_id),
 	especialidad_id INT NOT NULL REFERENCES "WASD".Especialidad(especialidad_id),
-	agenda_dia CHAR(9) CHECK (agenda_dia IN ('LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES', 'SABADO')),
+	agenda_dia CHAR(9) CHECK (agenda_dia IN ('LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES', 'SABADO', 'DOMINGO')),
 	agenda_hora_desde INT NOT NULL REFERENCES "WASD".Hora(hora_id),
 	agenda_hora_hasta INT NOT NULL REFERENCES "WASD".Hora(hora_id),
 	agenda_fecha_desde DATE NOT NULL,
@@ -287,10 +287,11 @@ CREATE TABLE "WASD".Turno (
 );
 
 CREATE TABLE "WASD".ConsultaMedica (
-	consultamedica_id INT PRIMARY KEY,
+	consultamedica_id INT NOT NULL REFERENCES "WASD".Turno(turno_id),
 	bono_id INT NOT NULL REFERENCES "WASD".Bono(bono_id),
 	consultamedica_fecha_hora DATETIME,
-	consultamedica_ocurrio BIT
+	consultamedica_ocurrio BIT,
+	PRIMARY KEY (consultamedica_id)
 );
 
 CREATE TABLE "WASD".Sintoma (
@@ -356,9 +357,6 @@ INSERT INTO "WASD".Usuario(usuario_id, usuario_nombre, usuario_password, usuario
 usuario_nombre_a_mostrar) VALUES
 (1, 'admin', 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7', 0, 1, 'Administrador General')
 SET IDENTITY_INSERT "WASD".Usuario OFF;
-
-INSERT INTO WASD.Profesional( usuario_id, profesional_sexo, profesional_tipodocumento, profesional_numero_documento, profesional_nombre, profesional_apellido, profesional_direccion, profesional_telefono, profesional_mail, profesional_fecha_nacimiento, profesional_matricula) VALUES
-(1, 'M', 'DNI', 36157488, 'Dr Leonel', 'Dan', 'Uriburu', 12345, 'asd@asd.asd', '1-9-1992', 321561);
 
 INSERT INTO "WASD".RolPorUsuario VALUES
 (1, 1),
@@ -625,6 +623,82 @@ SELECT Turno_Numero, Consulta_Enfermedades
 FROM gd_esquema.Maestra
 WHERE Consulta_Enfermedades IS NOT NULL
 ORDER BY Turno_Numero ASC;
+GO
+
+/**AGENDAS PROFESIONALES**/
+SET DATEFIRST 7
+DECLARE @mid INT, @mdni INT, @dia INT, @hini INT, @hfin INT, @esp INT
+DECLARE @fdesde DATE, @fhasta DATE
+
+/**Tomamos cada uno de los profesionales**/
+DECLARE medicos CURSOR FOR
+SELECT profesional_id, profesional_numero_documento
+FROM "WASD".Profesional
+ORDER BY profesional_id
+
+OPEN medicos
+FETCH FROM medicos INTO @mid, @mdni
+WHILE @@FETCH_STATUS = 0
+BEGIN
+	/**Tomamos cada uno de los dias de la semana que ese profesional atendio en la tabla maestra**/
+	DECLARE dias_medico CURSOR FOR
+	SELECT DISTINCT(DATEPART(weekday, Turno_Fecha))
+	FROM gd_esquema.Maestra
+	WHERE Turno_Fecha IS NOT NULL
+	AND Medico_Dni = @mdni
+	
+	OPEN dias_medico
+	FETCH FROM dias_medico INTO @dia
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		/**Tomamos cada una de las especialidades que ese profesional atendio en ese dia de la semana**/
+		DECLARE especialidades_medico CURSOR FOR
+		SELECT DISTINCT(Especialidad_Codigo)
+		FROM gd_esquema.Maestra
+		WHERE Turno_Fecha IS NOT NULL
+		AND Medico_Dni = @mdni
+		AND DATEPART(weekday, Turno_Fecha) = @dia
+		
+		OPEN especialidades_medico
+		FETCH FROM especialidades_medico INTO @esp
+		WHILE @@FETCH_STATUS = 0
+		BEGIN
+			/**Tomamos fechas minima y maxima, y horas minima y maxima e insertamos todo**/
+			INSERT INTO "WASD".Agenda(profesional_id, especialidad_id, agenda_dia, agenda_hora_desde, agenda_hora_hasta,
+			agenda_fecha_desde, agenda_fecha_hasta)
+			SELECT @mid, @esp,
+			CASE @dia
+				WHEN 1 THEN 'DOMINGO'
+				WHEN 2 THEN 'LUNES'
+				WHEN 3 THEN 'MARTES'
+				WHEN 4 THEN 'MIERCOLES'
+				WHEN 5 THEN 'JUEVES'
+				WHEN 6 THEN	'VIERNES'
+				ELSE 'SABADO'
+			END,
+			(MIN(DATEPART(hour, Turno_Fecha)) - 7) * 2 + 1,
+			(MAX(DATEPART(hour, Turno_Fecha)) - 7) * 2 + 3,
+			CAST(MIN(Turno_Fecha) AS DATE), CAST(MAX(Turno_Fecha) AS DATE)
+			FROM gd_esquema.Maestra
+			WHERE Turno_Fecha IS NOT NULL
+			AND Medico_Dni = @mdni
+			AND DATEPART(weekday, Turno_Fecha) = @dia
+			AND Especialidad_Codigo = @esp
+		
+			FETCH NEXT FROM especialidades_medico INTO @esp
+		END
+		CLOSE especialidades_medico
+		DEALLOCATE especialidades_medico
+		
+		FETCH NEXT FROM dias_medico INTO @dia
+	END
+	CLOSE dias_medico
+	DEALLOCATE dias_medico
+	
+	FETCH NEXT FROM medicos INTO @mid, @mdni
+END;
+CLOSE medicos
+DEALLOCATE medicos
 GO
 
 /****************************************************************************************************************/
