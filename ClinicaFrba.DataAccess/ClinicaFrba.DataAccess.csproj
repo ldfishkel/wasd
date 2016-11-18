@@ -105,6 +105,9 @@
     <Compile Include="Compra.cs">
       <DependentUpon>ClinicaFrba.tt</DependentUpon>
     </Compile>
+    <Compile Include="CompraBono_Result.cs">
+      <DependentUpon>ClinicaFrba.tt</DependentUpon>
+    </Compile>
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Configuration\ExternalConfiguration.cs" />
     <Compile Include="ConsultaMedica.cs">

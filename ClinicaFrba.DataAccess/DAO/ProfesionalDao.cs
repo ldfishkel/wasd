@@ -155,7 +155,7 @@
 
         public List<DateTime> GetFechasDisponibles(Profesional profesional, Especialidad especialidad)
         {
-            return _ds.FechasDisponibles(profesional.profesional_id, especialidad.especialidad_id).Select(x => x.Fecha).ToList();
+            return _ds.FechasDisponibles(profesional.profesional_id, especialidad.especialidad_id, Config.SystemDate().Year).Select(x => x.Fecha).ToList();
         }
 
         public List<int> GetHorasDisponibles(Profesional profesional, Especialidad especialidad, string fecha)

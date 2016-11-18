@@ -1,4 +1,4 @@
-﻿/**SCRIPT DE CREACION INICIAL**/
+/**SCRIPT DE CREACION INICIAL**/
 /**GRUPO NUMERO 52 WASD**/
 /**GESTION DE DATOS SEGUNDO CUATRIMESTRE 2016**/
 
@@ -263,10 +263,10 @@ CREATE TABLE "WASD".FuncionalidadPorRol (
 );
 
 CREATE TABLE "WASD".HistorialPlan (
+	historialplan_id INT PRIMARY KEY IDENTITY(1,1),
 	afiliado_id INT NOT NULL REFERENCES "WASD".Afiliado(afiliado_id),
 	historial_fecha DATE NOT NULL,
-	historial_motivo VARCHAR(144) NOT NULL,
-	PRIMARY KEY (afiliado_id)
+	historial_motivo VARCHAR(144) NOT NULL
 );
 
 CREATE TABLE "WASD".RolPorUsuario (
@@ -1009,7 +1009,7 @@ IF OBJECT_ID(N'WASD.FechasDisponibles', N'TF') IS NOT NULL
 	DROP FUNCTION "WASD".FechasDisponibles;
 GO
 
-CREATE FUNCTION "WASD".FechasDisponibles (@profesionalId INT, @especialidadId INT) RETURNS @retFechas TABLE (Fecha DATE NOT NULL)
+CREATE FUNCTION "WASD".FechasDisponibles (@profesionalId INT, @especialidadId INT, @anio INT) RETURNS @retFechas TABLE (Fecha DATE NOT NULL)
 AS BEGIN
 	DECLARE @Date1 DATE, @Date2 DATE, @Fecha DATE;
 
@@ -1020,7 +1020,8 @@ AS BEGIN
 		"WASD".Agenda
 	WHERE 
 		profesional_id = @profesionalId AND 
-		especialidad_id = @especialidadId;
+		especialidad_id = @especialidadId AND
+		YEAR(agenda_fecha_desde) = @anio;
 		
     DECLARE fechasCursor CURSOR FOR
 	
@@ -1051,6 +1052,7 @@ AS BEGIN
 									FROM 
 										"WASD".Agenda
 									WHERE
+										YEAR(agenda_fecha_desde) = @anio AND
 										profesional_id = @profesionalId AND 
 										especialidad_id = @especialidadId))
 			INSERT INTO @retFechas VALUES (@Fecha)
@@ -1082,7 +1084,8 @@ AS RETURN
 		b.bono_afiliado_usado IS NULL AND
 		b.afiliado_id = a.afiliado_id AND
 		CAST(ROUND(a.afiliado_numero / 100, 0, 1) AS INT) = CAST(ROUND(@nroAfiliado / 100, 0, 1) AS INT) AND
-		a.planmedico_id = b.planmedico_id;
+		a.planmedico_id = b.planmedico_id AND
+		b.planmedico_id = (select planmedico_id from WASD.Afiliado WHERE afiliado_numero = @nroAfiliado);
 GO
 
 /**LISTA DE TURNOS DEL DIA DE UN PROFESIONAL FILTRADO POR ESPECIALIDAD PARA EL REGISTRO DE LLEGADA**/
@@ -1421,7 +1424,7 @@ BEGIN
 			SET @intFlag = @intFlag + 1
 		END
 
-		SET @msg = 'Se ha comprado ' + @cant + ' bonos a ' + @monto + ' cada uno'; 
+		SET @msg = 'Se ha comprado ' + CAST(@cant AS VARCHAR) + ' bonos a ' + CAST(@monto AS VARCHAR) + ' cada uno'; 
 		SET @status = 0;
 		
 	END
@@ -1681,8 +1684,8 @@ BEGIN
 	ORDER BY
 		afiliado_numero DESC;
 
-		IF (@afiliado_grupo_familiar IS NULL)
-			SET @ultimoNumero = @ultimoNumero + 100;
+	IF (@afiliado_grupo_familiar IS NULL)
+		SET @ultimoNumero = @ultimoNumero + 100;
 
 	BEGIN TRY
 
@@ -1692,7 +1695,7 @@ BEGIN
 				"WASD".Usuario(usuario_nombre, usuario_password, usuario_intentos, usuario_activo, usuario_nombre_a_mostrar) 
 			VALUES
 				(@afiliado_numero_documento, 
-				'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7', 
+				'8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 
 				0, 
 				1,
 				@afiliado_apellido + ', ' + @afiliado_nombre);
@@ -1767,12 +1770,13 @@ BEGIN
 			DELETE FROM 
 				WASD.RolPorUsuario 
 			WHERE
-				usuario_id NOT IN (SELECT usuario_id FROM WASD.Afiliado);
+				usuario_id NOT IN (SELECT usuario_id FROM WASD.Afiliado UNION SELECT usuario_id FROM WASD.Profesional UNION SELECT usuario_id FROM WASD.RolPorUsuario WHERE rol_id = 1) AND
+				rol_id = 2;
 
 			DELETE FROM 
 				WASD.Usuario 
 			WHERE
-				usuario_id NOT IN (SELECT usuario_id FROM WASD.Afiliado);
+				usuario_id NOT IN (SELECT usuario_id FROM WASD.Afiliado UNION SELECT usuario_id FROM WASD.Profesional UNION SELECT usuario_id FROM WASD.RolPorUsuario WHERE rol_id = 1);
 
 	    	COMMIT TRANSACTION ALTAAFILIADO
 

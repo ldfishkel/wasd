@@ -132,6 +132,12 @@
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="IoC\Bootstrapper.cs" />
+    <Compile Include="RegistrarAgenda\AgendasAnterioresForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegistrarAgenda\AgendasAnterioresForm.Designer.cs">
+      <DependentUpon>AgendasAnterioresForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="RegistrarLlegada\BonosViewForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -230,6 +236,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="RegistrarAgenda\AgendasAnterioresForm.resx">
+      <DependentUpon>AgendasAnterioresForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RegistrarAgenda\RegistrarAgendaForm.resx">
       <DependentUpon>RegistrarAgendaForm.cs</DependentUpon>
     </EmbeddedResource>

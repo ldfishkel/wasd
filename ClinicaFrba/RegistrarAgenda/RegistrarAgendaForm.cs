@@ -21,6 +21,8 @@
         private List<Hora> _horasSemena;
         private List<Hora> _horasSabado;
 
+        private List<Agendum> _agendaAnterior;
+
         #endregion
 
         #region [INIT]
@@ -53,7 +55,13 @@
         private void InitializeAgenda()
         {
             _profesional.Agenda = _profesionalDao.GetAgenda(_profesional.profesional_id);
+            
+            var year = Config.SystemDate().Year;
 
+            _agendaAnterior = _profesional.Agenda.Where(x => x.agenda_fecha_desde.Year < year).ToList();
+
+            _profesional.Agenda = _profesional.Agenda.Where(x => x.agenda_fecha_desde.Year == year).ToList();
+            
             if (_profesional.Agenda != null && _profesional.Agenda.Count == 0)
                 InitializeComboboxes();
             else
@@ -96,7 +104,7 @@
             _fechaDesde.Value = _profesional.Agenda.First().agenda_fecha_desde;
             _fechaHasta.Value = _profesional.Agenda.First().agenda_fecha_hasta;
 
-            _panel.Enabled = false;
+            _agendaActualGroup.Enabled = false;
         }
 
         private void ShowAgenda(CheckBox check, ComboBox desde, ComboBox hasta, ComboBox especialidad, Agendum agenda)
@@ -116,7 +124,7 @@
             if (ValidateFields())
             {
                 SaveAgendum();
-                _panel.Enabled = false;
+                _agendaActualGroup.Enabled = false;
             }
         }
 
@@ -276,5 +284,12 @@
         }
 
         #endregion
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var form = new AgendasAnterioresForm(_agendaAnterior, _profesionalDao);
+
+            form.Show();
+        }
     }
 }

@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this._panel = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this._fechaHasta = new System.Windows.Forms.DateTimePicker();
+            this._fechaDesde = new System.Windows.Forms.DateTimePicker();
             this._registrarAgendaBtn = new System.Windows.Forms.Button();
             this._sabadoGroupBox = new System.Windows.Forms.GroupBox();
             this._sabadoCheck = new System.Windows.Forms.CheckBox();
@@ -60,39 +65,75 @@
             this._lunesEspecialidad = new System.Windows.Forms.ComboBox();
             this._lunesDesde = new System.Windows.Forms.ComboBox();
             this._lunesHasta = new System.Windows.Forms.ComboBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this._fechaDesde = new System.Windows.Forms.DateTimePicker();
-            this._fechaHasta = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this._agendaActualGroup = new System.Windows.Forms.GroupBox();
             this._panel.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this._sabadoGroupBox.SuspendLayout();
             this._viernesGroupBox.SuspendLayout();
             this._juevesGroupBox.SuspendLayout();
             this._miercolesGroupBox.SuspendLayout();
             this._martesGroupBox.SuspendLayout();
             this._lunesGroupBox.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this._agendaActualGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // _panel
             // 
-            this._panel.Controls.Add(this.groupBox1);
-            this._panel.Controls.Add(this._registrarAgendaBtn);
-            this._panel.Controls.Add(this._sabadoGroupBox);
-            this._panel.Controls.Add(this._viernesGroupBox);
-            this._panel.Controls.Add(this._juevesGroupBox);
-            this._panel.Controls.Add(this._miercolesGroupBox);
-            this._panel.Controls.Add(this._martesGroupBox);
-            this._panel.Controls.Add(this._lunesGroupBox);
-            this._panel.Location = new System.Drawing.Point(13, 13);
+            this._panel.Controls.Add(this._agendaActualGroup);
+            this._panel.Controls.Add(this.button1);
+            this._panel.Location = new System.Drawing.Point(19, 20);
             this._panel.Name = "_panel";
-            this._panel.Size = new System.Drawing.Size(534, 381);
+            this._panel.Size = new System.Drawing.Size(541, 429);
             this._panel.TabIndex = 0;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this._fechaHasta);
+            this.groupBox1.Controls.Add(this._fechaDesde);
+            this.groupBox1.Location = new System.Drawing.Point(6, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(504, 43);
+            this.groupBox1.TabIndex = 10;
+            this.groupBox1.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(266, 20);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Hasta";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(17, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Desde";
+            // 
+            // _fechaHasta
+            // 
+            this._fechaHasta.Location = new System.Drawing.Point(313, 17);
+            this._fechaHasta.Name = "_fechaHasta";
+            this._fechaHasta.Size = new System.Drawing.Size(184, 20);
+            this._fechaHasta.TabIndex = 1;
+            // 
+            // _fechaDesde
+            // 
+            this._fechaDesde.Location = new System.Drawing.Point(68, 17);
+            this._fechaDesde.Name = "_fechaDesde";
+            this._fechaDesde.Size = new System.Drawing.Size(180, 20);
+            this._fechaDesde.TabIndex = 0;
             // 
             // _registrarAgendaBtn
             // 
-            this._registrarAgendaBtn.Location = new System.Drawing.Point(10, 344);
+            this._registrarAgendaBtn.Location = new System.Drawing.Point(6, 353);
             this._registrarAgendaBtn.Name = "_registrarAgendaBtn";
             this._registrarAgendaBtn.Size = new System.Drawing.Size(504, 23);
             this._registrarAgendaBtn.TabIndex = 12;
@@ -106,7 +147,7 @@
             this._sabadoGroupBox.Controls.Add(this._sabadoEspecialidad);
             this._sabadoGroupBox.Controls.Add(this._sabadoDesde);
             this._sabadoGroupBox.Controls.Add(this._sabadoHasta);
-            this._sabadoGroupBox.Location = new System.Drawing.Point(10, 294);
+            this._sabadoGroupBox.Location = new System.Drawing.Point(6, 303);
             this._sabadoGroupBox.Name = "_sabadoGroupBox";
             this._sabadoGroupBox.Size = new System.Drawing.Size(504, 43);
             this._sabadoGroupBox.TabIndex = 11;
@@ -155,7 +196,7 @@
             this._viernesGroupBox.Controls.Add(this._viernesEspecialidad);
             this._viernesGroupBox.Controls.Add(this._viernesDesde);
             this._viernesGroupBox.Controls.Add(this._viernesHasta);
-            this._viernesGroupBox.Location = new System.Drawing.Point(10, 245);
+            this._viernesGroupBox.Location = new System.Drawing.Point(6, 254);
             this._viernesGroupBox.Name = "_viernesGroupBox";
             this._viernesGroupBox.Size = new System.Drawing.Size(504, 43);
             this._viernesGroupBox.TabIndex = 11;
@@ -204,7 +245,7 @@
             this._juevesGroupBox.Controls.Add(this._juevesEspecialidad);
             this._juevesGroupBox.Controls.Add(this._juevesDesde);
             this._juevesGroupBox.Controls.Add(this._juevesHasta);
-            this._juevesGroupBox.Location = new System.Drawing.Point(10, 196);
+            this._juevesGroupBox.Location = new System.Drawing.Point(6, 205);
             this._juevesGroupBox.Name = "_juevesGroupBox";
             this._juevesGroupBox.Size = new System.Drawing.Size(504, 43);
             this._juevesGroupBox.TabIndex = 11;
@@ -253,7 +294,7 @@
             this._miercolesGroupBox.Controls.Add(this._miercolesEspecialidad);
             this._miercolesGroupBox.Controls.Add(this._miercolesDesde);
             this._miercolesGroupBox.Controls.Add(this._miercolesHasta);
-            this._miercolesGroupBox.Location = new System.Drawing.Point(10, 147);
+            this._miercolesGroupBox.Location = new System.Drawing.Point(6, 156);
             this._miercolesGroupBox.Name = "_miercolesGroupBox";
             this._miercolesGroupBox.Size = new System.Drawing.Size(504, 43);
             this._miercolesGroupBox.TabIndex = 11;
@@ -302,7 +343,7 @@
             this._martesGroupBox.Controls.Add(this._martesEspecialidad);
             this._martesGroupBox.Controls.Add(this._martesDesde);
             this._martesGroupBox.Controls.Add(this._martesHasta);
-            this._martesGroupBox.Location = new System.Drawing.Point(10, 98);
+            this._martesGroupBox.Location = new System.Drawing.Point(6, 107);
             this._martesGroupBox.Name = "_martesGroupBox";
             this._martesGroupBox.Size = new System.Drawing.Size(504, 43);
             this._martesGroupBox.TabIndex = 10;
@@ -351,7 +392,7 @@
             this._lunesGroupBox.Controls.Add(this._lunesEspecialidad);
             this._lunesGroupBox.Controls.Add(this._lunesDesde);
             this._lunesGroupBox.Controls.Add(this._lunesHasta);
-            this._lunesGroupBox.Location = new System.Drawing.Point(10, 49);
+            this._lunesGroupBox.Location = new System.Drawing.Point(6, 58);
             this._lunesGroupBox.Name = "_lunesGroupBox";
             this._lunesGroupBox.Size = new System.Drawing.Size(504, 43);
             this._lunesGroupBox.TabIndex = 9;
@@ -394,59 +435,43 @@
             this._lunesHasta.TabIndex = 7;
             this._lunesHasta.Text = "Hora Hasta";
             // 
-            // groupBox1
+            // button1
             // 
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this._fechaHasta);
-            this.groupBox1.Controls.Add(this._fechaDesde);
-            this.groupBox1.Location = new System.Drawing.Point(10, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(504, 43);
-            this.groupBox1.TabIndex = 10;
-            this.groupBox1.TabStop = false;
+            this.button1.Location = new System.Drawing.Point(10, 398);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(521, 23);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "Ver Agendas Anteriores";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // _fechaDesde
+            // _agendaActualGroup
             // 
-            this._fechaDesde.Location = new System.Drawing.Point(68, 17);
-            this._fechaDesde.Name = "_fechaDesde";
-            this._fechaDesde.Size = new System.Drawing.Size(180, 20);
-            this._fechaDesde.TabIndex = 0;
-            // 
-            // _fechaHasta
-            // 
-            this._fechaHasta.Location = new System.Drawing.Point(313, 17);
-            this._fechaHasta.Name = "_fechaHasta";
-            this._fechaHasta.Size = new System.Drawing.Size(184, 20);
-            this._fechaHasta.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Desde";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(266, 20);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Hasta";
+            this._agendaActualGroup.Controls.Add(this.groupBox1);
+            this._agendaActualGroup.Controls.Add(this._registrarAgendaBtn);
+            this._agendaActualGroup.Controls.Add(this._sabadoGroupBox);
+            this._agendaActualGroup.Controls.Add(this._viernesGroupBox);
+            this._agendaActualGroup.Controls.Add(this._lunesGroupBox);
+            this._agendaActualGroup.Controls.Add(this._juevesGroupBox);
+            this._agendaActualGroup.Controls.Add(this._martesGroupBox);
+            this._agendaActualGroup.Controls.Add(this._miercolesGroupBox);
+            this._agendaActualGroup.Location = new System.Drawing.Point(11, 4);
+            this._agendaActualGroup.Name = "_agendaActualGroup";
+            this._agendaActualGroup.Size = new System.Drawing.Size(520, 385);
+            this._agendaActualGroup.TabIndex = 14;
+            this._agendaActualGroup.TabStop = false;
             // 
             // RegistrarAgendaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(561, 403);
+            this.ClientSize = new System.Drawing.Size(588, 464);
             this.Controls.Add(this._panel);
             this.Name = "RegistrarAgendaForm";
             this.Text = "Form1";
             this._panel.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this._sabadoGroupBox.ResumeLayout(false);
             this._sabadoGroupBox.PerformLayout();
             this._viernesGroupBox.ResumeLayout(false);
@@ -459,8 +484,7 @@
             this._martesGroupBox.PerformLayout();
             this._lunesGroupBox.ResumeLayout(false);
             this._lunesGroupBox.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this._agendaActualGroup.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -504,5 +528,7 @@
         private System.Windows.Forms.DateTimePicker _fechaDesde;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.GroupBox _agendaActualGroup;
     }
 }
