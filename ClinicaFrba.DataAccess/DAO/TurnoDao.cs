@@ -14,192 +14,212 @@
 
         public List<Turno> GetTurnosAfiliado(int afiliadoId)
         {
-            List<Turno> turnos = new List<Turno>();
-
-            foreach (TurnosAfiliado_Result x in _ds.TurnosAfiliado(afiliadoId, GetFecha()))
+            using (Entities _ds = GetDatasource())
             {
-                Turno turno = new Turno()
-                {
-                    turno_id = x.turno_id,
-                    turno_hora = x.turno_hora,
-                    turno_llego = x.turno_llego,
-                    turno_fecha = x.turno_fecha
-                };
+                List<Turno> turnos = new List<Turno>();
 
-                turno.Afiliado = new Afiliado()
+                foreach (TurnosAfiliado_Result x in _ds.TurnosAfiliado(afiliadoId, GetFecha()))
                 {
-                    afiliado_nombre = x.afiliado_nombre,
-                    afiliado_apellido = x.afiliado_apellido,
-                    afiliado_numero = x.afiliado_numero,
-                };
+                    Turno turno = new Turno()
+                    {
+                        turno_id = x.turno_id,
+                        turno_hora = x.turno_hora,
+                        turno_llego = x.turno_llego,
+                        turno_fecha = x.turno_fecha
+                    };
 
-                turno.Especialidad = new Especialidad()
-                {
-                    especialidad_nombre = x.especialidad_nombre
-                };
+                    turno.Afiliado = new Afiliado()
+                    {
+                        afiliado_nombre = x.afiliado_nombre,
+                        afiliado_apellido = x.afiliado_apellido,
+                        afiliado_numero = x.afiliado_numero,
+                    };
 
-                turno.Profesional = new Profesional()
-                {
-                    profesional_nombre = x.profesional_nombre,
-                    profesional_apellido = x.profesional_apellido
-                };
+                    turno.Especialidad = new Especialidad()
+                    {
+                        especialidad_nombre = x.especialidad_nombre
+                    };
 
-                turnos.Add(turno);
+                    turno.Profesional = new Profesional()
+                    {
+                        profesional_nombre = x.profesional_nombre,
+                        profesional_apellido = x.profesional_apellido
+                    };
+
+                    turnos.Add(turno);
+                }
+
+                return turnos;
             }
-
-            return turnos;
         }
 
         public List<TipoCancelacion> GetTipoCancelaciones()
         {
-            return _ds.ListaTipoCancelaciones.ToList().Select(x => new TipoCancelacion()
+            using (Entities _ds = GetDatasource())
             {
-                tipocancelacion_id = x.tipocancelacion_id,
-                tipocancelacion_nombre = x.tipocancelacion_nombre
-            }).ToList();
+                return _ds.ListaTipoCancelaciones.ToList().Select(x => new TipoCancelacion()
+                {
+                    tipocancelacion_id = x.tipocancelacion_id,
+                    tipocancelacion_nombre = x.tipocancelacion_nombre
+                }).ToList();
+            }
         }
 
         public List<Turno> GetTurnosProfesional(int idProfesional, int idEspecialidad)
         {
-            List<Turno> turnos = new List<Turno>();
-
-            foreach (TurnosProfesionalEspecialidad_Result x in _ds.TurnosProfesionalEspecialidad(idProfesional, idEspecialidad, GetFecha()))
+            using (Entities _ds = GetDatasource())
             {
-                Turno turno = new Turno()
-                {
-                    turno_id = x.turno_id,
-                    turno_hora = x.turno_hora,
-                    turnocancelado_id = x.turnocancelado_id,
-                    turno_llego = x.turno_llego
-                };
+                List<Turno> turnos = new List<Turno>();
 
-                turno.Afiliado = new Afiliado()
+                foreach (TurnosProfesionalEspecialidad_Result x in _ds.TurnosProfesionalEspecialidad(idProfesional, idEspecialidad, GetFecha()))
                 {
-                    afiliado_nombre = x.afiliado_nombre,
-                    afiliado_apellido = x.afiliado_apellido,
-                    afiliado_numero = x.afiliado_numero,
-                };
+                    Turno turno = new Turno()
+                    {
+                        turno_id = x.turno_id,
+                        turno_hora = x.turno_hora,
+                        turnocancelado_id = x.turnocancelado_id,
+                        turno_llego = x.turno_llego
+                    };
 
-                turno.Especialidad = new Especialidad()
-                {
-                    especialidad_nombre = x.especialidad_nombre
-                };
+                    turno.Afiliado = new Afiliado()
+                    {
+                        afiliado_nombre = x.afiliado_nombre,
+                        afiliado_apellido = x.afiliado_apellido,
+                        afiliado_numero = x.afiliado_numero,
+                    };
 
-                turno.Profesional = new Profesional()
-                {
-                    profesional_nombre = x.profesional_nombre,
-                    profesional_apellido = x.profesional_apellido
-                };
+                    turno.Especialidad = new Especialidad()
+                    {
+                        especialidad_nombre = x.especialidad_nombre
+                    };
 
-                turnos.Add(turno);
+                    turno.Profesional = new Profesional()
+                    {
+                        profesional_nombre = x.profesional_nombre,
+                        profesional_apellido = x.profesional_apellido
+                    };
+
+                    turnos.Add(turno);
+                }
+
+                return turnos;
             }
-
-            return turnos;
         }
 
         public List<Turno> GetTurnosProfesional(string nombreProfesional)
         {
-            List<Turno> turnos = new List<Turno>();
-            
-            foreach (TurnosProfesionalNombre_Result x in _ds.TurnosProfesionalNombre(nombreProfesional, GetFecha()))
+            using (Entities _ds = GetDatasource())
             {
-                Turno turno = new Turno()
-                {
-                    turno_id = x.turno_id,
-                    turno_hora = x.turno_hora,
-                    turnocancelado_id = x.turnocancelado_id,
-                    turno_llego = x.turno_llego
-                };
+                List<Turno> turnos = new List<Turno>();
 
-                turno.Afiliado = new Afiliado()
+                foreach (TurnosProfesionalNombre_Result x in _ds.TurnosProfesionalNombre(nombreProfesional, GetFecha()))
                 {
-                    afiliado_nombre = x.afiliado_nombre,
-                    afiliado_apellido = x.afiliado_apellido,
-                    afiliado_numero = x.afiliado_numero,
-                };
+                    Turno turno = new Turno()
+                    {
+                        turno_id = x.turno_id,
+                        turno_hora = x.turno_hora,
+                        turnocancelado_id = x.turnocancelado_id,
+                        turno_llego = x.turno_llego
+                    };
 
-                turno.Especialidad = new Especialidad()
-                {
-                    especialidad_nombre = x.especialidad_nombre
-                };
+                    turno.Afiliado = new Afiliado()
+                    {
+                        afiliado_nombre = x.afiliado_nombre,
+                        afiliado_apellido = x.afiliado_apellido,
+                        afiliado_numero = x.afiliado_numero,
+                    };
 
-                turno.Profesional = new Profesional()
-                {
-                    profesional_nombre = x.profesional_nombre,
-                    profesional_apellido = x.profesional_apellido
-                };
+                    turno.Especialidad = new Especialidad()
+                    {
+                        especialidad_nombre = x.especialidad_nombre
+                    };
 
-                turnos.Add(turno);
+                    turno.Profesional = new Profesional()
+                    {
+                        profesional_nombre = x.profesional_nombre,
+                        profesional_apellido = x.profesional_apellido
+                    };
+
+                    turnos.Add(turno);
+                }
+
+                return turnos;
             }
-            
-            return turnos;
         }
 
         public List<Turno> GetTurnosProfesional(int profesionalId)
         {
-            List<Turno> turnos = new List<Turno>();
-
-            foreach (TurnosProfesionalParaCancelar_Result x in _ds.TurnosProfesionalParaCancelar(profesionalId, GetFecha()))
+            using (Entities _ds = GetDatasource())
             {
-                Turno turno = new Turno()
-                {
-                    turno_id = x.turno_id,
-                    turno_hora = x.turno_hora,
-                    turno_llego = x.turno_llego,
-                    turno_fecha = x.turno_fecha
-                };
+                List<Turno> turnos = new List<Turno>();
 
-                turno.Afiliado = new Afiliado()
+                foreach (TurnosProfesionalParaCancelar_Result x in _ds.TurnosProfesionalParaCancelar(profesionalId, GetFecha()))
                 {
-                    afiliado_nombre = x.afiliado_nombre,
-                    afiliado_apellido = x.afiliado_apellido,
-                    afiliado_numero = x.afiliado_numero,
-                };
+                    Turno turno = new Turno()
+                    {
+                        turno_id = x.turno_id,
+                        turno_hora = x.turno_hora,
+                        turno_llego = x.turno_llego,
+                        turno_fecha = x.turno_fecha
+                    };
 
-                turno.Especialidad = new Especialidad()
-                {
-                    especialidad_nombre = x.especialidad_nombre
-                };
+                    turno.Afiliado = new Afiliado()
+                    {
+                        afiliado_nombre = x.afiliado_nombre,
+                        afiliado_apellido = x.afiliado_apellido,
+                        afiliado_numero = x.afiliado_numero,
+                    };
 
-                turno.Profesional = new Profesional()
-                {
-                    profesional_nombre = x.profesional_nombre,
-                    profesional_apellido = x.profesional_apellido
-                };
+                    turno.Especialidad = new Especialidad()
+                    {
+                        especialidad_nombre = x.especialidad_nombre
+                    };
 
-                turnos.Add(turno);
+                    turno.Profesional = new Profesional()
+                    {
+                        profesional_nombre = x.profesional_nombre,
+                        profesional_apellido = x.profesional_apellido
+                    };
+
+                    turnos.Add(turno);
+                }
+
+                return turnos;
             }
-
-            return turnos;
         }
 
         public CancelarTurno_Result CancelarTurno(string canceladoPor, int turnoId, int tipoCancelacionId, string descripcion)
         {
-            return _ds.CancelarTurno(canceladoPor, turnoId, tipoCancelacionId, descripcion).SingleOrDefault();
+            using (Entities _ds = GetDatasource())
+            {
+                return _ds.CancelarTurno(canceladoPor, turnoId, tipoCancelacionId, descripcion).SingleOrDefault();
+            }
         }
 
         public void CancelarTurnos(DateTime fechaDesde, DateTime fechaHasta, int profesionalId, int tipoCancelacionId, string descripcion)
         {
-            _ds.CancelarTurnoRango(profesionalId, fechaDesde, fechaHasta, tipoCancelacionId, descripcion);
+            using (Entities _ds = GetDatasource())
+            {
+                _ds.CancelarTurnoRango(profesionalId, fechaDesde, fechaHasta, tipoCancelacionId, descripcion);
+            }
         }
 
         public PedirTurno_Result PedirTurno(Turno turno)
         {
-            return _ds.PedirTurno(turno.afiliado_id, turno.especialidad_id, turno.profesional_id, turno.turno_fecha, turno.turno_hora).SingleOrDefault();
+            using (Entities _ds = GetDatasource())
+            {
+                return _ds.PedirTurno(turno.afiliado_id, turno.especialidad_id, turno.profesional_id, turno.turno_fecha, turno.turno_hora).SingleOrDefault();
+            }
         }
 
         public void RegistroLlegada(int bonoId, int turnoId)
         {
-            DateTime now = Config.SystemDate().AddHours(DateTime.Now.Hour).AddMinutes(DateTime.Now.Minute);
+            using (Entities _ds = GetDatasource())
+            {
+                DateTime now = Config.SystemDate().AddHours(DateTime.Now.Hour).AddMinutes(DateTime.Now.Minute);
 
-            _ds.RegistroLlegada(turnoId, bonoId, now);
-        }
-
-        private string GetFecha()
-        {
-            var today = Config.SystemDate();
-
-            return String.Format("{0}/{1}/{2}", today.Day, today.Month, today.Year);
+                _ds.RegistroLlegada(turnoId, bonoId, now);
+            }
         }
     }
 }

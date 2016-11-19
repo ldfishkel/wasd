@@ -4,11 +4,21 @@
 
     public abstract class DaoBase
     {
-        protected Entities _ds;
+        private string connectionString;
 
         public DaoBase()
         {
-            _ds = new Entities(Config.ConnectionString(ConnectionStringType.Local));
+            connectionString = Config.ConnectionString(ConnectionStringType.Local);
+        }
+
+        protected Entities GetDatasource()
+        {
+            return new Entities(connectionString);
+        }
+
+        protected string GetFecha()
+        {
+            return Utils.FormatDate(Config.SystemDate());
         }
     }
 }

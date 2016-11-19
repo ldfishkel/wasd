@@ -358,6 +358,9 @@ usuario_nombre_a_mostrar) VALUES
 (1, 'admin', 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7', 0, 1, 'Administrador General')
 SET IDENTITY_INSERT "WASD".Usuario OFF;
 
+INSERT INTO "WASD".Profesional( usuario_id, profesional_sexo, profesional_tipodocumento, profesional_numero_documento, profesional_nombre, profesional_apellido, profesional_direccion, profesional_telefono, profesional_mail, profesional_fecha_nacimiento, profesional_matricula) VALUES
+(1, 'M', 'DNI', 3154648, 'Dr Administrador', 'General', 'Uriburu', 12345, 'asd@asd.asd', '1-9-1992', 321561);
+
 INSERT INTO "WASD".RolPorUsuario VALUES
 (1, 1),
 (1, 2),
@@ -702,6 +705,29 @@ DEALLOCATE medicos
 GO
 
 /****************************************************************************************************************/
+/**SEED POST MIGRACION**/
+/***********************************************************************************************************/
+DECLARE @ult_num INT
+SELECT TOP 1
+	@ult_num = (FLOOR(afiliado_numero / 100)) * 100 + 101
+FROM
+	WASD.Afiliado
+ORDER BY
+	afiliado_numero DESC;
+
+SET IDENTITY_INSERT "WASD".Afiliado ON;
+INSERT INTO "WASD".Afiliado(afiliado_id,  usuario_id, estadocivil_id, afiliado_tipodocumento, planmedico_id, afiliado_sexo, afiliado_numero, afiliado_nombre, afiliado_apellido, afiliado_numero_documento, afiliado_direccion, afiliado_telefono, afiliado_mail, afiliado_fecha_nacimiento, afiliado_familiares_dependientes, afiliado_activo, afiliado_grupo_familiar, afiliado_cantidad_bonos_usados, afiliado_fecha_baja) VALUES
+(5551, 1, 1, 'DNI', 555555, 'M', @ult_num, 'Administrador', 'General', 3154648, 'Humboldt', 1168567706, 'asd@asd.asd', '9-1-1992', 0, 1, NULL, 0, NULL);
+SET IDENTITY_INSERT "WASD".Afiliado OFF;
+
+DECLARE @p_id INT, @e_id INT
+select @p_id = profesional_id from wasd.Profesional where usuario_id = 1
+select top 1 @e_id = especialidad_id from wasd.Especialidad
+
+INSERT INTO "WASD".EspecialidadPorProfesional values (@p_id, @e_id);
+
+
+/****************************************************************************************************************/
 /**VISTAS**/
 /***********************************************************************************************************/
 
@@ -1026,12 +1052,12 @@ AS BEGIN
     DECLARE fechasCursor CURSOR FOR
 	
 	SELECT 
-		DATEADD(DAY, number + 1, @Date1) 
+		DATEADD(DAY, number, @Date1) 
 	FROM 
 		master..spt_values
 	WHERE 
 		type = 'P' AND 
-		DATEADD(DAY, number + 1, @Date1) <= @Date2;
+		DATEADD(DAY, number, @Date1) <= @Date2;
 
 	OPEN fechasCursor
 
@@ -1078,13 +1104,10 @@ AS RETURN
 	SELECT 
 		b.bono_id 
 	FROM 
-		"WASD".Bono b,
-		"WASD".Afiliado a
+		"WASD".Bono b
 	WHERE 
 		b.bono_afiliado_usado IS NULL AND
-		b.afiliado_id = a.afiliado_id AND
-		CAST(ROUND(a.afiliado_numero / 100, 0, 1) AS INT) = CAST(ROUND(@nroAfiliado / 100, 0, 1) AS INT) AND
-		a.planmedico_id = b.planmedico_id AND
+		b.afiliado_id IN (select afiliado_id from wasd.Afiliado where CAST(ROUND(afiliado_numero / 100, 0, 1) AS INT) = CAST(ROUND(@nroAfiliado / 100, 0, 1) AS INT)) AND
 		b.planmedico_id = (select planmedico_id from WASD.Afiliado WHERE afiliado_numero = @nroAfiliado);
 GO
 
