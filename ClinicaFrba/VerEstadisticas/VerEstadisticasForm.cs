@@ -84,7 +84,7 @@
             else if (_fechaDesde.Value.Month == 7 && _fechaHasta.Value.Month != 12)
                 sb.AppendLine(msgErrorFecha);
 
-            if (sb.Length >= 0)
+            if (sb.Length == 0)
                 return true;
 
             MessageBox.Show(sb.ToString());
@@ -145,7 +145,7 @@
                     _grid5.Rows.Clear();
 
                     foreach (var result in _estadisticasDao.Consulta5(_fechaDesde.Value, _fechaHasta.Value))
-                        _grid1.Rows.Add(result.especialidad_nombre,
+                        _grid5.Rows.Add(result.especialidad_nombre,
                                                result.cantidad,
                                                result.mes);
                     break;

@@ -467,9 +467,6 @@
             // _planMedico3
             // 
             this._planMedico3.FormattingEnabled = true;
-            this._planMedico3.Items.AddRange(new object[] {
-            "A",
-            "P"});
             this._planMedico3.Location = new System.Drawing.Point(103, 16);
             this._planMedico3.Name = "_planMedico3";
             this._planMedico3.Size = new System.Drawing.Size(116, 21);
